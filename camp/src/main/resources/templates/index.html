@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예약 테스트</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+              integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+              crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container my-5">
+  <!-- 캠핑장 소개, 달력 -->
+  <div class="row my-4">
+    <div class="col-sm-4">
+      <div class="card">
+        <img src="/camp_img.jpg" alt="캠프 대표 이미지" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">파피루트 캠핑장</h5>
+          <p class="card-text mb-0">캠핑장 소개</p>
+          <span class="card-text">캠핑장 주소</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">캘린더</div>
+  </div>
+
+  <!-- 배치도 이미지 출력 -->
+  <div class="row my-4">
+    <img src="/Site_batch.gif" alt="" class="img-fluid">
+  </div>
+
+  <!-- 구역 리스트 -->
+  <div class="card">
+    <div class="row g-0">
+      <div class="col-sm-4">
+        <img src="/area01.png" class="img-fluid" alt="">
+      </div>
+      <div class="col-sm-8">
+        <div class="card-body">
+            <h5 class="card-title">1. 파쇄석 캠핑</h5>
+            <p>예약가능 0/15</p>
+            <p class="card-text text-end">50,000원</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-2">
+    <div class="row g-0">
+      <div class="col-sm-4">
+        <img src="/area02.png" class="img-fluid" alt="">
+      </div>
+      <div class="col-sm-8">
+        <div class="card-body">
+          <h5 class="card-title">1. 테크 캠핑</h5>
+          <p>예약가능 0/5</p>
+          <p class="card-text text-end">50,000원</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
