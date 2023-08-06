@@ -1,10 +1,10 @@
 package com.bitc.camp.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "camp_site_info")
@@ -44,7 +44,13 @@ public class CampSiteInfo {
   @Column(nullable = false)
   private int areaSiteCnt;
 
-  @Column(nullable = false)
-  private int campMainIdx;
+  // 관계
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "camp_main_idx")
+  @ToString.Exclude
+  private CampMainInfo campMainInfo;
 
+  @OneToMany(mappedBy = "campSiteInfo")
+  @ToString.Exclude
+  private List<CampSiteList> campSiteLists = new ArrayList<>();
 }

@@ -1,29 +1,28 @@
 package com.bitc.camp.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "camp_main_info")
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 public class CampMainInfo {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int idx;
 
-  @Column(nullable = false)
-  private int partnerIdx;
-
-  @Column(nullable = false)
+  @Column(length = 45, nullable = false)
   private String campName;
 
   @Column(length = 1000, nullable = false)
@@ -33,15 +32,25 @@ public class CampMainInfo {
   @Column(nullable = false)
   private LocalDateTime campDt;
 
-  @Column(nullable = false)
+  @Column(length = 1, nullable = false)
   private String kidszoneYn;
 
-  @Column(nullable = true)
+  @Column(length = 100, nullable = true)
   private String campHpLink;
 
-  @Column(nullable = false)
+  @Column(length = 45, nullable = false)
   private String campPh;
 
-  @Column(nullable = false)
-  private String address;
+  @Column(length = 100, nullable = false)
+  private String campAddress;
+
+  // 파트너 테이블 참조
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "partner_idx")
+  @ToString.Exclude
+  private Partner partner;
+
+  @OneToMany(mappedBy = "campMainInfo")
+  @ToString.Exclude
+  private List<CampSiteInfo> campSiteInfoList = new ArrayList<>();
 }

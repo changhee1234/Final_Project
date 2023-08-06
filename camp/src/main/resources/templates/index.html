@@ -20,9 +20,9 @@
       <div class="card">
         <img src="/camp_img.jpg" alt="캠프 대표 이미지" class="card-img-top">
         <div class="card-body">
-          <h5 class="card-title">파피루트 캠핑장</h5>
-          <p class="card-text mb-0">캠핑장 소개</p>
-          <span class="card-text">캠핑장 주소</span>
+          <h5 th:text="${mainInfo.campName}" class="card-title">파피루트 캠핑장</h5>
+          <p th:text="${mainInfo.campIntro}" class="card-text mb-0">캠핑장 소개</p>
+          <span th:text="${mainInfo.campAddress}" class="card-text text-muted">캠핑장 주소</span>
         </div>
       </div>
     </div>
@@ -35,35 +35,38 @@
   </div>
 
   <!-- 구역 리스트 -->
-  <div class="card">
+  <div class="card my-2d" th:each="siteInfo:${siteInfoList}">
     <div class="row g-0">
       <div class="col-sm-4">
         <img src="/area01.png" class="img-fluid" alt="">
       </div>
       <div class="col-sm-8">
         <div class="card-body">
-            <h5 class="card-title">1. 파쇄석 캠핑</h5>
+            <h5 class="card-title" th:text="${siteInfo.areaName}">1. 파쇄석 캠핑</h5>
             <p>예약가능 0/15</p>
-            <p class="card-text text-end">50,000원</p>
+            <p class="card-text text-end" th:text="${siteInfo.sitePrice}">50,000원</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card mt-2">
-    <div class="row g-0">
-      <div class="col-sm-4">
-        <img src="/area02.png" class="img-fluid" alt="">
-      </div>
-      <div class="col-sm-8">
-        <div class="card-body">
-          <h5 class="card-title">1. 테크 캠핑</h5>
-          <p>예약가능 0/5</p>
-          <p class="card-text text-end">50,000원</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--  <div class="card mt-2">-->
+<!--    <div class="row g-0">-->
+<!--      <div class="col-sm-4">-->
+<!--        <img src="/area02.png" class="img-fluid" alt="">-->
+<!--      </div>-->
+<!--      <div class="col-sm-8">-->
+<!--        <div class="card-body">-->
+<!--          <h5 class="card-title">1. 테크 캠핑</h5>-->
+<!--          <p>예약가능 0/5</p>-->
+<!--          <p class="card-text text-end">50,000원</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div>-->
+<!--  <p th:text="${siteInfoList}"></p>-->
+<!--</div>-->
 </body>
 </html>

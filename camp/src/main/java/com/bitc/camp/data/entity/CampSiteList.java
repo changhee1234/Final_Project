@@ -1,10 +1,8 @@
 package com.bitc.camp.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
 @Entity
@@ -25,13 +23,15 @@ public class CampSiteList {
   @Column(nullable = false)
   private String campSiteName;
 
-  @Column(nullable = false)
+  @Column(length = 1, nullable = false)
   private String reservationYn;
 
   @Column(nullable = true)
   private String reservationName;
 
-  @Column(nullable = false)
-  private int campSiteInfoIdx;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "camp_site_info_idx")
+  @ToString.Exclude
+  private CampSiteInfo campSiteInfo;
 
 }
