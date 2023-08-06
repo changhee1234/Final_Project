@@ -8,15 +8,15 @@ function BoardList(props) {
       <main className={'container my-4'}>
         <div className={'row my-4'}>
           <div className={'com-sm-8'}>
-            <div className={'row my-5 mb-3'}>
+            <div className={'row my-5 mb-0'}>
               <div className={'col-sm text-center my-4'}><h1>장터 게시판</h1></div>
               {/*검색창*/}
-              <div className="row">
-                <div className="col-3">
+              <div className="row my-0">
+                <div className="col-3 my-4">
                   <span className="icon"><i className="fa fa-search row"></i></span>
-                  <input className={'search'} type="search" id="search" placeholder="Search..."/>
+                  <input className={'search'} type="search" id="search" placeholder="원하는 물품을 검색해보세요"/>
                 </div>
-                <div className={'col my-1'}>
+                <div className={'col my-4 p-0'}>
                   <button type="button" className="input-group-text" id="btn-search"><i className="bi bi-search"></i>
                   </button>
 
@@ -33,12 +33,14 @@ function BoardList(props) {
                       </div>
                     </div>
                   </form>
+
                 </div>
+
               </div>
             </div>
 
             {/*게시판 리스트*/}
-            <div className="product_container row mx-auto my-2">
+            <div className="product_container row mx-auto my-2 mt-0">
               <div className="product col-3 box1">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
                 <a href="#" className={'text-decoration-none'}><h5 className="product_title"> 캠핑용 프로젝트 팝니다</h5></a>
@@ -47,8 +49,22 @@ function BoardList(props) {
                   거의 사용하지
                   않았구요..사진에 보시듯 제조일은 2016년인데... 사용시간은 47시간입니다.외관은 거의 새것처럼 깨끗합니다. 기스도 거의 없는 상태에요..</a>
                 <div className={'row my-2'}>
-                  <p className={'col text-start'}>홍길동</p>
-                  <p className={'col text-end'}>11회</p></div>
+                  <div className={'row col-6'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
+                    </ul>
+                  </div>
+                    <div className={'row col-5 p-0 text-end'}>
+                      <ul className={'list-unstyled'}>
+                        <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
+                      </ul>
+                    </div>
+                    <div className={'row col-3 p-0 text-end'}>
+                      <ul className={'list-unstyled'}>
+                        <li><i className="bi bi-eye"></i><span>11회</span></li>
+                      </ul>
+                    </div>
+                  </div>
               </div>
 
               <div className="product col-3 mx-auto box2">
@@ -58,8 +74,22 @@ function BoardList(props) {
                 <a className="product_des text-decoration-none"> 4번 정도 피칭 했고요 . 11월 13일 원남 저수지에서 마지막 사용 했습니다. 캠핑의 환상에서
                   벗어나 판매합니다.상태 전반적으로 괜찮아요..</a>
                 <div className={'row my-2'}>
-                  <p className={'col text-start'}>콩나물</p>
-                  <p className={'col text-end'}>11회</p></div>
+                  <div className={'row col-6'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-5 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-3 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-eye"></i><span>11회</span></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <div className="product col-3 box1">
@@ -68,8 +98,22 @@ function BoardList(props) {
                 <div className="product_mon"> 가격: 210,000￦</div>
                 <a className="product_des text-decoration-none"> 2룸 루프 플라이 파고 있습니다. 인기 많은 것 같은데 네고 안됩니다..</a>
                 <div className={'row my-2'}>
-                  <p className={'col text-start'}>김철수</p>
-                  <p className={'col text-end'}>41회</p></div>
+                  <div className={'row col-6'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-5 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-3 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-eye"></i><span>11회</span></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <div className="product col-3  box2">
@@ -78,8 +122,22 @@ function BoardList(props) {
                 <div className="product_mon"> 가격: 190,000￦</div>
                 <a className="product_des text-decoration-none"> 2룸 루프 플라이 사고 싶습니다. 많은 관심 부탁드립니다!!..</a>
                 <div className={'row my-2'}>
-                  <p className={'col text-start'}>김영희</p>
-                  <p className={'col text-end'}>31회</p></div>
+                  <div className={'row col-6'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-5 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-3 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-eye"></i><span>11회</span></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <div className="product col-3 py-4 box2">
@@ -88,8 +146,22 @@ function BoardList(props) {
                 <div className="product_mon"> 가격: 170,000￦</div>
                 <a className="product_des text-decoration-none"> 2룸 루프 플라이 사고 싶습니다. 많은 관심 부탁드립니..</a>
                 <div className={'row my-2'}>
-                  <p className={'col text-start'}>아무개</p>
-                  <p className={'col text-end'}>11회</p></div>
+                  <div className={'row col-6'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-5 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-3 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-eye"></i><span>11회</span></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
               <div className="product col-3 box3">
@@ -99,8 +171,22 @@ function BoardList(props) {
                 <a className="product_des text-decoration-none"> 4번 정도 피칭 했고요 . 11월 13일 원남 저수지에서 마지막 사용 했습니다. 캠핑의 환상에서
                   벗어나 판매합니다.상태 전반적으로 괜찮아요..</a>
                 <div className={'row my-2'}>
-                  <p className={'col text-start'}>콩나물</p>
-                  <p className={'col text-end'}>111회</p></div>
+                  <div className={'row col-6'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-5 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
+                    </ul>
+                  </div>
+                  <div className={'row col-3 p-0 text-end'}>
+                    <ul className={'list-unstyled'}>
+                      <li><i className="bi bi-eye"></i><span>11회</span></li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
 

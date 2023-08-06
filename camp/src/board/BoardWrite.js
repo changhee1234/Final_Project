@@ -21,8 +21,11 @@ function BoardWrite(props) {
                   <div className="col-sm">
                     <input type="text" className="form-control" id="title" name="title" placeholder="제목을 입력하세요"></input>
                   </div>
+                  <div className={"mt-3"}>
+                    <input type="number" className="form-control" id="price" name="price" placeholder="희망하는 가격을 입력하세요(원)"></input>
+                  </div>
                 </div>
-                <div className="my-3">
+                <div className="mb-3">
                         <textarea className="form-control" id="content" name="content" rows="20"
                                   placeholder="글 내용을 입력하세요"></textarea>
                 </div>
