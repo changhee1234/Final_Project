@@ -48,8 +48,8 @@ public class Partner {
   @ToString.Exclude
   private List<CampMainInfo> campMainInfoList = new ArrayList<>();
 
-//  @ManyToOne
-//  @JoinColumn(name = "member_idx")
-//  @ToString.Exclude
-//  private Member member;
+  @ManyToOne
+  @JoinColumn(name = "member_idx")
+  @ToString.Exclude
+  private Member member;
 }

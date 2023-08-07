@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CampSiteRepository extends JpaRepository<CampSiteInfo, Integer> {
 
-  List<CampSiteInfo> findAllByCampMainInfo_Idx(int CampMainIdx);
+  CampSiteInfo findByIdx(int campSiteInfoIdx);
 }
