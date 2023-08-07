@@ -1,4 +1,5 @@
 import React from "react";
+import './boardDetail.css'
 
 function BoardDetail(props) {
 
@@ -7,20 +8,29 @@ function BoardDetail(props) {
         <div className="row">
           <div className="col-sm-2"></div>
           <div className="col-sm-8">
-            <div className="d-flex justify-content-center my-3 mb-5">
-              <h2>장터 상세 게시글</h2>
+            <div className="d-flex justify-content-center my-3 mb-5 ">
+              <h2 className={'text1'}>장터 상세 게시글</h2>
             </div>
             <div className="col-sm d-flex justify-content-end my-3">
-              <button type="button" className="btn btn-outline-secondary me-2" id="btn-update">수정</button>
+              <button type="button" className="w-btn w-btn-indigo me-2" id="btn-update">수정</button>
               <button type="button" className="btn btn-outline-danger" id="btn-delete">삭제</button>
             </div>
             <div className="bg-secondary bg-opacity-10 rounded-1 p-2">
               <form id="frm" method="post">
                 <div className="row">
-                  <div className="col-sm">
+                  <div className="col-sm-9">
                     <input type="hidden" name="idx" id="idx"></input>
-                    <input type="text" className="form-control-plaintext fs-5 fw-bold" name="title" readOnly></input>
+                    <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'제목 부분'} name="title" readOnly></input>
                   </div>
+                  <div className="col-sm-3  ">
+                    <input type="hidden" name="idx" id="idx"></input>
+                    <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'희망가: 50,000원'} name="title" readOnly></input>
+                  </div>
+                </div>
+
+                <div className="col-sm-4 text-end">
+                  <input type="hidden" name="idx" id="idx"></input>
+                  <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'지역: 부산 사상구'} name="title" readOnly></input>
                 </div>
                 <div className="row my-3 bg-light">
                   <div className="col-sm-4 d-flex justify-content-start">
