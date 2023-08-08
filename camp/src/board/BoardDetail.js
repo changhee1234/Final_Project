@@ -13,18 +13,18 @@ function BoardDetail(props) {
             </div>
             <div className="col-sm d-flex justify-content-end my-3">
               <button type="button" className="w-btn w-btn-indigo me-2" id="btn-update">수정</button>
-              <button type="button" className="btn btn-outline-danger" id="btn-delete">삭제</button>
+              <button type="button" className="w-btn-outline w-btn-red-outline" id="btn-delete">삭제</button>
             </div>
             <div className="bg-secondary bg-opacity-10 rounded-1 p-2">
               <form id="frm" method="post">
                 <div className="row">
                   <div className="col-sm-9">
                     <input type="hidden" name="idx" id="idx"></input>
-                    <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'제목 부분'} name="title" readOnly></input>
+                    <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'루프 플라이 팝니다'} name="title" readOnly></input>
                   </div>
                   <div className="col-sm-3  ">
                     <input type="hidden" name="idx" id="idx"></input>
-                    <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'희망가: 50,000원'} name="title" readOnly></input>
+                    <input type="text" className="form-control-plaintext fs-5 fw-bold text-center" placeholder={'희망가: 50,000원'} name="title" readOnly></input>
                   </div>
                 </div>
 
@@ -40,7 +40,7 @@ function BoardDetail(props) {
                   </div>
                   <div className="col-sm d-flex justify-content-end py-2">
                     <div className="mx-2">
-                      <p className="text-end mb-0 pb-0">조회수</p>
+                      <p className="text-end mb-0 pb-0">조회수 79회</p>
                       <input type="text"
                              className="form-control-plaintext fw-light text-body-outline-light text-end mt-0 pt-0"
                              readOnly></input>

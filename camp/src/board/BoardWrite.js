@@ -36,8 +36,8 @@ function BoardWrite(props) {
                     </div>
                   </div>
                   <div className="my-3 col-sm d-flex justify-content-end gap-3 mx-0 px-0">
-                    <button type="submit" className="btn btn-primary">등록</button>
-                    <button type="reset" className="btn btn-secondary" id="btn-cancel">취소</button>
+                    <button type="submit" className="w-btn w-btn-indigo">등록</button>
+                    <button type="reset" className="w-btn w-btn-gray" id="btn-cancel">취소</button>
                   </div>
                 </div>
                 {/*<input type="hidden" className="form-control" id="user-name" name="userName" th:value="${session.userName}"></input>*/}
