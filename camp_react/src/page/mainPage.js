@@ -1,12 +1,14 @@
 import React from "react";
+import MainCarousel from "../contents/main/mainCarousel";
+import MainAnnouncement from "../contents/main/mainAnnouncement";
 
 
 function MainPage(props) {
 
     return (
         <main className={"container"}>
-            <h1 className={'text-center'}>mainPage.js</h1>
-            <h1 className={'text-center'}>test</h1>
+            <MainCarousel/>
+            <MainAnnouncement/>
         </main>
     );
 }
