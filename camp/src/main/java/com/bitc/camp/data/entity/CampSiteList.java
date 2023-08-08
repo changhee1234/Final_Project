@@ -5,6 +5,9 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "camp_site_list")
 @Getter
@@ -33,5 +36,9 @@ public class CampSiteList {
   @JoinColumn(name = "camp_site_info_idx")
   @ToString.Exclude
   private CampSiteInfo campSiteInfo;
+
+  @OneToMany(mappedBy = "campSiteList")
+  @ToString.Exclude
+  List<Reservation> reservationList = new ArrayList<>();
 
 }
