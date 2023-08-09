@@ -8,7 +8,7 @@ import ErrorPage from "./layout/errorPage";
 import Header from "./layout/header";
 import Footer from "./layout/footer";
 import BoardDetail from "./board/BoardDetail";
-import MainPage from "./layout/mainPage";
+import MainPage from "./layout/MainPage";
 import MyPage from "./board/myPage";
 import CampDetailPage from "./page/campDetailPage";
 import TradeListPage from "./page/tradeListPage";

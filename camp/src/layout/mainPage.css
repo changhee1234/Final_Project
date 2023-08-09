@@ -129,3 +129,9 @@
 ul{
 list-style-type: none;
 }
+
+.card {
+    width: 18rem
+}
+
+/*샐렉트 박스 UI*/

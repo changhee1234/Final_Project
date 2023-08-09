@@ -1,7 +1,19 @@
-import React from "react";
+import React, {useEffect, useState, useRef,} from 'react';
 import './mainPage.css';
+import {selectBox} from "./selectBox";
+import {hangjungdong} from "./hangjungdong";
 
-function mainPage(props) {
+function MainPage(props) {
+
+  // useEffect(() => {
+  //   selectBox();
+  //
+  // }, []);
+
+  const [val1, setVal1] = useState("");
+  const [val2, setVal2] = useState("");
+  const [val3, setVal3] = useState("");
+  const {sido, sigugun, dong} = hangjungdong;
 
   return (
       <main>
@@ -42,10 +54,10 @@ function mainPage(props) {
           <img src="/assets/캠핑2.jpg" alt="" className="d-block w-100"></img></button>
 
         {/*공지 및 광고배너*/}
-        <div className={'container my-4'}>
+        <div className={'container my-4 text-start'}>
           <div className={'row'}>
             <div className={'col-4'}>
-              <ul className={'list-unstyled'}>
+              <ul className={'list-unstyled mx-4'}>
                 <li><i className="bi bi-megaphone megaphone"></i><span className={'text1'}> 공지사항</span></li>
               </ul>
               <ul>
@@ -57,20 +69,166 @@ function mainPage(props) {
                 </a>
               </ul>
             </div>
-            <div className={'col-8'}>
+            <div className={'col-8 text-center'}>
               <img src="/assets/ad1.jpg" className={'ad'} alt=""/>
             </div>
           </div>
 
           {/*캠핑장 리스트*/}
-          <div className={'row my-2 box4'}>
-            <ul className={'col list-unstyled text-start mb-0'}>
+          <div className={'row my-4'}>
+            <ul className={'row-col-2 list-unstyled text-start mb-0'}>
               <a href="#" className={'text-decoration-none fw-bold text-dark'}>
-                <li><i className="bi bi-rocket-takeoff rocket-takeoff"></i><span className={'text1'}> 캠핑장</span></li></a>
+                <li><i className="col bi bi-rocket-takeoff rocket-takeoff"></i><span className={'text1'}> 캠핑장</span>
+                </li>
+              </a>
+
+              {/* 지역 설렉트 선택 버튼*/}
+              <div className={'row my-3 mx-4'}>
+              {/*  <select className={'col-2 mx-2'} name="sido1" id="sido1"></select>*/}
+              {/*  <select className={'col-2 mx-2'} name="gugun1" id="gugun1"></select>*/}
+              {/*  <select className={'col-2 mx-2'} name="dong1" id="dong1"></select>*/}
+              <div>
+                {/*<h1>{`${val1}-${val2}-${val3}`}</h1>*/}
+                <select onChange={(e) => setVal1(e.target.value)}>
+                  <option value="">선택</option>
+                  {sido.map((el) => (
+                      <option key={el.sido} value={el.sido}>
+                        {el.codeNm}
+                      </option>
+                  ))}
+                </select>
+                <select onChange={(e) => setVal2(e.target.value)}>
+                  <option value="">선택</option>
+                  {sigugun
+                      .filter((el) => el.sido === val1)
+                      .map((el) => (
+                          <option key={el.sigugun} value={el.sigugun}>
+                            {el.codeNm}
+                          </option>
+                      ))}
+                </select>
+                <select onChange={(e) => setVal3(e.target.value)}>
+                  <option value="">선택</option>
+                  {dong
+                      .filter((el) => el.sido === val1 && el.sigugun === val2)
+                      .map((el) => (
+                          <option key={el.dong} value={el.dong}>
+                            {el.codeNm}
+                          </option>
+                      ))}
+                </select>
+              </div>
+                <ul className={'col list-unstyled text-end mb-0 px-4 more'}>
+                  <a href="#" className={'text-decoration-none fw-bold text-dark'}>
+                    <li><i className="bi bi-pencil-square"></i><span className={'text2'}> 캠핑장 등록 및 광고문의</span></li>
+                  </a>
+                </ul>
+              </div>
+
             </ul>
-            <ul className={'col list-unstyled text-end mb-0 px-4 more'}>
-              <a href="#" className={'text-decoration-none fw-bold text-dark'}>
-                <li><i className="bi bi-plus"></i><span className={'text2'}>더보기</span></li></a>
+
+            {/*검색된 캠핑장 Card 리스트*/}
+            <div className={'row my-2 mx-4'}>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑1.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 class="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
+                  <p class="card-text">경기 파주시 적성면 설마천로 376</p>
+                </div>
+                <div class="card-body text-end">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+                </div>
+              </div>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑2.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
+                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
+                </div>
+                <div className="card-body text-end">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+
+                </div>
+              </div>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑1.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
+                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
+                </div>
+                <div className="card-body text-end">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+
+                </div>
+              </div>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑2.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
+                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
+                </div>
+                <div className="card-body text-end">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+                </div>
+              </div>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑1.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
+                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
+                </div>
+                <div className="card-body">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+
+                </div>
+              </div>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑2.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
+                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
+                </div>
+                <div className="card-body text-end">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+
+                </div>
+              </div>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑1.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
+                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
+                </div>
+                <div className="card-body text-end">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+
+                </div>
+              </div>
+              <div className="col-3 card my-2 mx-2">
+                <img className="card-img" src="/assets/캠핑2.jpg" alt="Card image"></img>
+                <div className="card-body">
+                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
+                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
+                </div>
+                <div className="card-body text-end">
+                  <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ajax 페이징*/}
+          <div className={'my-3'}>
+            <ul className={'pagination justify-content-center'} id={'paginationAjax'}>
+              <li className={'page-item disabled'}>
+                <a href="#" className={'page-link'}>&laquo;</a>
+              </li>
+              <li className={'page-item disabled'}>
+                <a href="#" className={'page-link'}>1</a>
+              </li>
+              <li className={'page-item disabled'}>
+                <a href="#" className={'page-link'}>&raquo;</a>
+              </li>
             </ul>
           </div>
 
@@ -79,11 +237,13 @@ function mainPage(props) {
           <div className={'row my-4'}>
             <ul className={'col list-unstyled text-start mb-0'}>
               <a href="#" className={'text-decoration-none fw-bold text-dark'}>
-                <li><i className="bi bi-cart4"></i><span className={'text1'}> 장터</span></li></a>
+                <li><i className="bi bi-cart4"></i><span className={'text1'}> 장터</span></li>
+              </a>
             </ul>
             <ul className={'col list-unstyled text-end mb-0 px-4 more'}>
               <a href="#" className={'text-decoration-none fw-bold text-dark'}>
-                <li><i className="bi bi-plus"></i><span className={'text2'}>더보기</span></li></a>
+                <li><i className="bi bi-plus"></i><span className={'text2'}>더보기</span></li>
+              </a>
             </ul>
             <div className="row mx-3 mt-0">
               <div className="product col-3 box1">
@@ -240,4 +400,4 @@ function mainPage(props) {
   )
 }
 
-export default mainPage;
+export default MainPage;
