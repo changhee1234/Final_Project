@@ -4,6 +4,7 @@ import com.bitc.camp.data.entity.CampSiteInfo;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class CampSiteInfoRespDto {
@@ -17,7 +18,10 @@ public class CampSiteInfoRespDto {
   private int parkPrice;
   private int elePrice;
   private int areaSiteCnt;
+
   private int campMainIdx;
+  private List<CampSiteListRespDto> campSiteLists;
+  private List<ReservationRespDto> reservationList;
 
   public CampSiteInfoRespDto(CampSiteInfo entity) {
     this.idx = entity.getIdx();
@@ -31,5 +35,8 @@ public class CampSiteInfoRespDto {
     this.elePrice = entity.getElePrice();
     this.areaSiteCnt = entity.getAreaSiteCnt();
     this.campMainIdx = entity.getCampMainInfo().getIdx();
+    this.campSiteLists = entity.getCampSiteLists().stream()
+        .map(CampSiteListRespDto::new)
+        .collect(Collectors.toList());
   }
 }

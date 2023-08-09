@@ -25,12 +25,6 @@ public class CampSiteList {
   @Column(nullable = false)
   private String campSiteName;
 
-  @Column(length = 1, nullable = false)
-  private String reservationYn;
-
-  @Column(nullable = true)
-  private String reservationName;
-
   @ManyToOne(optional = false)
   @JoinColumn(name = "camp_site_info_idx")
   @ToString.Exclude
