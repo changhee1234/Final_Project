@@ -2,10 +2,7 @@ package com.bitc.camp.data.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,10 +12,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "reservation")
 @Getter
-@Setter
 @ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
-@NoArgsConstructor
 public class Reservation {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,6 +66,8 @@ public class Reservation {
   @JoinColumn(name = "user_member_idx")
   @ToString.Exclude
   private Member member;
+
+
 
 
 }

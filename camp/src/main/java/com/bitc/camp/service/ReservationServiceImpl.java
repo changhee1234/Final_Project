@@ -1,5 +1,6 @@
 package com.bitc.camp.service;
 
+import com.bitc.camp.data.dto.CampMainRespDto;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
 import com.bitc.camp.data.repository.CampMainRepository;
@@ -19,9 +20,10 @@ public class ReservationServiceImpl implements ReservationService {
   private final CampSiteListRepository campSiteListRepository;
 
   @Override
-  public CampMainInfo getCampMainInfo(int campMainIdx) throws Exception {
+  public CampMainRespDto getCampMainInfo(int campMainIdx) throws Exception {
     CampMainInfo campMainInfo = campMainRepository.findByIdx(campMainIdx);
-    return campMainInfo;
+    CampMainRespDto campMainRespDto = new CampMainRespDto(campMainInfo);
+    return campMainRespDto;
   }
 
   @Override

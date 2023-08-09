@@ -12,10 +12,8 @@ import java.util.List;
 @Entity
 @Table(name = "camp_main_info")
 @Getter
-@Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @DynamicInsert
 public class CampMainInfo {
   @Id
@@ -44,7 +42,6 @@ public class CampMainInfo {
   @Column(length = 100, nullable = false)
   private String campAddress;
 
-  // 파트너 테이블 참조
   @ManyToOne(optional = false)
   @JoinColumn(name = "partner_idx")
   @ToString.Exclude

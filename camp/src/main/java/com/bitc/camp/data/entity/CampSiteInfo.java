@@ -9,9 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "camp_site_info")
 @Getter
-@Setter
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class CampSiteInfo {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +32,7 @@ public class CampSiteInfo {
   private int addPrice;
 
   @Column(nullable = false)
-  private String camp_reserve_period;
+  private String campReservePeriod;
 
   @Column(nullable = false)
   private int parkPrice;

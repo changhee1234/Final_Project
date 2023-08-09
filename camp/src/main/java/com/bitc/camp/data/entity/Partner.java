@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Table(name = "partner")
 @Getter
-@Setter
 @ToString
 @DynamicInsert
 @NoArgsConstructor

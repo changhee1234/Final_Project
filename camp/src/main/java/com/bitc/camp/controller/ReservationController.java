@@ -1,12 +1,12 @@
 package com.bitc.camp.controller;
 
-import com.bitc.camp.data.entity.CampMainInfo;
+import com.bitc.camp.data.dto.CampMainRespDto;
+import com.bitc.camp.data.dto.CampSiteInfoRespDto;
 import com.bitc.camp.data.entity.CampSiteInfo;
 import com.bitc.camp.data.entity.CampSiteList;
 import com.bitc.camp.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,8 +25,9 @@ public class ReservationController {
   @GetMapping("/")
   public ModelAndView index() throws Exception {
     ModelAndView mv = new ModelAndView("index");
-    CampMainInfo mainInfo = reservationService.getCampMainInfo(1);
-    List<CampSiteInfo> siteInfoList = mainInfo.getCampSiteInfoList();
+
+    CampMainRespDto mainInfo = reservationService.getCampMainInfo(1);
+    List<CampSiteInfoRespDto> siteInfoList = mainInfo.getSiteInfoLists();
 
     mv.addObject("mainInfo", mainInfo);
     mv.addObject("siteInfoList", siteInfoList);

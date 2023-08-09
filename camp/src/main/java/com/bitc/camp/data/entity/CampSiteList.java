@@ -11,9 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "camp_site_list")
 @Getter
-@Setter
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @DynamicInsert
 public class CampSiteList {
   @Id
