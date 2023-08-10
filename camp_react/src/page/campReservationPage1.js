@@ -45,13 +45,13 @@ function CampReservationPage1(props) {
       params.append('siteInfoIdxs', siteInfoIdxs)
       axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
         .then(res => {
-          // setSiteEmptyCnt(res.data);
-          setMainInfo(prev => ({
-            ...prev,
-            siteInfoLists: prev.siteInfoLists.map((m) => {
-              return {...prev, siteEmptyCnt: res.data}
-            }),
-            }));
+          setSiteEmptyCnt(res.data);
+          // setMainInfo(prev => ({
+          //   ...prev,
+          //   siteInfoLists: prev.siteInfoLists.map((m) => {
+          //     return {...prev, siteEmptyCnt: res.data}
+          //   }),
+          //   }));
         })
         .catch(err => {
           alert(`통신 오류 : ${err}`);
@@ -81,7 +81,7 @@ function CampReservationPage1(props) {
 
       <div><img className={'img-fluid'} src="/Site_batch.gif"/></div>
 
-      <AreaList mainInfo={mainInfo}/>
+      <AreaList mainInfo={mainInfo} siteEmptyCnt={siteEmptyCnt}/>
     </main>
   );
 }
