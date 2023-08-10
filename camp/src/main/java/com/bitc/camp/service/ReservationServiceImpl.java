@@ -33,11 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public int getSiteCnt() throws Exception {
-    String userReservationStart2 = "2023-08-10";
-    String userReservationEnd2 = "2023-08-13";
-    LocalDate userReservationStart = LocalDate.parse(userReservationStart2);
-    LocalDate userReservationEnd = LocalDate.parse(userReservationEnd2);
+  public int getSiteCnt(String startDate, String endDate) throws Exception {
+    LocalDate userReservationStart = LocalDate.parse(startDate);
+    LocalDate userReservationEnd = LocalDate.parse(endDate);
     int siteCnt = campSiteListRepository.queryCountSiteList(userReservationStart, userReservationEnd);
     return siteCnt;
   }

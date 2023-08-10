@@ -14,5 +14,5 @@ public interface ReservationService {
 
   CampSiteInfoRespDto getCampSiteInfo(int campSiteInfoIdx) throws Exception;
 
-  int getSiteCnt() throws Exception;
+  int getSiteCnt(String startDate, String endDate) throws Exception;
 }

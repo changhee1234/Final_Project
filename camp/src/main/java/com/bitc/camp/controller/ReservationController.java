@@ -26,25 +26,22 @@ public class ReservationController {
 
   private final ReservationService reservationService;
 
-//  @GetMapping("/")
-//  public ModelAndView getCampMainInfo() throws Exception {
-//    ModelAndView mv = new ModelAndView("index");
-//
-//    CampMainRespDto mainInfo = reservationService.getCampMainInfo(1);
-//    List<CampSiteInfoRespDto> siteInfoList = mainInfo.getSiteInfoLists();
-//
-//    mv.addObject("mainInfo", mainInfo);
-//    mv.addObject("siteInfoList", siteInfoList);
-//    return mv;
-//  }
-
-  @GetMapping("/")
-  public Object getCampMainInfo() throws Exception{
+  // 예약1 - 캠핑장 소개, 날짜, 구역 확인
+  @GetMapping("/{campMainIdx}")
+  public Object getCampMainInfo(@PathVariable("campMainIdx") int campMainIdx) throws Exception{
     Map<String, Object> result = new HashMap<>();
-    CampMainRespDto mainInfo = reservationService.getCampMainInfo(1);
-    List<CampSiteInfoRespDto> siteInfoList = mainInfo.getSiteInfoLists();
+    CampMainRespDto mainInfo = reservationService.getCampMainInfo(campMainIdx);
+    // List<CampSiteInfoRespDto> siteInfoList = mainInfo.getSiteInfoLists();
     result.put("mainInfo", mainInfo);
     return result;
+  }
+
+  // 예약 날짜 선택 후 예약 가능한 자리 조회
+  @ResponseBody
+  @PostMapping("/selectDate")
+  public Object countSiteList(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) throws Exception{
+    int siteCnt = reservationService.getSiteCnt(startDate, endDate);
+    return siteCnt;
   }
 
 //  @GetMapping("/reserveStep/{campSiteInfoIdx}")
@@ -58,14 +55,6 @@ public class ReservationController {
 //    return mv;
 //  }
 //
-//  // 예약 날짜 선택 후 예약 가능한 자리 조회
-//  @ResponseBody
-//  @GetMapping("/selectDate")
-//  public Object countSiteList() throws Exception{
-//
-//
-//    int siteCnt = reservationService.getSiteCnt();
-//    return siteCnt;
-//  }
+
 
 }
