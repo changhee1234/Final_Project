@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,10 +34,10 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public int getSiteCnt(String startDate, String endDate) throws Exception {
+  public int getSiteCnt(int siteInfoIdx, String startDate, String endDate) throws Exception {
     LocalDate userReservationStart = LocalDate.parse(startDate);
     LocalDate userReservationEnd = LocalDate.parse(endDate);
-    int siteCnt = campSiteListRepository.queryCountSiteList(userReservationStart, userReservationEnd);
+    int siteCnt = campSiteListRepository.queryCountSiteList(siteInfoIdx, userReservationStart, userReservationEnd);
     return siteCnt;
   }
 }

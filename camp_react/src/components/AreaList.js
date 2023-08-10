@@ -16,7 +16,7 @@ function AreaList(props) {
                   <div className="col-sm-8">
                     <div className="card-body">
                       <h5 className="card-title">{m.areaName}</h5>
-                      <p>예약가능 0/{m.areaSiteCnt}</p>
+                      <p>예약가능 {m.siteEmptyCnt}/{m.areaSiteCnt}</p>
                       <p className="card-text text-end">{m.sitePrice}원</p>
                     </div>
                   </div>
@@ -26,9 +26,6 @@ function AreaList(props) {
           )
         })
       }
-      {/*<a th:href="@{/reserve/reserveStep/} + ${siteInfo.idx}" className="text-decoration-none">*/}
-      {/*  */}
-      {/*</a>*/}
     </div>
   );
 }

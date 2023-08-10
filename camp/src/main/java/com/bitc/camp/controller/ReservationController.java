@@ -13,10 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +25,7 @@ public class ReservationController {
 
   // 예약1 - 캠핑장 소개, 날짜, 구역 확인
   @GetMapping("/{campMainIdx}")
-  public Object getCampMainInfo(@PathVariable("campMainIdx") int campMainIdx) throws Exception{
+  public Object getCampMainInfo(@PathVariable("campMainIdx") int campMainIdx) throws Exception {
     Map<String, Object> result = new HashMap<>();
     CampMainRespDto mainInfo = reservationService.getCampMainInfo(campMainIdx);
     // List<CampSiteInfoRespDto> siteInfoList = mainInfo.getSiteInfoLists();
@@ -39,9 +36,15 @@ public class ReservationController {
   // 예약 날짜 선택 후 예약 가능한 자리 조회
   @ResponseBody
   @PostMapping("/selectDate")
-  public Object countSiteList(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) throws Exception{
-    int siteCnt = reservationService.getSiteCnt(startDate, endDate);
-    return siteCnt;
+  public Object countSiteList(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("siteInfoIdxs") List<Integer> siteInfoIdxs) throws Exception {
+
+    List<Integer> siteCntList = new ArrayList<>();
+
+    for (int siteInfoIdx : siteInfoIdxs) {
+      int siteCnt = reservationService.getSiteCnt(siteInfoIdx, startDate, endDate);
+      siteCntList.add(siteCnt);
+    }
+    return siteCntList;
   }
 
 //  @GetMapping("/reserveStep/{campSiteInfoIdx}")

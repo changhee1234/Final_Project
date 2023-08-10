@@ -28,22 +28,36 @@ function CampReservationPage1(props) {
         alert(`통신 오류 : ${err}`);
       });
   }, []);
+
+
   const handleOnChange = item => {
     setDateRange([item.selection])
-    const params = new URLSearchParams;
-    dateRange.map(m => {
-      params.append('startDate', format((m.startDate), "yyyy-MM-dd"))
-      params.append('endDate', format((m.endDate), "yyyy-MM-dd"))
-    });
-    axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(err => {
-        alert(`통신 오류 : ${err}`);
-      });
-  };
 
+    const params = new URLSearchParams;
+    const startDate = format((item.selection.startDate), "yyyy-MM-dd");
+    const endDate = format((item.selection.endDate), "yyyy-MM-dd");
+
+    if (startDate !== endDate) {
+      const siteInfoIdxs = mainInfo.siteInfoLists.map(m => m.idx);
+
+      params.append('startDate', startDate)
+      params.append('endDate', endDate)
+      params.append('siteInfoIdxs', siteInfoIdxs)
+      axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
+        .then(res => {
+          // setSiteEmptyCnt(res.data);
+          setMainInfo(prev => ({
+            ...prev,
+            siteInfoLists: prev.siteInfoLists.map((m) => {
+              return {...prev, siteEmptyCnt: res.data}
+            }),
+            }));
+        })
+        .catch(err => {
+          alert(`통신 오류 : ${err}`);
+        });
+    }
+  };
 
   return (
     <main className={"container"}>
@@ -64,7 +78,9 @@ function CampReservationPage1(props) {
           />
         </div>
       </div>
+
       <div><img className={'img-fluid'} src="/Site_batch.gif"/></div>
+
       <AreaList mainInfo={mainInfo}/>
     </main>
   );

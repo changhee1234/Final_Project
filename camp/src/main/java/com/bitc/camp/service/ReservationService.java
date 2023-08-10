@@ -8,11 +8,12 @@ import com.bitc.camp.data.entity.CampSiteInfo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 public interface ReservationService {
   CampMainRespDto getCampMainInfo(int campMainIdx) throws Exception;
 
   CampSiteInfoRespDto getCampSiteInfo(int campSiteInfoIdx) throws Exception;
 
-  int getSiteCnt(String startDate, String endDate) throws Exception;
+  int getSiteCnt(int siteInfoIdx, String startDate, String endDate) throws Exception;
 }
