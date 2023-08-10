@@ -1,15 +1,17 @@
 import React from "react";
 
-function BoardWrite(props) {
+function TradeWritePage(props) {
 
   return (
-      <div className="container my-4">
+      <div className="container my-5">
         <div className="row">
-          <div className="col-sm-2"></div>
-          <div className="col-sm-8 text-center">
-            <h2>장터 게시판 글 등록</h2>
+          <div className="col-sm-2 my-4"></div>
+          <div className="col-sm-8 text-center my-5">
+            {/*<h3 className={'mt-5'}>장터 게시판 글 등록</h3>*/}
+            <ul className={'col-sm text-center my-4 mt-5'}>
+              <li><i className="bi bi-cart4"></i><span className={'text3'}> 장터 게시판 글 등록</span></li></ul>
             <div className="row">
-              <form action="/BoardWrite" method="post" encType="multipart/form-data">
+              <form action="/TradeWritePage.js" method="post" encType="multipart/form-data">
                 <div className="my-3 row">
                   <div className="col-sm-2">
                     <select id="box-office" className="form-control me-3" name="movieNm">
@@ -51,4 +53,4 @@ function BoardWrite(props) {
 )
 }
 
-export default BoardWrite;
+export default TradeWritePage;

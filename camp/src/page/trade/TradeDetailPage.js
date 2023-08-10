@@ -1,7 +1,7 @@
 import React from "react";
-import './boardDetail.css'
+import './tradeboardDetail.css'
 
-function BoardDetail(props) {
+function TradeDetailPage(props) {
 
   return (
       <main className="container my-4">
@@ -100,4 +100,4 @@ function BoardDetail(props) {
   )
 }
 
-export default BoardDetail;
+export default TradeDetailPage;

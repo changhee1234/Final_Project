@@ -26,7 +26,7 @@ function Header(props) {
             <nav className={"navbar navbar-expand-lg"}>
                 <div className={"navbar-brand ms-3"} style={logo}>
                     <Link to={'/'}>
-                        <img src={'campImg/camp_logo.png'} className={'img-fluid'}/>
+                        <img src={'assets/camp_logo.png'} className={'img-fluid'}/>
                     </Link>
                 </div>
                 <div className={"collapse navbar-collapse"} id={"navbarNav"}>
@@ -64,7 +64,7 @@ function Header(props) {
                                     aria-label={'Close'}></button>
                         </div>
                         <div className={'modal-body'}>
-                            {/*로그인정보 입력*/}
+                            {/*로그인 정보 입력*/}
                             <div className={'border-bottom'}>
                                 <div className={'input-group my-2'}>
                                     <span className={'input-group-text'}>Email</span>

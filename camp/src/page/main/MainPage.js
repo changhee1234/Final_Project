@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef,} from 'react';
 import './mainPage.css';
-import {selectBox} from "./selectBox";
-import {hangjungdong} from "./hangjungdong";
+import {selectBox} from "../layout/SelectBox";
+import {hangjungdong} from "../layout/Hangjungdong";
 
 function MainPage(props) {
 
@@ -33,7 +33,7 @@ function MainPage(props) {
               <div className="carousel-caption d-none d-md-block">
                 <h2 className={'highlight1'}>수하리 캠핑 파크</h2>
                 <h4 className={'highlight2'}>강원 홍천군 서석면 행치령로 708</h4>
-                <button type={'button'} className={'btn w-btn w-btn-indigo my-2'}>바로가기</button>
+                <button type={'button'} className={'btn w-btn w-btn-indigo my-4'}>바로가기</button>
               </div>
             </div>
             <div className="carousel-item" data-bs-interval="4000">
@@ -41,7 +41,7 @@ function MainPage(props) {
               <div className="carousel-caption d-none d-md-block">
                 <h2 className={'highlight1 '}>태양 힐링숲 글램핑&오토캠핑장</h2>
                 <h4 className={'highlight2'}>경기 파주시 적성면 설마천로 376</h4>
-                <button type={'button'} className={'btn w-btn w-btn-indigo my-2'}>바로가기</button>
+                <button type={'button'} className={'btn w-btn w-btn-indigo my-4'}>바로가기</button>
               </div>
             </div>
           </div>
@@ -83,22 +83,22 @@ function MainPage(props) {
               </a>
 
               {/* 지역 설렉트 선택 버튼*/}
-              <div className={'row my-3 mx-4'}>
+              <div className={'row my-3 mx-4 mt-1 mb-0'}>
               {/*  <select className={'col-2 mx-2'} name="sido1" id="sido1"></select>*/}
               {/*  <select className={'col-2 mx-2'} name="gugun1" id="gugun1"></select>*/}
               {/*  <select className={'col-2 mx-2'} name="dong1" id="dong1"></select>*/}
               <div>
                 {/*<h1>{`${val1}-${val2}-${val3}`}</h1>*/}
-                <select onChange={(e) => setVal1(e.target.value)}>
-                  <option value="">선택</option>
+                <select className={'sel'} onChange={(e) => setVal1(e.target.value)}>
+                  <option value="">시/도</option>
                   {sido.map((el) => (
                       <option key={el.sido} value={el.sido}>
                         {el.codeNm}
                       </option>
                   ))}
                 </select>
-                <select onChange={(e) => setVal2(e.target.value)}>
-                  <option value="">선택</option>
+                <select className={'sel'} onChange={(e) => setVal2(e.target.value)}>
+                  <option value="">구/군</option>
                   {sigugun
                       .filter((el) => el.sido === val1)
                       .map((el) => (
@@ -107,8 +107,8 @@ function MainPage(props) {
                           </option>
                       ))}
                 </select>
-                <select onChange={(e) => setVal3(e.target.value)}>
-                  <option value="">선택</option>
+                <select className={'sel'} onChange={(e) => setVal3(e.target.value)}>
+                  <option value="">동/면/읍</option>
                   {dong
                       .filter((el) => el.sido === val1 && el.sigugun === val2)
                       .map((el) => (
@@ -118,7 +118,7 @@ function MainPage(props) {
                       ))}
                 </select>
               </div>
-                <ul className={'col list-unstyled text-end mb-0 px-4 more'}>
+                <ul className={'col list-unstyled text-end mb-0 more'}>
                   <a href="#" className={'text-decoration-none fw-bold text-dark'}>
                     <li><i className="bi bi-pencil-square"></i><span className={'text2'}> 캠핑장 등록 및 광고문의</span></li>
                   </a>
@@ -128,7 +128,7 @@ function MainPage(props) {
             </ul>
 
             {/*검색된 캠핑장 Card 리스트*/}
-            <div className={'row my-2 mx-4'}>
+            <div className={'row my-2 mx-4 mt-0'}>
               <div className="col-3 card my-2 mx-2">
                 <img className="card-img" src="/assets/캠핑1.jpg" alt="Card image"></img>
                 <div className="card-body">
@@ -177,7 +177,7 @@ function MainPage(props) {
                   <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
                   <p className="card-text">경기 파주시 적성면 설마천로 376</p>
                 </div>
-                <div className="card-body">
+                <div className="card-body text-end">
                   <a href="#" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
 
                 </div>
@@ -235,17 +235,17 @@ function MainPage(props) {
 
           {/*장터 리스트*/}
           <div className={'row my-4'}>
-            <ul className={'col list-unstyled text-start mb-0'}>
+            <ul className={'col list-unstyled text-start mb-2'}>
               <a href="#" className={'text-decoration-none fw-bold text-dark'}>
                 <li><i className="bi bi-cart4"></i><span className={'text1'}> 장터</span></li>
               </a>
             </ul>
-            <ul className={'col list-unstyled text-end mb-0 px-4 more'}>
+            <ul className={'col list-unstyled text-end mb-0 more'}>
               <a href="#" className={'text-decoration-none fw-bold text-dark'}>
                 <li><i className="bi bi-plus"></i><span className={'text2'}>더보기</span></li>
               </a>
             </ul>
-            <div className="row mx-3 mt-0">
+            <div className="row mx-0 mt-0">
               <div className="product col-3 box1">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
                 <a href="#" className={'text-decoration-none'}><h5 className="product_title1"> 캠핑용 프로젝트 팝니다</h5></a>
@@ -369,12 +369,11 @@ function MainPage(props) {
                 </div>
               </div>
 
-              <div className="product col-3 box3">
+              <div className="product col-3 py-4 box3">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
-                <h5 className="product_title2"> 코베아 네스트3 구매해요!</h5>
-                <div className="product_mon"> 가격: 34,000￦</div>
-                <a className="product_des text-decoration-none"> 4번 정도 피칭 했고요 . 11월 13일 원남 저수지에서 마지막 사용 했습니다. 캠핑의 환상에서
-                  벗어나 판매합니다.상태 전반적으로 괜찮아요..</a>
+                <h5 className="product_title2"> 루프 플라이 삽니다</h5>
+                <div className="product_mon"> 가격: 180,000￦</div>
+                <a className="product_des text-decoration-none"> 2룸 루프 플라이 사고 싶습니다. 많은 관심 부탁드립니..</a>
                 <div className={'row my-2'}>
                   <div className={'row col-6 text-start'}>
                     <ul className={'list-unstyled product_des'}>

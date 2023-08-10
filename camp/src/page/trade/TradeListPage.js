@@ -1,8 +1,8 @@
 import React from "react";
-import './boardList.css'
+import './tradeListpage.css'
 import {Link} from "react-router-dom";
 
-function BoardList(props) {
+function TradeListPage(props) {
 
   return (
       <main className={'container my-5'}>
@@ -22,7 +22,7 @@ function BoardList(props) {
                   </button>
 
                   {/*게시판 최신순 및 조회순 정렬*/}
-                  <form action='/BoardList' method={"post"} id={'listCheck'} name={'listCheck'}>
+                  <form action='/TradeListPage.js' method={"post"} id={'listCheck'} name={'listCheck'}>
                     <div className={'col-sm btn-group d-flex justify-content-end'}>
                       <div className={'form-check mx-3 form-control-inline'}>
                         <input type='radio' className={'form-check-input'} name={'newest'} value={'newest'} checked></input>
@@ -216,4 +216,4 @@ function BoardList(props) {
   )
 }
 
-export default BoardList;
+export default TradeListPage;

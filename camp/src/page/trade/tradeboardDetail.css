@@ -11,6 +11,16 @@ h2 {
     font-weight: bold;
 }
 
+h3 {
+    margin: 20px;
+    padding: 20px 0px;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Arial Black", sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+
 text1 {
     background-color: #F44336;
     color: #ffffff;
@@ -33,6 +43,7 @@ text1 {
 .w-btn-indigo {
     border: 3px solid #d7e8f6;
     background-color: aliceblue;
+    opacity: 0.9;
     color: #1e6b7b;
 }
 

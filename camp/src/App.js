@@ -1,32 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Layout from "./layout/Layout";
-import BoardList from "./board/BoardList";
-import BoardWrite from "./board/BoardWrite";
-import ErrorPage from "./layout/errorPage";
-import Header from "./layout/header";
-import Footer from "./layout/footer";
-import BoardDetail from "./board/BoardDetail";
-import MainPage from "./layout/MainPage";
-import MyPage from "./board/myPage";
-import CampDetailPage from "./page/campDetailPage";
-import TradeListPage from "./page/tradeListPage";
-import TradeDetailPage from "./page/tradeDetailPage";
-import CampReservationPage1 from "./page/campReservationPage1";
-import CampReservationPage2 from "./page/campReservationPage2";
-import CampReservationPage3 from "./page/campReservationPage3";
-import AboutPage from "./page/aboutPage";
-import AnnouncementListPage from "./page/announcementListPage";
-import AnnouncementDetailPage from "./page/announcementDetailPage";
+import MainPage from "./page/main/MainPage";
+import MyPage from "./page/trade/MyPage";
+import CampDetailPage from "./page/camp/CampDetailPage";
+import TradeListPage from "./page/trade/TradeListPage";
+import TradeDetailPage from "./page/trade/TradeDetailPage";
+import TradeWritePage from "./page/trade/TradeWritePage";
+import CampReservationPage1 from "./page/camp/CampReservationPage1";
+import CampReservationPage2 from "./page/camp/CampReservationPage2";
+import CampReservationPage3 from "./page/camp/CampReservationPage3";
+import AnnouncementListPage from "./page/announce/AnnouncementListPage";
+import AnnouncementDetailPage from "./page/announce/AnnouncementDetailPage";
+import CampListPage from "./page/camp/CampListPage";
+import Header from "./page/layout/Header";
+import ErrorPage from "./page/layout/ErrorPage";
+import AboutPage from "./page/layout/AboutPage";
+import Footer from "./page/layout/Footer";
 
-function SelectBoardDetail() {
-  return null;
-}
-
-function CampListPage() {
-  return null;
-}
 
 function App(props) {
   return (
@@ -45,11 +34,11 @@ function App(props) {
           {/*캠핑장 상세보기*/}
           <Route path={'/campList/*'} element={<CampDetailPage/>}/>
           {/*중고장터 리스트*/}
-          <Route path={'/trade'} element={<BoardList/>}/>
+          <Route path={'/trade'} element={<TradeListPage/>}/>
           {/*중고장터 상세보기*/}
-          <Route path={'/tradeDetail/*'} element={<BoardDetail/>}/>
+          <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>
           {/*중고장터 글 등록*/}
-          <Route path={'/tradeWrite/*'} element={<BoardWrite/>}/>
+          <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
           {/*예약페이지*/}
           <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
           <Route path={'/reservation2/*'} element={<CampReservationPage2/>}/>
@@ -66,13 +55,13 @@ function App(props) {
       </div>
       //     <BrowserRouter>
   //       <Routes>
-  //         {/*<Route path={"/"} element={<BoardList/>}>*/}
-  //         {/*<Route path={"/"} element={<BoardWrite/>}>*/}
-  //         {/*<Route path={"/"} element={<BoardDetail/>}>*/}
+  //         {/*<Route path={"/"} element={<TradeListPage/>}>*/}
+  //         {/*<Route path={"/"} element={<TradeWritePage/>}>*/}
+  //         {/*<Route path={"/"} element={<TradeDetailPage/>}>*/}
   //         <Route path={"/"} element={<MainPage/>}>
-  //           {/*<Route index element={<BoardWrite/>}/>*/}
+  //           {/*<Route index element={<TradeWritePage/>}/>*/}
   //           {/*<Route path={"board/:boardIdx"} element={<SelectBoardDetail/>}/>*/}
-  //           {/*<Route path={"write"} element={<BoardWrite/>}/>*/}
+  //           {/*<Route path={"write"} element={<TradeWritePage/>}/>*/}
   //           {/*<Route path={"*"} element={<ErrorPage/>}/>*/}
   //         </Route>
   //       </Routes>
