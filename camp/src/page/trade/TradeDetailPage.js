@@ -4,7 +4,7 @@ import './tradeboardDetail.css'
 function TradeDetailPage(props) {
 
   return (
-      <main className="container my-4">
+      <main className="container">
         <div className="row">
           <div className="col-sm-2"></div>
           <div className="col-sm-8">
@@ -20,17 +20,20 @@ function TradeDetailPage(props) {
                 <div className="row">
                   <div className="col-sm-9">
                     <input type="hidden" name="idx" id="idx"></input>
-                    <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'루프 플라이 팝니다'} name="title" readOnly></input>
+                    <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'루프 플라이 팝니다'}
+                           name="title" readOnly></input>
                   </div>
                   <div className="col-sm-3  ">
                     <input type="hidden" name="idx" id="idx"></input>
-                    <input type="text" className="form-control-plaintext fs-5 fw-bold text-center" placeholder={'희망가: 50,000원'} name="title" readOnly></input>
+                    <input type="text" className="form-control-plaintext fs-5 fw-bold text-center"
+                           placeholder={'희망가: 50,000원'} name="title" readOnly></input>
                   </div>
                 </div>
 
                 <div className="col-sm-4 text-end">
                   <input type="hidden" name="idx" id="idx"></input>
-                  <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'지역: 부산 사상구'} name="title" readOnly></input>
+                  <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'지역: 부산 사상구'}
+                         name="title" readOnly></input>
                 </div>
                 <div className="row my-3 bg-light">
                   <div className="col-sm-4 d-flex justify-content-start">

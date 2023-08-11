@@ -78,7 +78,7 @@ function MainPage(props) {
           <div className={'row my-4'}>
             <ul className={'row-col-2 list-unstyled text-start mb-0'}>
               <a href="#" className={'text-decoration-none fw-bold text-dark'}>
-                <li><i className="col bi bi-rocket-takeoff rocket-takeoff"></i><span className={'text1'}> 캠핑장</span>
+                <li className={'mx-3'}><i className="col bi bi-rocket-takeoff rocket-takeoff"></i><span className={'text1'}> 캠핑장</span>
                 </li>
               </a>
 
@@ -241,16 +241,16 @@ function MainPage(props) {
               </a>
             </ul>
             <ul className={'col list-unstyled text-end mb-0 more'}>
-              <a href="#" className={'text-decoration-none fw-bold text-dark'}>
+              <a href="trade" className={'text-decoration-none fw-bold text-dark'}>
                 <li><i className="bi bi-plus"></i><span className={'text2'}>더보기</span></li>
               </a>
             </ul>
             <div className="row mx-0 mt-0">
               <div className="product col-3 box1">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
-                <a href="#" className={'text-decoration-none'}><h5 className="product_title1"> 캠핑용 프로젝트 팝니다</h5></a>
+                <a href="tradeDetail" className={'text-decoration-none'}><h5 className="product_title1"> 캠핑용 프로젝트 팝니다</h5></a>
                 <div className="product_mon"> 가격: 25,000￦</div>
-                <a href={'#'} className="product_des text-decoration-none"> 캠핑용품 정리하다가 불용품 발견되어 장터에 내놓습니다.초기에 몇번 들고 나가고
+                <a href={'tradeDetail'} className="product_des text-decoration-none"> 캠핑용품 정리하다가 불용품 발견되어 장터에 내놓습니다.초기에 몇번 들고 나가고
                   거의 사용하지
                   않았구요..사진에 보시듯 제조일은 2016년인데... 사용시간은 47시간입니다.외관은 거의 새것처럼 깨끗합니다. 기스도 거의 없는 상태에요..</a>
                 <div className={'row my-2'}>
@@ -345,7 +345,7 @@ function MainPage(props) {
                 </div>
               </div>
 
-              <div className="product col-3 py-4 box2">
+              <div className="product col-3 py-2 my-3 box2">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
                 <h5 className="product_title2"> 루프 플라이 삽니다</h5>
                 <div className="product_mon"> 가격: 170,000￦</div>
@@ -369,7 +369,7 @@ function MainPage(props) {
                 </div>
               </div>
 
-              <div className="product col-3 py-4 box3">
+              <div className="product col-3  py-2 my-3 box3">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
                 <h5 className="product_title2"> 루프 플라이 삽니다</h5>
                 <div className="product_mon"> 가격: 180,000￦</div>

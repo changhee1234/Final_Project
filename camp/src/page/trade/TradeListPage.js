@@ -41,7 +41,7 @@ function TradeListPage(props) {
             </div>
 
             {/*게시판 리스트*/}
-            <div className="product_container row mx-auto my-2 mt-0">
+            <div className="product_container row mx-auto my-2 mb-0">
               <div className="product col-3 box1">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
                 <a href="#" className={'text-decoration-none'}><h5 className="product_title1"> 캠핑용 프로젝트 팝니다</h5></a>
@@ -141,7 +141,7 @@ function TradeListPage(props) {
                 </div>
               </div>
 
-              <div className="product col-3 py-4 box2">
+              <div className="product col-3 py-2 my-3 box2">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
                 <h5 className="product_title2"> 루프 플라이 삽니다</h5>
                 <div className="product_mon"> 가격: 170,000￦</div>
@@ -165,7 +165,7 @@ function TradeListPage(props) {
                 </div>
               </div>
 
-              <div className="product col-3 box3">
+              <div className="product col-3 py-2 my-3 box3">
                 <div className="product_img_div"><img src="/assets/default_image.png" className="product_img"/></div>
                 <h5 className="product_title2"> 코베아 네스트3 구매해요!</h5>
                 <div className="product_mon"> 가격: 34,000￦</div>
@@ -191,9 +191,8 @@ function TradeListPage(props) {
               </div>
             </div>
 
-            <div className="product py-4 text-end">
-              <a href="/BoardWr
-              ite" className="w-btn w-btn-indigo mx-3">글 등록</a>
+            <div className="product text-end">
+              <a href="tradeWrite" className="w-btn w-btn-indigo mx-3">글 등록</a>
             </div>
 
             {/* ajax 페이징*/}
