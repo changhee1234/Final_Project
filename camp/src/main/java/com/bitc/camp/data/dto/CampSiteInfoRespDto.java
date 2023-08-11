@@ -16,7 +16,7 @@ public class CampSiteInfoRespDto {
   private int peopleMin;
   private int peopleMax;
   private int addPrice;
-  private String campReservePeriod;
+  private int campReservePeriod;
   private int parkPrice;
   private int elePrice;
   private int areaSiteCnt;

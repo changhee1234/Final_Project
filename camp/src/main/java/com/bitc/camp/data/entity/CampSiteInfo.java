@@ -38,7 +38,7 @@ public class CampSiteInfo {
   private int addPrice;
 
   @Column(nullable = false)
-  private String campReservePeriod;
+  private int campReservePeriod;
 
   @Column(nullable = false)
   private int parkPrice;
