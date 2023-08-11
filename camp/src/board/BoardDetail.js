@@ -22,7 +22,7 @@ function BoardDetail(props) {
                     <input type="hidden" name="idx" id="idx"></input>
                     <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'루프 플라이 팝니다'} name="title" readOnly></input>
                   </div>
-                  <div className="col-sm-3  ">
+                  <div className="col-sm-3">
                     <input type="hidden" name="idx" id="idx"></input>
                     <input type="text" className="form-control-plaintext fs-5 fw-bold text-center" placeholder={'희망가: 50,000원'} name="title" readOnly></input>
                   </div>
