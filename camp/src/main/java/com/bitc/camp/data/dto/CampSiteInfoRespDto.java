@@ -11,6 +11,8 @@ public class CampSiteInfoRespDto {
   private int idx;
   private String areaName;
   private int sitePrice;
+  private String notice;
+  private String campStyle;
   private int peopleMin;
   private int peopleMax;
   private int addPrice;
@@ -27,6 +29,8 @@ public class CampSiteInfoRespDto {
     this.idx = entity.getIdx();
     this.areaName = entity.getAreaName();
     this.sitePrice = entity.getSitePrice();
+    this.notice = entity.getNotice();
+    this.campStyle = entity.getCampStyle();
     this.peopleMin = entity.getPeopleMin();
     this.peopleMax = entity.getPeopleMax();
     this.addPrice = entity.getAddPrice();

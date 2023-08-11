@@ -22,6 +22,12 @@ public class CampSiteInfo {
   @Column(nullable = false)
   private int sitePrice;
 
+  @Column(nullable = false, length = 3000)
+  private String notice;
+
+  @Column(nullable = false)
+  private String campStyle;
+
   @Column(nullable = false)
   private int peopleMin;
 

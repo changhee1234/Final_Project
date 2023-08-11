@@ -37,7 +37,6 @@ public class ReservationServiceImpl implements ReservationService {
   public int getSiteCnt(int siteInfoIdx, String startDate, String endDate) throws Exception {
     LocalDate userReservationStart = LocalDate.parse(startDate);
     LocalDate userReservationEnd = LocalDate.parse(endDate);
-    int siteCnt = campSiteListRepository.queryCountSiteList(siteInfoIdx, userReservationStart, userReservationEnd);
-    return siteCnt;
+    return campSiteListRepository.queryCountSiteList(siteInfoIdx, userReservationStart, userReservationEnd);
   }
 }

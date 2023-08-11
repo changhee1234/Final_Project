@@ -20,9 +20,6 @@ public class CampSiteList {
   private int idx;
 
   @Column(nullable = false)
-  private String campStyle;
-
-  @Column(nullable = false)
   private String campSiteName;
 
   @ManyToOne(optional = false)

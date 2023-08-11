@@ -34,30 +34,25 @@ public class ReservationController {
   }
 
   // 예약 날짜 선택 후 예약 가능한 자리 조회
-  @ResponseBody
   @PostMapping("/selectDate")
   public Object countSiteList(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("siteInfoIdxs") List<Integer> siteInfoIdxs) throws Exception {
-
-    List<Integer> siteCntList = new ArrayList<>();
+    Map<String, Integer> siteCntList = new HashMap<>();
 
     for (int siteInfoIdx : siteInfoIdxs) {
       int siteCnt = reservationService.getSiteCnt(siteInfoIdx, startDate, endDate);
-      siteCntList.add(siteCnt);
+      siteCntList.put("siteIdx" + siteInfoIdx, siteCnt);
     }
     return siteCntList;
   }
 
-//  @GetMapping("/reserveStep/{campSiteInfoIdx}")
-//  public ModelAndView reserveStep(@PathVariable("campSiteInfoIdx") int idx) throws Exception {
-//    ModelAndView mv = new ModelAndView("reserveStep");
-//
-//    CampSiteInfoRespDto campSiteInfo = reservationService.getCampSiteInfo(idx);
-//    List<CampSiteListRespDto> campSiteLists = campSiteInfo.getCampSiteLists();
-//    mv.addObject("campSiteInfo", campSiteInfo);
-//    mv.addObject("campSiteLists", campSiteLists);
-//    return mv;
-//  }
-//
+  @GetMapping("/reserveStep/{campSiteInfoIdx}")
+  public Object reserveStep(@PathVariable("campSiteInfoIdx") int idx) throws Exception {
+    Map<String, Object> result = new HashMap<>();
+    CampSiteInfoRespDto campSiteInfo = reservationService.getCampSiteInfo(idx);
+    // List<CampSiteListRespDto> campSiteLists = campSiteInfo.getCampSiteLists();
+    result.put("campSiteInfo", campSiteInfo);
+    return result;
+  }
 
 
 }

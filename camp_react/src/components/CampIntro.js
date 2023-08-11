@@ -1,20 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import React from 'react';
 
 function CampIntro(props) {
-  // const [mainInfo, setMainInfo] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:8080/reserve/")
-  //     .then(res => {
-  //       console.log(res.data);
-  //       setMainInfo(res.data.mainInfo);
-  //     })
-  //     .catch(err => {
-  //       alert(`통신 오류 : ${err}`);
-  //     });
-  // }, []);
-
   return (
     <div className={"card"}>
       <img src="/camp_img.jpg" alt="캠프 대표 이미지" className="card-img-top"/>

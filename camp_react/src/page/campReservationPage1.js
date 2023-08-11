@@ -10,11 +10,12 @@ import axios from "axios";
 
 function CampReservationPage1(props) {
   const [mainInfo, setMainInfo] = useState([]);
-  const [siteEmptyCnt, setSiteEmptyCnt] = useState(0);
+  const [siteInfos, setSiteInfos] = useState([]);
+  const [siteEmptyCnt, setSiteEmptyCnt] = useState([0]);
   const [dateRange, setDateRange] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 1),
+      endDate: new Date(),
       key: 'selection'
     }
   ]);
@@ -23,6 +24,7 @@ function CampReservationPage1(props) {
     axios.get("http://localhost:8080/reserve/" + 1)
       .then(res => {
         setMainInfo(res.data.mainInfo);
+        setSiteInfos(res.data.mainInfo.siteInfoLists)
       })
       .catch(err => {
         alert(`통신 오류 : ${err}`);
@@ -45,7 +47,11 @@ function CampReservationPage1(props) {
       params.append('siteInfoIdxs', siteInfoIdxs)
       axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
         .then(res => {
-          setSiteEmptyCnt(res.data);
+
+          const toArr = Object.keys(res.data).map(key => ({[key]: res.data[key]}));
+          setSiteEmptyCnt(toArr);
+          // console.log(mainInfo.siteInfoLists);
+          // console.log(res.data);
           // setMainInfo(prev => ({
           //   ...prev,
           //   siteInfoLists: prev.siteInfoLists.map((m) => {
@@ -79,9 +85,14 @@ function CampReservationPage1(props) {
         </div>
       </div>
 
-      <div><img className={'img-fluid'} src="/Site_batch.gif"/></div>
 
-      <AreaList mainInfo={mainInfo} siteEmptyCnt={siteEmptyCnt}/>
+
+      {/*{Object.keys(siteEmptyCnt).map(key => (*/}
+      {/*  <AreaList key={ key } stateKey={ key } stateValue={ siteEmptyCnt[key] }/>*/}
+      {/*))}*/}
+      <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt}/>
+
+      <div><img className={'img-fluid'} src="/Site_batch.gif"/></div>
     </main>
   );
 }
