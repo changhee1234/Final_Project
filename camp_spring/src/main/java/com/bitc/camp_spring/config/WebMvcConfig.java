@@ -1,4 +1,4 @@
-package com.bict.camp_spring.config;
+package com.bitc.camp_spring.config;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

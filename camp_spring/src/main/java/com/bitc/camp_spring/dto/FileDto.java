@@ -1,4 +1,4 @@
-package com.bict.camp_spring.dto;
+package com.bitc.camp_spring.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.bict.camp_spring;
+package com.bitc.camp_spring;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
-package com.bict.camp_spring.common;
+package com.bitc.camp_spring.common;
 
-import com.bict.camp_spring.dto.FileDto;
+import com.bitc.camp_spring.dto.FileDto;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;

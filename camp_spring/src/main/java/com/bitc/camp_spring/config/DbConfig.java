@@ -1,4 +1,4 @@
-package com.bict.camp_spring.config;
+package com.bitc.camp_spring.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
