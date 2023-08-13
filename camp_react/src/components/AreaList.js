@@ -8,12 +8,8 @@ function AreaList(props) {
       {
         props.siteInfos && props.siteInfos.map((m) => {
           return (
-            <Link to={{
-              pathname: `/reservation2/${m.idx}`,
-              state: {
-                siteIdx: m.idx
-              }
-            }} key={m.idx} className={'text-decoration-none'}>
+
+            <Link to={`/reservation2/${m.idx}`} state={{dateRange: props.dateRange}} key={m.idx} className={'text-decoration-none'}>
               <div className="card my-2">
                 <div className="row g-0">
                   <div className="col-sm-3">

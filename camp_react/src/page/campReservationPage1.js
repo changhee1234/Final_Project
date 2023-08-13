@@ -47,7 +47,6 @@ function CampReservationPage1(props) {
       params.append('siteInfoIdxs', siteInfoIdxs)
       axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
         .then(res => {
-
           const toArr = Object.keys(res.data).map(key => ({[key]: res.data[key]}));
           setSiteEmptyCnt(toArr);
           // console.log(mainInfo.siteInfoLists);
@@ -90,7 +89,7 @@ function CampReservationPage1(props) {
       {/*{Object.keys(siteEmptyCnt).map(key => (*/}
       {/*  <AreaList key={ key } stateKey={ key } stateValue={ siteEmptyCnt[key] }/>*/}
       {/*))}*/}
-      <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt}/>
+      <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange}/>
 
       <div><img className={'img-fluid'} src="/Site_batch.gif"/></div>
     </main>

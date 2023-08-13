@@ -8,7 +8,9 @@ import SelectOptions from "../components/SelectOptions";
 
 
 function CampReservationPage2(props) {
+  const location = useLocation();
   const siteIdx = useParams();
+  const dateRange = location.state?.dateRange;
   const [siteInfo, setSiteInfo] = useState([]);
   const [siteLists, setSiteLists] = useState([]);
 
@@ -32,7 +34,7 @@ function CampReservationPage2(props) {
           <SiteLists siteLists={siteLists}/>
         </div>
         <div className="col-sm">
-          <SelectOptions/>
+          <SelectOptions siteInfo={siteInfo} dateRange={dateRange}/>
         </div>
       </div>
     </main>
