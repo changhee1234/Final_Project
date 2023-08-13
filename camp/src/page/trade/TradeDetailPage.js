@@ -53,7 +53,7 @@ function TradeDetailPage(props) {
                 <div className="row my-3">
                   <div className="col-sm">
                     <div className="my-3">
-                      <img width="100%"></img>
+                      <img width="100%" alt={"content"}></img>
                     </div>
                     <textarea className="form-control-plaintext" rows="15" id="contents" name="contents"
                               readOnly></textarea>

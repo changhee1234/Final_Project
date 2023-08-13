@@ -8,25 +8,25 @@ function Header(props) {
         width: "150px"
     }
 
-    const headerBackgroundColor = {
-        backgroundColor: "#ffdca4"
-    }
+    // const headerBackgroundColor = {
+    //     backgroundColor: "#ffdca4"
+    // }
 
     return (
         <header className={"fixed-top shadow container-fluid mb-3 border-bottom bg-light"}>
             <div className={'d-flex justify-content-end me-5'}>
                 <Link className={'me-3 text-decoration-none text-dark'} to={'/'}>Home</Link>
                 <Link className={'me-3 text-decoration-none text-dark'} to={'/announcementList'}>공지사항</Link>
-                <a className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'}
+                <a href={'#!'} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'}
                    data-bs-target={'#joinModal'}>회원가입</a>
-                <a className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'}
+                <a href={'#!'} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'}
                    data-bs-target={'#loginModal'}>로그인</a>
                 <Link className={'text-decoration-none text-dark'} to={'/about'}>고객센터</Link>
             </div>
             <nav className={"navbar navbar-expand-lg"}>
                 <div className={"navbar-brand ms-3"} style={logo}>
                     <Link to={'/'}>
-                        <img src={'assets/camp_logo.png'} className={'img-fluid'}/>
+                        <img src={'assets/camp_logo.png'} className={'img-fluid'} alt={'img'}/>
                     </Link>
                 </div>
                 <div className={"collapse navbar-collapse"} id={"navbarNav"}>

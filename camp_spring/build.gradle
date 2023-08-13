@@ -4,7 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.2'
 }
 
-group = 'com.bict'
+group = 'com.bitc'
 version = '0.0.1-SNAPSHOT'
 
 java {
@@ -40,73 +40,73 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-//// 리액트,스프링 병합 및 배포
-//// 1.리액트: 구성편집-> build
-//// 2.스프링: bootJar 더블클릭 / 명령창에서 libs 폴더들어간 후(C:\smart505\09 React 0622-\backend\build\libs) ->
-//// -> java -jar backend-0.0.1-SNAPSHOT.jar 명령어 -> bootJar 다시 -> 버전변경 명령어 -> 8080으로 접속
-//
-//// 리액트 프로젝트 포함하기
-//
-//// 변수 선언 및 리액트 프로젝트 폴더 설정
-//// $projectDir : 스프링 프로젝트를 뜻함
-//def frontendDir = "$projectDir/src/main/React"
-//
-//// 리액트 프로젝트가 복사될 위치 설정
-//sourceSets {
-//    main {
-//        resources {
-//            srcDirs = ["$projectDir/src/main/resources"]
-//        }
-//    }
-//}
-//
-//processResources {
-//    dependsOn "copyReactBuildFiles"
-//}
-//
-//// 리액트 프로젝트 인스톨
-//task installReact(type: Exec) {
-////	해당 명령 실행 후 동작(작업 폴더 변경)
-//    workingDir "$frontendDir"
-//    inputs.dir "$frontendDir"
-//    group = BasePlugin.BUILD_GROUP
-//
-////	리액트 모듈 다운로드 명령
-//    if(System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
-//        commandLine "npm.cmd", "audit", "fix"
-//        commandLine "npm.cmd", "install"
-//    }
-//    else {
-//        commandLine "npm", "audit", "fix"
-//        commandLine "npm", "install"
-//    }
-//}
-//
-//// 리액트 프로젝트 빌드
-//task buildReact(type: Exec) {
-////  해당 명령 실행 후 동작
-//    dependsOn "installReact"
-//    workingDir "$frontendDir"
-//    inputs.dir "$frontendDir"
-//    group = BasePlugin.BUILD_GROUP
-//
-////	리액트 프로젝트 빌드 명령
-//    if(System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
-//        commandLine "npm.cmd", "run-script", "build"
-//    }
-//    else {
-//        commandLine "npm", "run-script", "build"
-//    }
-//}
-//
-//// 빌드된 리액트 프로젝트를 스프링 프로젝트로 복사
-//task copyReactBuildFiles(type: Copy) {
-//    dependsOn "buildReact"
-//    from "$frontendDir/build"
-//    into "$projectDir/scr/main/resources/static"
-//}
-//
-//// bootJar 명령 실행 시 아래 명령 실행
-//tasks.bootJar {
-//    dependsOn "copyReactBuildFiles"
-//}
+// 리액트,스프링 병합 및 배포
+// 1.리액트: 구성편집-> build
+// 2.스프링: bootJar 더블클릭 / 명령창에서 libs 폴더들어간 후(C:\smart505\09 React 0622-\backend\build\libs) ->
+// -> java -jar backend-0.0.1-SNAPSHOT.jar 명령어 -> bootJar 다시 -> 버전변경 명령어 -> 8080으로 접속
+
+// 리액트 프로젝트 포함하기
+
+// 변수 선언 및 리액트 프로젝트 폴더 설정
+// $projectDir : 스프링 프로젝트를 뜻함
+def campDir = "$projectDir/src/main/camp"
+
+// 리액트 프로젝트가 복사될 위치 설정
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["$projectDir/src/main/resources"]
+        }
+    }
+}
+
+processResources {
+    dependsOn "copyReactBuildFiles"
+}
+
+// 리액트 프로젝트 인스톨
+task installReact(type: Exec) {
+//	해당 명령 실행 후 동작(작업 폴더 변경)
+    workingDir "$campDir"
+    inputs.dir "$campDir"
+    group = BasePlugin.BUILD_GROUP
+
+//	리액트 모듈 다운로드 명령
+    if(System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
+        commandLine "npm.cmd", "audit", "fix"
+        commandLine "npm.cmd", "install"
+    }
+    else {
+        commandLine "npm", "audit", "fix"
+        commandLine "npm", "install"
+    }
+}
+
+// 리액트 프로젝트 빌드
+task buildReact(type: Exec) {
+//  해당 명령 실행 후 동작
+    dependsOn "installReact"
+    workingDir "$campDir"
+    inputs.dir "$campDir"
+    group = BasePlugin.BUILD_GROUP
+
+//	리액트 프로젝트 빌드 명령
+    if(System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
+        commandLine "npm.cmd", "run-script", "build"
+    }
+    else {
+        commandLine "npm", "run-script", "build"
+    }
+}
+
+// 빌드된 리액트 프로젝트를 스프링 프로젝트로 복사
+task copyReactBuildFiles(type: Copy) {
+    dependsOn "buildReact"
+    from "$campDir/build"
+    into "$projectDir/scr/main/resources/static"
+}
+
+// bootJar 명령 실행 시 아래 명령 실행
+tasks.bootJar {
+    dependsOn "copyReactBuildFiles"
+}
