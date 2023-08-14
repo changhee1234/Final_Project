@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import SiteInfo from "../components/SiteInfo";
+import SiteInfo from "../components/reserve/SiteInfo";
 import {useLocation, useParams, useSearchParams} from "react-router-dom";
-import Notice from "../components/Notice";
-import SiteLists from "../components/SiteLists";
-import SelectOptions from "../components/SelectOptions";
+import Notice from "../components/reserve/Notice";
+import SiteLists from "../components/reserve/SiteLists";
+import SelectOptions from "../components/reserve/SelectOptions";
 
 
 function CampReservationPage2(props) {

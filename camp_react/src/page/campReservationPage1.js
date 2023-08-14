@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import CampIntro from "../components/CampIntro";
-import AreaList from "../components/AreaList";
+import CampIntro from "../components/reserve/CampIntro";
+import AreaList from "../components/reserve/AreaList";
 import './styles.css';
 import './default.css';
 import {DateRange} from 'react-date-range';
