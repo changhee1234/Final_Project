@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 
 function AreaList(props) {
-  console.log(props.siteEmptyCnt);
   return (
     <div>
       {
         props.siteInfos && props.siteInfos.map((m) => {
           return (
-
-            <Link to={`/reservation2/${m.idx}`} state={{dateRange: props.dateRange}} key={m.idx} className={'text-decoration-none'}>
+            <Link to={`/reservation2/${m.idx}`} state={{dateRange: props.dateRange}} key={m.idx}
+                  className={'text-decoration-none'}>
               <div className="card my-2">
                 <div className="row g-0">
                   <div className="col-sm-3">
@@ -18,11 +17,7 @@ function AreaList(props) {
                   <div className="col-sm-8">
                     <div className="card-body">
                       <h5 className="card-title">{m.areaName}</h5>
-                      <p>예약가능 {
-                        props.siteEmptyCnt.map((i) => {
-                          return <span>{i.siteIdx1}</span>
-                        })
-                      }/{m.areaSiteCnt}</p>
+                      <p>예약가능 {m.available === undefined ? 0 : m.available}/{m.areaSiteCnt}</p>
                       <p className="card-text text-end">{m.sitePrice}원</p>
                     </div>
                   </div>

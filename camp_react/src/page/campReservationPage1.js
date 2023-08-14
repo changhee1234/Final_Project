@@ -31,7 +31,6 @@ function CampReservationPage1(props) {
       });
   }, []);
 
-
   const handleOnChange = item => {
     setDateRange([item.selection])
 
@@ -47,22 +46,20 @@ function CampReservationPage1(props) {
       params.append('siteInfoIdxs', siteInfoIdxs)
       axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
         .then(res => {
-          const toArr = Object.keys(res.data).map(key => ({[key]: res.data[key]}));
-          setSiteEmptyCnt(toArr);
-          // console.log(mainInfo.siteInfoLists);
-          // console.log(res.data);
-          // setMainInfo(prev => ({
-          //   ...prev,
-          //   siteInfoLists: prev.siteInfoLists.map((m) => {
-          //     return {...prev, siteEmptyCnt: res.data}
-          //   }),
-          //   }));
+          setSiteEmptyCnt(res.data);
         })
         .catch(err => {
           alert(`통신 오류 : ${err}`);
         });
     }
   };
+
+  useEffect(() => {
+    const combinedData = siteInfos.map((siteInfo, index) => {
+      return { ...siteInfo, available: siteEmptyCnt[index] };
+    });
+    setSiteInfos(combinedData);
+  }, [siteEmptyCnt]);
 
   return (
     <main className={"container"}>
@@ -84,11 +81,6 @@ function CampReservationPage1(props) {
         </div>
       </div>
 
-
-
-      {/*{Object.keys(siteEmptyCnt).map(key => (*/}
-      {/*  <AreaList key={ key } stateKey={ key } stateValue={ siteEmptyCnt[key] }/>*/}
-      {/*))}*/}
       <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange}/>
 
       <div><img className={'img-fluid'} src="/Site_batch.gif"/></div>

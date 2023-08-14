@@ -36,11 +36,11 @@ public class ReservationController {
   // 예약 날짜 선택 후 예약 가능한 자리 조회
   @PostMapping("/selectDate")
   public Object countSiteList(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("siteInfoIdxs") List<Integer> siteInfoIdxs) throws Exception {
-    Map<String, Integer> siteCntList = new HashMap<>();
+    List<Integer> siteCntList = new ArrayList<>();
 
     for (int siteInfoIdx : siteInfoIdxs) {
       int siteCnt = reservationService.getSiteCnt(siteInfoIdx, startDate, endDate);
-      siteCntList.put("siteIdx" + siteInfoIdx, siteCnt);
+      siteCntList.add(siteCnt);
     }
     return siteCntList;
   }
