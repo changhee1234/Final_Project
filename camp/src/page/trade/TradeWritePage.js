@@ -1,6 +1,53 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from 'axios';
 
 function TradeWritePage(props) {
+
+    const [boards, setBoards] = useState([]);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+
+    useEffect(() => {
+      fetchBoards();
+    }, []);
+
+    const fetchBoards = async () => {
+      const response = await axios.get('/api/boards');
+      setBoards(response.data);
+    };
+
+    // const createBoard = async () => {
+    //   const newBoard = { title, content };
+    //   const response = await axios.post('/api/boards', newBoard);
+    //   setBoards([...boards, response.data]);
+    //   setTitle('');
+    //   setContent('');
+    // };
+
+    // const deleteBoard = async (id) => {
+    //   await axios.delete(`/api/boards/${id}`);
+    //   setBoards(boards.filter(board => board.id !== id));
+    // };
+  useEffect(() => {
+    function getBoxOffice() {
+      fetch('/nowMovie')
+          .then(response => response.json())
+          .then(data => {
+            const selectBox = document.getElementById('box-office');
+            let options = "";
+            for (let i = 0; i < data.length; i++) {
+              options += `<option value="${data[i].movieNm}">${data[i].movieNm}</option>`;
+            }
+            selectBox.innerHTML = options;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    }
+
+    getBoxOffice();
+  }, []);
+
 
   return (
       <div className="container my-5">
@@ -11,7 +58,7 @@ function TradeWritePage(props) {
             <ul className={'col-sm text-center my-4 mt-5'}>
               <li><i className="bi bi-cart4"></i><span className={'text3'}> 장터 게시판 글 등록</span></li></ul>
             <div className="row">
-              <form action="/TradeWritePage.js" method="post" encType="multipart/form-data">
+              <form action="/TradeWritePage" method="post" encType="multipart/form-data">
                 <div className="my-3 row">
                   <div className="col-sm-2">
                     <select id="box-office" className="form-control me-3" name="movieNm">
@@ -24,7 +71,7 @@ function TradeWritePage(props) {
                     <input type="text" className="form-control" id="title" name="title" placeholder="제목을 입력하세요"></input>
                   </div>
                   <div className={"mt-3"}>
-                    <input type="number" className="form-control" id="price" name="price" placeholder="희망하는 가격을 입력하세요(원)"></input>
+                    <input type="number" className="form-control" id="tradePrice" name="tradePrice" placeholder="희망하는 가격을 입력하세요(원)"></input>
                   </div>
                 </div>
                 <div className="mb-3">

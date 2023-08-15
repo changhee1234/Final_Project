@@ -15,59 +15,43 @@ import Header from "./page/layout/Header";
 import ErrorPage from "./page/layout/ErrorPage";
 import AboutPage from "./page/layout/AboutPage";
 import Footer from "./page/layout/Footer";
-import Hello from "./Hello";
-
 
 function App(props) {
   return (
       <div className={'App'}>
       <BrowserRouter>
-        {/*<Header/>*/}
-        <Hello/>
-        {/*<Routes path={'/'}>*/}
-        {/*  /!*메인페이지*!/*/}
-        {/*  <Route path={'/'} element={<MainPage/>}/>*/}
-        {/*  /!*마이페이지*!/*/}
-        {/*  <Route path={'/myPage'} element={<MyPage/>}/>*/}
-        {/*  /!*예외처리(에러페이지)*!/*/}
-        {/*  <Route path={'*'} element={<ErrorPage/>}/>*/}
-        {/*  /!*캠핑장 리스트*!/*/}
-        {/*  <Route path={'/camp'} element={<CampListPage/>}/>*/}
-        {/*  /!*캠핑장 상세보기*!/*/}
-        {/*  <Route path={'/campList/*'} element={<CampDetailPage/>}/>*/}
-        {/*  /!*중고장터 리스트*!/*/}
-        {/*  <Route path={'/trade'} element={<TradeListPage/>}/>*/}
-        {/*  /!*중고장터 상세보기*!/*/}
-        {/*  <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>*/}
-        {/*  /!*중고장터 글 등록*!/*/}
-        {/*  <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>*/}
-        {/*  /!*예약페이지*!/*/}
-        {/*  <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>*/}
-        {/*  <Route path={'/reservation2/*'} element={<CampReservationPage2/>}/>*/}
-        {/*  <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>*/}
-        {/*  /!*어바웃페이지*!/*/}
-        {/*  <Route path={'/about'} element={<AboutPage/>}/>*/}
-        {/*  /!*공지사항 리스트 페이지*!/*/}
-        {/*  <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>*/}
-        {/*  /!*공지사항 상세보기 페이지*!/*/}
-        {/*  <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>*/}
-        {/*</Routes>*/}
-        {/*<Footer/>*/}
+        <Header/>
+        <Routes path={'/'}>
+          {/*메인페이지*/}
+          <Route path={'/'} element={<MainPage/>}/>
+          {/*마이페이지*/}
+          <Route path={'/myPage'} element={<MyPage/>}/>
+          {/*예외처리(에러페이지)*/}
+          <Route path={'*'} element={<ErrorPage/>}/>
+          {/*캠핑장 리스트*/}
+          <Route path={'/camp'} element={<CampListPage/>}/>
+          {/*캠핑장 상세보기*/}
+          <Route path={'/campList/*'} element={<CampDetailPage/>}/>
+          {/*중고장터 리스트*/}
+          <Route path={'/trade'} element={<TradeListPage/>}/>
+          {/*중고장터 상세보기*/}
+          <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>
+          {/*중고장터 글 등록*/}
+          <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
+          {/*예약페이지*/}
+          <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
+          <Route path={'/reservation2/*'} element={<CampReservationPage2/>}/>
+          <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>
+          {/*어바웃페이지*/}
+          <Route path={'/about'} element={<AboutPage/>}/>
+          {/*공지사항 리스트 페이지*/}
+          <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
+          {/*공지사항 상세보기 페이지*/}
+          <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
+        </Routes>
+        <Footer/>
       </BrowserRouter>
       </div>
-      //     <BrowserRouter>
-  //       <Routes>
-  //         {/*<Route path={"/"} element={<TradeListPage/>}>*/}
-  //         {/*<Route path={"/"} element={<TradeWritePage/>}>*/}
-  //         {/*<Route path={"/"} element={<TradeDetailPage/>}>*/}
-  //         <Route path={"/"} element={<MainPage/>}>
-  //           {/*<Route index element={<TradeWritePage/>}/>*/}
-  //           {/*<Route path={"board/:boardIdx"} element={<SelectBoardDetail/>}/>*/}
-  //           {/*<Route path={"write"} element={<TradeWritePage/>}/>*/}
-  //           {/*<Route path={"*"} element={<ErrorPage/>}/>*/}
-  //         </Route>
-  //       </Routes>
-  //     </BrowserRouter>
   );
 }
 
