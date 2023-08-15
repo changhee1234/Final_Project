@@ -55,10 +55,10 @@ function CampReservationPage1(props) {
   };
 
   useEffect(() => {
-    const combinedData = siteInfos.map((siteInfo, index) => {
+    const siteInfoAddData = siteInfos.map((siteInfo, index) => {
       return { ...siteInfo, available: siteEmptyCnt[index] };
     });
-    setSiteInfos(combinedData);
+    setSiteInfos(siteInfoAddData);
   }, [siteEmptyCnt]);
 
   return (

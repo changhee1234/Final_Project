@@ -15,6 +15,7 @@ function SelectOptions(props) {
   const [elePrice, setElePrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(props.siteInfo.sitePrice);
   const [dateRange, setDateRange] = useState(props.dateRange);
+  const [availSiteList, setAvailSiteList] = useState([]);
 
   const handleOnChange = item => {
     setDateRange([item.selection])
@@ -23,32 +24,45 @@ function SelectOptions(props) {
     const startDate = format((item.selection.startDate), "yyyy-MM-dd");
     const endDate = format((item.selection.endDate), "yyyy-MM-dd");
 
-    // if (startDate !== endDate) {
-    //   const siteInfoIdxs = mainInfo.siteInfoLists.map(m => m.idx);
-    //
-    //   params.append('startDate', startDate)
-    //   params.append('endDate', endDate)
-    //   params.append('siteInfoIdxs', siteInfoIdxs)
-    //   axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
-    //     .then(res => {
-    //       const toArr = Object.keys(res.data).map(key => ({[key]: res.data[key]}));
-    //       setSiteEmptyCnt(toArr);
-    //       // console.log(mainInfo.siteInfoLists);
-    //       // console.log(res.data);
-    //       // setMainInfo(prev => ({
-    //       //   ...prev,
-    //       //   siteInfoLists: prev.siteInfoLists.map((m) => {
-    //       //     return {...prev, siteEmptyCnt: res.data}
-    //       //   }),
-    //       //   }));
-    //     })
-    //     .catch(err => {
-    //       alert(`통신 오류 : ${err}`);
-    //     });
-    // }
+    if (startDate !== endDate) {
+      const siteInfoIdx = props.siteInfo.idx;
+
+      params.append('startDate', startDate)
+      params.append('endDate', endDate)
+      params.append('siteInfoIdx', siteInfoIdx)
+      axios.post("http://localhost:8080/reserve/availableSiteList", null, {params: params})
+          .then(res => {
+            props.availSiteList(res.data);
+          })
+          .catch(err => {
+            alert(`통신 오류 : ${err}`);
+          });
+    }
   };
 
+  useEffect(() => {
 
+    const params = new URLSearchParams;
+    const startDate = format((dateRange[0].startDate), "yyyy-MM-dd");
+    const endDate = format((dateRange[0].endDate), "yyyy-MM-dd");
+
+    if (startDate !== endDate) {
+      const siteInfoIdx = props.siteIdx.siteIdx;
+
+      params.append('startDate', startDate);
+      params.append('endDate', endDate);
+      params.append('siteInfoIdx', siteInfoIdx);
+      axios.post("http://localhost:8080/reserve/availableSiteList", null, {params: params})
+          .then(res => {
+            props.availSiteList(res.data);
+          })
+          .catch(err => {
+            alert(`통신 오류 : ${err}`);
+          });
+    }
+  }, []);
+
+  ///////////////////////////
   // 인원 추가 옵션
   const handleAddPeople = (e) => {
     if (people === props.siteInfo.peopleMax) {

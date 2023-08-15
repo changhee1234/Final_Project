@@ -2,6 +2,7 @@ package com.bitc.camp.service;
 
 import com.bitc.camp.data.dto.CampMainRespDto;
 import com.bitc.camp.data.dto.CampSiteInfoRespDto;
+import com.bitc.camp.data.dto.CampSiteListRespDto;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
 
@@ -16,4 +17,6 @@ public interface ReservationService {
   CampSiteInfoRespDto getCampSiteInfo(int campSiteInfoIdx) throws Exception;
 
   int getSiteCnt(int siteInfoIdx, String startDate, String endDate) throws Exception;
+
+  List<CampSiteListRespDto> getSiteList(int siteInfoIdx, String startDate, String endDate) throws Exception;
 }

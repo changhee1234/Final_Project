@@ -13,6 +13,11 @@ function CampReservationPage2(props) {
   const dateRange = location.state?.dateRange;
   const [siteInfo, setSiteInfo] = useState([]);
   const [siteLists, setSiteLists] = useState([]);
+  const [availSiteList, setAvailSiteList] = useState([]);
+
+  const siteListFromSelectOptions = (data) => {
+    setAvailSiteList(data);
+  };
 
   useEffect(() => {
     axios.get("http://localhost:8080/reserve/reserveStep/" + siteIdx.siteIdx)
@@ -31,10 +36,10 @@ function CampReservationPage2(props) {
         <div className="col-sm-6">
           <SiteInfo siteInfo={siteInfo}/>
           <Notice siteInfo={siteInfo}/>
-          <SiteLists siteLists={siteLists}/>
+          <SiteLists siteLists={siteLists} availSiteList={availSiteList}/>
         </div>
         <div className="col-sm">
-          <SelectOptions siteInfo={siteInfo} dateRange={dateRange}/>
+          <SelectOptions siteInfo={siteInfo} dateRange={dateRange} siteIdx={siteIdx} availSiteList={siteListFromSelectOptions}/>
         </div>
       </div>
     </main>

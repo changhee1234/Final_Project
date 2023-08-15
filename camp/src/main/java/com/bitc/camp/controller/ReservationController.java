@@ -35,7 +35,10 @@ public class ReservationController {
 
   // 예약 날짜 선택 후 예약 가능한 자리 조회
   @PostMapping("/selectDate")
-  public Object countSiteList(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("siteInfoIdxs") List<Integer> siteInfoIdxs) throws Exception {
+  public Object countSiteList(
+      @RequestParam("startDate") String startDate,
+      @RequestParam("endDate") String endDate,
+      @RequestParam("siteInfoIdxs") List<Integer> siteInfoIdxs) throws Exception {
     List<Integer> siteCntList = new ArrayList<>();
 
     for (int siteInfoIdx : siteInfoIdxs) {
@@ -44,6 +47,18 @@ public class ReservationController {
     }
     return siteCntList;
   }
+
+  @PostMapping("/availableSiteList")
+  public Object siteList(
+      @RequestParam("startDate") String startDate,
+      @RequestParam("endDate") String endDate,
+      @RequestParam("siteInfoIdx") int siteInfoIdx) throws Exception {
+    List<CampSiteListRespDto> siteList = new ArrayList<>();
+
+    siteList = reservationService.getSiteList(siteInfoIdx, startDate, endDate);
+    return siteList;
+  }
+
 
   @GetMapping("/reserveStep/{campSiteInfoIdx}")
   public Object reserveStep(@PathVariable("campSiteInfoIdx") int idx) throws Exception {
