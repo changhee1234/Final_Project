@@ -53,10 +53,10 @@ public class  BoardController {
 //  }
 
 // 글 등록
-  @PostMapping("/write")
-  public Long save(@RequestBody final BoardRequestDto params) {
-    return boardService.save(params);
-  }
+//  @PostMapping("/write")
+//  public Long save(@RequestBody final BoardRequestDto params) {
+//    return boardService.save(params);
+//  }
 
 // 글 목록
   @GetMapping("/board")
@@ -66,9 +66,9 @@ public class  BoardController {
   }
 
 //  글 수정
-  @PatchMapping("/trade/{id}")
-  public Long save(@PathVariable final Long id, @RequestBody final BoardRequestDto params) {
-    return boardService.update(id, params);
-  }
+//  @PatchMapping("/trade/{id}")
+//  public Long save(@PathVariable final Long id, @RequestBody final BoardRequestDto params) {
+//    return boardService.update(id, params);
+//  }
 
 }

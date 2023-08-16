@@ -23,9 +23,6 @@ function TradeListPage(props) {
         });
   }, []);
 
-
-
-
   return (
       <main className={'container my-5'}>
         <div className={'row my-5'}>

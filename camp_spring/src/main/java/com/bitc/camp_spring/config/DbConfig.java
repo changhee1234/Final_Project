@@ -20,7 +20,7 @@ public class DbConfig {
   }
 
   @Bean
-  public DataSource dataSource(){
+  public DataSource dataSource() throws Exception {
     DataSource dataSource = new HikariDataSource(hikariConfig());
     return dataSource;
   }

@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface BoardService {
-  Long save(BoardRequestDto requestDto);
-  List<BoardResponseDto> findAll();
-  Long update(Long id, BoardRequestDto requestDto);
+  List<Board> findAll() throws Exception;
+
+//  Board selectBoardDetail(Long boardIdx) throws Exception;
 }
 
 //    private final BoardRepository boardRepository;

@@ -53,7 +53,6 @@ public class Board {
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
-        this.userName = userName;
         this.updateDt = updateDt.now();
     }
 

@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
-  Optional<BoardRepository> findByEmpNo(int empNo);
-  List<BoardRepository> findAllByFirstName(String firstName);
+//  Optional<BoardRepository> findByEmpNo(int empNo);
+  List<BoardRepository> findAllByOrderByBoardIdxDesc();
 }
