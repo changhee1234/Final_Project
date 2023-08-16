@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import SiteInfo from "../components/reserve/SiteInfo";
-import {useLocation, useParams, useSearchParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import Notice from "../components/reserve/Notice";
 import SiteLists from "../components/reserve/SiteLists";
 import SelectOptions from "../components/reserve/SelectOptions";
@@ -11,12 +11,18 @@ function CampReservationPage2(props) {
   const location = useLocation();
   const siteIdx = useParams();
   const dateRange = location.state?.dateRange;
+  const campName = location.state?.campName;
   const [siteInfo, setSiteInfo] = useState([]);
   const [siteLists, setSiteLists] = useState([]);
   const [availSiteList, setAvailSiteList] = useState([]);
+  const [selectedSite, setSelectedSite] = useState([]);
 
   const siteListFromSelectOptions = (data) => {
     setAvailSiteList(data);
+  };
+
+  const selectedSiteFromSiteLists = (data) => {
+    setSelectedSite(data);
   };
 
   useEffect(() => {
@@ -36,10 +42,10 @@ function CampReservationPage2(props) {
         <div className="col-sm-6">
           <SiteInfo siteInfo={siteInfo}/>
           <Notice siteInfo={siteInfo}/>
-          <SiteLists siteLists={siteLists} availSiteList={availSiteList}/>
+          <SiteLists siteLists={siteLists} availSiteList={availSiteList} selectedSite={selectedSiteFromSiteLists}/>
         </div>
         <div className="col-sm">
-          <SelectOptions siteInfo={siteInfo} dateRange={dateRange} siteIdx={siteIdx} availSiteList={siteListFromSelectOptions}/>
+          <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campName={campName} siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite}/>
         </div>
       </div>
     </main>

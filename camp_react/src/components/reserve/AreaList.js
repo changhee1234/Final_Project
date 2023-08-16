@@ -1,5 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
+import dateRange from "react-date-range/dist/components/DateRange";
+import {formatDistance} from "date-fns";
+import {formatDistanceWithOptions} from "date-fns/fp";
 
 function AreaList(props) {
   return (
@@ -7,8 +10,18 @@ function AreaList(props) {
       {
         props.siteInfos && props.siteInfos.map((m) => {
           return (
-            <Link to={`/reservation2/${m.idx}`} state={{dateRange: props.dateRange}} key={m.idx}
-                  className={'text-decoration-none'}>
+            <Link to={`/reservation2/reserveStep/${m.idx}`} state={{dateRange: props.dateRange, campName: props.campName}}
+                  key={m.idx}
+                  className={'text-decoration-none'} onClick={(e) => {
+              const dis = formatDistance(props.dateRange[0].startDate, props.dateRange[0].endDate);
+              if (m.available === undefined || m.available === 0) {
+                alert(`예약 가능한 자리가 없습니다. 날짜를 다시 선택해주세요`);
+                e.preventDefault();
+              } else if (dis === "less than a minute") {
+                alert(`1박 이상 선택하세요`);
+                e.preventDefault();
+              }
+            }}>
               <div className="card my-2">
                 <div className="row g-0">
                   <div className="col-sm-3">

@@ -34,16 +34,16 @@ function CampReservationPage1(props) {
   const handleOnChange = item => {
     setDateRange([item.selection])
 
-    const params = new URLSearchParams;
+    const params = new URLSearchParams();
     const startDate = format((item.selection.startDate), "yyyy-MM-dd");
     const endDate = format((item.selection.endDate), "yyyy-MM-dd");
 
     if (startDate !== endDate) {
       const siteInfoIdxs = mainInfo.siteInfoLists.map(m => m.idx);
 
-      params.append('startDate', startDate)
-      params.append('endDate', endDate)
-      params.append('siteInfoIdxs', siteInfoIdxs)
+      params.append('startDate', startDate);
+      params.append('endDate', endDate);
+      params.append('siteInfoIdxs', siteInfoIdxs);
       axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
         .then(res => {
           setSiteEmptyCnt(res.data);
@@ -64,10 +64,10 @@ function CampReservationPage1(props) {
   return (
     <main className={"container"}>
       <div className="row my-4">
-        <div className="col-sm-4">
+        <div className="col-sm-4 mx-auto">
           <CampIntro mainInfo={mainInfo}/>
         </div>
-        <div className="col-sm">
+        <div className="col-sm mx-auto">
           <DateRange
             editableDateInputs={false}
             onChange={handleOnChange}
@@ -81,9 +81,9 @@ function CampReservationPage1(props) {
         </div>
       </div>
 
-      <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange}/>
+      <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange} campName={mainInfo.campName}/>
 
-      <div><img className={'img-fluid'} src="/Site_batch.gif"/></div>
+      <div><img className={'img-fluid'} alt={"배치도이미지"} src="/Site_batch.gif"/></div>
     </main>
   );
 }

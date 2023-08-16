@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {ToggleButton, ToggleButtonGroup} from "react-bootstrap";
 
 function SiteLists(props) {
-  const [selectedSite, setSelectedSite] = useState();
 
   const mapObjectsByKey = (array, key) =>
     array.reduce((acc, obj) => {
@@ -16,13 +16,19 @@ function SiteLists(props) {
     const availSiteMap = mapObjectsByKey(props.availSiteList, 'idx');
 
     return (
-      <div className="row row-cols-3 text-center">
+      <ToggleButtonGroup type="radio" name="options" className="row row-cols-4 text-center">
         {Object.values(siteListMap).map((site) => (
-          <button className="btn btn-light g-1 gx-1" key={site.idx} disabled={!availSiteMap[site.idx]} onClick={() => {setSelectedSite(site.campSiteName)}}>
-            <h5 className="card-title py-4">{site.campSiteName}</h5>
-          </button>
+            <ToggleButton key={site.idx} id={site.idx} value={site.campSiteName}
+                          className={"btn btn-light"}
+                          disabled={!availSiteMap[site.idx]}
+                          style={{borderRadius: 3 + "px", margin: 0.2 + "rem"}}
+                          onChange={() => {
+                            props.selectedSite(site.campSiteName);
+                          }}>
+              <h5 className="card-title py-4">{site.campSiteName}</h5>
+            </ToggleButton>
         ))}
-      </div>
+          </ToggleButtonGroup>
     );
   };
 

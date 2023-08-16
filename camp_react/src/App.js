@@ -39,7 +39,7 @@ function App() {
           <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>
           {/*예약페이지*/}
           <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
-          <Route path={'/reservation2/:siteIdx'} element={<CampReservationPage2/>}/>
+          <Route path={'/reservation2/:encodeCampName/:siteIdx'} element={<CampReservationPage2/>}/>
           <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>
           {/*어바웃페이지*/}
           <Route path={'/about'} element={<AboutPage/>}/>
