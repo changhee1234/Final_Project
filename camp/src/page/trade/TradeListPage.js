@@ -1,7 +1,35 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './tradeListpage.css'
+import axios from 'axios';
+import * as tradeListPage from "react-bootstrap/ElementChildren";
+
 
 function TradeListPage(props) {
+  const [boards, setBoards] = useState([]);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
+  useEffect(() => {
+    fetchBoards();
+  }, []);
+
+  const fetchBoards = async () => {
+    const response = await axios.get('/api/boards');
+    setBoards(response.data);
+  };
+
+  const createBoard = async () => {
+    const newBoard = { title, content };
+    const response = await axios.post('/api/boards', newBoard);
+    setBoards([...boards, response.data]);
+    setTitle('');
+    setContent('');
+  };
+
+  const deleteBoard = async (id) => {
+    await axios.delete(`/api/boards/${id}`);
+    setBoards(boards.filter(board => board.id !== id));
+  };
 
   return (
       <main className={'container my-5'}>
@@ -40,154 +68,164 @@ function TradeListPage(props) {
             </div>
 
             {/*게시판 리스트*/}
-            <div className="product_container row mx-auto my-2 mb-0">
-              <div className="product col-3 box1">
-                <div className="product_img_div"><img src="/assets/default_image.png" alt={"img"} className="product_img"/></div>
-                <a href="#!" className={'text-decoration-none'}><h5 className="product_title1"> 캠핑용 프로젝트 팝니다</h5></a>
-                <div className="product_mon"> 가격: 25,000￦</div>
-                <a href={'#!'} className="product_des text-decoration-none"> 캠핑용품 정리하다가 불용품 발견되어 장터에 내놓습니다.초기에 몇번 들고 나가고
-                  거의 사용하지
-                  않았구요..사진에 보시듯 제조일은 2016년인데... 사용시간은 47시간입니다.외관은 거의 새것처럼 깨끗합니다. 기스도 거의 없는 상태에요..</a>
-                <div className={'row my-2'}>
-                  <div className={'row col-6 text-start'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
-                    </ul>
-                  </div>
-                    <div className={'row col-5 p-0 text-end'}>
-                      <ul className={'list-unstyled'}>
-                        <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
-                      </ul>
-                    </div>
-                    <div className={'row col-3 p-0 text-end'}>
-                      <ul className={'list-unstyled'}>
-                        <li><i className="bi bi-eye"></i><span>11회</span></li>
-                      </ul>
-                    </div>
-                  </div>
-              </div>
-
-              <div className="product col-3 mx-auto box2">
-                <div className="product_img_div"><img src="/assets/default_image.png" alt={'img'} className="product_img"/></div>
-                <h5 className="product_title2"> 코베아 네스트2 구매해요!</h5>
-                <div className="product_mon"> 가격: 15,000￦</div>
-                <a href={'#!'} className="product_des text-decoration-none"> 4번 정도 피칭 했고요 . 11월 13일 원남 저수지에서 마지막 사용 했습니다. 캠핑의 환상에서
-                  벗어나 판매합니다.상태 전반적으로 괜찮아요..</a>
-                <div className={'row my-2'}>
-                  <div className={'row col-6 text-start'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-5 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-3 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-eye"></i><span>11회</span></li>
-                    </ul>
-                  </div>
+                <div>
+                  {tradeListPage.map((trade) => (
+                      <div key={trade.index} className="product_container row mx-auto my-2 mb-0">
+                        <div className="product col-3 box1">
+                          <div className="product_img_div">
+                            <img src="/assets/default_image.png" alt={"img"} className="product_img" />
+                          </div>
+                          <div>
+                            <a href={`/trade/${trade.idx}`} className="text-decoration-none">{trade.title}</a>
+                          </div>
+                          <a href={`/trade/${trade.idx}`} className="text-decoration-none">
+                            <h5 className="product_title1">{trade.title}</h5>
+                          </a>
+                          <div className="product_mon">가격: {trade.tradePrice}￦</div>
+                          <a href={'#!'} className="product_des text-decoration-none">{trade.description}</a>
+                          <div className="row my-2">
+                            <div className="row col-6 text-start">
+                              <ul className="list-unstyled">
+                                <li><i className="bi bi-person"></i><span>{trade.userName}</span></li>
+                              </ul>
+                            </div>
+                            <div className="row col-5 p-0 text-end">
+                              <ul className="list-unstyled">
+                                <li><i className="bi bi-alarm"></i><span>{trade.createDt}</span></li>
+                              </ul>
+                            </div>
+                            <div className="row col-3 p-0 text-end">
+                              <ul className="list-unstyled">
+                                <li><i className="bi bi-eye"></i><span>{trade.hitCnt}회</span></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  ))}
                 </div>
-              </div>
 
-              <div className="product col-3 box1">
-                <div className="product_img_div"><img src="/assets/default_image.png" className="product_img" alt={'img'}/></div>
-                <h5 className="product_title1"> 루프 플라이 팝니다</h5>
-                <div className="product_mon"> 가격: 210,000￦</div>
-                <a href={"#!"} className="product_des text-decoration-none"> 2룸 루프 플라이 팔고 있습니다. 인기 많은 것 같은데 네고 안됩니다..</a>
-                <div className={'row my-2'}>
-                  <div className={'row col-6 text-start'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-5 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-3 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-eye"></i><span>11회</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {/*<div className="product col-3 mx-auto box2">*/}
+              {/*  <div className="product_img_div"><img src="/assets/default_image.png" alt={'img'} className="product_img"/></div>*/}
+              {/*  <h5 className="product_title2"> 코베아 네스트2 구매해요!</h5>*/}
+              {/*  <div className="product_mon"> 가격: 15,000￦</div>*/}
+              {/*  <a href={'#!'} className="product_des text-decoration-none"> 4번 정도 피칭 했고요 . 11월 13일 원남 저수지에서 마지막 사용 했습니다. 캠핑의 환상에서*/}
+              {/*    벗어나 판매합니다.상태 전반적으로 괜찮아요..</a>*/}
+              {/*  <div className={'row my-2'}>*/}
+              {/*    <div className={'row col-6 text-start'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-person"></i><span>홍길동</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-5 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-alarm"></i><span> 14:23</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-3 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-eye"></i><span>11회</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
 
-              <div className="product col-3  box2">
-                <div className="product_img_div"><img src="/assets/default_image.png"  alt={"img"} className="product_img"/></div>
-                <h5 className="product_title2"> 루프 플라이 삽니다!!</h5>
-                <div className="product_mon"> 가격: 190,000￦</div>
-                <a href={"#!"}  className="product_des text-decoration-none"> 2룸 루프 플라이 사고 싶습니다. 많은 관심 부탁드립니다!!..</a>
-                <div className={'row my-2'}>
-                  <div className={'row col-6 text-start'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-5 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-3 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-eye"></i><span>11회</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {/*<div className="product col-3 box1">*/}
+              {/*  <div className="product_img_div"><img src="/assets/default_image.png" className="product_img" alt={'img'}/></div>*/}
+              {/*  <h5 className="product_title1"> 루프 플라이 팝니다</h5>*/}
+              {/*  <div className="product_mon"> 가격: 210,000￦</div>*/}
+              {/*  <a href={"#!"} className="product_des text-decoration-none"> 2룸 루프 플라이 팔고 있습니다. 인기 많은 것 같은데 네고 안됩니다..</a>*/}
+              {/*  <div className={'row my-2'}>*/}
+              {/*    <div className={'row col-6 text-start'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-person"></i><span>홍길동</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-5 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-alarm"></i><span> 14:23</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-3 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-eye"></i><span>11회</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
 
-              <div className="product col-3 py-2 my-3 box2">
-                <div className="product_img_div"><img src="/assets/default_image.png"  alt={"img"} className="product_img"/></div>
-                <h5 className="product_title2"> 루프 플라이 삽니다</h5>
-                <div className="product_mon"> 가격: 170,000￦</div>
-                <a href={"#!"}  className="product_des text-decoration-none"> 2룸 루프 플라이 사고 싶습니다. 많은 관심 부탁드립니..</a>
-                <div className={'row my-2'}>
-                  <div className={'row col-6 text-start'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-5 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-3 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-eye"></i><span>11회</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {/*<div className="product col-3  box2">*/}
+              {/*  <div className="product_img_div"><img src="/assets/default_image.png"  alt={"img"} className="product_img"/></div>*/}
+              {/*  <h5 className="product_title2"> 루프 플라이 삽니다!!</h5>*/}
+              {/*  <div className="product_mon"> 가격: 190,000￦</div>*/}
+              {/*  <a href={"#!"}  className="product_des text-decoration-none"> 2룸 루프 플라이 사고 싶습니다. 많은 관심 부탁드립니다!!..</a>*/}
+              {/*  <div className={'row my-2'}>*/}
+              {/*    <div className={'row col-6 text-start'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-person"></i><span>홍길동</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-5 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-alarm"></i><span> 14:23</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-3 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-eye"></i><span>11회</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
 
-              <div className="product col-3 py-2 my-3 box3">
-                <div className="product_img_div"><img src="/assets/default_image.png"  alt={"img"} className="product_img"/></div>
-                <h5 className="product_title2"> 코베아 네스트3 구매해요!</h5>
-                <div className="product_mon"> 가격: 34,000￦</div>
-                <a href={"#!"}  className="product_des text-decoration-none"> 4번 정도 피칭 했고요 . 11월 13일 원남 저수지에서 마지막 사용 했습니다. 캠핑의 환상에서
-                  벗어나 판매합니다.상태 전반적으로 괜찮아요..</a>
-                <div className={'row my-2'}>
-                  <div className={'row col-6 text-start'}>
-                    <ul className={'list-unstyled '}>
-                      <li><i className="bi bi-person"></i><span>홍길동</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-5 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-alarm"></i><span> 14:23</span></li>
-                    </ul>
-                  </div>
-                  <div className={'row col-3 p-0 text-end'}>
-                    <ul className={'list-unstyled'}>
-                      <li><i className="bi bi-eye"></i><span>11회</span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              {/*<div className="product col-3 py-2 my-3 box2">*/}
+              {/*  <div className="product_img_div"><img src="/assets/default_image.png"  alt={"img"} className="product_img"/></div>*/}
+              {/*  <h5 className="product_title2"> 루프 플라이 삽니다</h5>*/}
+              {/*  <div className="product_mon"> 가격: 170,000￦</div>*/}
+              {/*  <a href={"#!"}  className="product_des text-decoration-none"> 2룸 루프 플라이 사고 싶습니다. 많은 관심 부탁드립니..</a>*/}
+              {/*  <div className={'row my-2'}>*/}
+              {/*    <div className={'row col-6 text-start'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-person"></i><span>홍길동</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-5 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-alarm"></i><span> 14:23</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-3 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-eye"></i><span>11회</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
+
+              {/*<div className="product col-3 py-2 my-3 box3">*/}
+              {/*  <div className="product_img_div"><img src="/assets/default_image.png"  alt={"img"} className="product_img"/></div>*/}
+              {/*  <h5 className="product_title2"> 코베아 네스트3 구매해요!</h5>*/}
+              {/*  <div className="product_mon"> 가격: 34,000￦</div>*/}
+              {/*  <a href={"#!"}  className="product_des text-decoration-none"> 4번 정도 피칭 했고요 . 11월 13일 원남 저수지에서 마지막 사용 했습니다. 캠핑의 환상에서*/}
+              {/*    벗어나 판매합니다.상태 전반적으로 괜찮아요..</a>*/}
+              {/*  <div className={'row my-2'}>*/}
+              {/*    <div className={'row col-6 text-start'}>*/}
+              {/*      <ul className={'list-unstyled '}>*/}
+              {/*        <li><i className="bi bi-person"></i><span>홍길동</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-5 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-alarm"></i><span> 14:23</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*    <div className={'row col-3 p-0 text-end'}>*/}
+              {/*      <ul className={'list-unstyled'}>*/}
+              {/*        <li><i className="bi bi-eye"></i><span>11회</span></li>*/}
+              {/*      </ul>*/}
+              {/*    </div>*/}
+              {/*  </div>*/}
+              {/*</div>*/}
             </div>
 
             <div className="product text-end">
@@ -209,7 +247,6 @@ function TradeListPage(props) {
               </ul>
             </div>
           </div>
-        </div>
       </main>
   )
 }

@@ -93,7 +93,11 @@ tasks.named('test') {
 ////	리액트 프로젝트 빌드 명령
 //    if(System.getProperty("os.name").toLowerCase(Locale.ROOT).contains("windows")) {
 //        commandLine "npm.cmd", "run-script", "build"
+<<<<<<< HEAD
 //    }03301
+=======
+//    }
+>>>>>>> 1297539cee0ee571ba3bd3922f3c2d756453b1d9
 //    else {
 //        commandLine "npm", "run-script", "build"
 //    }
@@ -109,4 +113,8 @@ tasks.named('test') {
 //// bootJar 명령 실행 시 아래 명령 실행
 //tasks.bootJar {
 //    dependsOn "copyReactBuildFiles"
+<<<<<<< HEAD
 }
+=======
+//}
+>>>>>>> 1297539cee0ee571ba3bd3922f3c2d756453b1d9

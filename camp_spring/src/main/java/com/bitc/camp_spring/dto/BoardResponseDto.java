@@ -14,6 +14,8 @@ public class BoardResponseDto {
     private String userName; // 작성자
     private int cnt; // 조회 수
     private char deleteYn; // 삭제 여부
+    private int tradePrice; // 가격
+    private String tradeLocation; // 지역
     private LocalDateTime createDt; // 생성일
     private LocalDateTime updateDt; // 수정일
 
@@ -24,6 +26,8 @@ public class BoardResponseDto {
         this.userName = entity.getUserName();
         this.cnt = entity.getCnt();
         this.deleteYn = entity.getDeleteYn();
+        this.tradePrice = entity.getTradePrice();
+        this.tradeLocation = entity.getTradeLocation();
         this.createDt = entity.getCreateDt();
         this.updateDt = entity.getUpdateDt();
     }

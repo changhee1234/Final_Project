@@ -15,15 +15,16 @@ import Header from "./page/layout/Header";
 import ErrorPage from "./page/layout/ErrorPage";
 import AboutPage from "./page/layout/AboutPage";
 import Footer from "./page/layout/Footer";
-import Hello from "./Hello";
-
 
 function App(props) {
   return (
       <div className={'App'}>
       <BrowserRouter>
         <Header/>
+<<<<<<< HEAD
         {/*<Hello/>*/}
+=======
+>>>>>>> 1297539cee0ee571ba3bd3922f3c2d756453b1d9
         <Routes path={'/'}>
           {/*메인페이지*/}
           <Route path={'/'} element={<MainPage/>}/>
@@ -55,19 +56,6 @@ function App(props) {
         <Footer/>
       </BrowserRouter>
       </div>
-      //     <BrowserRouter>
-  //       <Routes>
-  //         {/*<Route path={"/"} element={<TradeListPage/>}>*/}
-  //         {/*<Route path={"/"} element={<TradeWritePage/>}>*/}
-  //         {/*<Route path={"/"} element={<TradeDetailPage/>}>*/}
-  //         <Route path={"/"} element={<MainPage/>}>
-  //           {/*<Route index element={<TradeWritePage/>}/>*/}
-  //           {/*<Route path={"board/:boardIdx"} element={<SelectBoardDetail/>}/>*/}
-  //           {/*<Route path={"write"} element={<TradeWritePage/>}/>*/}
-  //           {/*<Route path={"*"} element={<ErrorPage/>}/>*/}
-  //         </Route>
-  //       </Routes>
-  //     </BrowserRouter>
   );
 }
 
