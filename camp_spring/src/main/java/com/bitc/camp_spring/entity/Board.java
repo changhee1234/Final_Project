@@ -50,7 +50,7 @@ public class Board {
         this.tradeLocation = tradeLocation;
     }
 
-    public void update(String title, String content, String userName) {
+    public void update(String title, String content) {
         this.title = title;
         this.content = content;
         this.userName = userName;

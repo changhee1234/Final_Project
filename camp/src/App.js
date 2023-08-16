@@ -21,10 +21,6 @@ function App(props) {
       <div className={'App'}>
       <BrowserRouter>
         <Header/>
-<<<<<<< HEAD
-        {/*<Hello/>*/}
-=======
->>>>>>> 1297539cee0ee571ba3bd3922f3c2d756453b1d9
         <Routes path={'/'}>
           {/*메인페이지*/}
           <Route path={'/'} element={<MainPage/>}/>
