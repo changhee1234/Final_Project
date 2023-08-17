@@ -47,7 +47,7 @@ function CampReservationPage3(props) {
       userReservationCnt: stateObj.people,
       userParkCnt: stateObj.cars,
       userEleCnt: stateObj.ele,
-      userReservationTotalPrice: sitePriceDays + "원"
+      userReservationTotalPrice: sitePriceDays + stateObj.addPrice + stateObj.parkPrice + stateObj.elePrice + "원"
     }
     console.log(requestData);
 
