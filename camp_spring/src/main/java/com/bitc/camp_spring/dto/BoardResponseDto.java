@@ -1,10 +1,15 @@
 package com.bitc.camp_spring.dto;
 
 import com.bitc.camp_spring.entity.Board;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class BoardResponseDto {
 
@@ -18,6 +23,8 @@ public class BoardResponseDto {
     private String tradeLocation; // 지역
     private LocalDateTime createDt; // 생성일
     private LocalDateTime updateDt; // 수정일
+    private String tradeCate; // 판매/구매 구분
+    private int memberIdx; // 회원번호
 
     public BoardResponseDto(Board entity) {
         this.tradeBoardIdx = entity.getTradeBoardIdx();
@@ -30,6 +37,8 @@ public class BoardResponseDto {
         this.tradeLocation = entity.getTradeLocation();
         this.createDt = entity.getCreateDt();
         this.updateDt = entity.getUpdateDt();
+        this.tradeCate = entity.getTradeCate();
+        this.memberIdx = entity.getMemberIdx();
     }
 
 }

@@ -1,13 +1,14 @@
 package com.bitc.camp_spring.controller;
 
 import com.bitc.camp_spring.dto.BoardRequestDto;
-import com.bitc.camp_spring.dto.BoardResponseDto;
+import com.bitc.camp_spring.entity.Board;
 import com.bitc.camp_spring.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -17,58 +18,66 @@ public class  BoardController {
 
   private final BoardService boardService;
 
-////  글 등록
-//@PostMapping("/write")
-//  public ResponseEntity<?> createBoard(@RequestBody BoardRequestDto requestDto) {
-//    boardService.createBoard(requestDto);
-//    return ResponseEntity.ok().build();
-//  }
-//
-////  글 상세
-//  @GetMapping("/{boardId}")
-//  public ResponseEntity<?> getBoard(@PathVariable Long boardId) {
-//    BoardResponseDto responseDto = boardService.getBoard(boardId);
-//    return ResponseEntity.ok(responseDto);
-//  }
-//
-//// 글 목록
-//  @GetMapping
-//  public ResponseEntity<?> getAllBoards() {
-//    List<BoardResponseDto> responseDtos = boardService.getAllBoards();
-//    return ResponseEntity.ok(responseDtos);
-//  }
-//
-////  글 수정
-//  @PutMapping("/{boardId}")
-//  public ResponseEntity<?> updateBoard(@PathVariable Long boardId, @RequestBody BoardRequestDto requestDto) {
-//    boardService.updateBoard(boardId, requestDto);
-//    return ResponseEntity.ok().build();
-//  }
-//
-//// 글 삭제
-//  @DeleteMapping("/{boardId}")
-//  public ResponseEntity<?> deleteBoard(@PathVariable Long boardId) {
-//    boardService.deleteBoard(boardId);
-//    return ResponseEntity.ok().build();
-//  }
-
-// 글 등록
-//  @PostMapping("/write")
-//  public Long save(@RequestBody final BoardRequestDto params) {
-//    return boardService.save(params);
-//  }
-
 // 글 목록
-  @GetMapping("/board")
-  public List<BoardResponseDto> findAll() {
-    List<BoardResponseDto> dtos = boardService.findAll();
-    return dtos;
+  @GetMapping("/list")
+  public Object allBoardList() throws Exception {
+    Map<String, Object> result = new HashMap<>();
+
+    List<Board> boardList = boardService.findAllBoard();
+    result.put("result", boardList);
+    return result;
   }
 
-//  글 수정
-//  @PatchMapping("/trade/{id}")
-//  public Long save(@PathVariable final Long id, @RequestBody final BoardRequestDto params) {
-//    return boardService.update(id, params);
+  // 글 등록
+  @RequestMapping(value ="/write", method = RequestMethod.POST)
+  public Object boardWrite(@RequestBody BoardRequestDto boardrequestDto) throws Exception {
+    Board save = boardService.save(boardrequestDto);
+
+    return save;
+  }
+
+//  public Object boardWrite(@RequestBody BoardRequestDto requestDto) throws Exception {
+//    // 결과를 담을 맵 생성
+//    Map<String, Object> result = new HashMap<>();
+//
+//    // BoardRequestDto에서 Board 엔티티로 변환하여 저장
+//    Board boardToSave = requestDto.toEntity(); // Board 엔티티로 변환
+//    Board savedBoard = boardService.save(boardToSave); // Board 저장
+//
+//    // 결과 맵에 등록된 게시글 정보를 넣고 반환
+//    result.put("result", savedBoard);
+//    return result;
+//  }
+
+//  글 상세
+//  @GetMapping("/{tradeBoardIdx}")
+//  public Object boardDetail(@PathVariable("tradeBoardIdx") Long tradeBoardIdx) throws Exception {
+//    Map<String, Object> result = new HashMap<>();
+//
+//    Board boardDetail = (Board) boardService.findById(tradeBoardIdx);
+//    result.put("result", boardDetail);
+//    return result;
+//  }
+
+// 글 수정
+//@PatchMapping("/{tradeBoardIdx}")
+//public Object updateBoard(@PathVariable("tradeBoardIdx") Long tradeBoardIdx, @RequestBody BoardRequestDto boardRequestDto) throws Exception {
+//  Map<String, Object> result = new HashMap<>();
+//
+//  Board updatedBoard = (Board) boardService.update(tradeBoardIdx, boardRequestDto.toEntity());
+//  result.put("result", updatedBoard);
+//  return result;
+//  }
+
+// 글 삭제
+//@DeleteMapping("/{tradeBoardIdx}")
+//public Object deleteBoard(@PathVariable("tradeBoardIdx") Long tradeBoardIdx) throws Exception {
+//  Map<String, Object> result = new HashMap<>();
+//
+//  boardService.delete(tradeBoardIdx);
+//  result.put("result", "Success");
+//  return result;
 //  }
 
 }
+

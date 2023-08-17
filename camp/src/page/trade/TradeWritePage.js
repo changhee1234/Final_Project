@@ -40,7 +40,7 @@ function TradeWritePage(props) {
                 <div className="my-3 row">
                   <div className="col-sm-2">
                     <select id="box-office" className="form-control me-3" name="movieNm">
-                      <option value="" selected="selected">분류</option>
+                      <option value="{tradeCate}" selected="selected">분류</option>
                       <option value={"1"}>삽니다</option>
                       <option value={"2"}>팝니다</option>
                     </select>

@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 function TradeListPage(props) {
   const [tradeListPage, setTradeListPage] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [titleToSend] = useState([]);
   const navi = useNavigate();
   const goWrite = () => navi('/tradeWrite');
@@ -12,14 +13,16 @@ function TradeListPage(props) {
   params.append("title", titleToSend);
 
   useEffect(() => {
-    axios.get("http://localhost:8080/board/board")
+    axios.get("http://localhost:8080/board/list")
         .then(res => {
-          console.log(res.data);
-          const tradeListPageData = res.data
+          console.log(res.data); // 확인용 로그
+          const tradeListPageData = res.data.result
           setTradeListPage(tradeListPageData);
+          // setLoading(false); // 데이터 로딩 완료
         })
         .catch(err => {
           alert(`통신 오류 : ${err}`);
+          setLoading(false); // 데이터 로딩 실패
         });
   }, []);
 
@@ -60,41 +63,43 @@ function TradeListPage(props) {
             </div>
 
             {/*게시판 리스트*/}
-            <div>
-              {tradeListPage.map((item) => (
-                  <div key={item.index} className="product_container row mx-auto my-2 mb-0">
-                    <div className="product col-3 box1">
-                      <div className="product_img_div">
-                        <img src="/assets/default_image.png" alt={"img"} className="product_img"/>
-                      </div>
-                      <div>
-                        <a href={`/trade/${item.idx}`} className="text-decoration-none">{item.title}</a>
-                      </div>
-                      <a href={`/trade/${item.idx}`} className="text-decoration-none">
-                        <h5 className="product_title1">{item.title}</h5>
-                      </a>
-                      <div className="product_mon">가격: {item.tradePrice}￦</div>
-                      <a href={'#!'} className="product_des text-decoration-none">{item.description}</a>
-                      <div className="row my-2">
-                        <div className="row col-6 text-start">
-                          <ul className="list-unstyled">
-                            <li><i className="bi bi-person"></i><span>{item.userName}</span></li>
-                          </ul>
+            <div className={'row'}>
+                {tradeListPage.map(item => (
+                    <div key={item.index} className="my-2 mb-0 col-3">
+                      <div className="box1">
+                        <div className="product_img_div">
+                          <img src="/assets/default_image.png" alt={"img"} className="product_img"/>
                         </div>
-                        <div className="row col-5 p-0 text-end">
-                          <ul className="list-unstyled">
-                            <li><i className="bi bi-alarm"></i><span>{item.createDt}</span></li>
-                          </ul>
+                        <div className={'product_mon mx-3  text-center'}>
+                          <a href={`/trade/${item.idx}`} className="text-decoration-none">{item.title}</a>
                         </div>
-                        <div className="row col-3 p-0 text-end">
-                          <ul className="list-unstyled">
-                            <li><i className="bi bi-eye"></i><span>{item.hitCnt}회</span></li>
-                          </ul>
+                        <div className="product_mon text-center">가격: {item.tradePrice}￦</div>
+
+                        <a href={`/trade/${item.idx}`} className="text-decoration-none">
+                          <h5 className="product_title1">{item.content}</h5>
+                        </a>
+                        <a href={'#!'} className="product_des text-decoration-none">{item.description}</a>
+                        <div className="row my-2">
+                          <div className="row col-6 text-start">
+                            <ul className="list-unstyled mx-2">
+                              <li><i className="bi bi-person"></i><span>{item.userName}</span></li>
+                            </ul>
+                          </div>
+                          <div className="row col-5 p-0">
+                            <ul className="list-unstyled">
+                              <li><i className="bi bi-alarm"></i><span>{item.createDt}</span></li>
+                            </ul>
+                          </div>
+                          <div className="row col-3 p-0 text-end">
+                            <ul className="list-unstyled">
+                              <li><i className="bi bi-eye"></i><span>{item.cnt}회</span></li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-              ))}
+                ))
+                }
             </div>
 
             {/*<div className="product col-3 mx-auto box2">*/}
