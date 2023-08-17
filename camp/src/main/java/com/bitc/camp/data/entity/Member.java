@@ -47,4 +47,8 @@ public class Member {
   @OneToMany(mappedBy = "member")
   @ToString.Exclude
   List<Reservation> reservationList = new ArrayList<>();
+
+  public Member(int memberIdx) {
+    this.memberIdx = memberIdx;
+  }
 }

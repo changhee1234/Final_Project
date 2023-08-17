@@ -6,7 +6,6 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,13 +33,9 @@ public class Reservation {
   @Column(nullable = false)
   private int userReservationCnt;
 
-  private String userParkPeriod;
-
   private int userParkCnt;
 
   private String userCarNum;
-
-  private String userElePeriod;
 
   private int userEleCnt;
 
@@ -67,7 +62,34 @@ public class Reservation {
   @ToString.Exclude
   private Member member;
 
-
-
-
+  @Builder
+  public Reservation(
+      String userReservationName,
+      LocalDateTime userReservationStart,
+      LocalDateTime userReservationEnd,
+      int userReservationCnt,
+      int userParkCnt,
+      String userCarNum,
+      int userEleCnt,
+      String userPhoneNumber,
+      String userMemo,
+      String userReservationTotalPrice,
+      CampSiteInfo campSiteInfo,
+      CampSiteList campSiteList,
+      Member member
+  ) {
+    this.userReservationName = userReservationName;
+    this.userReservationStart = userReservationStart;
+    this.userReservationEnd = userReservationEnd;
+    this.userReservationCnt = userReservationCnt;
+    this.userParkCnt = userParkCnt;
+    this.userCarNum = userCarNum;
+    this.userEleCnt = userEleCnt;
+    this.userPhoneNumber = userPhoneNumber;
+    this.userMemo = userMemo;
+    this.userReservationTotalPrice = userReservationTotalPrice;
+    this.campSiteInfo = campSiteInfo;
+    this.campSiteList = campSiteList;
+    this.member = member;
+  }
 }

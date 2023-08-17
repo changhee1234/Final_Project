@@ -3,12 +3,15 @@ package com.bitc.camp.service;
 import com.bitc.camp.data.dto.CampMainRespDto;
 import com.bitc.camp.data.dto.CampSiteInfoRespDto;
 import com.bitc.camp.data.dto.CampSiteListRespDto;
+import com.bitc.camp.data.dto.ReservationReqDto;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
 import com.bitc.camp.data.entity.CampSiteList;
+import com.bitc.camp.data.entity.Reservation;
 import com.bitc.camp.data.repository.CampMainRepository;
 import com.bitc.camp.data.repository.CampSiteListRepository;
 import com.bitc.camp.data.repository.CampSiteRepository;
+import com.bitc.camp.data.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,7 @@ public class ReservationServiceImpl implements ReservationService {
   private final CampMainRepository campMainRepository;
   private final CampSiteRepository campSiteRepository;
   private final CampSiteListRepository campSiteListRepository;
+  private final ReservationRepository reservationRepository;
 
   @Override
   public CampMainRespDto getCampMainInfo(int campMainIdx) throws Exception {
@@ -55,5 +59,10 @@ public class ReservationServiceImpl implements ReservationService {
       campSiteLists.add(dto);
     }
     return campSiteLists;
+  }
+
+  @Override
+  public void save(ReservationReqDto requestData) throws Exception {
+    reservationRepository.save(requestData.toEntity());
   }
 }

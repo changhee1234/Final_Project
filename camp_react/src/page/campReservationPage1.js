@@ -20,19 +20,28 @@ function CampReservationPage1(props) {
     }
   ]);
 
+  // 캠핑장 메인 정보 저장
   useEffect(() => {
     axios.get("http://localhost:8080/reserve/" + 1)
       .then(res => {
         setMainInfo(res.data.mainInfo);
-        setSiteInfos(res.data.mainInfo.siteInfoLists)
+        setSiteInfos(res.data.mainInfo.siteInfoLists);
       })
       .catch(err => {
         alert(`통신 오류 : ${err}`);
       });
   }, []);
 
+
+  // 날짜 선택 시 예약 가능한 자리수 저장
   const handleOnChange = item => {
-    setDateRange([item.selection])
+    setDateRange([item.selection]);
+
+    // 최대 숙박예약 기간(수정 필요)
+    if (item.selection.endDate > addDays(item.selection.startDate, siteInfos[0].campReservePeriod)) {
+      alert(`최대 ${siteInfos[0].campReservePeriod}박까지 예약 가능합니다.`);
+      return;
+    }
 
     const params = new URLSearchParams();
     const startDate = format((item.selection.startDate), "yyyy-MM-dd");
@@ -47,6 +56,7 @@ function CampReservationPage1(props) {
       axios.post("http://localhost:8080/reserve/selectDate", null, {params: params})
         .then(res => {
           setSiteEmptyCnt(res.data);
+          // siteEmptyCnt가 0일 때 날짜 선택 비활성화 미구현(alert창으로 재선택 메시지 출력 처리)
         })
         .catch(err => {
           alert(`통신 오류 : ${err}`);

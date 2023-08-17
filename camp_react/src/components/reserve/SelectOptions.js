@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {DateRange} from "react-date-range";
-import {addDays, format} from "date-fns";
+import {addDays, format, formatDistance} from "date-fns";
 import * as locales from "react-date-range/dist/locale";
 import axios from "axios";
 import {Link} from "react-router-dom";
@@ -16,12 +16,17 @@ function SelectOptions(props) {
   const [sitePrice, setSitePrice] = useState(props.siteInfo.sitePrice);
   const [dateRange, setDateRange] = useState(props.dateRange);
   const [selectedSite, setSelectedSite] = useState(props.selectedSite);
+  const [selectedSiteIdx, setSelectedSiteIdx] = useState(props.selectedSiteIdx);
 
   // 날짜 포맷
-  // const startDateFormat = format((dateRange[0].startDate), "MM.dd(EEE)", {locale: ko});
-  // const endDateFormat = format((dateRange[0].endDate), "MM.dd(EEE)", {locale: ko});
-  // console.log(startDateFormat);
-  // console.log(endDateFormat);
+  const startDateFormat = format((dateRange[0].startDate), "MM.dd(EEE)", {locale: ko});
+  const endDateFormat = format((dateRange[0].endDate), "MM.dd(EEE)", {locale: ko});
+  const distance = formatDistance(dateRange[0].startDate, dateRange[0].endDate, {locale: ko});
+
+  const distanceInt = Number(distance.slice(0, -1));
+
+  const sitePriceDays = sitePrice * distanceInt;
+
 
   useEffect(() => {
     setDateRange(props.dateRange);
@@ -30,6 +35,10 @@ function SelectOptions(props) {
   useEffect(() => {
     setSelectedSite(props.selectedSite);
   }, [props.selectedSite]);
+
+  useEffect(() => {
+    setSelectedSiteIdx(props.selectedSiteIdx);
+  }, [props.selectedSiteIdx]);
 
   // 이전 페이지에서 선택한 예약 날짜에 예약 가능한 자리 리스트
   useEffect(() => {
@@ -77,6 +86,8 @@ function SelectOptions(props) {
         .catch(err => {
           alert(`통신 오류 : ${err}`);
         });
+    } else {
+      props.availSiteList([]);
     }
   };
 
@@ -159,8 +170,9 @@ function SelectOptions(props) {
   // html
   return (
     <div className="card">
+      <p className={"card-title text-center fs-4 fw-bold"}>{props.campName}</p>
+
       <div className={"mx-auto"}>
-        <p>예약 날짜</p>
         <DateRange
           editableDateInputs={false}
           onChange={handleOnChange}
@@ -173,17 +185,18 @@ function SelectOptions(props) {
         />
       </div>
 
+      <p className={"mx-5 mb-0 fs-5 fw-bold"}>예약정보</p>
       {
         selectedSite.length !== 0 &&
         <>
-          <p className={"mx-5 mb-0 fs-5 fw-bold"}>예약정보</p>
-          {/*<div className={"mx-5 my-3"}>*/}
-          {/*  <p className={"mb-0"}>예약날짜 : {startDateFormat} ~ {endDateFormat}</p>*/}
-          {/*</div>*/}
-
+          <div className={"mx-5 my-3"}>
+            {!isNaN(distanceInt) ?
+              <p className={"mb-0"}>예약날짜 : {startDateFormat} ~ {endDateFormat} / {distanceInt}박</p> :
+              <p className={"mb-0"}>예약날짜 : {startDateFormat} ~ {endDateFormat}</p>}
+          </div>
 
           <div className={"mx-5 my-3"}>
-            <p className={"mb-0"}>선택한 자리 : {selectedSite}</p>
+            <p className={"mb-0"}>예약 사이트 : {selectedSite}</p>
           </div>
 
           <div className={"d-flex justify-content-between my-3  mx-5"}>
@@ -208,7 +221,7 @@ function SelectOptions(props) {
 
 
           <div className={"d-flex justify-content-between mx-5 my-3"}>
-            <span className="mb-0">캠핑카 전기 사용(캠핑카 사용 시 선택)</span>
+            <span className="mb-0">캠핑카 전기 사용(캠핑카 사용 시 필수 선택)</span>
             <div>
               <button type="button" className="btn btn-outline-secondary" onClick={handleAddEle}>+</button>
               <span className={"mx-3"}>{ele}</span>
@@ -217,15 +230,17 @@ function SelectOptions(props) {
           </div>
 
 
-          <div className={"mx-5 my-3"}>
-            <p className={"mb-0"}>기본금액 : {props.siteInfo.sitePrice}원</p>
-            <p className={"mb-0"}>추가인원 : {addPrice}원</p>
-            <p className={"mb-0"}>추가차량 : {parkPrice}원</p>
-            <p className={"mb-0"}>추가전기 : {elePrice}원</p>
-            <hr/>
-            <p className={"mb-0"}>총 결제금액</p>
-            <span>{sitePrice + addPrice + parkPrice + elePrice}원</span>
-          </div>
+          {startDateFormat !== endDateFormat &&
+            <div className={"mx-5 my-3"}>
+              {!isNaN(sitePriceDays) && <p className={"mb-0"}> 사이트금액 : {sitePriceDays}원 / {distanceInt}박</p>}
+              <p className={"mb-0"}>추가인원 : {addPrice}원</p>
+              <p className={"mb-0"}>추가차량 : {parkPrice}원</p>
+              <p className={"mb-0"}>추가전기 : {elePrice}원</p>
+              <hr/>
+              <p className={"mb-0"}>총 결제금액</p>
+              <span>{sitePrice + addPrice + parkPrice + elePrice}원</span>
+            </div>
+          }
         </>
       }
 
@@ -234,6 +249,7 @@ function SelectOptions(props) {
               dateRange: dateRange,
               siteInfo: props.siteInfo,
               selectedSite: selectedSite,
+              selectedSiteIdx: selectedSiteIdx,
               people: people,
               cars: cars,
               ele: ele,
@@ -243,12 +259,19 @@ function SelectOptions(props) {
               sitePrice: sitePrice,
               campName: props.campName
             }}
-            className="btn btn-primary" onClick={(e) => {
-        if (selectedSite.length === 0) {
-          alert(`사이트(객실)을 선택해주십시오.`);
-          e.preventDefault();
-        }
-      }}>예약신청</Link>
+            className="btn btn-primary mt-3"
+            onClick={(e) => {
+              const distance = formatDistance(dateRange[0].startDate, dateRange[0].endDate);
+
+              if (selectedSite.length === 0) {
+                alert(`사이트(객실)을 선택해주십시오.`);
+                e.preventDefault();
+              } else if (distance === "less than a minute") {
+                alert(`1박 이상 선택하세요.`);
+                e.preventDefault();
+              }
+            }}
+      >예약신청</Link>
     </div>
   );
 }

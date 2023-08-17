@@ -63,4 +63,7 @@ public class CampSiteInfo {
   @ToString.Exclude
   List<Reservation> reservationList = new ArrayList<>();
 
+  public CampSiteInfo(int idx) {
+    this.idx = idx;
+  }
 }

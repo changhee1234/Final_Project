@@ -24,6 +24,7 @@ function SiteLists(props) {
                           style={{borderRadius: 3 + "px", margin: 0.2 + "rem"}}
                           onChange={() => {
                             props.selectedSite(site.campSiteName);
+                            props.selectedSiteIdx(site.idx);
                           }}>
               <h5 className="card-title py-4">{site.campSiteName}</h5>
             </ToggleButton>
