@@ -5,10 +5,8 @@ import {ko} from "date-fns/locale";
 import axios from "axios";
 
 
-
 function CampReservationPage3(props) {
   const location = useLocation();
-  const [reserveData, setReserveData] = useState(location.state);
 
   const stateObj = location.state;
 
@@ -22,11 +20,13 @@ function CampReservationPage3(props) {
   });
   const nightCntInt = Number(nightCnt.slice(0, -1));
   const sitePriceDays = stateObj.sitePrice * nightCntInt;
+  const totalPrice = sitePriceDays + stateObj.addPrice + stateObj.parkPrice + stateObj.elePrice;
 
   // 예약자 정보 폼 상태
   const [reserveFrom, setReserveForm] = useState({
     userReservationName: '',
     userPhoneNumber: '',
+    userEmail: '',
     userCarNum: '',
     userMemo: ''
   });
@@ -47,18 +47,51 @@ function CampReservationPage3(props) {
       userReservationCnt: stateObj.people,
       userParkCnt: stateObj.cars,
       userEleCnt: stateObj.ele,
-      userReservationTotalPrice: sitePriceDays + stateObj.addPrice + stateObj.parkPrice + stateObj.elePrice + "원"
+      userReservationTotalPrice: totalPrice + "원"
     }
     console.log(requestData);
 
     axios.post("http://localhost:8080/reserve/insertReservation", requestData)
       .then(res => {
-        alert(`예약 성공`);
+        alert(`예약을 완료하였습니다.`);
       })
       .catch(err => {
         alert(`통신 에러 : ${err}`);
       });
     e.preventDefault();
+  };
+
+  const doPayment = () => {
+    const {IMP} = window;
+    IMP.init('imp56656734');
+
+    const data = {
+      pg: "html5_inicis.INIpayTest",
+      pay_method: "card",
+      merchant_uid: `campRe_${new Date().getDate()}`,
+      name: `예약_${stateObj.campName}_${stateObj.selectedSite}`,
+      amount: 1,
+      buyer_name: reserveFrom.userReservationName,
+      buyer_tel: reserveFrom.userPhoneNumber,
+      buyer_email: reserveFrom.userEmail,
+    }
+
+    IMP.request_pay(data, callback);
+
+    function callback(response) {
+      const {
+        success,
+        merchant_uid,
+        error_msg
+      } = response;
+
+      if (success) {
+        alert('결제 성공');
+        handleSubmit();
+      } else {
+        alert(`결제 실패: ${error_msg}`);
+      }
+    }
   };
 
   return (
@@ -86,6 +119,17 @@ function CampReservationPage3(props) {
                   id={"reservationPhone"}
                   name={"userPhoneNumber"}
                   value={reserveFrom.userPhoneNumber}
+                  onChange={handleChange}
+                  className={"form-control"}/>
+              </div>
+
+              <div className={"my-3"}>
+                <label htmlFor="userEmail" className={"form-label"}>이메일</label>
+                <input
+                  type="email"
+                  id={"userEmail"}
+                  name={"userEmail"}
+                  value={reserveFrom.userEmail}
                   onChange={handleChange}
                   className={"form-control"}/>
               </div>
@@ -181,7 +225,7 @@ function CampReservationPage3(props) {
                 <div className="card-footer d-flex justify-content-between">
                   <p className={"mb-0 fw-bold"}>총 결제 금액</p>
                   <p
-                    className={"mb-0 fw-bold"}>{sitePriceDays + stateObj.addPrice + stateObj.parkPrice + stateObj.elePrice}원</p>
+                    className={"mb-0 fw-bold"}>{totalPrice}원</p>
                 </div>
               </div>
             </div>
@@ -195,7 +239,8 @@ function CampReservationPage3(props) {
               </div>
             </div>
             <div className={"d-grid my-3"}>
-              <button type={"submit"} className={"btn btn-primary"}>예약하기(결제)</button>
+              {/*<button type={"submit"} className={"btn btn-primary"}>예약하기(결제)</button>*/}
+              <button type={"button"} className={"btn btn-primary"} onClick={doPayment}>결제하기</button>
             </div>
           </div>
         </div>
