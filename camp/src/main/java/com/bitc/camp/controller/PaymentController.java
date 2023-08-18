@@ -2,10 +2,8 @@ package com.bitc.camp.controller;
 
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.request.PrepareData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
-import com.siot.IamportRestClient.response.Prepare;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

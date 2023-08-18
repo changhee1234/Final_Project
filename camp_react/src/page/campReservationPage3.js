@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import React, {useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import {format, formatDistance} from "date-fns";
 import {ko} from "date-fns/locale";
 import axios from "axios";
-import data from "bootstrap/js/src/dom/data";
 
 
 function CampReservationPage3(props) {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const stateObj = location.state;
 
   // 날짜, 숙박 관련
@@ -85,6 +84,7 @@ function CampReservationPage3(props) {
       if (rsp.paid_amount === data.response.amount) {
         alert(`결제 성공 및 검증확인`);
         handleSubmit();
+        return navigate("/")
       } else {
         alert(`결제 실패하였습니다.`);
         //결제 취소 처리

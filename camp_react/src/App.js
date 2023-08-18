@@ -16,6 +16,7 @@ import CampReservationPage3 from "./page/campReservationPage3";
 import AboutPage from "./page/aboutPage";
 import AnnouncementListPage from "./page/announcementListPage";
 import AnnouncementDetailPage from "./page/announcementDetailPage";
+import CampReservationPage4 from "./page/CampReservationPage4";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
           <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2/>}/>
           <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>
+          <Route path={'/reservation4/*'} element={<CampReservationPage4/>}/>
           {/*어바웃페이지*/}
           <Route path={'/about'} element={<AboutPage/>}/>
           {/*공지사항 리스트 페이지*/}
