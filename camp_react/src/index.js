@@ -6,9 +6,13 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+<<<<<<< .merge_file_6WwAFG
   <React.StrictMode>
     <App />
   </React.StrictMode>
+=======
+    <App />
+>>>>>>> .merge_file_EYLSKk
 );
 
 // If you want to start measuring performance in your app, pass a function
