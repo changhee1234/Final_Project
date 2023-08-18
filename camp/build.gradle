@@ -1,55 +1,13 @@
 plugins {
-<<<<<<< .merge_file_8cT6X0
     id 'java'
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
-=======
-	id 'java'
-	id 'org.springframework.boot' version '3.1.2'
-	id 'io.spring.dependency-management' version '1.1.2'
->>>>>>> .merge_file_1CzctG
 }
 
 group = 'com.bitc'
 version = '0.0.1-SNAPSHOT'
 
 java {
-<<<<<<< .merge_file_8cT6X0
-    sourceCompatibility = '17'
-}
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    //	coolsms jdk
-    implementation 'net.nurigo:sdk:4.2.7'
-//	Spring Json-Web-Token
-    implementation "io.jsonwebtoken:jjwt:0.9.1"
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-//	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
-=======
 	sourceCompatibility = '17'
 }
 
@@ -81,5 +39,4 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
->>>>>>> .merge_file_1CzctG
 }
