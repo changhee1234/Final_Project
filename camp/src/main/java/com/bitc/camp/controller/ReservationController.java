@@ -23,7 +23,6 @@ public class ReservationController {
   public Map<String, Object> getCampMainInfo(@PathVariable("campMainIdx") int campMainIdx) throws Exception {
     Map<String, Object> result = new HashMap<>();
     CampMainRespDto mainInfo = reservationService.getCampMainInfo(campMainIdx);
-    // List<CampSiteInfoRespDto> siteInfoList = mainInfo.getSiteInfoLists();
     result.put("mainInfo", mainInfo);
     return result;
   }
@@ -54,7 +53,6 @@ public class ReservationController {
     return siteList;
   }
 
-
   @GetMapping("/reserveStep/{campSiteInfoIdx}")
   public Map<String, Object> reserveStep(@PathVariable("campSiteInfoIdx") int idx) throws Exception {
     Map<String, Object> result = new HashMap<>();
@@ -63,10 +61,10 @@ public class ReservationController {
     return result;
   }
 
+  // 결제 후 예약db에 저장
   @PostMapping("/insertReservation")
   public void insertReservation(@RequestBody final ReservationReqDto requestData) throws Exception{
     reservationService.save(requestData);
   }
-
 
 }

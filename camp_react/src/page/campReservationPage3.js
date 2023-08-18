@@ -3,6 +3,7 @@ import {useLocation} from "react-router-dom";
 import {format, formatDistance} from "date-fns";
 import {ko} from "date-fns/locale";
 import axios from "axios";
+import data from "bootstrap/js/src/dom/data";
 
 
 function CampReservationPage3(props) {
@@ -58,45 +59,42 @@ function CampReservationPage3(props) {
       .catch(err => {
         alert(`통신 에러 : ${err}`);
       });
-    e.preventDefault();
   };
 
-  const doPayment = () => {
+  const doPayment = async () => {
     const {IMP} = window;
     IMP.init('imp56656734');
 
-    const data = {
+
+    const reqData = {
       pg: "html5_inicis.INIpayTest",
       pay_method: "card",
-      merchant_uid: `campRe_${new Date().getDate()}`,
+      merchant_uid: `campRe_${new Date()}`,
       name: `예약_${stateObj.campName}_${stateObj.selectedSite}`,
-      amount: 1,
+      amount: 1, // totalPrice
       buyer_name: reserveFrom.userReservationName,
       buyer_tel: reserveFrom.userPhoneNumber,
       buyer_email: reserveFrom.userEmail,
     }
 
-    IMP.request_pay(data, callback);
+    IMP.request_pay(reqData, callback);
 
-    function callback(response) {
-      const {
-        success,
-        merchant_uid,
-        error_msg
-      } = response;
-
-      if (success) {
-        alert('결제 성공');
+    async function callback(rsp) {
+      // 결제 사후 검증
+      const {data} = await axios.post("http://localhost:8080/payments/" + rsp.imp_uid)
+      if (rsp.paid_amount === data.response.amount) {
+        alert(`결제 성공 및 검증확인`);
         handleSubmit();
       } else {
-        alert(`결제 실패: ${error_msg}`);
+        alert(`결제 실패하였습니다.`);
+        //결제 취소 처리
       }
     }
   };
 
   return (
     <main className={"container"}>
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className={"row"}>
           <div className="col-sm-6 mx-auto">
             {/*예약자 정보 입력*/}
