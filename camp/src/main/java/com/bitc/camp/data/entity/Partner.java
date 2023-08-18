@@ -1,5 +1,6 @@
 package com.bitc.camp.data.entity;
 
+import com.bitc.camp.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

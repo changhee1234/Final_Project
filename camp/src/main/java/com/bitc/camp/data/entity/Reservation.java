@@ -1,6 +1,7 @@
 package com.bitc.camp.data.entity;
 
 
+import com.bitc.camp.entity.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
@@ -33,11 +34,11 @@ public class Reservation {
   @Column(nullable = false)
   private int userReservationCnt;
 
-  private int userParkCnt;
+  private Integer userParkCnt;
 
   private String userCarNum;
 
-  private int userEleCnt;
+  private Integer userEleCnt;
 
   @Column(nullable = false)
   private String userPhoneNumber;

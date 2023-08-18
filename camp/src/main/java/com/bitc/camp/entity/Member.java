@@ -1,13 +1,17 @@
 package com.bitc.camp.entity;
 
+import com.bitc.camp.data.entity.Partner;
+import com.bitc.camp.data.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,6 +37,20 @@ public class Member implements UserDetails {
 
 //  @Column(name = "auth")
 //  private String auth;
+
+  // 추가
+  @OneToMany(mappedBy = "member")
+  @ToString.Exclude
+  List<Partner> partnerList = new ArrayList<>();
+
+  @OneToMany(mappedBy = "member")
+  @ToString.Exclude
+  List<Reservation> reservationList = new ArrayList<>();
+
+  public Member(int memberIdx) {
+    this.memberIdx = memberIdx;
+  }
+  // 추가
 
   @Builder
   public Member(int memberIdx, String email, String password, String userName, String nickName, String phone, String auth) {
