@@ -1,6 +1,6 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MainPage from "./page/main/MainPage";
-import MyPage from "./page/MyPage/MyPage";
+import MyPage from "./page/trade/MyPage";
 import CampDetailPage from "./page/camp/CampDetailPage";
 import TradeListPage from "./page/trade/TradeListPage";
 import TradeDetailPage from "./page/trade/TradeDetailPage";
@@ -25,7 +25,7 @@ function App(props) {
           {/*메인페이지*/}
           <Route path={'/'} element={<MainPage/>}/>
           {/*마이페이지*/}
-          <Route path={'/myPage/:userIdx'} element={<MyPage user={props.user} />} />
+          {/*<Route path={'/myPage'} element={<MyPage/>}/>*/}
           {/*예외처리(에러페이지)*/}
           <Route path={'*'} element={<ErrorPage/>}/>
           {/*캠핑장 리스트*/}
