@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "./axios";
+import MyPage from "../MyPage/MyPage"; // 새로운 파일에서 만든 마이페이지 컴포넌트 불러오기
 
 function Header(props) {
     const [isVerified, setIsVerified] = useState(false);
@@ -164,7 +165,13 @@ function Header(props) {
                     </Link>
                     {user ? (
                         <>
-                            <span className={'me-3'}>{user.nickName}님</span>
+                            {/* 마이페이지 링크 */}
+                            <Link className={'me-3 text-decoration-none text-dark'} to={{
+                                pathname: '/myPage',
+                                state: { user: user }
+                            }}>
+                                {user.nickName}님
+                            </Link>
                             <button className={'btn btn-link text-decoration-none text-dark'} onClick={handleLogout}>
                                 로그아웃
                             </button>
