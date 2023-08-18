@@ -25,7 +25,7 @@ function App(props) {
           {/*메인페이지*/}
           <Route path={'/'} element={<MainPage/>}/>
           {/*마이페이지*/}
-          <Route path={'/myPage/:userIdx'} element={<MyPage user={props.user} />} />
+          {/*<Route path={'/myPage/:userIdx'} element={<MyPage user={props.user} />} />*/}
           {/*예외처리(에러페이지)*/}
           <Route path={'*'} element={<ErrorPage/>}/>
           {/*캠핑장 리스트*/}
