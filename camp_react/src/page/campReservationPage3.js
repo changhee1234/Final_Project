@@ -84,6 +84,18 @@ function CampReservationPage3(props) {
       if (rsp.paid_amount === data.response.amount) {
         alert(`결제 성공 및 검증확인`);
         handleSubmit();
+        // 예약테이블에 imp_uid, m_uid저장?
+
+        const reqPayData = {
+          payAmount: data.response.amount,
+          payState: data.response,
+          payDate: data.response
+        }
+        axios.post("http://localhost:8080/payments/save", reqPayData)
+          .then(res => alert(`결제 db 저장 완료`))
+          .catch(err => alert(err));
+        // 결제 내역 결제 테이블에 저장
+
         return navigate("/")
       } else {
         alert(`결제 실패하였습니다.`);
