@@ -2,8 +2,8 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$/camp">
-      <excludeFolder url="file://$MODULE_DIR$/camp/build" />
+    <content url="file://$MODULE_DIR$/camp_react">
+      <excludeFolder url="file://$MODULE_DIR$/camp_react/build" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
