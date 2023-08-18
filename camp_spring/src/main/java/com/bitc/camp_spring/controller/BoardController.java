@@ -1,6 +1,7 @@
 package com.bitc.camp_spring.controller;
 
 import com.bitc.camp_spring.dto.BoardRequestDto;
+import com.bitc.camp_spring.dto.BoardResponseDto;
 import com.bitc.camp_spring.entity.Board;
 import com.bitc.camp_spring.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -30,11 +31,12 @@ public class  BoardController {
 
   // 글 등록
   @RequestMapping(value ="/write", method = RequestMethod.POST)
-  public Object boardWrite(@RequestBody BoardRequestDto boardrequestDto) throws Exception {
-    Board save = boardService.save(boardrequestDto);
+  public Object boardWrite(BoardRequestDto boardRequestDto) throws Exception {
+    Board createBoard = boardService.createBoard(boardRequestDto);
 
-    return save;
+    return createBoard;
   }
+
 
 //  public Object boardWrite(@RequestBody BoardRequestDto requestDto) throws Exception {
 //    // 결과를 담을 맵 생성
@@ -80,4 +82,3 @@ public class  BoardController {
 //  }
 
 }
-

@@ -32,11 +32,11 @@ public class BoardResponseDto {
         this.content = entity.getContent();
         this.userName = entity.getUserName();
         this.cnt = entity.getCnt();
-        this.deleteYn = entity.getDeleteYn();
+//        this.deleteYn = entity.getDeleteYn();
         this.tradePrice = entity.getTradePrice();
         this.tradeLocation = entity.getTradeLocation();
         this.createDt = entity.getCreateDt();
-        this.updateDt = entity.getUpdateDt();
+//        this.updateDt = entity.getUpdateDt();
         this.tradeCate = entity.getTradeCate();
         this.memberIdx = entity.getMemberIdx();
     }

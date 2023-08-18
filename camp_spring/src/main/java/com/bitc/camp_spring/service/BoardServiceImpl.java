@@ -1,12 +1,13 @@
 package com.bitc.camp_spring.service;
 
 import com.bitc.camp_spring.dto.BoardRequestDto;
+import com.bitc.camp_spring.dto.BoardResponseDto;
 import com.bitc.camp_spring.entity.Board;
 import com.bitc.camp_spring.repository.BoardRepository;
-import com.bitc.camp_spring.repository.BoardWriteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
   private final BoardRepository boardRepository;
-  private final BoardWriteRepository boardWriteRepository;
 
 //  게시글 목록 조회
   @Override
@@ -22,24 +22,22 @@ public class BoardServiceImpl implements BoardService {
     return boardRepository.findAllByOrderByTradeBoardIdxDesc();
   }
 
-
   // 게시글 등록
   @Override
-  public Board save(BoardRequestDto boardRequestDto) throws Exception {
-    // BoardRequestDto를 사용하여 Board 객체를 생성하거나 변환합니다.
-    Board board = convertToBoard(boardRequestDto);
-
-    // 생성된 Board 객체를 저장합니다.
-    return boardRepository.save(board);
-  }
-
-  // BoardRequestDto를 Board 엔티티로 변환하는 메서드
-  private Board convertToBoard(BoardRequestDto boardRequestDto) {
+  public Board createBoard(BoardRequestDto boardRequestDto) throws Exception {
+    // BoardRequestDto를 사용하여 Board 객체를 생성하거나 변환
     Board board = new Board();
+
     board.setTitle(boardRequestDto.getTitle());
     board.setContent(boardRequestDto.getContent());
-    // 나머지 필드 설정
-    return board;
+    board.setUserName(boardRequestDto.getUserName());
+    board.setTradePrice(boardRequestDto.getTradePrice());
+    board.setTradeCate(boardRequestDto.getTradeCate());
+    board.setMemberIdx(boardRequestDto.getMemberIdx());
+    board.setCreateDt(boardRequestDto.getCreateDt());
+
+    // 생성된 Board 객체를 저장
+    return boardRepository.save(board);
   }
   
   // 상세 게시글 조회

@@ -4,19 +4,26 @@ import axios from 'axios';
 
 function TradeWritePage(props) {
   const [title, setTitle] = useState('');
-  const [contents, setContents] = useState('');
-  const [createId, setCreateId] = useState('');
+  const [content, setContent] = useState('');
+  const [userName, setUserName] = useState('');
   const [tradePrice, setTradePrice] = useState('');
+  const [tradeCate, setTradeCate] = useState('');
+  const [createDt, setCreateDt] = useState(new Date());
+  // const [memberIdx, setMemberIdx] = useState([{idx : 0}]);
+
   const navi = useNavigate();
 
   const handleSubmit = () => {
     axios.post("http://localhost:8080/board/write", null,
         {
           params: {
+            // memberIdx: memberIdx,
             title: title,
-            contents: contents,
-            createId: createId,
-            tradePrice : tradePrice
+            content: content,
+            userName: userName,
+            tradePrice: tradePrice,
+            tradeCate: tradeCate,
+            createDt: createDt.toISOString().substr(0, 16),
           }
         })
         .then(res => {
@@ -31,35 +38,40 @@ function TradeWritePage(props) {
         <div className="row">
           <div className="col-sm-2 my-4"></div>
           <div className="col-sm-8 text-center my-5">
-            {/*<h3 className={'mt-5'}>장터 게시판 글 등록</h3>*/}
             <ul className={'col-sm text-center my-4 mt-5'}>
               <li><i className="bi bi-cart4"></i><span className={'text3'}> 장터 게시판 글 등록</span></li>
             </ul>
             <form className={'my-5'} onSubmit={handleSubmit}>
+              <input className={'form-control'} id={'createDt'} name={"createDt"} type="hidden"
+                      value={createDt.toISOString().substr(0, 16)}
+                      onChange={(e) => setCreateDt(new Date(e.target.value))}/>
+              {/*<input className={'form-control'} id={'memberIdx'} type="hidden" name={"memberIdx"} value={memberIdx}*/}
+              {/*        onChange={(e) => setMemberIdx(e.target.value)}/>*/}
               <div className="row">
                 <div className="my-3 row">
                   <div className="col-sm-2">
-                    <select id="box-office" className="form-control me-3" name="movieNm">
-                      <option value="{tradeCate}" selected="selected">분류</option>
+                    <select id="box-office" className="form-control me-3" name="tradeCate"
+                            onChange={(e) => setTradeCate(e.target.value)}>
+                      <option value={tradeCate} selected="selected">분류</option>
                       <option value={"1"}>삽니다</option>
-                      <option value={"2"}>팝니다</option>
+                        <option value={"2"}>팝니다</option>
                     </select>
                   </div>
-                  <input type="hidden" className="form-control" id="create-id" name="createId"
-                         placeholder="사용자 ID를 입력하세요" onChange={e => setCreateId(e.target.value)}></input>
+                  <input type="hidden" className="form-control" id="user-name" name="userName"
+                          placeholder="사용자 ID를 입력하세요" onChange={(e) => setUserName(e.target.value)}></input>
                   <div className="col-sm">
                     <input type="text" className="form-control" id="title" name="title" placeholder="제목을 입력하세요"
-                           value={title} onChange={e => setTitle(e.target.value)}></input>
+                            value={title} onChange={(e) => setTitle(e.target.value)}></input>
                   </div>
                   <div className={"mt-3"}>
                     <input type="number" className="form-control" id="tradePrice" name="tradePrice"
-                           placeholder="희망하는 가격을 입력하세요(원)" value={tradePrice}
-                           onChange={e => setTradePrice(e.target.value)}></input>
+                            placeholder="희망하는 가격을 입력하세요(원)" value={tradePrice}
+                            onChange={e => setTradePrice(e.target.value)}></input>
                   </div>
                 </div>
                 <div className="mb-3">
                         <textarea className="form-control" id="content" name="content" rows="20"
-                                  placeholder="글 내용을 입력하세요" onChange={e => setContents(e.target.value)}></textarea>
+                                  placeholder="글 내용을 입력하세요" onChange={(e) => setContent(e.target.value)}></textarea>
                 </div>
                 <div className="row input-group">
                   <div className="my-3 col-sm d-flex justify-content-start gap-3">
