@@ -1,3 +1,4 @@
+<<<<<<< .merge_file_s0Nzol
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MainPage from "./page/main/MainPage";
 import MyPage from "./page/trade/MyPage";
@@ -19,13 +20,42 @@ import Footer from "./page/layout/Footer";
 function App(props) {
   return (
       <div className={'App'}>
+=======
+import logo from './logo.svg';
+import './App.css';
+import MainPage from "./page/mainPage";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Header from "./layout/header";
+import Footer from "./layout/footer";
+import MyPage from "./page/myPage";
+import ErrorPage from "./page/errorPage";
+import CampListPage from "./page/campListPage";
+import CampDetailPage from "./page/campDetailPage";
+import TradeListPage from "./page/tradeListPage";
+import TradeDetailPage from "./page/tradeDetailPage";
+import CampReservationPage1 from "./page/campReservationPage1";
+import CampReservationPage2 from "./page/campReservationPage2";
+import CampReservationPage3 from "./page/campReservationPage3";
+import AboutPage from "./page/aboutPage";
+import AnnouncementListPage from "./page/announcementListPage";
+import AnnouncementDetailPage from "./page/announcementDetailPage";
+import CampReservationPage4 from "./page/CampReservationPage4";
+
+function App() {
+  return (
+    <div className={'App'}>
+>>>>>>> .merge_file_xX0UBq
       <BrowserRouter>
         <Header/>
         <Routes path={'/'}>
           {/*메인페이지*/}
           <Route path={'/'} element={<MainPage/>}/>
           {/*마이페이지*/}
+<<<<<<< .merge_file_s0Nzol
           {/*<Route path={'/myPage'} element={<MyPage/>}/>*/}
+=======
+          <Route path={'/myPage'} element={<MyPage/>}/>
+>>>>>>> .merge_file_xX0UBq
           {/*예외처리(에러페이지)*/}
           <Route path={'*'} element={<ErrorPage/>}/>
           {/*캠핑장 리스트*/}
@@ -36,6 +66,7 @@ function App(props) {
           <Route path={'/trade'} element={<TradeListPage/>}/>
           {/*중고장터 상세보기*/}
           <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>
+<<<<<<< .merge_file_s0Nzol
           {/*중고장터 글 등록*/}
           <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
           {/*예약페이지*/}
@@ -52,6 +83,23 @@ function App(props) {
         <Footer/>
       </BrowserRouter>
       </div>
+=======
+          {/*예약페이지*/}
+          <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
+          <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2/>}/>
+          <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>
+          <Route path={'/reservation4/*'} element={<CampReservationPage4/>}/>
+          {/*어바웃페이지*/}
+          <Route path={'/about'} element={<AboutPage/>}/>
+          {/*공지사항 리스트 페이지*/}
+          <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
+          {/*공지사항 상세보기 페이지*/}
+          <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
+        </Routes>
+        <Footer/>
+      </BrowserRouter>
+    </div>
+>>>>>>> .merge_file_xX0UBq
   );
 }
 
