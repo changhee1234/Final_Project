@@ -2,8 +2,8 @@ package com.bitc.camp.data.dto;
 
 import com.bitc.camp.data.entity.CampSiteInfo;
 import com.bitc.camp.data.entity.CampSiteList;
-import com.bitc.camp.data.entity.Member;
 import com.bitc.camp.data.entity.Reservation;
+import com.bitc.camp.entity.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
