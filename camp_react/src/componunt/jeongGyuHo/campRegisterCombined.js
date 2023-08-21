@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function CampRegisterCombined(props) {
+    const negative = useNavigate();
+
     const [step, setStep] = useState(1); // 현재 단계를 저장하는 상태 변수
 
     // campMainInfo 등록 인풋 state
@@ -88,6 +90,7 @@ function CampRegisterCombined(props) {
                     .then((res) => {
                         console.log(res.data);
                         alert('등록되었습니다.');
+                        negative("/");
                     })
                     .catch((err) => {
                         console.log(err);
