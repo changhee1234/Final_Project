@@ -1,22 +1,14 @@
 package com.bitc.camp.controller;
 
-<<<<<<< HEAD:camp/src/main/java/com/bitc/camp/controller/MemberController.java
 import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.repository.MemberRepository;
 import com.bitc.camp.service.MemberService;
-=======
-<<<<<<< Updated upstream:camp/src/main/java/com/bitc/camp_spring/controller/MemberController.java
-import com.bitc.camp_spring.dto.AddMemberReq;
-import com.bitc.camp_spring.repository.MemberRepository;
-import com.bitc.camp_spring.service.MemberService;
-=======
+
 import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.dto.ModifyMemberReq;
 import com.bitc.camp.entity.Member;
 import com.bitc.camp.repository.MemberRepository;
 import com.bitc.camp.service.MemberService;
->>>>>>> Stashed changes:camp/src/main/java/com/bitc/camp/controller/MemberController.java
->>>>>>> 김창희:camp/src/main/java/com/bitc/camp_spring/controller/MemberController.java
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
