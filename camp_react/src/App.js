@@ -5,10 +5,10 @@ import CampDetailPage from "./page/camp/CampDetailPage";
 import TradeListPage from "./page/trade/TradeListPage";
 import TradeDetailPage from "./page/trade/TradeDetailPage";
 import TradeWritePage from "./page/trade/TradeWritePage";
-import CampReservationPage1 from "./page/campReservationPage1";
-import CampReservationPage2 from "./page/campReservationPage2";
-import CampReservationPage3 from "./page/campReservationPage3";
-import CampReservationPage4 from "./page/CampReservationPage4";
+import CampReservationPage1 from "./page/camp/CampReservationPage1";
+import CampReservationPage2 from "./page/camp/CampReservationPage2";
+import CampReservationPage3 from "./page/camp/CampReservationPage3";
+import CampReservationPage4 from "./page/camp/CampReservationPage4";
 import AnnouncementListPage from "./page/announce/AnnouncementListPage";
 import AnnouncementDetailPage from "./page/announce/AnnouncementDetailPage";
 import CampListPage from "./page/camp/CampListPage";
@@ -18,13 +18,20 @@ import AboutPage from "./page/layout/AboutPage";
 import Footer from "./page/layout/Footer";
 
 import './App.css';
+import {useState} from "react";
 
 
 function App(props) {
+  const [userInfo, setUserInfo] = useState(null);
+
+  const handleUserInfo = (data) => {
+    setUserInfo(data);
+  };
+
   return (
       <div className={'App'}>
         <BrowserRouter>
-          <Header />
+          <Header getUserInfo ={handleUserInfo}/>
           <Routes path={'/'}>
             {/* 메인페이지 */}
             <Route path={'/'} element={<MainPage />} />
@@ -44,10 +51,10 @@ function App(props) {
             {/* 중고장터 글 등록 */}
             <Route path={'/tradeWrite/*'} element={<TradeWritePage />} />
             {/* 예약페이지 */}
-            <Route path={'/reservation1/*'} element={<CampReservationPage1 />} />
-            <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 />} />
-            <Route path={'/reservation3/*'} element={<CampReservationPage3 />} />
-            <Route path={'/reservation4/*'} element={<CampReservationPage4 />} />
+            <Route path={'/reservation1/*'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
+            <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
+            <Route path={'/reservation3/*'} element={<CampReservationPage3 userInfo={userInfo}/>}/>
+            <Route path={'/reservation4/*'} element={<CampReservationPage4 userInfo={userInfo}/>}/>
             {/* 어바웃페이지 */}
             <Route path={'/about'} element={<AboutPage />} />
             {/* 공지사항 리스트 페이지 */}

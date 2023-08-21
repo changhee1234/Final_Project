@@ -16,11 +16,8 @@ public class Payment {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int idx;
 
-//  @Column(nullable = false)
-//  private int reserveIdx;
-//
-//  @Column(nullable = false)
-//  private int payAmount;
+  @Column(nullable = false)
+  private int payAmount;
 
   @Column(nullable = false)
   private String payState;

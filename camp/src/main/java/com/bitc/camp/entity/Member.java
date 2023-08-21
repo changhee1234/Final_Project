@@ -1,12 +1,9 @@
 package com.bitc.camp.entity;
 
-import com.bitc.camp.data.entity.Partner;
-import com.bitc.camp.data.entity.Reservation;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,14 +26,7 @@ public class Member implements UserDetails {
   private String phone;
   private String email;
   private String grade;
-
-//  private String googleCheck;
-//  private String googleCode;
-
-
-
-//  @Column(name = "auth")
-//  private String auth;
+  private String profileImg;
 
   // 추가
 //  @OneToMany(mappedBy = "member")
