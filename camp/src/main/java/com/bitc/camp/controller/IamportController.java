@@ -11,11 +11,10 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-public class PaymentController {
+public class IamportController {
 
   private final IamportClient iamportClient;
-
-  private PaymentController() {
+  private IamportController() {
     this.iamportClient = new IamportClient("1245320317184060", "ffNXUIJwkTtkwPZm9LzqPVQyBqg86lDPp9bFuxGfKeY5ZZvjndYJzW2s9rDD6IGtJifXtznpPn2755GL");
   }
 

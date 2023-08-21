@@ -48,10 +48,10 @@ public class Reservation {
   @Column(nullable = false)
   private String userReservationTotalPrice;
 
-  @Column(nullable = false)
+  private String payStatus;
+
   private String impUid;
 
-  @Column(nullable = false)
   private String merchantUid;
 
   @ManyToOne(optional = false)
@@ -81,6 +81,9 @@ public class Reservation {
       String userPhoneNumber,
       String userMemo,
       String userReservationTotalPrice,
+      String payStatus,
+      String impUid,
+      String merchantUid,
       CampSiteInfo campSiteInfo,
       CampSiteList campSiteList,
       Member member
@@ -95,8 +98,17 @@ public class Reservation {
     this.userPhoneNumber = userPhoneNumber;
     this.userMemo = userMemo;
     this.userReservationTotalPrice = userReservationTotalPrice;
+    this.payStatus = payStatus;
+    this.impUid = impUid;
+    this.merchantUid = merchantUid;
     this.campSiteInfo = campSiteInfo;
     this.campSiteList = campSiteList;
     this.member = member;
+  }
+
+  public void update(String payStatus, String impUid, String merchantUid) {
+    this.payStatus = payStatus;
+    this.impUid = impUid;
+    this.merchantUid = merchantUid;
   }
 }
