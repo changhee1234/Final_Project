@@ -14,7 +14,7 @@ function Header(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [nickName, setNickName] = useState("");
-    const [userName, setUserName] = useState("");
+    const [realName, setRealName] = useState("");
     const [user, setUser] = useState(null);
     const [isEmailAvailable, setIsEmailAvailable] = useState(true);
     const [isCheckingEmail, setIsCheckingEmail] = useState(false);
@@ -22,7 +22,7 @@ function Header(props) {
     const emailToSend = email;
     const passwordToSend = password;
     const nickNameToSend = nickName;
-    const userNameToSend = userName;
+    const realNameToSend = realName;
     const phoneToSend = phone;
 
 
@@ -88,7 +88,7 @@ function Header(props) {
                     email: emailToSend,
                     password: passwordToSend,
                     nickName: nickNameToSend,
-                    userName: userNameToSend,
+                    realName: realNameToSend,
                     phone: phoneToSend,
                 };
                 const params = new URLSearchParams();
@@ -146,7 +146,7 @@ function Header(props) {
         try {
             await axios.post('http://localhost:3000/logout'); // Spring Security의 로그아웃 엔드포인트 호출
             setUser(null); // 사용자 정보 초기화
-            window.location.reload(); // 화면 새로고침
+            window.location.href = 'http://localhost:3000';
         } catch (error) {
             console.error('로그아웃 오류:', error);
         }
@@ -164,7 +164,10 @@ function Header(props) {
                     </Link>
                     {user ? (
                         <>
-                            <span className={'me-3'}>{user.nickName}님</span>
+                            {/*<span className={'me-3'}>{user.nickName}님</span>*/}
+                            <Link className="me-3 text-decoration-none text-dark" to={`/myPage/${user.nickName}`}>
+                                {user.nickName}님
+                            </Link>
                             <button className={'btn btn-link text-decoration-none text-dark'} onClick={handleLogout}>
                                 로그아웃
                             </button>
@@ -295,17 +298,17 @@ function Header(props) {
                                     </div>
                                     {/*실명*/}
                                     <div className="my-3">
-                                        <label htmlFor="user-userName" className="form-label">
+                                        <label htmlFor="user-realName" className="form-label">
                                             실명 :
                                         </label>
                                         <input
                                             type="text"
                                             className="form-control"
-                                            name="userName"
-                                            id="user-userName"
+                                            name="realName"
+                                            id="user-realName"
                                             placeholder="실명을 입력해주세요"
-                                            value={userName}  // Add this line
-                                            onChange={(e) => setUserName(e.target.value)}
+                                            value={realName}  // Add this line
+                                            onChange={(e) => setRealName(e.target.value)}
                                         />
                                     </div>
                                     {/*전화번호*/}

@@ -21,8 +21,9 @@ public class MemberServiceImpl implements MemberService {
                 .email(dto.getEmail())
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
                 .phone(dto.getPhone())
-                .userName(dto.getUserName())
+                .realName(dto.getRealName())
                 .nickName(dto.getNickName())
+                .grade("user")
                 .build());
     }
 }

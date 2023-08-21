@@ -16,15 +16,21 @@ public class Payment {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int idx;
 
-  @Column(nullable = false)
-  private int reserveIdx;
-
-  @Column(nullable = false)
-  private int payAmount;
+//  @Column(nullable = false)
+//  private int reserveIdx;
+//
+//  @Column(nullable = false)
+//  private int payAmount;
 
   @Column(nullable = false)
   private String payState;
 
   @Column(nullable = false)
-  private Date payDate;
+  private int payDate;
+
+  @Column(nullable = false)
+  private String impUid;
+
+  @Column(nullable = false)
+  private String merchantUid;
 }
