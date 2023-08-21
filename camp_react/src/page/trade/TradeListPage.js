@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import './tradeListpage.css'
+import React, { useEffect, useState } from "react";
+import './tradeListpage.css';
 import axios from 'axios';
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function TradeListPage(props) {
   const [tradeListPage, setTradeListPage] = useState([]);
@@ -10,7 +10,11 @@ function TradeListPage(props) {
   const navi = useNavigate();
   const goWrite = () => navi('/tradeWrite');
   const params = new URLSearchParams();
-  const [sortOption, setSortOption] = useState('');
+  const [sortOption, setSortOption] = useState('newest'); // 최신순을 기본으로 설정
+  // 폼 제출 이벤트 핸들러
+  const handleFormSubmit = (event) => {
+    event.preventDefault(); // 폼의 제출 동작 막음
+  };
   params.append("title", titleToSend);
 
   useEffect(() => {
@@ -18,24 +22,27 @@ function TradeListPage(props) {
   }, [sortOption]);
 
   const fetchData = () => {
-    axios.get(`http://localhost:8080/board/list?sortOption=${sortOption}`)
+    let apiUrl = `http://localhost:8080/board/list?sortOption=${sortOption}`;
+    if (sortOption === "newest") {
+      apiUrl += "&sortBy=created_at"; // 최신순으로 정렬
+    } else if (sortOption === "viewest") {
+      apiUrl += "&sortBy=views"; // 조회순으로 정렬
+    }
+
+    axios.get(apiUrl)
         .then(res => {
           const tradeListPageData = res.data.result;
-
-          if (sortOption === "viewest") {
-            // 조회수(hitCnt)를 기준으로 내림차순 정렬
-            tradeListPageData.sort((a, b) => b.hitCnt - a.hitCnt);
-          } else if (sortOption === "newest") {
-            // 등록일(createDt)을 기준으로 내림차순 정렬
-            tradeListPageData.sort((a, b) => new Date(b.createDt) - new Date(a.createDt));
-          }
-
           setTradeListPage(tradeListPageData);
+          setLoading(false); // 데이터 로딩 완료
         })
         .catch(err => {
           alert(`통신 오류 : ${err}`);
-          setLoading(false);
+          setLoading(false); // 데이터 로딩 실패
         });
+  };
+
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
   };
 
   // useEffect(() => {
@@ -71,9 +78,6 @@ function TradeListPage(props) {
   // }, [sortOption]); // sortOption이 변경될 때마다 실행
 
   // 정렬 옵션 변경 핸들러
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
-  };
 
 // 등록일을 ~시간 전으로 표기, 24시간 후에는 날짜로 표기하는 함수
   const getTimeOrDate = (dateTime) => {
@@ -109,8 +113,8 @@ function TradeListPage(props) {
                   </button>
 
                   {/*게시판 최신순 및 조회순 정렬*/}
-                  <form action='/TradeListPage.js' method={"post"} id={'listCheck'} name={'listCheck'}>
-                    <div className="col-sm btn-group d-flex justify-content-end">
+                  <form onSubmit={handleFormSubmit} id={'listCheck'} name={'listCheck'}>
+                  <div className="col-sm btn-group d-flex justify-content-end">
                       <div className="form-check mx-3 form-control-inline">
                         <input
                             type="radio" className="form-check-input" name="sortOption"
@@ -151,7 +155,7 @@ function TradeListPage(props) {
                           <i className="bi bi-coin"></i>가격: {item.tradePrice.toLocaleString()}원
                         </div>
                         <h5 className="product_content">{item.content}</h5>
-                        <a href={'#'} className="product_des text-decoration-none">{item.description}</a>
+                        <a className="product_des text-decoration-none">{item.description}</a>
                         <div className="row my-2">
                           <div className="row col-5 text-start">
                             <ul className="list-unstyled mx-2">
