@@ -4,7 +4,6 @@ import {useParams} from "react-router-dom";
 
 function PartnerCampDetail() {
     // camp_main_info 입력관련 state 관리
-
     const [partnerIdx, setPartnerIdx] = useState(0);
     const { campIdx } = useParams(); // Get campIdx from URL parameter
     const [campDetails, setCampDetails] = useState(null);
@@ -21,6 +20,7 @@ function PartnerCampDetail() {
             idx: 0
         }
     }); // Store updated data
+    const intCampIdx = parseInt(campIdx);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/partnerCampDetail/${campIdx}`)
@@ -60,6 +60,18 @@ function PartnerCampDetail() {
         const { name, checked } = e.target;
         setUpdatedCampInfo(prevData => ({ ...prevData, [name]: checked ? "Y" : "N" }));
     };
+
+    const handleSelectCampSiteInfo = (e) => {
+        e.preventDefault()
+
+        axios.get(`http://localhost:8080/partnerCampSiteDetail/${intCampIdx}`)
+            .then((res) => {
+                console.log(res.datas);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -172,11 +184,13 @@ function PartnerCampDetail() {
                 <button type={'submit'} className={'btn btn-primary'}>수정하기</button>
                 <button type={'reset'} className={'btn btn-danger'} onClick={handleCancel}>취소하기</button>
             </form>
+
                 ) : (
                 <div className={'container text-center'}>
                     로딩 중...
                 </div>
                 )}
+            <button type={'button'} className={'btn btn-primary'} onClick={handleSelectCampSiteInfo}>제발</button>
         </div>
     );
 }
