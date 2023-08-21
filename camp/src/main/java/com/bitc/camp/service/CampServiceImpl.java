@@ -2,6 +2,7 @@ package com.bitc.camp.service;
 
 import com.bitc.camp.data.dto.CampMainInfoDto;
 import com.bitc.camp.data.dto.CampSiteInfoDto;
+import com.bitc.camp.data.dto.CampSiteListDto;
 import com.bitc.camp.data.dto.ReviewBoardDto;
 import com.bitc.camp.data.entity.*;
 import com.bitc.camp.data.repository.*;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CampServiceImpl implements CampService{
 
-    private final CampMainRepository campMainRepository;
+    private final CampMainInfoRepository campMainInfoRepository;
     private final CampImgRepository campImgRepository;
     private final CampSiteInfoRepository campSiteInfoRepository;
     private final CampSiteListRepository campSiteListRepository;
@@ -36,7 +37,7 @@ public class CampServiceImpl implements CampService{
 
     @Override
     public List<CampMainInfoDto> selectCampList() throws Exception {
-        List<CampMainInfo> campList = campMainRepository.findAllByOrderByIdxDesc();
+        List<CampMainInfo> campList = campMainInfoRepository.findAllByOrderByIdxDesc();
 
         List<CampMainInfoDto> campMainInfoDtoList = new ArrayList<>();
 
@@ -98,7 +99,7 @@ public class CampServiceImpl implements CampService{
         campMainInfo.setCampAddress(campMainInfoDto.getCampAddress());
         campMainInfo.setPartner(campMainInfoDto.getPartner());
 
-        return campMainRepository.save(campMainInfo);
+        return campMainInfoRepository.save(campMainInfo);
     }
 
 
@@ -143,7 +144,7 @@ public class CampServiceImpl implements CampService{
 
     @Override
     public CampMainInfoDto partnerSelectCampList(int campIdx) throws Exception {
-        CampMainInfo camp =  campMainRepository.findById(campIdx).orElse(null);
+        CampMainInfo camp =  campMainInfoRepository.findById(campIdx).orElse(null);
         Partner partner = camp.getPartner();
 
         CampMainInfoDto campMainInfoDto = CampMainInfoDto.builder()
@@ -164,7 +165,7 @@ public class CampServiceImpl implements CampService{
 
     @Override
     public CampMainInfo updatePartnerCamp(int campIdx,CampMainInfoDto campMainInfoDto) throws Exception {
-        Optional<CampMainInfo> existingCampOptional = campMainRepository.findById(campIdx);
+        Optional<CampMainInfo> existingCampOptional = campMainInfoRepository.findById(campIdx);
 
         if (existingCampOptional.isEmpty()) {
             throw new ChangeSetPersister.NotFoundException();
@@ -183,7 +184,53 @@ public class CampServiceImpl implements CampService{
         existingCamp.setPartner(campMainInfoDto.getPartner());
 
         // 엔티티 업데이트 후 저장
-        return campMainRepository.save(existingCamp);
+        return campMainInfoRepository.save(existingCamp);
+    }
+
+    @Override
+    public List<CampSiteInfoDto> partnerSelectCampSiteList(int intCampIdx) throws Exception {
+        Optional<CampMainInfo> campMainInfo = campMainInfoRepository.findById(intCampIdx);
+
+        List<CampSiteInfo> campSiteInfoList = campSiteInfoRepository.findAllByCampMainInfoOrderByIdxDesc(campMainInfo);
+
+        List<CampSiteInfoDto> campSiteInfoDtoList = new ArrayList<>();
+
+        for (CampSiteInfo campSiteInfo : campSiteInfoList) {
+            CampSiteInfoDto dto = CampSiteInfoDto.builder()
+                    .idx(campSiteInfo.getIdx())
+                    .areaName(campSiteInfo.getAreaName())
+                    .sitePrice(campSiteInfo.getSitePrice())
+                    .notice(campSiteInfo.getNotice())
+                    .campStyle(campSiteInfo.getCampStyle())
+                    .peopleMin(campSiteInfo.getPeopleMin())
+                    .peopleMax(campSiteInfo.getPeopleMax())
+                    .addPrice(campSiteInfo.getAddPrice())
+                    .campReservePeriod(campSiteInfo.getCampReservePeriod())
+                    .parkPrice(campSiteInfo.getParkPrice())
+                    .elePrice(campSiteInfo.getElePrice())
+                    .areaSiteCnt(campSiteInfo.getAreaSiteCnt())
+                    . build();
+            campSiteInfoDtoList.add(dto);
+        }
+
+        return campSiteInfoDtoList;
+    }
+
+    @Override
+    public List<CampSiteListDto> partnerSelectCampSiteList2(CampSiteInfo campSiteInfo) throws Exception {
+        List<CampSiteList> campSiteListList = campSiteListRepository.findAllByCampSiteInfoOrderByIdxDesc(campSiteInfo);
+
+        List<CampSiteListDto> campSiteListDtoList = new ArrayList<>();
+
+        for (CampSiteList campSiteList : campSiteListList) {
+            CampSiteListDto dto = CampSiteListDto.builder()
+                    .idx(campSiteList.getIdx())
+                    .campSiteName(campSiteList.getCampSiteName())
+                    .campSiteInfoIdx(campSiteInfo != null? campSiteInfo.getIdx():null)
+                    .build();
+            campSiteListDtoList.add(dto);
+        }
+        return campSiteListDtoList;
     }
 
 

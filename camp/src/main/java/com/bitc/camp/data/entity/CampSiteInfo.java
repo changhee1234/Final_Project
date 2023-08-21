@@ -27,7 +27,7 @@ public class CampSiteInfo {
     private String notice;
 
     @Column(nullable = false)
-    private String CampStyle;
+    private String campStyle;
 
     @Column(nullable = false)
     private int peopleMin;

@@ -11,7 +11,7 @@ public class CampSiteInfoDto {
     private String areaName;
     private int sitePrice;
     private String notice;
-    private String CampStyle;
+    private String campStyle;
     private int peopleMin;
     private int peopleMax;
     private int addPrice;
@@ -20,4 +20,5 @@ public class CampSiteInfoDto {
     private int elePrice;
     private int areaSiteCnt;
     private CampMainInfo campMainInfo;
+    private int campMainInfoIdx;
 }

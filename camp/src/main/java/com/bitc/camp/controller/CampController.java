@@ -58,6 +58,13 @@ public class CampController {
     public Object updatePartnerCamp(@PathVariable int campIdx, @RequestBody CampMainInfoDto campMainInfoDto) throws Exception {
         CampMainInfo updatedCamp = campService.updatePartnerCamp(campIdx, campMainInfoDto);
 
-        return updatedCamp;
+        return "성공";
+    }
+
+    @RequestMapping(value = "/partnerCampSiteDetail/{intCampIdx}", method = RequestMethod.GET)
+    public Object partnerCampSiteDetail(@PathVariable int intCampIdx) throws Exception {
+        List<CampSiteInfoDto> campSiteInfoDtoList = campService.partnerSelectCampSiteList(intCampIdx);
+
+        return campSiteInfoDtoList;
     }
 }

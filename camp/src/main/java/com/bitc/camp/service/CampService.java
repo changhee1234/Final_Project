@@ -2,6 +2,7 @@ package com.bitc.camp.service;
 
 import com.bitc.camp.data.dto.CampMainInfoDto;
 import com.bitc.camp.data.dto.CampSiteInfoDto;
+import com.bitc.camp.data.dto.CampSiteListDto;
 import com.bitc.camp.data.dto.ReviewBoardDto;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
@@ -20,4 +21,8 @@ public interface CampService {
     CampMainInfoDto partnerSelectCampList(int campIdx) throws Exception;
 
     CampMainInfo updatePartnerCamp(int campIdx, CampMainInfoDto campMainInfoDto) throws Exception;
+
+    List<CampSiteInfoDto> partnerSelectCampSiteList(int intCampIdx) throws Exception;
+
+    List<CampSiteListDto> partnerSelectCampSiteList2(CampSiteInfo campSiteInfo) throws Exception;
 }

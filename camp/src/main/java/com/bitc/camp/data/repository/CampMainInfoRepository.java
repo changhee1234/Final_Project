@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CampMainRepository extends JpaRepository<CampMainInfo, Integer> {
+public interface CampMainInfoRepository extends JpaRepository<CampMainInfo, Integer> {
 
     List<CampMainInfo> findAllByOrderByIdxDesc();
 

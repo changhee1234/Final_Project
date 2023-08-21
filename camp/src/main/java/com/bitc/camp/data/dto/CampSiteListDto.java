@@ -10,4 +10,5 @@ public class CampSiteListDto {
     private int idx;
     private String campSiteName;
     private CampSiteInfo campSiteInfo;
+    private int campSiteInfoIdx;
 }
