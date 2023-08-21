@@ -10,11 +10,6 @@ import axios from "../layout/axios";
 
 
 function MyPage() {
-    const {nickname} = useParams();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [nickName, setNickName] = useState("");
-    const [userName, setUserName] = useState("");
     const [user, setUser] = useState(null);
     const [selectedMenu, setSelectedMenu] = useState('내 정보');
 

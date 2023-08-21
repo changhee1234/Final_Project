@@ -1,12 +1,27 @@
 package com.bitc.camp.controller;
 
+<<<<<<< HEAD:camp/src/main/java/com/bitc/camp/controller/MemberController.java
 import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.repository.MemberRepository;
 import com.bitc.camp.service.MemberService;
+=======
+<<<<<<< Updated upstream:camp/src/main/java/com/bitc/camp_spring/controller/MemberController.java
+import com.bitc.camp_spring.dto.AddMemberReq;
+import com.bitc.camp_spring.repository.MemberRepository;
+import com.bitc.camp_spring.service.MemberService;
+=======
+import com.bitc.camp.dto.AddMemberReq;
+import com.bitc.camp.dto.ModifyMemberReq;
+import com.bitc.camp.entity.Member;
+import com.bitc.camp.repository.MemberRepository;
+import com.bitc.camp.service.MemberService;
+>>>>>>> Stashed changes:camp/src/main/java/com/bitc/camp/controller/MemberController.java
+>>>>>>> 김창희:camp/src/main/java/com/bitc/camp_spring/controller/MemberController.java
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +42,30 @@ public class MemberController {
         memberService.join(member);
         return null;
     }
+
+    // MemberController.java
+
+    @PostMapping("/modify")
+    public ResponseEntity<?> modifyMember(@RequestBody ModifyMemberReq modify) {
+        try {
+            Member member = memberRepository.findByEmail(modify.getEmail())
+                    .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다."));
+
+            // 업데이트할 정보 설정
+            member.setNickName(modify.getNickName());
+            member.setRealName(modify.getRealName());
+            member.setPhone(modify.getPhone());
+
+            // 여기에 필요한 정보들을 업데이트하는 로직 추가
+
+            memberRepository.save(member);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 정보 업데이트 오류가 발생했습니다.");
+        }
+    }
+
 
     @PostMapping("/login")
     public String login() {

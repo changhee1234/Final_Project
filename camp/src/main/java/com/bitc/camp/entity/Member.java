@@ -25,8 +25,17 @@ public class Member implements UserDetails {
   private String nickName;
   private String phone;
   private String email;
+<<<<<<< HEAD:camp/src/main/java/com/bitc/camp/entity/Member.java
   private String grade;
   private String profileImg;
+=======
+<<<<<<< Updated upstream:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
+//  private String grade;
+=======
+  private String grade;
+  private String profileImg;
+>>>>>>> Stashed changes:camp/src/main/java/com/bitc/camp/entity/Member.java
+>>>>>>> 김창희:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
 
   // 추가
 //  @OneToMany(mappedBy = "member")
@@ -43,14 +52,30 @@ public class Member implements UserDetails {
   // 추가
 
   @Builder
+<<<<<<< HEAD:camp/src/main/java/com/bitc/camp/entity/Member.java
   public Member(int memberIdx, String email, String password, String realName, String nickName, String phone, String grade, String auth) {
+=======
+<<<<<<< Updated upstream:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
+  public Member(int memberIdx, String email, String password, String userName, String nickName, String phone, String auth) {
+=======
+  public Member(int memberIdx, String email, String password, String realName, String nickName, String phone, String grade,String profileImg, String auth) {
+>>>>>>> Stashed changes:camp/src/main/java/com/bitc/camp/entity/Member.java
+>>>>>>> 김창희:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
     this.memberIdx = memberIdx;
     this.email = email;
     this.password = password;
     this.realName = realName;
     this.nickName = nickName;
     this.phone = phone;
+<<<<<<< HEAD:camp/src/main/java/com/bitc/camp/entity/Member.java
     this.grade = "user";
+=======
+<<<<<<< Updated upstream:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
+=======
+    this.grade = "user";
+    this.profileImg = profileImg;
+>>>>>>> Stashed changes:camp/src/main/java/com/bitc/camp/entity/Member.java
+>>>>>>> 김창희:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
   }
 
 
@@ -96,6 +121,25 @@ public class Member implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+<<<<<<< HEAD:camp/src/main/java/com/bitc/camp/entity/Member.java
 
 
+=======
+<<<<<<< Updated upstream:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
+=======
+  // Setter 메소드 추가
+  public void setNickName(String nickName) {
+    this.nickName = nickName;
+  }
+
+  public void setRealName(String realName) {
+    this.realName = realName;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+>>>>>>> Stashed changes:camp/src/main/java/com/bitc/camp/entity/Member.java
+>>>>>>> 김창희:camp/src/main/java/com/bitc/camp_spring/entity/Member.java
 }
