@@ -5,10 +5,10 @@ import CampDetailPage from "./page/camp/CampDetailPage";
 import TradeListPage from "./page/trade/TradeListPage";
 import TradeDetailPage from "./page/trade/TradeDetailPage";
 import TradeWritePage from "./page/trade/TradeWritePage";
-import CampReservationPage1 from "./page/campReservationPage1";
-import CampReservationPage2 from "./page/campReservationPage2";
-import CampReservationPage3 from "./page/campReservationPage3";
-import CampReservationPage4 from "./page/CampReservationPage4";
+import CampReservationPage1 from "./page/camp/CampReservationPage1";
+import CampReservationPage2 from "./page/camp/CampReservationPage2";
+import CampReservationPage3 from "./page/camp/CampReservationPage3";
+import CampReservationPage4 from "./page/camp/CampReservationPage4";
 import AnnouncementListPage from "./page/announce/AnnouncementListPage";
 import AnnouncementDetailPage from "./page/announce/AnnouncementDetailPage";
 import CampListPage from "./page/camp/CampListPage";
@@ -43,7 +43,6 @@ function App(props) {
           {/*중고장터 글 등록*/}
           <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
           {/*예약페이지*/}
-          {/*ksh 브랜치 테스트*/}
           <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
           <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2/>}/>
           <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>

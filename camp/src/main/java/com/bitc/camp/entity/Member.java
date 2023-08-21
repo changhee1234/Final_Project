@@ -39,13 +39,13 @@ public class Member implements UserDetails {
 //  private String auth;
 
   // 추가
-  @OneToMany(mappedBy = "member")
-  @ToString.Exclude
-  List<Partner> partnerList = new ArrayList<>();
-
-  @OneToMany(mappedBy = "member")
-  @ToString.Exclude
-  List<Reservation> reservationList = new ArrayList<>();
+//  @OneToMany(mappedBy = "member")
+//  @ToString.Exclude
+//  List<Partner> partnerList = new ArrayList<>();
+//
+//  @OneToMany(mappedBy = "member")
+//  @ToString.Exclude
+//  List<Reservation> reservationList = new ArrayList<>();
 
   public Member(int memberIdx) {
     this.memberIdx = memberIdx;
