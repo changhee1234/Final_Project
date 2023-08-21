@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "./axios";
-
+import './LoginCSS.css';
 function Header(props) {
     const [isVerified, setIsVerified] = useState(false);
     const [isOpened, setIsOpend] = useState(false);
@@ -389,50 +389,48 @@ function Header(props) {
                     </div>
                 </div>
             {/*    로그인 모달*/}
-                <div className={'modal fade'} id={'loginModal'} tabIndex={'-1'} aria-labelledby={'loginModalLabel'}
-                     aria-hidden={'true'}>
-                    <div className={'modal-dialog'}>
-                        <div className={'modal-content'}>
-                            <div className={'modal-header'}>
-                                <h1 className={'modal-title fs-5'} id={'loginModalLabel'}>회원가입</h1>
-                                <button type={'button'} className={'btn-close'} data-bs-dismiss={'modal'}
-                                        aria-label={'Close'}></button>
-                            </div>
-                            <div className={'modal-body'}>
-                                {/*로그인정보 입력*/}
-                                <form action="/login" method="post">
-                                <div className={'border-bottom'}>
-                                    <div className={'input-group my-2'}>
-                                        <span className={'input-group-text'}>Email</span>
+            <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="loginModalLabel">회원가입</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            {/* 로그인정보 입력 */}
+                            <form action="/login" method="post">
+                                <div className="border-bottom">
+                                    <div className="input-group my-2">
+                                        <span className="input-group-text">Email</span>
                                         <input
-                                            type={'text'}
+                                            type="text"
                                             id="username"
                                             name="username"
-                                            className={'form-control'}
-                                            placeholder={'Email을 입력해주세요'}
+                                            className="form-control"
+                                            placeholder="Email을 입력해주세요"
                                         />
                                     </div>
-                                    <div className={'input-group mb-4'}>
-                                        <span className={'input-group-text'}>비밀번호</span>
+                                    <div className="input-group mb-4">
+                                        <span className="input-group-text">비밀번호</span>
                                         <input
-                                            type={'password'}
+                                            type="password"
                                             id="password"
                                             name="password"
-                                            className={'form-control'}
-                                            placeholder={'비밀번호를 입력하세요'}
+                                            className="form-control"
+                                            placeholder="비밀번호를 입력하세요"
                                         />
                                     </div>
                                 </div>
 
-                                {/*로그인 버튼*/}
-                                <div className={'d-grid my-3'}>
-                                    <button type={'submit'} className={'btn btn-primary'}>로그인</button>
+                                {/* 로그인 버튼 */}
+                                <div className="d-grid my-3">
+                                    <button type="submit" className="btn btn-primary">로그인</button>
                                 </div>
-                                </form>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
         </header>
     );
 }
