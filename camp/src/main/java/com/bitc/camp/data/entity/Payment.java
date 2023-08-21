@@ -17,9 +17,6 @@ public class Payment {
   private int idx;
 
   @Column(nullable = false)
-  private int reserveIdx;
-
-  @Column(nullable = false)
   private int payAmount;
 
   @Column(nullable = false)
@@ -27,4 +24,10 @@ public class Payment {
 
   @Column(nullable = false)
   private Date payDate;
+
+  @Column(nullable = false)
+  private String impUid;
+
+  @Column(nullable = false)
+  private String merchantUid;
 }

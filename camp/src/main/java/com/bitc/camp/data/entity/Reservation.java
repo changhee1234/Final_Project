@@ -48,6 +48,12 @@ public class Reservation {
   @Column(nullable = false)
   private String userReservationTotalPrice;
 
+  @Column(nullable = false)
+  private String impUid;
+
+  @Column(nullable = false)
+  private String merchantUid;
+
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_site_info_idx")
   @ToString.Exclude

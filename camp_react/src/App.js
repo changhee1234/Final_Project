@@ -18,13 +18,20 @@ import AboutPage from "./page/layout/AboutPage";
 import Footer from "./page/layout/Footer";
 
 import './App.css';
+import {useState} from "react";
 
 
 function App(props) {
+  const [userInfo, setUserInfo] = useState(null);
+
+  const handleUserInfo = (data) => {
+    setUserInfo(data);
+  };
+
   return (
       <div className={'App'}>
       <BrowserRouter>
-        <Header/>
+        <Header getUserInfo ={handleUserInfo}/>
         <Routes path={'/'}>
           {/*메인페이지*/}
           <Route path={'/'} element={<MainPage/>}/>
@@ -43,10 +50,10 @@ function App(props) {
           {/*중고장터 글 등록*/}
           <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
           {/*예약페이지*/}
-          <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
-          <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2/>}/>
-          <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>
-          <Route path={'/reservation4/*'} element={<CampReservationPage4/>}/>
+          <Route path={'/reservation1/*'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
+          <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
+          <Route path={'/reservation3/*'} element={<CampReservationPage3 userInfo={userInfo}/>}/>
+          <Route path={'/reservation4/*'} element={<CampReservationPage4 userInfo={userInfo}/>}/>
           {/*어바웃페이지*/}
           <Route path={'/about'} element={<AboutPage/>}/>
           {/*공지사항 리스트 페이지*/}

@@ -24,19 +24,12 @@ public class Member implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int memberIdx;
   private String password;
-  private String userName;
+  private String realName;
   private String nickName;
   private String phone;
   private String email;
+  private String profileImg;
 //  private String grade;
-
-//  private String googleCheck;
-//  private String googleCode;
-
-
-
-//  @Column(name = "auth")
-//  private String auth;
 
   // 추가
 //  @OneToMany(mappedBy = "member")
@@ -53,11 +46,11 @@ public class Member implements UserDetails {
   // 추가
 
   @Builder
-  public Member(int memberIdx, String email, String password, String userName, String nickName, String phone, String auth) {
+  public Member(int memberIdx, String email, String password, String realName, String nickName, String phone, String profileImg) {
     this.memberIdx = memberIdx;
     this.email = email;
     this.password = password;
-    this.userName = userName;
+    this.realName = realName;
     this.nickName = nickName;
     this.phone = phone;
   }

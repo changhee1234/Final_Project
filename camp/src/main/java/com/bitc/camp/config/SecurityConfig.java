@@ -43,7 +43,7 @@ public class SecurityConfig {
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
-                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**"
+                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**"
                     ).permitAll()
                     .anyRequest().authenticated())
             .formLogin(login -> login

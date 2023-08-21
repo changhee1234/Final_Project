@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {format, formatDistance} from "date-fns";
 import {ko} from "date-fns/locale";
@@ -30,18 +30,43 @@ function CampReservationPage3(props) {
     userCarNum: '',
     userMemo: ''
   });
+  const [isChecked, setIsChecked] = useState(false);
+  const [realName, setRealName] = useState('');
 
   const handleChange = (e) => {
     const {name, value} = e.target;
     setReserveForm({...reserveFrom, [name]: value});
   };
 
+
+  // 로그인 유저 정보 입력 폼 채우기
+  const handleCheck = (e) => {
+    const checked = e.target.checked;
+    setIsChecked(e.target.checked);
+    if (checked) {
+      setReserveForm({
+        ...reserveFrom,
+        userReservationName: props.userInfo.realName,
+        userPhoneNumber: props.userInfo.phone,
+        userEmail: props.userInfo.email
+      });
+    } else {
+      setReserveForm({
+        ...reserveFrom,
+        userReservationName: '',
+        userPhoneNumber: '',
+        userEmail: ''
+      });
+    }
+  };
+
+
   const handleSubmit = (e) => {
     const requestData = {
       ...reserveFrom,
       userSiteInfoIdx: stateObj.siteInfo.idx,
       userSiteListIdx: stateObj.selectedSiteIdx,
-      userMemberIdx: 1,
+      userMemberIdx: props.userInfo.memberIdx,
       userReservationStart: stateObj.dateRange[0].startDate,
       userReservationEnd: stateObj.dateRange[0].endDate,
       userReservationCnt: stateObj.people,
@@ -49,7 +74,6 @@ function CampReservationPage3(props) {
       userEleCnt: stateObj.ele,
       userReservationTotalPrice: totalPrice + "원"
     }
-    console.log(requestData);
 
     axios.post("http://localhost:8080/reserve/insertReservation", requestData)
       .then(res => {
@@ -60,15 +84,15 @@ function CampReservationPage3(props) {
       });
   };
 
+  // 결제
   const doPayment = async () => {
     const {IMP} = window;
     IMP.init('imp56656734');
 
-
     const reqData = {
       pg: "html5_inicis.INIpayTest",
       pay_method: "card",
-      merchant_uid: `campRe_${new Date()}`,
+      merchant_uid: `${stateObj.selectedSite}_${format(new Date(), "MMdd_HH:mm:ss")}`,
       name: `예약_${stateObj.campName}_${stateObj.selectedSite}`,
       amount: 1, // totalPrice
       buyer_name: reserveFrom.userReservationName,
@@ -82,6 +106,7 @@ function CampReservationPage3(props) {
       // 결제 사후 검증
       const {data} = await axios.post("http://localhost:8080/payments/" + rsp.imp_uid)
       if (rsp.paid_amount === data.response.amount) {
+        console.log(rsp);
         alert(`결제 성공 및 검증확인`);
         handleSubmit();
         // 예약테이블에 imp_uid, m_uid저장?
@@ -111,7 +136,11 @@ function CampReservationPage3(props) {
           <div className="col-sm-6 mx-auto">
             {/*예약자 정보 입력*/}
             <div>
-              <div className={"my-3"}>
+              <div className={"form-check m-0"}>
+                <input type={"checkbox"} className={"form-check-input"} id={"check"} onChange={handleCheck}/>
+                <label htmlFor={"check"} className={"form-check-label"}>정보 동일</label>
+              </div>
+              <div className={"mb-3"}>
                 <label htmlFor="reservationName" className={"form-label"}>예약자 이름</label>
                 <input
                   type="text"

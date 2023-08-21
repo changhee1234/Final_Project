@@ -136,6 +136,7 @@ function Header(props) {
         try {
             const response = await axios.get("/user-info"); // Spring Security의 API endpoint
             setUser(response.data); // 사용자 정보 설정
+            props.getUserInfo(response.data);
         } catch (error) {
             console.error("사용자 정보를 가져오는 데 실패했습니다.", error);
         }
