@@ -6,9 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 @Entity
 @Table(name = "payment")
 @Getter
@@ -48,6 +45,8 @@ public class Payment {
 
   private Long cancelDate;
 
+  private int reservationIdx;
+
   @Builder
   public Payment(
       String impUid,
@@ -60,7 +59,8 @@ public class Payment {
       String receiptUrl,
       String payStatus,
       int cancelAmount,
-      Long cancelDate
+      Long cancelDate,
+      int reservationIdx
   ) {
     this.impUid = impUid;
     this.merchantUid = merchantUid;
@@ -73,5 +73,6 @@ public class Payment {
     this.payStatus = payStatus;
     this.cancelAmount = cancelAmount;
     this.cancelDate = cancelDate;
+    this.reservationIdx = reservationIdx;
   }
 }

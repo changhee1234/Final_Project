@@ -21,6 +21,7 @@ public class PaymentReqDto {
   private int cancelAmount;
   private Long cancelDate;
   private String receiptUrl;
+  private int reservationIdx;
 
   public Payment toEntity(){
     return Payment.builder()
@@ -35,6 +36,7 @@ public class PaymentReqDto {
         .cancelAmount(cancelAmount)
         .cancelDate(cancelDate)
         .receiptUrl(receiptUrl)
+        .reservationIdx(reservationIdx)
         .build();
   }
 }

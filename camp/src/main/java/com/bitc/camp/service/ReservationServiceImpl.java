@@ -12,8 +12,6 @@ import com.bitc.camp.data.repository.CampMainRepository;
 import com.bitc.camp.data.repository.CampSiteListRepository;
 import com.bitc.camp.data.repository.CampSiteRepository;
 import com.bitc.camp.data.repository.ReservationRepository;
-import com.bitc.camp.exception.CustomException;
-import com.bitc.camp.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,8 +64,9 @@ public class ReservationServiceImpl implements ReservationService {
 
   @Transactional
   @Override
-  public void save(ReservationReqDto requestData) throws Exception {
-    reservationRepository.save(requestData.toEntity());
+  public int save(ReservationReqDto requestData) throws Exception {
+    Reservation entity = reservationRepository.save(requestData.toEntity());
+    return entity.getIdx();
   }
 
   // 결제 성공시 예약 상태 결제 성공으로 수정

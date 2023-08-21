@@ -16,7 +16,7 @@ public interface ReservationService {
 
   List<CampSiteListRespDto> getSiteList(int siteInfoIdx, String startDate, String endDate) throws Exception;
 
-  void save(ReservationReqDto requestData) throws Exception;
+  int save(ReservationReqDto requestData) throws Exception;
 
   void updateReservation(int idx, ReservationReqDto params) throws Exception;
 }
