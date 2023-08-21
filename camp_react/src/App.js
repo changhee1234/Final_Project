@@ -43,6 +43,7 @@ function App(props) {
           {/*중고장터 글 등록*/}
           <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
           {/*예약페이지*/}
+          {/*ksh 브랜치 테스트*/}
           <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
           <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2/>}/>
           <Route path={'/reservation3/*'} element={<CampReservationPage3/>}/>
