@@ -5,27 +5,102 @@ import {Link, useNavigate, useParams} from 'react-router-dom';
 
 function TradeDetailPage(props) {
   const board = useParams();
+  const { tradeBoardIdx } = useParams();
+  const [campDetails, setCampDetails] = useState(null);
+  const [updateBoard, setUpdateBoard] = useState({
+    tradeBoardIdx : tradeBoardIdx,
+    campName : '',
+    campIntro : '',
+    campDt : '',
+    kidszoneYn : 'N',
+    campHpLink : '',
+    campPh : '',
+    campAddress : '',
+    partner : {
+      inx: 0
+    }
+  });
 
   const [tradeDetailPage, setTradeDetailPage] = useState([]);
-
   const navi = useNavigate();
   const goList = () => navi('/board/');
 
   useEffect(() => {
-    axios.get("http://localhost:8080/trade")
+    axios.get(`http://localhost:8080/trade/${tradeBoardIdx}`)
         .then(res => {
-          setTradeDetailPage(res.data.board);
+
+          console.log(res.data); // 응답 데이터를 콘솔에 기록
+          setCampDetails(res.data);
+          setUpdateBoard({ ...res.data });
+          setUpdateBoard({
+            campIdx: res.data.campIdx,
+            campName: res.data.campName,
+            campIntro: res.data.campIntro,
+            campDt: res.data.campDt,
+            kidszoneYn: res.data.kidszoneYn,
+            campHpLink: res.data.campHpLink,
+            campPh: res.data.campPh,
+            campAddress: res.data.campAddress,
+            partner: {
+              idx : res.data.partnerIdx
+            }
+          });
+        })
+
+        .catch(err => {
+          console.log(`에러: ${err}`);
+        });
+  }, [tradeBoardIdx]);
+
+  if (!campDetails) {
+    return <div>로딩 중...</div>;
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateBoard(prevData => ({ ...prevData, [name]: value }));
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setUpdateBoard(prevData => ({ ...prevData, [name]: checked ? "Y" : "N" }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Include partnerIdx in the updatedCampInfo
+    const updatedDataWithPartnerIdx = {
+      ...updateBoard,
+      partnerIdx: tradeBoardIdx // Include partnerIdx here
+    };
+
+    axios.put(`http://localhost:8080/partnerCampDetail/${tradeBoardIdx}`, updatedDataWithPartnerIdx)
+        .then(res => {
+          console.log("Camp details updated successfully:", res.data);
+          setUpdateBoard({});
+          setCampDetails(updatedDataWithPartnerIdx); // Update campDetails with the updated data
         })
         .catch(err => {
-          alert(`통신 오류 : ${err}`);
+          console.log("Error updating camp details:", err);
         });
-  }, [board.boardIdx]); // 의존성 배열에 추가
+  };
 
+  const handleCancel = () => {
+    // Reset updatedCampInfo to the original campDetails data
+    setUpdateBoard(campDetails);
+  };
 
+  const dtTruncateText = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.slice(0, maxLength);
+  };
 
   const handleDelete = (e) => {
     if (window.confirm('정말 삭제하겠습니까?') === true) {
-      axios.delete("http://localhost:8080/board/delete/" + board.boardIdx)
+      axios.delete(`http://localhost:8080/board/delete/${tradeBoardIdx}`)
           .then(res => {
             alert('삭제되었습니다.');
           })
@@ -36,6 +111,7 @@ function TradeDetailPage(props) {
     }
   }
 
+
   return (
       <main className="container">
         <div className="row">
@@ -45,18 +121,18 @@ function TradeDetailPage(props) {
               <h2 className={'text1'}>장터 상세 게시글</h2>
             </div>
             <div className="col-sm d-flex justify-content-end my-3">
-              <button type={'button'} className={'btn btn-dartk me-auto'} onClick={goList}>목록</button>
-              <Link to={`/board/edit/${tradeDetailPage.boardIdx}`}  className="w-btn w-btn-indigo me-2">수정</Link>
+              <button type={'button'} className={'btn btn-dart me-auto'} onClick={goList}>목록</button>
+              <Link to={`/board/edit/${tradeDetailPage.tradeBoardIdx}`}  className="w-btn w-btn-indigo me-2">수정</Link>
               <button type="button" className="w-btn-outline w-btn-red-outline" id="btn-delete"
                       onClick={handleDelete}>삭제
               </button>
             </div>
             <div className="bg-secondary bg-opacity-10 rounded-1 p-2">
-              <form id="frm" method="post">
+              <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-sm-9">
                     <input type="hidden" value={tradeDetailPage.idx} name="idx" id="idx"></input>
-                    <input type="text" name="title" value={tradeDetailPage.title} readOnly></input>
+                    <input type="text" name="title" value={tradeDetailPage.title} readOnly onChange={handleInputChange}></input>
                   </div>
                   <div className="col-sm-3">
                     <input type="hidden" value={tradeDetailPage.idx} name="idx" id="idx"></input>
@@ -68,7 +144,7 @@ function TradeDetailPage(props) {
                 <div className="col-sm-4 text-end">
                   <input type="hidden" value={tradeDetailPage.idx} name="idx" id="idx"></input>
                   <input type="text" className="form-control-plaintext fs-5 fw-bold" placeholder={'지역: 부산 사상구'}
-                         name="tradeLocation" value={tradeDetailPage.tradeLocation} readOnly></input>
+                         name="tradeLocation" value={tradeDetailPage.tradeLocation} readOnly onChange={handleInputChange}></input>
                 </div>
                 <div className="row my-3 bg-light">
                   <div className="col-sm-4 d-flex justify-content-start">

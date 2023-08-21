@@ -1,9 +1,13 @@
 package com.bitc.camp.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.bitc.camp.dto.BoardRequestDto;
+import com.bitc.camp.dto.BoardResponseDto;
 import com.bitc.camp.entity.Board;
+import com.bitc.camp.repository.BoardRepository;
 import com.bitc.camp.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -14,11 +18,11 @@ import java.util.Map;
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/board")
 @RestController
-public class  BoardController {
+public class BoardController {
 
   private final BoardService boardService;
 
-// 글 목록
+  // 글 목록
   @GetMapping("/list")
   public Object allBoardList() throws Exception {
     Map<String, Object> result = new HashMap<>();
@@ -29,11 +33,17 @@ public class  BoardController {
   }
 
   // 글 등록
-  @RequestMapping(value ="/write", method = RequestMethod.POST)
+  @RequestMapping(value = "/write", method = RequestMethod.POST)
   public Object boardWrite(BoardRequestDto boardRequestDto) throws Exception {
     Board createBoard = boardService.createBoard(boardRequestDto);
 
     return createBoard;
+  }
+
+  //  조회수 업데이트
+  @GetMapping("/list/{tradeBoardIdx}")
+  public Board getBoard(@PathVariable Long tradeBoardIdx) throws Exception {
+    return boardService.getBoardWithIncrementedViews(tradeBoardIdx);
   }
 
 //  글 수정
@@ -54,14 +64,12 @@ public class  BoardController {
 //  }
 
 //  글 상세
-//  @GetMapping("/{tradeBoardIdx}")
-//  public Object boardDetail(@PathVariable("tradeBoardIdx") Long tradeBoardIdx) throws Exception {
-//    Map<String, Object> result = new HashMap<>();
-//
-//    Board boardDetail = (Board) boardService.findById(tradeBoardIdx);
-//    result.put("result", boardDetail);
-//    return result;
-//  }
+  @RequestMapping(value = "/{tradeBoardIdx}", method = RequestMethod.GET)
+  public Object boardDetail(@PathVariable int tradeBoardIdx) throws Exception {
+    BoardResponseDto detail = boardService.detailBoard((long) tradeBoardIdx);
+
+    return detail;
+  }
 
 // 글 수정
 //@PatchMapping("/{tradeBoardIdx}")

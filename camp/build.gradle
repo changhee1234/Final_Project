@@ -34,6 +34,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+
+    //	페이징 구현을 위해서 pagehelper 라이브러리 추가
+    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.7'
 }
 
 tasks.named('test') {

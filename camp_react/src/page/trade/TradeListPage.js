@@ -37,7 +37,7 @@ function TradeListPage(props) {
         })
         .catch(err => {
           alert(`통신 오류 : ${err}`);
-          setLoading(false); // 데이터 로딩 실패
+            setLoading(false); // 데이터 로딩 실패
         });
   };
 
@@ -140,11 +140,11 @@ function TradeListPage(props) {
             <div className={'row'}>
               {tradeListPage.map(item => (
                   <div key={item.index} className="my-2 mb-0 col-3">
-                    <Link to={`/trade/${item.idx}`} className="text-decoration-none">
+                    <Link to={`/trade/${item.tradeBoardIdx}`} className="text-decoration-none">
                       {/*삽니다/팝니다 선택에 따라 다른 css 디자인 적용하여 구분*/}
                       <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                         <div className="product_img_div">
-                          <Link to={`/trade/${item.idx}`}>
+                          <Link to={`/trade/${item.tradeBoardIdx}`}>
                             <img src="/assets/default_image.png" alt={"img"} className="product_img"/>
                           </Link>
                         </div>

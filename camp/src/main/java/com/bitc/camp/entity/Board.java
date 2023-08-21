@@ -59,6 +59,8 @@ public class Board {
   @Column(length = 100, nullable = true)
   private String tradeLocation; // 지역
 
+  private int views; // 조회수 필드
+
   @Builder
 //  생성자 정의
   public Board(String title, String content, String userName, int cnt,
