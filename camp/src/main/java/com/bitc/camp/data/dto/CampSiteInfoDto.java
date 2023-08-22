@@ -21,4 +21,5 @@ public class CampSiteInfoDto {
     private int areaSiteCnt;
     private CampMainInfo campMainInfo;
     private int campMainInfoIdx;
+    private String siteDeletedYn;
 }

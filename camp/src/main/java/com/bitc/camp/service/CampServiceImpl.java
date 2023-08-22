@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CampServiceImpl implements CampService{
+public class CampServiceImpl implements CampService {
 
     private final CampMainInfoRepository campMainInfoRepository;
     private final CampImgRepository campImgRepository;
@@ -52,8 +52,9 @@ public class CampServiceImpl implements CampService{
                     .campHpLink(camp.getCampHpLink())
                     .campPh(camp.getCampPh())
                     .campAddress(camp.getCampAddress())
+                    .campDeletedYn(camp.getCampDeletedYn())
                     .partnerIdx(partner != null ? partner.getIdx() : null)
-                    .partnerName(partner != null? partner.getPartnerName() : null)
+                    .partnerName(partner != null ? partner.getPartnerName() : null)
                     .memberIdx(partner != null && partner.getMember() != null ? partner.getMember().getMemberIdx() : null)
                     .build();
             campMainInfoDtoList.add(dto);
@@ -103,7 +104,7 @@ public class CampServiceImpl implements CampService{
     }
 
 
-//    캠프사이트인포 입력
+    //    캠프사이트인포 입력
     @Override
     public List<CampSiteInfo> createCamp2(List<CampSiteInfoDto> campSiteInfoDtoList) throws Exception {
         List<CampSiteInfo> campSiteInfos = new ArrayList<>();
@@ -144,7 +145,7 @@ public class CampServiceImpl implements CampService{
 
     @Override
     public CampMainInfoDto partnerSelectCampList(int campIdx) throws Exception {
-        CampMainInfo camp =  campMainInfoRepository.findById(campIdx).orElse(null);
+        CampMainInfo camp = campMainInfoRepository.findById(campIdx).orElse(null);
         Partner partner = camp.getPartner();
 
         CampMainInfoDto campMainInfoDto = CampMainInfoDto.builder()
@@ -155,16 +156,17 @@ public class CampServiceImpl implements CampService{
                 .kidszoneYn(camp.getKidszoneYn())
                 .campHpLink(camp.getCampHpLink())
                 .campPh(camp.getCampPh())
+                .campDeletedYn(camp.getCampDeletedYn())
                 .campAddress(camp.getCampAddress())
                 .partnerIdx(partner != null ? partner.getIdx() : null)
-                .partnerName(partner != null? partner.getPartnerName() : null)
+                .partnerName(partner != null ? partner.getPartnerName() : null)
                 .memberIdx(partner != null && partner.getMember() != null ? partner.getMember().getMemberIdx() : null)
                 .build();
         return campMainInfoDto;
     }
 
     @Override
-    public CampMainInfo updatePartnerCamp(int campIdx,CampMainInfoDto campMainInfoDto) throws Exception {
+    public CampMainInfo updatePartnerCamp(int campIdx, CampMainInfoDto campMainInfoDto) throws Exception {
         Optional<CampMainInfo> existingCampOptional = campMainInfoRepository.findById(campIdx);
 
         if (existingCampOptional.isEmpty()) {
@@ -203,13 +205,14 @@ public class CampServiceImpl implements CampService{
                     .notice(campSiteInfo.getNotice())
                     .campStyle(campSiteInfo.getCampStyle())
                     .peopleMin(campSiteInfo.getPeopleMin())
+                    .siteDeletedYn(campSiteInfo.getSiteDeletedYn())
                     .peopleMax(campSiteInfo.getPeopleMax())
                     .addPrice(campSiteInfo.getAddPrice())
                     .campReservePeriod(campSiteInfo.getCampReservePeriod())
                     .parkPrice(campSiteInfo.getParkPrice())
                     .elePrice(campSiteInfo.getElePrice())
                     .areaSiteCnt(campSiteInfo.getAreaSiteCnt())
-                    . build();
+                    .build();
             campSiteInfoDtoList.add(dto);
         }
 
@@ -217,20 +220,70 @@ public class CampServiceImpl implements CampService{
     }
 
     @Override
-    public List<CampSiteListDto> partnerSelectCampSiteList2(CampSiteInfo campSiteInfo) throws Exception {
-        List<CampSiteList> campSiteListList = campSiteListRepository.findAllByCampSiteInfoOrderByIdxDesc(campSiteInfo);
+    public CampSiteInfo updatePartnerSiteInfo(int campInfoIdx, CampSiteInfoDto campSiteInfoDto) throws Exception {
+        Optional<CampSiteInfo> existingCampSiteOptional = campSiteInfoRepository.findById(campInfoIdx);
 
-        List<CampSiteListDto> campSiteListDtoList = new ArrayList<>();
-
-        for (CampSiteList campSiteList : campSiteListList) {
-            CampSiteListDto dto = CampSiteListDto.builder()
-                    .idx(campSiteList.getIdx())
-                    .campSiteName(campSiteList.getCampSiteName())
-                    .campSiteInfoIdx(campSiteInfo != null? campSiteInfo.getIdx():null)
-                    .build();
-            campSiteListDtoList.add(dto);
+        if (existingCampSiteOptional.isEmpty()) {
+            throw new ChangeSetPersister.NotFoundException();
         }
-        return campSiteListDtoList;
+
+        CampSiteInfo existingCampSite = existingCampSiteOptional.get();
+//    existingCampSite.setCampMainInfo(campSiteInfoDto.getCampMainInfo());
+        existingCampSite.setAreaName(campSiteInfoDto.getAreaName());
+        existingCampSite.setSitePrice(campSiteInfoDto.getSitePrice());
+        existingCampSite.setNotice(campSiteInfoDto.getNotice());
+        existingCampSite.setCampStyle(campSiteInfoDto.getCampStyle());
+        existingCampSite.setPeopleMin(campSiteInfoDto.getPeopleMin());
+        existingCampSite.setPeopleMax(campSiteInfoDto.getPeopleMax());
+        existingCampSite.setAddPrice(campSiteInfoDto.getAddPrice());
+        existingCampSite.setCampReservePeriod(campSiteInfoDto.getCampReservePeriod());
+        existingCampSite.setParkPrice(campSiteInfoDto.getParkPrice());
+        existingCampSite.setElePrice(campSiteInfoDto.getElePrice());
+        existingCampSite.setAreaSiteCnt(campSiteInfoDto.getAreaSiteCnt());
+
+        CampSiteInfo savedCampSiteInfo = campSiteInfoRepository.save(existingCampSite);
+
+        // 기존에 존재하는 CampSiteList 찾기
+        List<CampSiteList> existingCampSiteLists = campSiteListRepository.findByCampSiteInfo(existingCampSite);
+
+        for (int i = 0; i < savedCampSiteInfo.getAreaSiteCnt(); i++) {
+            // 캠프 사이트 이름 생성
+            String campSiteName = savedCampSiteInfo.getAreaName() + "_" + (i + 1);
+
+            // 기존 로우 수정
+            if (i < existingCampSiteLists.size()) {
+                CampSiteList existingCampSiteList = existingCampSiteLists.get(i);
+                existingCampSiteList.setCampSiteName(campSiteName);
+                campSiteListRepository.save(existingCampSiteList);
+            } else {
+                // 새로운 로우 생성
+                CampSiteList campSiteList = new CampSiteList();
+                campSiteList.setCampSiteInfo(savedCampSiteInfo);
+                campSiteList.setCampSiteName(campSiteName);
+                campSiteListRepository.save(campSiteList);
+            }
+        }
+
+        return savedCampSiteInfo;
+    }
+
+    @Override
+    public CampMainInfo deletePartnerCamp(int campIdx) throws Exception {
+        Optional<CampMainInfo> campMainInfoOptional = campMainInfoRepository.findById(campIdx);
+
+        CampMainInfo campMainInfo = campMainInfoOptional.get();
+        campMainInfo.setCampDeletedYn("Y");
+        return campMainInfoRepository.save(campMainInfo);
+    }
+
+    @Override
+    public CampSiteInfo deletePartnerSite(int campInfoIdx) throws Exception {
+        Optional<CampSiteInfo> campSiteInfoOptional = campSiteInfoRepository.findById(campInfoIdx);
+
+        CampSiteInfo campSiteInfo = campSiteInfoOptional.get();
+        campSiteInfo.setSiteDeletedYn("Y");
+
+        return campSiteInfoRepository.save(campSiteInfo);
     }
 
 

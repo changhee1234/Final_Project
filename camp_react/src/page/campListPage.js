@@ -1,5 +1,5 @@
 import React from "react";
-import CampList from "../componunt/jeongGyuHo/campList";
+import CampList from "../componunt/jeongGyuHo/campList.js";
 
 
 function CampListPage(props) {

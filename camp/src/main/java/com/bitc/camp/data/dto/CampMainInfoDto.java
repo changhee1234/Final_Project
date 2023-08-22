@@ -21,4 +21,5 @@ public class CampMainInfoDto {
     private int partnerIdx;
     private int memberIdx;
     private String partnerName;
+    private String campDeletedYn;
 }

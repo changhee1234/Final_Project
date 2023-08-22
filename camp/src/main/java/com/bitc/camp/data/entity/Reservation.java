@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,11 +29,11 @@ public class Reservation {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
-    private LocalDateTime userReservationStart;
+    private LocalDate userReservationStart;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
-    private LocalDateTime userReservationEnd;
+    private LocalDate userReservationEnd;
 
     @Column(nullable = false)
     private int userReservationCnt;
@@ -52,9 +53,9 @@ public class Reservation {
     private String userReservationTotalPrice;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_site_info_idx")
+    @JoinColumn(name = "user_camp_main_idx")
     @ToString.Exclude
-    private CampSiteInfo campSiteInfo;
+    private CampMainInfo campMainInfo;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_site_list_idx")

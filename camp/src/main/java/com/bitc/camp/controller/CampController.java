@@ -56,7 +56,7 @@ public class CampController {
 
     @RequestMapping(value = "/partnerCampDetail/{campIdx}", method = RequestMethod.PUT)
     public Object updatePartnerCamp(@PathVariable int campIdx, @RequestBody CampMainInfoDto campMainInfoDto) throws Exception {
-        CampMainInfo updatedCamp = campService.updatePartnerCamp(campIdx, campMainInfoDto);
+        campService.updatePartnerCamp(campIdx, campMainInfoDto);
 
         return "성공";
     }
@@ -66,5 +66,26 @@ public class CampController {
         List<CampSiteInfoDto> campSiteInfoDtoList = campService.partnerSelectCampSiteList(intCampIdx);
 
         return campSiteInfoDtoList;
+    }
+
+    @RequestMapping(value = "/partnerCampSiteDetail/{campInfoIdx}", method = RequestMethod.PUT)
+    public Object updateCampSiteDetail(@PathVariable int campInfoIdx, @RequestBody CampSiteInfoDto campSiteInfoDto) throws Exception {
+        campService.updatePartnerSiteInfo(campInfoIdx, campSiteInfoDto);
+
+        return "성공";
+    }
+
+    @RequestMapping(value = "/partnerCampDetail/{campIdx}", method = RequestMethod.DELETE)
+    public Object deletePartnerCamp(@PathVariable int campIdx) throws Exception {
+        campService.deletePartnerCamp(campIdx);
+
+        return "성공";
+    }
+
+    @RequestMapping(value = "/partnerCampSiteDetail/{campInfoIdx}", method = RequestMethod.DELETE)
+    public Object deletePartnerCampList(@PathVariable int campInfoIdx) throws Exception {
+        campService.deletePartnerSite(campInfoIdx);
+
+        return "성공";
     }
 }

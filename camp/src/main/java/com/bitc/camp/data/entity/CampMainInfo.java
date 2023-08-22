@@ -25,6 +25,9 @@ public class CampMainInfo {
     @Column(length = 45, nullable = false)
     private String campName;
 
+    @Column(length = 1, nullable = false)
+    private String campDeletedYn;
+
     @Column(length = 1000, nullable = false)
     private String campIntro;
 
@@ -48,7 +51,6 @@ public class CampMainInfo {
     @ManyToOne(optional = false)
     @JoinColumn(name = "partner_idx")
     @ToString.Exclude
-//    @JsonIgnoreProperties("campMainInfo")
     private Partner partner;
 
     @OneToMany(mappedBy = "campMainInfo")
