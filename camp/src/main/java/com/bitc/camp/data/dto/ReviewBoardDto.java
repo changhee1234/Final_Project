@@ -1,7 +1,7 @@
 package com.bitc.camp.data.dto;
 
 import com.bitc.camp.data.entity.CampMainInfo;
-import com.bitc.camp.data.entity.Member;
+import com.bitc.camp.entity.Member;
 import lombok.Builder;
 import lombok.Data;
 

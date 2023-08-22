@@ -6,6 +6,7 @@ import com.bitc.camp.data.dto.CampSiteListDto;
 import com.bitc.camp.data.dto.ReviewBoardDto;
 import com.bitc.camp.data.entity.*;
 import com.bitc.camp.data.repository.*;
+import com.bitc.camp.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
