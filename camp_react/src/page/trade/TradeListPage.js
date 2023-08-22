@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import './tradeListpage.css';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
+import TradeListPage from "./TradeListPage";
 
-function TradeListPage(props) {
+function TradeListMain(props) {
   const [tradeListPage, setTradeListPage] = useState([]);
   const [loading, setLoading] = useState(true);
   const [titleToSend] = useState([]);
@@ -37,7 +38,7 @@ function TradeListPage(props) {
         })
         .catch(err => {
           alert(`통신 오류 : ${err}`);
-            setLoading(false); // 데이터 로딩 실패
+          setLoading(false); // 데이터 로딩 실패
         });
   };
 
@@ -45,37 +46,23 @@ function TradeListPage(props) {
     setSortOption(event.target.value);
   };
 
-  // useEffect(() => {
-  //   fetchData(); // Fetch data whenever sort option changes
-  // }, [sortOption]);
-  //
-  // const fetchData = () => {
-  //   axios.get(`http://localhost:8080/board/list?sortOption=${sortOption}`)
-  //       .then(res => {
-  //         console.log(res.data); // 확인용 로그
-  //         const tradeListPageData = res.data.result
-  //         setTradeListPage(tradeListPageData);
-  //         // setLoading(false); // 데이터 로딩 완료
-  //       })
-  //       .catch(err => {
-  //         alert(`통신 오류 : ${err}`);
-  //         setLoading(false); // 데이터 로딩 실패
-  //       });
-  // };
+  useEffect(() => {
+    fetchData(); // Fetch data whenever sort option changes
+  }, [sortOption]);
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/board/list?sortOption=${sortOption}`)
-  //       .then(res => {
-  //         console.log(res.data); // 확인용 로그
-  //         const tradeListPageData = res.data.result
-  //         setTradeListPage(tradeListPageData);
-  //         // setLoading(false); // 데이터 로딩 완료
-  //       })
-  //       .catch(err => {
-  //         alert(`통신 오류 : ${err}`);
-  //         setLoading(false); // 데이터 로딩 실패
-  //       });
-  // }, [sortOption]); // sortOption이 변경될 때마다 실행
+  useEffect(() => {
+    axios.get(`http://localhost:8080/board/list?sortOption=${sortOption}`)
+        .then(res => {
+          console.log(res.data); // 확인용 로그
+          const tradeListPageData = res.data.result
+          setTradeListPage(tradeListPageData);
+          // setLoading(false); // 데이터 로딩 완료
+        })
+        .catch(err => {
+          alert(`통신 오류 : ${err}`);
+          setLoading(false); // 데이터 로딩 실패
+        });
+  }, [sortOption]); // sortOption이 변경될 때마다 실행
 
   // 정렬 옵션 변경 핸들러
 
@@ -145,7 +132,8 @@ function TradeListPage(props) {
                       <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                         <div className="product_img_div">
                           <Link to={`/trade/${item.tradeBoardIdx}`}>
-                            <img src="/assets/default_image.png" alt={"img"} className="product_img"/>
+                            <img  src={item.img} alt={"img"} className="product_img"/>
+                            {/*"/assets/default_image.png"*/}
                           </Link>
                         </div>
                         <div className={'product_mon mx-3 text-center'}>
@@ -205,4 +193,4 @@ function TradeListPage(props) {
   )
 }
 
-export default TradeListPage;
+export default TradeListMain;

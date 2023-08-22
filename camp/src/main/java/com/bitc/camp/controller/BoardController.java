@@ -9,6 +9,8 @@ import com.bitc.camp.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,17 +34,26 @@ public class BoardController {
     return result;
   }
 
-  // 글 등록
+  // 글 등록(파일 업로드)
   @RequestMapping(value = "/write", method = RequestMethod.POST)
-  public Object boardWrite(BoardRequestDto boardRequestDto) throws Exception {
-    Board createBoard = boardService.createBoard(boardRequestDto);
+  public Object boardWrite(BoardRequestDto boardRequestDto,  @RequestParam("file") MultipartFile file) throws Exception {
+    Board createBoard = boardService.createBoard(boardRequestDto, file);
 
     return createBoard;
   }
 
+  //  글 상세
+  @RequestMapping(value = "/trade/{tradeBoardIdx}", method = RequestMethod.GET)
+  public Object boardDetail(@PathVariable int tradeBoardIdx) throws Exception {
+    BoardResponseDto detail = boardService.detailBoard((int) tradeBoardIdx);
+
+    return detail;
+  }
+
   //  조회수 업데이트
   @GetMapping("/list/{tradeBoardIdx}")
-  public Board getBoard(@PathVariable Long tradeBoardIdx) throws Exception {
+  public Board getBoard(@PathVariable int tradeBoardIdx) throws Exception {
+
     return boardService.getBoardWithIncrementedViews(tradeBoardIdx);
   }
 
@@ -63,17 +74,9 @@ public class BoardController {
 //    return result;
 //  }
 
-//  글 상세
-  @RequestMapping(value = "/{tradeBoardIdx}", method = RequestMethod.GET)
-  public Object boardDetail(@PathVariable int tradeBoardIdx) throws Exception {
-    BoardResponseDto detail = boardService.detailBoard((long) tradeBoardIdx);
-
-    return detail;
-  }
-
 // 글 수정
 //@PatchMapping("/{tradeBoardIdx}")
-//public Object updateBoard(@PathVariable("tradeBoardIdx") Long tradeBoardIdx, @RequestBody BoardRequestDto boardRequestDto) throws Exception {
+//public Object updateBoard(@PathVariable("tradeBoardIdx") int tradeBoardIdx, @RequestBody BoardRequestDto boardRequestDto) throws Exception {
 //  Map<String, Object> result = new HashMap<>();
 //
 //  Board updatedBoard = (Board) boardService.update(tradeBoardIdx, boardRequestDto.toEntity());
@@ -83,7 +86,7 @@ public class BoardController {
 
 // 글 삭제
 //@DeleteMapping("/{tradeBoardIdx}")
-//public Object deleteBoard(@PathVariable("tradeBoardIdx") Long tradeBoardIdx) throws Exception {
+//public Object deleteBoard(@PathVariable("tradeBoardIdx") int tradeBoardIdx) throws Exception {
 //  Map<String, Object> result = new HashMap<>();
 //
 //  boardService.delete(tradeBoardIdx);

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, Integer> {
   //  리스트 조회
   List<Board> findAllByOrderByTradeBoardIdxDesc();
 
@@ -16,5 +16,4 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
   @Modifying
   @Query("update Board p set p.cnt = p.cnt + 1 where p.cnt = :id")
   int updateView(Long id);
-
 }

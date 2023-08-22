@@ -15,7 +15,7 @@ public class BoardRequestDto {
   private String title; // 제목
   private String content; // 내용
   private String userName; // 작성자
-  private char deleteYn; // 삭제 여부
+//  private char deleteYn; // 삭제 여부
   private Long tradeBoardIdx; // PK
   private int tradePrice; // 가격
   private String tradeLocation; // 지역

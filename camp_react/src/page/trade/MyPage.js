@@ -11,7 +11,7 @@
 //             <div className={'row my-5 mb-3'}>
 //               <div className={'col-sm text-center'}><h1>마이 페이지</h1></div>
 //               {/*게시판 최신순 및 조회수 정렬*/}
-//               <form action='/TradeListPage.js' method={"post"} id={'listCheck'} name={'listCheck'}>
+//               <form action='/TradeListMain.js' method={"post"} id={'listCheck'} name={'listCheck'}>
 //                 <div className={'col-sm btn-group d-flex justify-content-end'}>
 //                   <div className={'form-check mx-3 form-control-inline'}>
 //                     <input type='radio' className={'form-check-input'} name={'newest'} value={'newest'} checked></input>
@@ -25,7 +25,7 @@
 //               </form>
 //             </div>
 //             {/*게시판 리스트*/}
-//             <form action="/TradeListPage.js" method={'post'} id={'form'}>
+//             <form action="/TradeListMain.js" method={'post'} id={'form'}>
 //               <div>
 //                 <table className={'table table-hover table-striped'}>
 //                   <colgroup>

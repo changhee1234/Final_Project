@@ -5,17 +5,26 @@ import com.bitc.camp.dto.BoardResponseDto;
 import com.bitc.camp.dto.FileDto;
 import com.bitc.camp.entity.Board;
 import com.bitc.camp.repository.BoardRepository;
+import com.bitc.camp.repository.DetailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
   private final BoardRepository boardRepository;
+  private final DetailRepository detailRepository;
 
 //  게시글 목록 조회
   @Override
@@ -26,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
   //  최신순/조회순 정렬
 //@Override
 //@Transactional
-//public Board getBoardWithIncrementedViews(Long tradeBoardIdx) {
+//public Board getBoardWithIncrementedViews(int tradeBoardIdx) {
 //  Board board = boardRepository.findById(tradeBoardIdx).orElse(null);
 //
 //  if (board != null) {
@@ -38,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
 //}
 
   @Override
-  public Page<BoardResponseDto> selectListNewest(Long pageNum) throws Exception {
+  public Page<BoardResponseDto> selectListNewest(int pageNum) throws Exception {
     return null;
   }
 
@@ -49,9 +58,17 @@ public class BoardServiceImpl implements BoardService {
 
   // 게시글 등록
   @Override
-  public Board createBoard(BoardRequestDto boardRequestDto) throws Exception {
+  public Board createBoard(BoardRequestDto boardRequestDto, MultipartFile file) throws Exception {
     // BoardRequestDto를 사용하여 Board 객체를 생성하거나 변환
     Board board = new Board();
+
+    if (!file.isEmpty()) {
+      String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+      String uploadDir = "path_to_your_upload_directory"; // 실제 업로드 디렉토리로 수정
+
+      Path filePath = Paths.get(uploadDir, fileName);
+      Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+    }
 
     board.setTitle(boardRequestDto.getTitle());
     board.setContent(boardRequestDto.getContent());
@@ -63,25 +80,24 @@ public class BoardServiceImpl implements BoardService {
 
     // 생성된 Board 객체를 저장
     return boardRepository.save(board);
-
   }
 
-  //  상세 글 조회
 
+  //  상세 글 조회
   @Override
-  public BoardResponseDto detailBoard(Long tradeBoardIdx) throws Exception {
-    Board camp =  boardRepository.findById(tradeBoardIdx).orElse(null);
+  public BoardResponseDto detailBoard(int tradeBoardIdx) throws Exception {
+    Board camp = boardRepository.findById(tradeBoardIdx).orElse(null);
 
     BoardResponseDto boardResponseDto = BoardResponseDto.builder()
         .tradeBoardIdx(camp.getTradeBoardIdx())
         .title(camp.getTitle())
         .content(camp.getContent())
+        .createDt(camp.getCreateDt())
         .userName(camp.getUserName())
-        .cnt(camp.getCnt())
         .tradePrice(camp.getTradePrice())
         .tradeLocation(camp.getTradeLocation())
-        .createDt(camp.getCreateDt())
         .tradeCate(camp.getTradeCate())
+        .imgUrl(camp.getImgUrl())
         .memberIdx(camp.getMemberIdx())
         .build();
     return boardResponseDto;
@@ -98,8 +114,9 @@ public class BoardServiceImpl implements BoardService {
     return null;
   }
 
+//  수정
   @Override
-  public Board update(Long tradeBoardIdx, Board updatedBoard) throws Exception {
+  public Board update(int tradeBoardIdx, Board updatedBoard) throws Exception {
     // 특정 ID를 가진 게시글 조회
     Board existingBoard = boardRepository.findById(tradeBoardIdx)
         .orElseThrow(() -> new IllegalArgumentException("Invalid board id: " + tradeBoardIdx));
@@ -113,8 +130,9 @@ public class BoardServiceImpl implements BoardService {
     return boardRepository.save(existingBoard);
   }
 
+//  삭제
   @Override
-  public void delete(Long tradeBoardIdx) throws Exception {
+  public void delete(int tradeBoardIdx) throws Exception {
     // 특정 ID를 가진 게시글 조회
     Board boardToDelete = boardRepository.findById(tradeBoardIdx)
         .orElseThrow(() -> new IllegalArgumentException("Invalid board id: " + tradeBoardIdx));
@@ -123,8 +141,9 @@ public class BoardServiceImpl implements BoardService {
     boardRepository.delete(boardToDelete);
   }
 
+//
   @Override
-  public Board getBoardWithIncrementedViews(Long tradeBoardIdx) throws Exception {
+  public Board getBoardWithIncrementedViews(int tradeBoardIdx) throws Exception {
     // 게시물 조회
     Optional<Board> optionalBoard = boardRepository.findById(tradeBoardIdx);
 

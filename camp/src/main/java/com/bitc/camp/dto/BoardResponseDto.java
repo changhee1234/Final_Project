@@ -14,18 +14,19 @@ import java.time.LocalDateTime;
 @Builder
 public class BoardResponseDto {
 
-    private Long tradeBoardIdx; // PK
+    private int tradeBoardIdx; // PK
     private String title; // 제목
     private String content; // 내용
     private String userName; // 작성자
     private int cnt; // 조회 수
-    private char deleteYn; // 삭제 여부
+//    private char deleteYn; // 삭제 여부
     private int tradePrice; // 가격
     private String tradeLocation; // 지역
     private LocalDateTime createDt; // 생성일
     private LocalDateTime updateDt; // 수정일
     private String tradeCate; // 판매/구매 구분
     private int memberIdx; // 회원번호
+    private String imgUrl; // 이미지 주소
 
     public BoardResponseDto(Board entity) {
         this.tradeBoardIdx = entity.getTradeBoardIdx();
@@ -40,6 +41,7 @@ public class BoardResponseDto {
 //        this.updateDt = entity.getUpdateDt();
         this.tradeCate = entity.getTradeCate();
         this.memberIdx = entity.getMemberIdx();
+        this.imgUrl = entity.getImgUrl();
     }
 
 }

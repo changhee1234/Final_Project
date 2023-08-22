@@ -2,7 +2,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MainPage from "./page/main/MainPage";
 import MyPage from "./page/trade/MyPage";
 import CampDetailPage from "./page/camp/CampDetailPage";
-import TradeListPage from "./page/trade/TradeListPage";
+import TradeListMain from "./page/trade/TradeListMain";
 import TradeDetailPage from "./page/trade/TradeDetailPage";
 import TradeWritePage from "./page/trade/TradeWritePage";
 import CampReservationPage1 from "./page/camp/CampReservationPage1";
@@ -15,6 +15,7 @@ import Header from "./page/layout/Header";
 import ErrorPage from "./page/layout/ErrorPage";
 import AboutPage from "./page/layout/AboutPage";
 import Footer from "./page/layout/Footer";
+import TradeListPage from "./page/trade/TradeListPage";
 
 function App(props) {
   return (
@@ -35,7 +36,7 @@ function App(props) {
           {/*중고장터 리스트*/}
           <Route path={'/trade'} element={<TradeListPage/>}/>
           {/*중고장터 상세보기*/}
-          <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>
+          <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
           {/*중고장터 글 등록*/}
           <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
           {/*예약페이지*/}

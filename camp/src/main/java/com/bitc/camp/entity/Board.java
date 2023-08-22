@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Board {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long tradeBoardIdx; // 글번호(PK)
+  private int tradeBoardIdx; // 글번호(PK)
 
   @Column(length = 45, nullable = false)
   private String title; // 제목
@@ -59,12 +59,15 @@ public class Board {
   @Column(length = 100, nullable = true)
   private String tradeLocation; // 지역
 
+  @Column(length = 1000)
+  private String imgUrl;
+
   private int views; // 조회수 필드
 
   @Builder
 //  생성자 정의
   public Board(String title, String content, String userName, int cnt,
-                int tradePrice, String tradeLocation, String tradeCate, int memberIdx) {
+               int tradePrice, String tradeLocation, String tradeCate, int memberIdx) {
     this.title = title;
     this.content = content;
     this.userName = userName;
@@ -74,6 +77,7 @@ public class Board {
     this.tradeCate = tradeCate;
     this.memberIdx = memberIdx;
     this.createDt = LocalDateTime.now();
+    this.imgUrl = imageUrl;
   }
 
   //  객체의 속성을 업데이트
@@ -84,8 +88,18 @@ public class Board {
     this.tradeLocation = tradeLocation;
     this.tradeCate = tradeCate;
     this.tradePrice = tradePrice;
-    this.cnt= cnt;
+    this.imgUrl = imageUrl;
+    this.cnt = cnt;
 
   }
 
+  //  게시글 삭제
+//  public void delete() {
+//    this.deleteYn = 'Y';
+//  }
+
+  //  조회수 증가
+  public void increaseHits() {
+    this.cnt++;
+  }
 }

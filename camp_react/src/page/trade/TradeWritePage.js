@@ -10,8 +10,30 @@ function TradeWritePage(props) {
   const [tradeCate, setTradeCate] = useState('');
   const [createDt, setCreateDt] = useState(new Date());
   // const [memberIdx, setMemberIdx] = useState([{idx : 0}]);
+  const [file, setFile] = useState(null);
 
   const navi = useNavigate();
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+    const handleFile = () => {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      axios.post("your_server_url", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+          .then((response) => {
+            // 파일 업로드 성공 처리
+          })
+          .catch((error) => {
+            // 파일 업로드 실패 처리
+          });
+    };
 
   const handleSubmit = () => {
     axios.post("http://localhost:8080/board/write", null,
@@ -45,7 +67,7 @@ function TradeWritePage(props) {
             <ul className={'col-sm text-center my-4 mt-5'}>
               <li><i className="bi bi-cart4"></i><span className={'text3'}> 장터 게시판 글 등록</span></li>
             </ul>
-            <form className={'my-5'} onSubmit={handleSubmit}>
+            <form className={'my-5'} onSubmit={handleSubmit} enctype="multipart/form-data">
               <input className={'form-control'} id={'createDt'} name={"createDt"} type="hidden"
                       value={createDt.toISOString().substr(0, 16)}
                       onChange={(e) => setCreateDt(new Date(e.target.value))}/>
@@ -80,11 +102,12 @@ function TradeWritePage(props) {
                 <div className="row input-group">
                   <div className="my-3 col-sm d-flex justify-content-start gap-3">
                     <div className="input-group">
-                      <input type="file" className="form-control" id="files" name="files" multiple></input>
+                      <input type="file" className="form-control" id="files" name="files" multiple
+                             onChange={handleFileChange} onClick={handleFile}></input>
                     </div>
                   </div>
                   <div className="my-3 col-sm d-flex justify-content-end gap-3 mx-0 px-0">
-                    <button type="submit" className="w-btn w-btn-indigo">등록</button>
+                    <button type="submit" className="w-btn w-btn-indigo" onClick={handleSubmit}>등록</button>
                     <button type="reset" className="w-btn w-btn-gray" onClick={handleCancel}>취소
                     </button>
                   </div>
