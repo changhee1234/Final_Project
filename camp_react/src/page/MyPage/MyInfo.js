@@ -5,7 +5,7 @@ import axios from "../layout/axios";
 import Modal from 'react-bootstrap/Modal'; // Modal 컴포넌트 import 추가
 import Button from 'react-bootstrap/Button'; // Button 컴포넌트 import 추가
 import { CameraFill } from 'react-bootstrap-icons';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 function formatPhoneNumber(phoneNumber) {
     const digits = phoneNumber.replace(/\D/g, "");
@@ -147,7 +147,19 @@ function MyInfo(props) {
         }
     };
 
-
+    // 등급을 텍스트로 변환하는 함수
+    const getGradeText = (grade) => {
+        switch (grade) {
+            case "user":
+                return "일반 등급 입니다";
+            case "partner":
+                return "파트너 등급 입니다";
+            case "admin":
+                return "관리자 등급 입니다";
+            default:
+                return "";
+        }
+    };
 
     const handleImageChange = (e) => {
         console.log("handleImageChange called");
@@ -157,8 +169,8 @@ function MyInfo(props) {
 
     return (
         <div className="my-info my-5">
-            <h2 className="text-start mt-5">내 정보</h2>
-            <div className="profile-image">
+            <h3 className="text-start my-5">내 정보</h3>
+            <div className="profile-image mt-5">
                 <label htmlFor="image-upload">
                     <img
                         src={user?.profileImage || ProfileImage}
@@ -358,7 +370,6 @@ function MyInfo(props) {
                             </Button>
                         </Modal.Footer>
                     </Modal>
->>>>>>> 김창희
                 </div>
             </div>
         </div>

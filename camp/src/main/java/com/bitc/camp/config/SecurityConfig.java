@@ -43,11 +43,8 @@ public class SecurityConfig {
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
-<<<<<<< HEAD:camp/src/main/java/com/bitc/camp/config/SecurityConfig.java
-                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**"
-=======
-                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/modify", "/upload-profile-image"
->>>>>>> 김창희:camp/src/main/java/com/bitc/camp_spring/config/SecurityConfig.java
+                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image"
+
                     ).permitAll()
                     .requestMatchers("/partner-page").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")
