@@ -88,7 +88,6 @@ function PartnerCampDetail() {
     }
 
 
-
     const handleMainInfoDeleteButton = (e) => {
         e.preventDefault();
 
@@ -296,42 +295,32 @@ function PartnerCampDetail() {
                               name="campIntro"
                               onChange={handleInputChange}></textarea>
                         </div>
-
                     </div>
+
+
                     <div className={'row my-3'}>
                         <div className={'d-flex justify-content-end'}>
-                                <button type={'submit'} className={'btn btn-primary me-3'}>수정하기</button>
-                                <button type={'resset'} className={'btn btn-danger'} onClick={handleMainInfoDeleteButton}>삭제하기
-                                </button>
+                            <button type={'submit'} className={'btn btn-primary me-3'}>수정하기</button>
+                            <button type={'resset'} className={'btn btn-danger'}
+                                    onClick={handleMainInfoDeleteButton}>삭제하기
+                            </button>
                         </div>
                     </div>
-
                 </form>
             ) : (
                 <div className={'container text-center'}>
                     로딩 중...
                 </div>
             )}
+
             <div className={'row my-4'}>
                 <h2 className={'my-3'}>구역 수정하기</h2>
                 <div className={'d-flex justify-content-between'}>
                     <div className={'col-sm-9'}>
                         {editingArea ? (
                             <div>
-                                <div className={'col-sm-7 my-3'}>
-                                    <div className={'input-group'}>
-                                        <span className={'input-group-text'}>idx</span>
-                                        <input
-                                            type={'text'}
-                                            className={'form-control'}
-                                            value={selectedArea[0].idx}
-                                            readOnly={true}
-                                        />
-                                    </div>
-                                </div>
 
                                 <div className={'my-3 row'}>
-
                                     <div className={'col-sm-7'}>
                                         <div className={'input-group'}>
                                             <span className={'input-group-text'}>구역이름</span>
@@ -548,14 +537,11 @@ function PartnerCampDetail() {
                                         const selectedIdx = parseInt(e.target.value);
                                         const selectedAreaInfo = campSiteInfo.find(area => area.idx === selectedIdx);
 
-                                        // Update selected area and updatedCampInfo
                                         setSelectedArea([selectedAreaInfo]);
                                         setUpdatedCampInfo({
                                             ...updatedCampInfo,
-                                            // Update other relevant properties based on selected area
                                             campStyle: selectedAreaInfo.campStyle,
                                             addPrice: selectedAreaInfo.addPrice,
-                                            // ... and so on for other properties
                                         });
                                     }}
                                 >
@@ -571,8 +557,9 @@ function PartnerCampDetail() {
                     </div>
 
                     {editingArea ? (
+
                         <div className={'col-sm-2'}>
-                            <div className={'row'}>
+                            <div className={'row my-3'}>
                                 <div className={'d-grid'}>
                                     <button
                                         type={'submit'}
@@ -583,38 +570,38 @@ function PartnerCampDetail() {
                                     </button>
                                 </div>
                             </div>
-                            <div className={'row my-3'}>
+
+                            <div className={'row'}>
                                 <div className={'d-grid'}>
                                     <button
                                         type={'submit'}
-                                        className={'btn btn-danger'}
+                                        className={'btn btn-primary'}
                                         onClick={handleSiteInfoDeleteButton}
                                     >
                                         구역 삭제
                                     </button>
                                 </div>
                             </div>
-
                         </div>
                     ) : (
                         <div className={'col-sm-2'}>
                             <div className={'d-grid'}>
                                 <button
                                     type={'button'}
-                                    className={'btn btn-primary'}
+                                    className={'btn btn-danger'}
                                     onClick={handleAreaEditClick}
                                 >
                                     구역 수정하기
                                 </button>
                             </div>
                         </div>
+
                     )}
                 </div>
-                <button type={'reset'} className={'btn btn-secondary my-3'} onClick={handleCancel}>취소하기</button>
             </div>
+            <button type={'reset'} className={'btn btn-secondary my-3'} onClick={handleCancel}>취소하기</button>
         </div>
-    )
-        ;
+    );
 }
 
 export default PartnerCampDetail;
