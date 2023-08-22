@@ -67,8 +67,8 @@ public class ReservationController {
     return idx;
   }
 
-  @PatchMapping("/updateReservation/{reserveIdx}")
-  public void updateReservation(@PathVariable("reserveIdx") int idx, ReservationReqDto params) throws Exception {
+  @PatchMapping("/updateReservation/{reservationIdx}")
+  public void updateReservation(@PathVariable("reservationIdx") int idx,@RequestBody ReservationReqDto params) throws Exception {
     reservationService.updateReservation(idx, params);
   }
 }

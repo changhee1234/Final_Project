@@ -31,7 +31,6 @@ function CampReservationPage3(props) {
     userMemo: ''
   });
   const [isChecked, setIsChecked] = useState(false);
-  const [reservationIdx, setReservationIdx] = useState(0);
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -60,7 +59,7 @@ function CampReservationPage3(props) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const requestData = {
       ...reserveFrom,
@@ -75,18 +74,18 @@ function CampReservationPage3(props) {
       userReservationTotalPrice: totalPrice + "원"
     }
 
-    axios.post("http://localhost:8080/reserve/insertReservation", requestData)
-      .then(res => {
-        alert(`결제 전 예약db 저장.`);
-        setReservationIdx(res.data);
-      })
-      .catch(err => {
-        alert(`통신 에러 : ${err}`);
-      });
+    try {
+      const res = await axios.post("http://localhost:8080/reserve/insertReservation", requestData)
+      alert(`결제 전 예약db 저장.`);
+      const reservationIdx = res.data;
+      await doPayment(reservationIdx);
+    } catch (err){
+      alert(`통신 에러 : ${err}`);
+    }
   };
 
   // 결제
-  const doPayment = async () => {
+  const doPayment = async (reservationIdx) => {
     const {IMP} = window;
     IMP.init('imp56656734');
 
@@ -135,9 +134,11 @@ function CampReservationPage3(props) {
         // 예약테이블에 imp_uid, m_uid추가, 결제 상태 결제 성공으로 수정
         const params = {
           payStatus: "결제완료",
-          impUid: data.response.imp_uid,
-          merchantUid: data.response.merchant_uid
+          impUid: reqPayData.impUid,
+          merchantUid: reqPayData.merchantUid
         }
+
+        console.log(params);
 
         await axios.patch("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
           .then(res => console.log('결제 성공'))
