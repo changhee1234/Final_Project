@@ -61,13 +61,16 @@ function CampReservationPage3(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const userReservationStart = format(stateObj.dateRange[0].startDate, "yyyy-MM-dd");
+    const userReservationEnd = format(stateObj.dateRange[0].endDate, "yyyy-MM-dd");
+
     const requestData = {
       ...reserveFrom,
       userSiteInfoIdx: stateObj.siteInfo.idx,
       userSiteListIdx: stateObj.selectedSiteIdx,
       userMemberIdx: props.userInfo.memberIdx,
-      userReservationStart: stateObj.dateRange[0].startDate,
-      userReservationEnd: stateObj.dateRange[0].endDate,
+      userReservationStart: userReservationStart,
+      userReservationEnd: userReservationEnd,
       userReservationCnt: stateObj.people,
       userParkCnt: stateObj.cars,
       userEleCnt: stateObj.ele,
@@ -93,7 +96,7 @@ function CampReservationPage3(props) {
       pg: "html5_inicis.INIpayTest",
       pay_method: "card",
       merchant_uid: `${stateObj.selectedSite}_${format(new Date(), "MMdd_HH:mm:ss")}`,
-      name: `예약_${stateObj.campName}_${stateObj.selectedSite}`,
+      name: `${stateObj.campName}_${stateObj.selectedSite}`,
       amount: 1, // totalPrice
       buyer_name: reserveFrom.userReservationName,
       buyer_tel: reserveFrom.userPhoneNumber,
@@ -118,8 +121,11 @@ function CampReservationPage3(props) {
           cancelAmount: data.response.cancelAmount,
           cancelDate: data.response.cancelledAt,
           receiptUrl: data.response.receiptUrl,
-          reservationIdx: reservationIdx
+          reservationIdx: reservationIdx,
+          name: data.response.name
         }
+
+        console.log(data);
 
         console.log(reqPayData);
 
@@ -135,16 +141,13 @@ function CampReservationPage3(props) {
         const params = {
           payStatus: "결제완료",
           impUid: reqPayData.impUid,
-          merchantUid: reqPayData.merchantUid
+          merchantUid: reqPayData.merchantUid,
+          name: reqPayData.name
         }
-
-        console.log(params);
 
         await axios.patch("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
           .then(res => console.log('결제 성공'))
           .catch(err => alert(err));
-
-
         return navigate("/")
       } else {
         alert(`결제 실패하였습니다.`);

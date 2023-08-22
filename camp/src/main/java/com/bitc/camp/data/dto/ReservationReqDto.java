@@ -8,14 +8,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReservationReqDto {
   private String userReservationName;
-  private LocalDateTime userReservationStart;
-  private LocalDateTime userReservationEnd;
+  private LocalDate userReservationStart;
+  private LocalDate userReservationEnd;
   private int userReservationCnt;
   private int userParkCnt;
   private String userCarNum;
@@ -26,6 +27,7 @@ public class ReservationReqDto {
   private String payStatus;
   private String impUid;
   private String merchantUid;
+  private String name;
 
   private int userSiteInfoIdx;
   private int userSiteListIdx;
@@ -46,6 +48,7 @@ public class ReservationReqDto {
         .payStatus(payStatus)
         .impUid(impUid)
         .merchantUid(merchantUid)
+        .name(name)
         .campSiteInfo(new CampSiteInfo(userSiteInfoIdx))
         .campSiteList(new CampSiteList(userSiteListIdx))
         .member(new Member(userMemberIdx))

@@ -13,6 +13,7 @@ public class PaymentReqDto {
   private String impUid;
   private String merchantUid;
   private String payMethod;
+  private String name;
   private String cardName;
   private String cardNumber;
   private int payAmount;
@@ -27,6 +28,7 @@ public class PaymentReqDto {
     return Payment.builder()
         .impUid(impUid)
         .merchantUid(merchantUid)
+        .name(name)
         .payMethod(payMethod)
         .cardName(cardName)
         .cardNumber(cardNumber)

@@ -7,7 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "reservation")
@@ -25,11 +25,11 @@ public class Reservation {
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(nullable = false)
-  private LocalDateTime userReservationStart;
+  private LocalDate userReservationStart;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(nullable = false)
-  private LocalDateTime userReservationEnd;
+  private LocalDate userReservationEnd;
 
   @Column(nullable = false)
   private int userReservationCnt;
@@ -54,6 +54,8 @@ public class Reservation {
 
   private String merchantUid;
 
+  private String name;
+
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_site_info_idx")
   @ToString.Exclude
@@ -72,8 +74,8 @@ public class Reservation {
   @Builder
   public Reservation(
       String userReservationName,
-      LocalDateTime userReservationStart,
-      LocalDateTime userReservationEnd,
+      LocalDate userReservationStart,
+      LocalDate userReservationEnd,
       int userReservationCnt,
       int userParkCnt,
       String userCarNum,
@@ -84,6 +86,7 @@ public class Reservation {
       String payStatus,
       String impUid,
       String merchantUid,
+      String name,
       CampSiteInfo campSiteInfo,
       CampSiteList campSiteList,
       Member member
@@ -101,14 +104,16 @@ public class Reservation {
     this.payStatus = payStatus;
     this.impUid = impUid;
     this.merchantUid = merchantUid;
+    this.name = name;
     this.campSiteInfo = campSiteInfo;
     this.campSiteList = campSiteList;
     this.member = member;
   }
 
-  public void update(String payStatus, String impUid, String merchantUid) {
+  public void update(String payStatus, String impUid, String merchantUid, String name) {
     this.payStatus = payStatus;
     this.impUid = impUid;
     this.merchantUid = merchantUid;
+    this.name = name;
   }
 }

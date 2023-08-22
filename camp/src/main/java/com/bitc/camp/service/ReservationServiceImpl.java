@@ -74,6 +74,6 @@ public class ReservationServiceImpl implements ReservationService {
   @Override
   public void updateReservation(int idx, ReservationReqDto params) throws Exception {
     Reservation entity = reservationRepository.findById(idx).orElseThrow();
-    entity.update(params.getPayStatus(), params.getImpUid(), params.getMerchantUid());
+    entity.update(params.getPayStatus(), params.getImpUid(), params.getMerchantUid(), params.getName());
   }
 }

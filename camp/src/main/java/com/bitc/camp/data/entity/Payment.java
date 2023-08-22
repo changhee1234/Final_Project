@@ -22,6 +22,9 @@ public class Payment {
   private String merchantUid;
 
   @Column(nullable = false)
+  private String name;
+
+  @Column(nullable = false)
   private String payMethod;
 
   @Column(nullable = false)
@@ -51,6 +54,7 @@ public class Payment {
   public Payment(
       String impUid,
       String merchantUid,
+      String name,
       String payMethod,
       String cardName,
       String cardNumber,
@@ -64,6 +68,7 @@ public class Payment {
   ) {
     this.impUid = impUid;
     this.merchantUid = merchantUid;
+    this.name = name;
     this.payMethod = payMethod;
     this.cardName = cardName;
     this.cardNumber = cardNumber;
