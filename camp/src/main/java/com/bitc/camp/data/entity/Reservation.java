@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -25,11 +26,11 @@ public class Reservation {
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(nullable = false)
-  private LocalDateTime userReservationStart;
+  private LocalDate userReservationStart;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(nullable = false)
-  private LocalDateTime userReservationEnd;
+  private LocalDate userReservationEnd;
 
   @Column(nullable = false)
   private int userReservationCnt;
@@ -86,8 +87,8 @@ public class Reservation {
       Member member
   ) {
     this.userReservationName = userReservationName;
-    this.userReservationStart = userReservationStart;
-    this.userReservationEnd = userReservationEnd;
+    this.userReservationStart = LocalDate.from(userReservationStart);
+    this.userReservationEnd = LocalDate.from(userReservationEnd);
     this.userReservationCnt = userReservationCnt;
     this.userParkCnt = userParkCnt;
     this.userCarNum = userCarNum;

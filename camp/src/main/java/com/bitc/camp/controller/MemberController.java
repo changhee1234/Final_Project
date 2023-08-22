@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
@@ -35,8 +37,7 @@ public class MemberController {
         return null;
     }
 
-    // MemberController.java
-
+//    회원정보 수정
     @PostMapping("/modify")
     public ResponseEntity<?> modifyMember(@RequestBody ModifyMemberReq modify) {
         try {
@@ -79,6 +80,16 @@ public class MemberController {
 
         // 로그아웃 처리 후 클라이언트에 응답
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/delete-account")
+    public ResponseEntity<String> deleteMember(@RequestParam String email) {
+        try {
+            memberService.deleteMemberByEmail(email);
+            return ResponseEntity.ok("회원 삭제가 완료되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 삭제 오류가 발생했습니다.");
+        }
     }
 
     @GetMapping("/check-email")

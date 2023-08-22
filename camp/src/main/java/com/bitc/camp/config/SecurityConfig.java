@@ -43,8 +43,7 @@ public class SecurityConfig {
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
-                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image"
-
+                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image", "/delete-account"
                     ).permitAll()
                     .requestMatchers("/partner-page").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")
@@ -62,34 +61,6 @@ public class SecurityConfig {
 
     return http.build();
   }
-//  @Override
-//  protected void configure(HttpSecurity http) throws Exception {
-//    http.csrf().disable()
-//            .cors(c -> c
-//                    .configurationSource(corsConfigurationSource())
-//            )
-//            .authorizeHttpRequests(req -> req
-//                    .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-//                    .antMatchers(
-//                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email"
-//                    ).permitAll()
-//                    .antMatchers("/client-page").hasRole("USER")
-//                    .antMatchers("/partner-page").hasRole("PARTNER")
-//                    .antMatchers("/admin-page").hasRole("ADMIN")
-//                    .anyRequest().authenticated())
-//            .formLogin(login -> login
-//                    .loginPage("/login")
-//                    .defaultSuccessUrl("http://localhost:3000/", true)
-//                    .permitAll())
-//            .logout(logout -> logout
-//                    .logoutUrl("/logout")
-//                    .logoutSuccessUrl("http://localhost:3000/")
-//                    .invalidateHttpSession(true)
-//                    .deleteCookies("JSESSIONID"))
-//            .userDetailsService(memberDetailService);
-//
-//    return http.build();
-//  }
 
 
   @Bean
