@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Header from "./layout/header";
-import MainPage from "./page/mainPage";
-import MyPage from "./page/myPage";
-import ErrorPage from "./page/errorPage";
-import CampListPage from "./page/campListPage";
-import CampDetailPage from "./page/campDetailPage";
-import TradeListPage from "./page/tradeListPage";
-import TradeDetailPage from "./page/tradeDetailPage";
-import CampReservationPage1 from "./page/campReservationPage1";
-import CampReservationPage2 from "./page/campReservationPage2";
-import CampReservationPage3 from "./page/campReservationPage3";
-import AboutPage from "./page/aboutPage";
-import AnnouncementListPage from "./page/announcementListPage";
-import AnnouncementDetailPage from "./page/announcementDetailPage";
-import DetailPartnerCamp from "./componunt/DetailPartnerCamp";
-import CampRegisterCombined from "./componunt/jeongGyuHo/campRegisterCombined";
-import Footer from "./layout/footer";
+import Header from "./layout/header.js";
+import MainPage from "./page/mainPage.js";
+import MyPage from "./page/myPage.js";
+import ErrorPage from "./page/errorPage.js";
+import CampListPage from "./page/campListPage.js";
+import CampDetailPage from "./page/campDetailPage.js";
+import TradeListPage from "./page/tradeListPage.js";
+import TradeDetailPage from "./page/tradeDetailPage.js";
+import CampReservationPage1 from "./page/campReservationPage1.js";
+import CampReservationPage2 from "./page/campReservationPage2.js";
+import CampReservationPage3 from "./page/campReservationPage3.js";
+import AboutPage from "./page/aboutPage.js";
+import AnnouncementListPage from "./page/announcementListPage.js";
+import AnnouncementDetailPage from "./page/announcementDetailPage.js";
+import CampRegisterCombined from "./componunt/jeongGyuHo/campRegisterCombined.js";
+import Footer from "./layout/footer.js";
+import DetailPartnerCamp from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
 
 function App() {
   return (

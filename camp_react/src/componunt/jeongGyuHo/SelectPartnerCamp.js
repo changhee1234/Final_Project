@@ -7,6 +7,8 @@ function SelectPartnerCamp(props) {
     const [filteredCampList, setFilteredCampList] = useState([]);
     const [selectedPartnerIdx, setSelectedPartnerIdx] = useState(null);
 
+
+
     useEffect(() => {
         axios.get('http://localhost:8080/camp')
             .then(res => {
@@ -22,11 +24,14 @@ function SelectPartnerCamp(props) {
     useEffect(() => {
         if (selectedPartnerIdx === null) {
             setFilteredCampList(campList);
+            const filteredList = campList.filter(camp => camp.campDeletedYn === 'N');
+            setFilteredCampList(filteredList);
         } else {
-            const filteredList = campList.filter(camp => camp.partnerIdx === selectedPartnerIdx);
+            const filteredList = campList.filter(camp => camp.partnerIdx === selectedPartnerIdx && camp.campDeletedYn === 'N');
             setFilteredCampList(filteredList);
         }
     }, [selectedPartnerIdx, campList]);
+
 
     const handlePartnerSelectChange = (e) => {
         setSelectedPartnerIdx(e.target.value === "all" ? null : parseInt(e.target.value));
@@ -49,6 +54,7 @@ function SelectPartnerCamp(props) {
 
     return (
         <div className={'container'}>
+            <h2>운영중인 캠핑장</h2>
             <select onChange={handlePartnerSelectChange} className={'form-select'}>
                 <option value="all">전체</option>
                 <option value={1}>1</option>

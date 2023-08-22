@@ -24,5 +24,9 @@ public interface CampService {
 
     List<CampSiteInfoDto> partnerSelectCampSiteList(int intCampIdx) throws Exception;
 
-    List<CampSiteListDto> partnerSelectCampSiteList2(CampSiteInfo campSiteInfo) throws Exception;
+    CampSiteInfo updatePartnerSiteInfo(int campInfoIdx, CampSiteInfoDto campSiteInfoDto) throws Exception;
+
+    CampMainInfo deletePartnerCamp(int campIdx) throws Exception;
+
+    CampSiteInfo deletePartnerSite(int campInfoIdx) throws Exception;
 }

@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
 
 function CampRegisterCombined(props) {
     const [step, setStep] = useState(1); // 현재 단계를 저장하는 상태 변수
@@ -413,7 +412,6 @@ function CampRegisterCombined(props) {
                                 <label htmlFor={'notice'} className={'form-label'}>주의사항</label>
                                 <textarea
                                     rows={8}
-                                    type={"text"}
                                     className={'form-control'}
                                     id={'notice'}
                                     value={campSiteInfo.notice}
