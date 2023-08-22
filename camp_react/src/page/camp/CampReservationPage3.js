@@ -31,7 +31,6 @@ function CampReservationPage3(props) {
     userMemo: ''
   });
   const [isChecked, setIsChecked] = useState(false);
-  const [realName, setRealName] = useState('');
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -60,32 +59,36 @@ function CampReservationPage3(props) {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userReservationStart = format(stateObj.dateRange[0].startDate, "yyyy-MM-dd");
+    const userReservationEnd = format(stateObj.dateRange[0].endDate, "yyyy-MM-dd");
 
-  const handleSubmit = (e) => {
     const requestData = {
       ...reserveFrom,
       userSiteInfoIdx: stateObj.siteInfo.idx,
       userSiteListIdx: stateObj.selectedSiteIdx,
       userMemberIdx: props.userInfo.memberIdx,
-      userReservationStart: stateObj.dateRange[0].startDate,
-      userReservationEnd: stateObj.dateRange[0].endDate,
+      userReservationStart: userReservationStart,
+      userReservationEnd: userReservationEnd,
       userReservationCnt: stateObj.people,
       userParkCnt: stateObj.cars,
       userEleCnt: stateObj.ele,
       userReservationTotalPrice: totalPrice + "원"
     }
 
-    axios.post("http://localhost:8080/reserve/insertReservation", requestData)
-      .then(res => {
-        alert(`예약을 완료하였습니다.`);
-      })
-      .catch(err => {
-        alert(`통신 에러 : ${err}`);
-      });
+    try {
+      const res = await axios.post("http://localhost:8080/reserve/insertReservation", requestData)
+      alert(`결제 전 예약db 저장.`);
+      const reservationIdx = res.data;
+      await doPayment(reservationIdx);
+    } catch (err) {
+      alert(`통신 에러 : ${err}`);
+    }
   };
 
   // 결제
-  const doPayment = async () => {
+  const doPayment = async (reservationIdx) => {
     const {IMP} = window;
     IMP.init('imp56656734');
 
@@ -93,7 +96,7 @@ function CampReservationPage3(props) {
       pg: "html5_inicis.INIpayTest",
       pay_method: "card",
       merchant_uid: `${stateObj.selectedSite}_${format(new Date(), "MMdd_HH:mm:ss")}`,
-      name: `예약_${stateObj.campName}_${stateObj.selectedSite}`,
+      name: `${stateObj.campName}_${stateObj.selectedSite}`,
       amount: 1, // totalPrice
       buyer_name: reserveFrom.userReservationName,
       buyer_tel: reserveFrom.userPhoneNumber,
@@ -105,33 +108,66 @@ function CampReservationPage3(props) {
     async function callback(rsp) {
       // 결제 사후 검증
       const {data} = await axios.post("http://localhost:8080/payments/" + rsp.imp_uid)
+      const reqPayData = {
+        impUid: data.response.impUid,
+        merchantUid: data.response.merchantUid,
+        payMethod: data.response.payMethod,
+        cardName: data.response.cardName,
+        cardNumber: data.response.cardNumber,
+        payAmount: data.response.amount,
+        payDate: data.response.paidAt,
+        payStatus: data.response.status,
+        cancelAmount: data.response.cancelAmount,
+        cancelDate: data.response.cancelledAt,
+        receiptUrl: data.response.receiptUrl,
+        reservationIdx: reservationIdx,
+        name: data.response.name
+      }
+      console.log(reqPayData);
+
       if (rsp.paid_amount === data.response.amount) {
-        console.log(rsp);
-        alert(`결제 성공 및 검증확인`);
-        handleSubmit();
-        // 예약테이블에 imp_uid, m_uid저장?
-
-        const reqPayData = {
-          payAmount: data.response.amount,
-          payState: data.response,
-          payDate: data.response
-        }
-        axios.post("http://localhost:8080/payments/save", reqPayData)
-          .then(res => alert(`결제 db 저장 완료`))
-          .catch(err => alert(err));
         // 결제 내역 결제 테이블에 저장
+        await axios.post("http://localhost:8080/payments/success", reqPayData)
+          .then(res => {
+            alert(`결제 db 저장 완료`)
+          })
+          .catch(err => alert(err));
 
+        // 예약테이블에 imp_uid, m_uid추가, 결제 상태 결제 성공으로 수정
+        const params = {
+          payStatus: "결제완료",
+          impUid: reqPayData.impUid,
+          merchantUid: reqPayData.merchantUid,
+          name: reqPayData.name
+        }
+
+        await axios.patch("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
+          .then(res => console.log('결제 성공'))
+          .catch(err => alert(err));
         return navigate("/")
+
       } else {
         alert(`결제 실패하였습니다.`);
-        //결제 취소 처리
+        //결제 실패 처리
+        const params = {
+          payStatus: "결제실패",
+          impUid: reqPayData.impUid,
+          merchantUid: reqPayData.merchantUid,
+          name: reqPayData.name
+        }
+
+        console.log(params);
+
+        await axios.patch("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
+          .then(res => console.log('결제 실패'))
+          .catch(err => alert(err));
       }
     }
   };
 
   return (
     <main className={"container"}>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={"row"}>
           <div className="col-sm-6 mx-auto">
             {/*예약자 정보 입력*/}
@@ -279,7 +315,7 @@ function CampReservationPage3(props) {
             </div>
             <div className={"d-grid my-3"}>
               {/*<button type={"submit"} className={"btn btn-primary"}>예약하기(결제)</button>*/}
-              <button type={"button"} className={"btn btn-primary"} onClick={doPayment}>결제하기</button>
+              <button type={"submit"} className={"btn btn-primary"} onClick={doPayment}>결제하기</button>
             </div>
           </div>
         </div>
