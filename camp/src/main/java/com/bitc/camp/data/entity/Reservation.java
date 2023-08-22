@@ -54,12 +54,6 @@ public class Reservation {
 
   @Column(nullable = false)
   private String merchantUid;
-
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "user_site_info_idx")
-  @ToString.Exclude
-  private CampSiteInfo campSiteInfo;
-
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_site_list_idx")
   @ToString.Exclude
@@ -96,7 +90,6 @@ public class Reservation {
     this.userPhoneNumber = userPhoneNumber;
     this.userMemo = userMemo;
     this.userReservationTotalPrice = userReservationTotalPrice;
-    this.campSiteInfo = campSiteInfo;
     this.campSiteList = campSiteList;
     this.member = member;
   }

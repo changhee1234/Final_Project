@@ -36,13 +36,13 @@ function MyPage() {
     if (selectedMenu === '내 정보') {
         contentComponent = <MyInfo/>;
     } else if (selectedMenu === '찜한 캠핑장') {
-        contentComponent = <FavoriteCampingList/>;
+        contentComponent = <FavoriteCampingList user={user}/>;
     } else if (selectedMenu === '예약 확인') {
-        contentComponent = <ReservationConfirmation/>;
+        contentComponent = <ReservationConfirmation user={user}/>;
     } else if (selectedMenu === '내가 쓴 장터글') {
-        contentComponent = <MyTradePosts/>;
+        contentComponent = <MyTradePosts user={user}/>;
     } else if (selectedMenu === '파트너 회원 신청') {
-        contentComponent = <PartnerApplication/>;
+        contentComponent = <PartnerApplication user={user}/>;
     } else {
         contentComponent = (
             <div className="container">
@@ -53,7 +53,7 @@ function MyPage() {
 
 
     return (
-        <main className="container my-5">
+        <main className="container my-5 pt-5">
             <div className="row my-5">
                 <div className="col-md-3 my-5">
                     {/* 왼쪽 영역 */}
@@ -98,7 +98,7 @@ function MyPage() {
                 </div>
                 <div className="col-md-8">
                     {/* 오른쪽 영역 */}
-                    {contentComponent}
+                    {contentComponent }
                 </div>
             </div>
         </main>

@@ -52,4 +52,14 @@ public class Partner {
   @JoinColumn(name = "member_idx")
   @ToString.Exclude
   private Member member;
-}
+
+  public void setPartnerName(String partnerName) {this.partnerName = partnerName;}
+  public void setPartnerPhone(String partnerPhone) {this.partnerPhone = partnerPhone;}
+  public void setPartnerNum(String partnerNum) {this.partnerNum = partnerNum;}
+  public void setAddressNum(int addressNum) {this.addressNum = addressNum;}
+  public void setAddress(String address) {this.address = address;}
+  public void setAddressDetail(String addressDetail) {this.addressDetail = addressDetail;}
+  public void setPartnerAccess(String partnerAccess) {this.partnerAccess = partnerAccess;}
+  public void setMember(Member member) { this.member = member; }
+  }
+

@@ -43,7 +43,8 @@ public class SecurityConfig {
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
-                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image", "/delete-account"
+                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image"
+                            , "/delete-account", "/addPartner"
                     ).permitAll()
                     .requestMatchers("/partner-page").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")
