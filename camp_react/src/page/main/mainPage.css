@@ -1,0 +1,156 @@
+/*.carousel-inner {*/
+/*width: auto;*/
+/*height: 965px;*/
+/*}*/
+
+/*.carousel-item.active{*/
+/*    position: relative;*/
+/*    opacity: 1;*/
+/*    z-index: 700;*/
+/*}*/
+
+/*.carousel-item.prev{*/
+/*    transform: translateX(-100%);*/
+/*    z-index: 500;*/
+/*}*/
+
+/*.carousel-item.next{*/
+/*    transform: translateX(100%);*/
+/*    z-index: 500;*/
+/*}*/
+
+/*.carousel-btn-next,*/
+/*.carousel-btn-prev{*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    width: 40px;*/
+/*    height: 40px;*/
+/*    border-radius: 50%;*/
+/*    border : 1px solid #000;*/
+/*    background-color: #fff;*/
+/*    cursor: pointer;*/
+/*    transform: translateY(-50%);*/
+/*    z-index: 1000;*/
+/*}*/
+/*광고배너 크기*/
+.ad {
+    width: 700px;
+    height: 200px;
+}
+
+.bi-megaphone {
+    font-size: 25px;
+    line-height: 22px;
+    color: crimson;
+}
+
+.rocket-takeoff {
+    font-size: 25px;
+    line-height: 22px;
+    color: rgba(175, 146, 0, 0.93);
+}
+
+.bi-cart4 {
+    font-size: 25px;
+    line-height: 22px;
+}
+
+.text1 {
+    text-transform: uppercase;
+    font-family: "Arial Black", sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.text2 {
+    text-transform: uppercase;
+    font-family: "Arial Black", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.text3 {
+    text-transform: uppercase;
+    font-family: "Arial Black", sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.more {
+    margin: 20px 40px;
+}
+
+/*등록 및 수정버튼 UI*/
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-indigo {
+    border: 3px solid #d7e8f6;
+    background-color: aliceblue;
+    color: #1e6b7b;
+}
+
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/*캐러셀 텍스트 형광펜 효과*/
+.highlight1 {
+    background-color: rgba(0, 0, 0, 0.4);
+    width: auto;
+    margin: auto;
+    font-weight: bold;
+}
+
+.highlight2 {
+    background: linear-gradient(to top, #004460 40%, transparent 40%);
+    background-color: #a20000;
+    opacity: 0.8;
+    text-align: center;
+    width: 400px;
+    color: white;
+    font-weight: bold;
+    margin: auto;
+}
+
+ul{
+list-style-type: none;
+}
+
+.card {
+    width: 18rem
+}
+
+/*샐렉트 박스 UI*/
+.sel{
+    width: 200px;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 12px 13px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.sel:focus{
+    border: 1px solid #a49c27;
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline: 3px solid #F8E4FF;
+    border-radius: 10px;
+}

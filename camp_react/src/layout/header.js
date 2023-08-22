@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
+
 function Header(props) {
 
     const logo = {
@@ -45,14 +46,12 @@ function Header(props) {
                             <Link className="nav-link fs-4" to={'/'}>날씨</Link>
                         </li>
                     </ul>
-
                 </div>
                 <form className="d-flex justify-content-end me-3" role="search">
                     <input className="form-control me-2" type="search" placeholder="검색어를 입력해주세요." aria-label="Search"/>
                     <button className="btn btn-light btn-outline-dark" type="submit">Search</button>
                 </form>
             </nav>
-
             {/*    회원가입 모달창*/}
             <div className={'modal fade'} id={'joinModal'} tabindex={'-1'} aria-labelledby={'joinModalLabel'}
                  aria-hidden={'true'}>

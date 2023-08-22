@@ -21,6 +21,7 @@ function Footer(props) {
                 </li>
                 <li className={"nav-item"}>
                     <Link to={'/announcementList'} className={"nav-link px-2 text-body-secondary"}>Announcement</Link>
+
                 </li>
             </ul>
             <p className={"text-center text-body-secondary"}>2023 full505 team3 final</p>

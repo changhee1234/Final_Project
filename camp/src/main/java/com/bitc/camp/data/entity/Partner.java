@@ -1,10 +1,13 @@
 package com.bitc.camp.data.entity;
 
+
+import com.bitc.camp.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 import org.hibernate.annotations.DynamicInsert;
 
 import java.util.ArrayList;
@@ -52,3 +55,4 @@ public class Partner {
     @ToString.Exclude
     private Member member;
 }
+

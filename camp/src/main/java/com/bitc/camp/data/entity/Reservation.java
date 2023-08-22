@@ -1,24 +1,20 @@
 package com.bitc.camp.data.entity;
 
 
+import com.bitc.camp.entity.Member;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reservation")
 @Getter
-@Setter
 @ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicInsert
-@NoArgsConstructor
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,11 +34,11 @@ public class Reservation {
     @Column(nullable = false)
     private int userReservationCnt;
 
-    private int userParkCnt;
+    private Integer userParkCnt;
 
     private String userCarNum;
 
-    private int userEleCnt;
+    private Integer userEleCnt;
 
     @Column(nullable = false)
     private String userPhoneNumber;
@@ -50,12 +46,20 @@ public class Reservation {
     private String userMemo;
 
     @Column(nullable = false)
-    private int userReservationTotalPrice;
+    private String userReservationTotalPrice;
+
+    private String payStatus;
+
+    private String impUid;
+
+    private String merchantUid;
+
+    private String name;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_camp_main_idx")
+    @JoinColumn(name = "user_site_info_idx")
     @ToString.Exclude
-    private CampMainInfo campMainInfo;
+    private CampSiteInfo campSiteInfo;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_site_list_idx")
@@ -67,5 +71,49 @@ public class Reservation {
     @ToString.Exclude
     private Member member;
 
+    @Builder
+    public Reservation(
+            String userReservationName,
+            LocalDate userReservationStart,
+            LocalDate userReservationEnd,
+            int userReservationCnt,
+            int userParkCnt,
+            String userCarNum,
+            int userEleCnt,
+            String userPhoneNumber,
+            String userMemo,
+            String userReservationTotalPrice,
+            String payStatus,
+            String impUid,
+            String merchantUid,
+            String name,
+            CampSiteInfo campSiteInfo,
+            CampSiteList campSiteList,
+            Member member
+    ) {
+        this.userReservationName = userReservationName;
+        this.userReservationStart = userReservationStart;
+        this.userReservationEnd = userReservationEnd;
+        this.userReservationCnt = userReservationCnt;
+        this.userParkCnt = userParkCnt;
+        this.userCarNum = userCarNum;
+        this.userEleCnt = userEleCnt;
+        this.userPhoneNumber = userPhoneNumber;
+        this.userMemo = userMemo;
+        this.userReservationTotalPrice = userReservationTotalPrice;
+        this.payStatus = payStatus;
+        this.impUid = impUid;
+        this.merchantUid = merchantUid;
+        this.name = name;
+        this.campSiteInfo = campSiteInfo;
+        this.campSiteList = campSiteList;
+        this.member = member;
+    }
 
+    public void update(String payStatus, String impUid, String merchantUid, String name) {
+        this.payStatus = payStatus;
+        this.impUid = impUid;
+        this.merchantUid = merchantUid;
+        this.name = name;
+    }
 }

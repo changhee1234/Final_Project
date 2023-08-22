@@ -13,21 +13,22 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class DbConfig {
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.hikari")
-    public HikariConfig hikariConfig(){
-        return new HikariConfig();
-    }
 
-    @Bean
-    public DataSource dataSource(){
-        DataSource dataSource = new HikariDataSource(hikariConfig());
-        return dataSource;
-    }
+  @Bean
+  @ConfigurationProperties(prefix = "spring.datasource.hikari")
+  public HikariConfig hikariConfig(){
+    return new HikariConfig();
+  }
 
-    @Bean
-    @ConfigurationProperties(prefix = "spring.jpa")
-    public Properties properties(){
-        return new Properties();
-    }
+  @Bean
+  public DataSource dataSource(){
+    DataSource dataSource = new HikariDataSource(hikariConfig());
+    return dataSource;
+  }
+
+  @Bean
+  @ConfigurationProperties(prefix = "spring.jpa")
+  public Properties properties(){
+    return new Properties();
+  }
 }

@@ -56,4 +56,5 @@ public class CampMainInfo {
     @OneToMany(mappedBy = "campMainInfo")
     @ToString.Exclude
     private List<CampSiteInfo> campSiteInfoList = new ArrayList<>();
+
 }
