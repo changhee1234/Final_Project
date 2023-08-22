@@ -1,10 +1,8 @@
 package com.bitc.camp.controller;
 
-import com.bitc.camp.data.dto.CampMainRespDto;
-import com.bitc.camp.data.dto.CampSiteInfoRespDto;
-import com.bitc.camp.data.dto.CampSiteListRespDto;
-import com.bitc.camp.data.dto.ReservationReqDto;
+import com.bitc.camp.data.dto.*;
 import com.bitc.camp.service.ReservationService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,14 +60,26 @@ public class ReservationController {
 
   // 결제 전 예약db에 결제 상태:결제전
   @PostMapping("/insertReservation")
-  public int insertReservation(@RequestBody final ReservationReqDto requestData) throws Exception{
+  public int insertReservation(@RequestBody final ReservationReqDto requestData) throws Exception {
     int idx = reservationService.save(requestData);
     return idx;
   }
 
   // 결제 완료 후 예약db 결제 상태 변경
-  @PatchMapping("/updateReservation/{reservationIdx}")
-  public void updateReservation(@PathVariable("reservationIdx") int idx,@RequestBody ReservationReqDto params) throws Exception {
+  @PutMapping("/updateReservation/{reservationIdx}")
+  public void updateReservation(@PathVariable("reservationIdx") int idx, @RequestBody ReservationReqDto params) throws Exception {
     reservationService.updateReservation(idx, params);
+  }
+
+  // 파트너 예약 리스트 조회
+  @GetMapping("/reservationList/{partnerIdx}")
+  public Map<String, Object> getReservation(@PathVariable("partnerIdx") int partnerIdx) throws Exception {
+
+    Map<String, Object> result = new HashMap<>();
+
+    List<ReservationRespDto> reservationList = reservationService.getReservationFromCampMainIdx(partnerIdx);
+    result.put("result", reservationList);
+
+    return result;
   }
 }

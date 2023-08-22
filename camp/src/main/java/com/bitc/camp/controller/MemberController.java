@@ -1,5 +1,6 @@
 package com.bitc.camp.controller;
 
+import com.bitc.camp.data.dto.PartnerRespDto;
 import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.repository.MemberRepository;
 import com.bitc.camp.service.MemberService;
@@ -97,5 +98,12 @@ public class MemberController {
         public boolean isAvailable() {
             return available;
         }
+    }
+
+
+    // 파트너 정보 불러오기
+    @GetMapping("/partnerInfo/{memberIdx}")
+    public PartnerRespDto getPartnerInfo(@PathVariable("memberIdx")int memberIdx) throws Exception{
+        return memberService.getPartnerInfo(memberIdx);
     }
 }

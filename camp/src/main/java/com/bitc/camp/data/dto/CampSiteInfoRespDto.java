@@ -23,7 +23,6 @@ public class CampSiteInfoRespDto {
 
   private int campMainIdx;
   private List<CampSiteListRespDto> campSiteLists;
-  private List<ReservationRespDto> reservationList;
 
   public CampSiteInfoRespDto(CampSiteInfo entity) {
     this.idx = entity.getIdx();

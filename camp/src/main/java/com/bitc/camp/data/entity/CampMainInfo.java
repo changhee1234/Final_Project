@@ -18,43 +18,50 @@ import java.util.List;
 @AllArgsConstructor
 @DynamicInsert
 public class CampMainInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idx;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int idx;
 
-    @Column(length = 45, nullable = false)
-    private String campName;
+  @Column(length = 45, nullable = false)
+  private String campName;
 
-    @Column(length = 1, nullable = false)
-    private String campDeletedYn;
+  @Column(length = 1, nullable = false)
+  private String campDeletedYn;
 
-    @Column(length = 1000, nullable = false)
-    private String campIntro;
+  @Column(length = 1000, nullable = false)
+  private String campIntro;
 
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime campDt;
+  @CreatedDate
+  @Column(nullable = false)
+  private LocalDateTime campDt;
 
-    @Column(length = 1, nullable = false)
-    private String kidszoneYn;
+  @Column(length = 1, nullable = false)
+  private String kidszoneYn;
 
-    @Column(length = 100, nullable = true)
-    private String campHpLink;
+  @Column(length = 100, nullable = true)
+  private String campHpLink;
 
-    @Column(length = 45, nullable = false)
-    private String campPh;
+  @Column(length = 45, nullable = false)
+  private String campPh;
 
-    @Column(length = 100, nullable = false)
-    private String campAddress;
+  @Column(length = 100, nullable = false)
+  private String campAddress;
 
-    // 파트너 테이블 참조
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "partner_idx")
-    @ToString.Exclude
-    private Partner partner;
+  // 파트너 테이블 참조
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "partner_idx")
+  @ToString.Exclude
+  private Partner partner;
 
-    @OneToMany(mappedBy = "campMainInfo")
-    @ToString.Exclude
-    private List<CampSiteInfo> campSiteInfoList = new ArrayList<>();
+  @OneToMany(mappedBy = "campMainInfo")
+  @ToString.Exclude
+  private List<CampSiteInfo> campSiteInfoList = new ArrayList<>();
 
+  @OneToMany(mappedBy = "campMainInfo")
+  @ToString.Exclude
+  private List<Reservation> reservationList = new ArrayList<>();
+
+  public CampMainInfo(int idx) {
+    this.idx = idx;
+  }
 }

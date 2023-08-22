@@ -1,9 +1,6 @@
 package com.bitc.camp.service;
 
-import com.bitc.camp.data.dto.CampMainRespDto;
-import com.bitc.camp.data.dto.CampSiteInfoRespDto;
-import com.bitc.camp.data.dto.CampSiteListRespDto;
-import com.bitc.camp.data.dto.ReservationReqDto;
+import com.bitc.camp.data.dto.*;
 
 import java.util.List;
 
@@ -19,4 +16,6 @@ public interface ReservationService {
   int save(ReservationReqDto requestData) throws Exception;
 
   void updateReservation(int idx, ReservationReqDto params) throws Exception;
+
+  List<ReservationRespDto> getReservationFromCampMainIdx(int partnerIdx);
 }

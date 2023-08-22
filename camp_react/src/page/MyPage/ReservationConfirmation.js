@@ -1,11 +1,14 @@
 import React from 'react';
-
+import UserReservationConfirmation from "../../components/reserve/UserReservationConfirmation";
+import PartnerReservationConfirmation from "../../components/reserve/PartnerReservationConfirmation";
 function ReservationConfirmation(props) {
 
     return (
-        <div>
-            <h3 className={"text-start"}>예약 확인</h3>
-        </div>
+        <>
+          {
+            props.userInfo.grade === "user" ? <UserReservationConfirmation/> : <PartnerReservationConfirmation userInfo={props.userInfo}/>
+          }
+        </>
     )
 }
 
