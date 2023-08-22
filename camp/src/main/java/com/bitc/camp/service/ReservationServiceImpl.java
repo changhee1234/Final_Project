@@ -14,6 +14,7 @@ import com.bitc.camp.data.repository.CampSiteRepository;
 import com.bitc.camp.data.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -61,8 +62,18 @@ public class ReservationServiceImpl implements ReservationService {
     return campSiteLists;
   }
 
+  @Transactional
   @Override
-  public void save(ReservationReqDto requestData) throws Exception {
-    reservationRepository.save(requestData.toEntity());
+  public int save(ReservationReqDto requestData) throws Exception {
+    Reservation entity = reservationRepository.save(requestData.toEntity());
+    return entity.getIdx();
+  }
+
+  // 결제 성공시 예약 상태 결제 성공으로 수정
+  @Transactional
+  @Override
+  public void updateReservation(int idx, ReservationReqDto params) throws Exception {
+    Reservation entity = reservationRepository.findById(idx).orElseThrow();
+    entity.update(params.getPayStatus(), params.getImpUid(), params.getMerchantUid(), params.getName());
   }
 }

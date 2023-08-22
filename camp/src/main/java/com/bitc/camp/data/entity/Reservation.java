@@ -8,7 +8,6 @@ import org.hibernate.annotations.DynamicInsert;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reservation")
@@ -49,15 +48,18 @@ public class Reservation {
   @Column(nullable = false)
   private String userReservationTotalPrice;
 
-  @Column(nullable = false)
+  private String payStatus;
+
   private String impUid;
 
-  @Column(nullable = false)
   private String merchantUid;
+
+  private String name;
+
   @ManyToOne(optional = false)
-  @JoinColumn(name = "user_site_list_idx")
+  @JoinColumn(name = "user_site_info_idx")
   @ToString.Exclude
-  private CampSiteList campSiteList;
+  private CampSiteInfo campSiteInfo;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_member_idx")
@@ -67,8 +69,8 @@ public class Reservation {
   @Builder
   public Reservation(
       String userReservationName,
-      LocalDateTime userReservationStart,
-      LocalDateTime userReservationEnd,
+      LocalDate userReservationStart,
+      LocalDate userReservationEnd,
       int userReservationCnt,
       int userParkCnt,
       String userCarNum,
@@ -76,8 +78,11 @@ public class Reservation {
       String userPhoneNumber,
       String userMemo,
       String userReservationTotalPrice,
+      String payStatus,
+      String impUid,
+      String merchantUid,
+      String name,
       CampSiteInfo campSiteInfo,
-      CampSiteList campSiteList,
       Member member
   ) {
     this.userReservationName = userReservationName;
@@ -90,7 +95,18 @@ public class Reservation {
     this.userPhoneNumber = userPhoneNumber;
     this.userMemo = userMemo;
     this.userReservationTotalPrice = userReservationTotalPrice;
-    this.campSiteList = campSiteList;
+    this.payStatus = payStatus;
+    this.impUid = impUid;
+    this.merchantUid = merchantUid;
+    this.name = name;
+    this.campSiteInfo = campSiteInfo;
     this.member = member;
+  }
+
+  public void update(String payStatus, String impUid, String merchantUid, String name) {
+    this.payStatus = payStatus;
+    this.impUid = impUid;
+    this.merchantUid = merchantUid;
+    this.name = name;
   }
 }

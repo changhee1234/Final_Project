@@ -60,10 +60,16 @@ public class ReservationController {
     return result;
   }
 
-  // 결제 후 예약db에 저장
+  // 결제 전 예약db에 결제 상태:결제전
   @PostMapping("/insertReservation")
-  public void insertReservation(@RequestBody final ReservationReqDto requestData) throws Exception{
-    reservationService.save(requestData);
+  public int insertReservation(@RequestBody final ReservationReqDto requestData) throws Exception{
+    int idx = reservationService.save(requestData);
+    return idx;
   }
 
+  // 결제 완료 후 예약db 결제 상태 변경
+  @PatchMapping("/updateReservation/{reservationIdx}")
+  public void updateReservation(@PathVariable("reservationIdx") int idx,@RequestBody ReservationReqDto params) throws Exception {
+    reservationService.updateReservation(idx, params);
+  }
 }
