@@ -1,9 +1,6 @@
 package com.bitc.camp.service;
 
-import com.bitc.camp.data.dto.CampMainRespDto;
-import com.bitc.camp.data.dto.CampSiteInfoRespDto;
-import com.bitc.camp.data.dto.CampSiteListRespDto;
-import com.bitc.camp.data.dto.ReservationReqDto;
+import com.bitc.camp.data.dto.*;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
 import com.bitc.camp.data.entity.CampSiteList;
@@ -19,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -76,4 +74,24 @@ public class ReservationServiceImpl implements ReservationService {
     Reservation entity = reservationRepository.findById(idx).orElseThrow();
     entity.update(params.getPayStatus(), params.getImpUid(), params.getMerchantUid(), params.getName());
   }
+
+  @Override
+  public List<ReservationRespDto> getReservationFromCampMainIdx(int partnerIdx) {
+    int campMainIdx = reservationRepository.findByPartnerIdx(partnerIdx);
+    List<Reservation> reservations = reservationRepository.findByCampMainIdx(campMainIdx);
+    List<ReservationRespDto> reservationRespDtos = new ArrayList<>();
+    for (Reservation item : reservations) {
+      ReservationRespDto respDto = new ReservationRespDto(item);
+      reservationRespDtos.add(respDto);
+    }
+    return reservationRespDtos;
+  }
+
+//  @Override
+//  public ReservationRespDto getReservation(int id) throws Exception {
+//
+//    Reservation reservation = reservationRepository.findById(id).orElseThrow();
+//    return new ReservationRespDto(reservation);
+//  }
+
 }

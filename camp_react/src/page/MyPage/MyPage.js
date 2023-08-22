@@ -39,7 +39,7 @@ function MyPage() {
     } else if (selectedMenu === '찜한 캠핑장') {
         contentComponent = <FavoriteCampingList/>;
     } else if (selectedMenu === '예약 확인') {
-        contentComponent = <ReservationConfirmation/>;
+        contentComponent = <ReservationConfirmation userInfo={user}/>;
     } else if (selectedMenu === '내가 쓴 장터글') {
         contentComponent = <MyTradePosts/>;
     } else if (selectedMenu === '파트너 회원 신청') {

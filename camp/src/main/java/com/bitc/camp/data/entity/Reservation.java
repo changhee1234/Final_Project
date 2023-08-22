@@ -46,7 +46,7 @@ public class Reservation {
   private String userMemo;
 
   @Column(nullable = false)
-  private String userReservationTotalPrice;
+  private int userReservationTotalPrice;
 
   private String payStatus;
 
@@ -57,9 +57,9 @@ public class Reservation {
   private String name;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "user_site_info_idx")
+  @JoinColumn(name = "user_camp_main_idx")
   @ToString.Exclude
-  private CampSiteInfo campSiteInfo;
+  private CampMainInfo campMainInfo;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "user_site_list_idx")
@@ -82,12 +82,12 @@ public class Reservation {
       int userEleCnt,
       String userPhoneNumber,
       String userMemo,
-      String userReservationTotalPrice,
+      int userReservationTotalPrice,
       String payStatus,
       String impUid,
       String merchantUid,
       String name,
-      CampSiteInfo campSiteInfo,
+      CampMainInfo campMainInfo,
       CampSiteList campSiteList,
       Member member
   ) {
@@ -105,7 +105,7 @@ public class Reservation {
     this.impUid = impUid;
     this.merchantUid = merchantUid;
     this.name = name;
-    this.campSiteInfo = campSiteInfo;
+    this.campMainInfo = campMainInfo;
     this.campSiteList = campSiteList;
     this.member = member;
   }

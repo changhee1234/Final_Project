@@ -50,4 +50,12 @@ public class CampMainInfo {
   @OneToMany(mappedBy = "campMainInfo")
   @ToString.Exclude
   private List<CampSiteInfo> campSiteInfoList = new ArrayList<>();
+
+  @OneToMany(mappedBy = "campMainInfo")
+  @ToString.Exclude
+  private List<Reservation> reservationList = new ArrayList<>();
+
+  public CampMainInfo(int idx) {
+    this.idx = idx;
+  }
 }

@@ -257,7 +257,8 @@ function SelectOptions(props) {
               parkPrice: parkPrice,
               elePrice: elePrice,
               sitePrice: sitePrice,
-              campName: props.campName
+              campName: props.campName,
+              campMainIdx: props.campMainIdx
             }}
             className="btn btn-primary mt-3"
             onClick={(e) => {

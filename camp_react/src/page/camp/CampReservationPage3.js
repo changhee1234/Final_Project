@@ -66,7 +66,7 @@ function CampReservationPage3(props) {
 
     const requestData = {
       ...reserveFrom,
-      userSiteInfoIdx: stateObj.siteInfo.idx,
+      userCampMainIdx: stateObj.campMainIdx,
       userSiteListIdx: stateObj.selectedSiteIdx,
       userMemberIdx: props.userInfo.memberIdx,
       userReservationStart: userReservationStart,
@@ -74,7 +74,7 @@ function CampReservationPage3(props) {
       userReservationCnt: stateObj.people,
       userParkCnt: stateObj.cars,
       userEleCnt: stateObj.ele,
-      userReservationTotalPrice: totalPrice + "원"
+      userReservationTotalPrice: totalPrice
     }
 
     try {
@@ -141,7 +141,7 @@ function CampReservationPage3(props) {
           name: reqPayData.name
         }
 
-        await axios.patch("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
+        await axios.put("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
           .then(res => console.log('결제 성공'))
           .catch(err => alert(err));
         return navigate("/")
@@ -156,9 +156,7 @@ function CampReservationPage3(props) {
           name: reqPayData.name
         }
 
-        console.log(params);
-
-        await axios.patch("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
+        await axios.put("http://localhost:8080/reserve/updateReservation/" + reservationIdx, params)
           .then(res => console.log('결제 실패'))
           .catch(err => alert(err));
       }
