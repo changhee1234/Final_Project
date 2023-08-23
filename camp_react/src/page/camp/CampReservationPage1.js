@@ -7,8 +7,10 @@ import {DateRange} from 'react-date-range';
 import * as locales from 'react-date-range/dist/locale';
 import {addDays, format} from 'date-fns';
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 function CampReservationPage1(props) {
+  const campIdx = useParams();
   const [mainInfo, setMainInfo] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   const [siteInfos, setSiteInfos] = useState([]);
@@ -23,15 +25,14 @@ function CampReservationPage1(props) {
 
   useEffect(() => {
     // 캠핑장 메인 정보 저장
-    axios.get("http://localhost:8080/reserve/" + 1)
-        .then(res => {
-          setMainInfo(res.data.mainInfo);
-          setSiteInfos(res.data.mainInfo.siteInfoLists);
-        })
-        .catch(err => {
-          alert(`통신 오류 : ${err}`);
-        });
-
+    axios.get("http://localhost:8080/reserve/" + campIdx.campIdx)
+      .then(res => {
+        setMainInfo(res.data.mainInfo);
+        setSiteInfos(res.data.mainInfo.siteInfoLists);
+      })
+      .catch(err => {
+        alert(`통신 오류 : ${err}`);
+      });
   }, []);
 
   // 날짜 선택 시 예약 가능한 자리수 저장

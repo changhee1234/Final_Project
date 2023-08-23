@@ -58,7 +58,7 @@ function App() {
             <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
             <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
             {/*예약페이지*/}
-            <Route path={'/reservation1/*'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
+            <Route path={'/reservation1/:campIdx'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
             <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
             <Route path={'/reservation3/*'} element={<CampReservationPage3 userInfo={userInfo}/>}/>
             <Route path={'/reservation4/*'} element={<CampReservationPage4 userInfo={userInfo}/>}/>
