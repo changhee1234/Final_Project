@@ -1,5 +1,7 @@
 import React from "react";
+
 import {Link} from "react-router-dom";
+
 
 
 function CampDetailPage(props) {
@@ -10,6 +12,7 @@ function CampDetailPage(props) {
             <h1 className={'text-center'}>test</h1>
             {/* 1->db의 campMainIdx*/}
             <Link to={'/reservation1/' + 1} className={'text-decoration-none btn btn-primary'}>예약하기</Link>
+
         </main>
     );
 }

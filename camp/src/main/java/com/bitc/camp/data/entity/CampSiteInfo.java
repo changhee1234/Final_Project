@@ -9,6 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "camp_site_info")
 @Getter
+@Setter
+@AllArgsConstructor
 @ToString
 @NoArgsConstructor
 public class CampSiteInfo {
@@ -49,6 +51,9 @@ public class CampSiteInfo {
   @Column(nullable = false)
   private int areaSiteCnt;
 
+  @Column(nullable = false)
+  private String siteDeletedYn;
+
   // 관계
   @ManyToOne(optional = false)
   @JoinColumn(name = "camp_main_idx")
@@ -62,4 +67,5 @@ public class CampSiteInfo {
   public CampSiteInfo(int idx) {
     this.idx = idx;
   }
+
 }

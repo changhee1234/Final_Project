@@ -9,7 +9,7 @@ function AreaList(props) {
         props.siteInfos && props.siteInfos.map((m) => {
           return (
             <Link to={`/reservation2/reserveStep/${m.idx}`}
-                  state={{dateRange: props.dateRange, campName: props.campName}}
+                  state={{dateRange: props.dateRange, campName: props.campName, campMainIdx: props.campMainIdx}}
                   key={m.idx}
                   className={'text-decoration-none'}
                   onClick={(e) => {

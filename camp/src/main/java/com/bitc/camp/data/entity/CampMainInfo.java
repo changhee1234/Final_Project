@@ -12,8 +12,10 @@ import java.util.List;
 @Entity
 @Table(name = "camp_main_info")
 @Getter
+@Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @DynamicInsert
 public class CampMainInfo {
   @Id
@@ -22,6 +24,9 @@ public class CampMainInfo {
 
   @Column(length = 45, nullable = false)
   private String campName;
+
+  @Column(length = 1, nullable = false)
+  private String campDeletedYn;
 
   @Column(length = 1000, nullable = false)
   private String campIntro;
@@ -42,6 +47,7 @@ public class CampMainInfo {
   @Column(length = 100, nullable = false)
   private String campAddress;
 
+  // 파트너 테이블 참조
   @ManyToOne(optional = false)
   @JoinColumn(name = "partner_idx")
   @ToString.Exclude
@@ -50,4 +56,12 @@ public class CampMainInfo {
   @OneToMany(mappedBy = "campMainInfo")
   @ToString.Exclude
   private List<CampSiteInfo> campSiteInfoList = new ArrayList<>();
+
+  @OneToMany(mappedBy = "campMainInfo")
+  @ToString.Exclude
+  private List<Reservation> reservationList = new ArrayList<>();
+
+  public CampMainInfo(int idx) {
+    this.idx = idx;
+  }
 }

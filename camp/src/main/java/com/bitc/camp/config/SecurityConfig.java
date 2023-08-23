@@ -46,7 +46,7 @@ public class SecurityConfig {
                             "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image"
                             , "/delete-account", "/addPartner", "/updatePartnerAccess"
                     ).permitAll()
-                    .requestMatchers("/partner-page").hasRole("PARTNER")
+                    .requestMatchers("/partner-page", "/partnerInfo/**").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")
                     .anyRequest().authenticated())
             .formLogin(login -> login
@@ -62,7 +62,6 @@ public class SecurityConfig {
 
     return http.build();
   }
-
 
   @Bean
   public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, MemberDetailService memberDetailService) throws Exception {

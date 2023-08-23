@@ -166,12 +166,12 @@ function Header(props) {
                     {user ? (
                         <>
                             {/*<span className={'me-3'}>{user.nickName}님</span>*/}
-                            <Link className="me-3 text-decoration-none text-dark" to={`/myPage/${user.nickName}`}>
+                            <Link className="me-3 text-decoration-none text-dark fw-bold" to={`/myPage/${user.nickName}`}>
                                 {user.nickName}님
                             </Link>
-                            <button className={'btn btn-link text-decoration-none text-dark'} onClick={handleLogout}>
+                            <a className={'me-3 text-decoration-none text-dark'} onClick={handleLogout}>
                                 로그아웃
-                            </button>
+                            </a>
                         </>
                     ) : (
                         <>

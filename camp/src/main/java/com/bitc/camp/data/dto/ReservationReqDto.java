@@ -1,6 +1,6 @@
 package com.bitc.camp.data.dto;
 
-import com.bitc.camp.data.entity.CampSiteInfo;
+import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteList;
 import com.bitc.camp.data.entity.Reservation;
 import com.bitc.camp.entity.Member;
@@ -9,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,7 +28,7 @@ public class ReservationReqDto {
   private String merchantUid;
   private String name;
 
-  private int userSiteInfoIdx;
+  private int userCampMainIdx;
   private int userSiteListIdx;
   private int userMemberIdx;
 
@@ -49,6 +48,8 @@ public class ReservationReqDto {
         .impUid(impUid)
         .merchantUid(merchantUid)
         .name(name)
+        .campMainInfo(new CampMainInfo(userCampMainIdx))
+        .campSiteList(new CampSiteList(userSiteListIdx))
         .member(new Member(userMemberIdx))
         .build();
   }

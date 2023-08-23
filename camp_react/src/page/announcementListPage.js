@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "../layout/header";
-import Footer from "../layout/footer";
+
 
 function AnnouncementListPage(props) {
 

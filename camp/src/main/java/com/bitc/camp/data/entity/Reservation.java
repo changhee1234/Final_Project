@@ -57,6 +57,16 @@ public class Reservation {
   private String name;
 
   @ManyToOne(optional = false)
+  @JoinColumn(name = "user_camp_main_idx")
+  @ToString.Exclude
+  private CampMainInfo campMainInfo;
+
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "user_site_list_idx")
+  @ToString.Exclude
+  private CampSiteList campSiteList;
+
+  @ManyToOne(optional = false)
   @JoinColumn(name = "user_member_idx")
   @ToString.Exclude
   private Member member;
@@ -77,6 +87,9 @@ public class Reservation {
       String impUid,
       String merchantUid,
       String name,
+
+      CampMainInfo campMainInfo,
+      CampSiteList campSiteList,
       Member member
   ) {
     this.userReservationName = userReservationName;
@@ -93,6 +106,9 @@ public class Reservation {
     this.impUid = impUid;
     this.merchantUid = merchantUid;
     this.name = name;
+
+    this.campMainInfo = campMainInfo;
+    this.campSiteList = campSiteList;
     this.member = member;
   }
 

@@ -1,5 +1,8 @@
 package com.bitc.camp.service;
 
+import com.bitc.camp.data.dto.PartnerRespDto;
+import com.bitc.camp.data.entity.Partner;
+import com.bitc.camp.data.repository.PartnerRepository;
 import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.entity.Member;
 import com.bitc.camp.repository.MemberRepository;
@@ -17,6 +20,8 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    private final PartnerRepository partnerRepository;
 
     @Override
     public void join(AddMemberReq dto) {
@@ -53,5 +58,11 @@ public class MemberServiceImpl implements MemberService {
         } else {
             throw new RuntimeException("삭제할 회원을 찾을 수 없습니다.");
         }
+    }
+
+    @Override
+    public PartnerRespDto getPartnerInfo(int memberIdx) throws Exception {
+        Partner entity = partnerRepository.getReferenceById(memberIdx);
+        return new PartnerRespDto(entity);
     }
 }

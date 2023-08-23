@@ -13,6 +13,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:/application.properties")
 public class DbConfig {
+
   @Bean
   @ConfigurationProperties(prefix = "spring.datasource.hikari")
   public HikariConfig hikariConfig(){

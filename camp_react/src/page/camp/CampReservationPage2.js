@@ -12,6 +12,7 @@ function CampReservationPage2(props) {
   const siteIdx = useParams();
   const dateRange = location.state.dateRange;
   const campName = location.state.campName;
+  const campMainIdx = location.state.campMainIdx;
   const [siteInfo, setSiteInfo] = useState([]);
   const [siteLists, setSiteLists] = useState([]);
   const [availSiteList, setAvailSiteList] = useState([]);
@@ -50,7 +51,7 @@ function CampReservationPage2(props) {
           <SiteLists siteLists={siteLists} availSiteList={availSiteList} selectedSite={selectedSiteFromSiteLists} selectedSiteIdx={selectedSiteIdxFromSiteLists}/>
         </div>
         <div className="col-sm">
-          <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campName={campName} siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite} selectedSiteIdx={selectedSiteIdx}/>
+          <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campMainIdx={campMainIdx} campName={campName} siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite} selectedSiteIdx={selectedSiteIdx}/>
         </div>
       </div>
     </main>
