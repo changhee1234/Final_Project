@@ -80,7 +80,7 @@ function MainPage(props) {
           {/*캠핑장 리스트*/}
           <div className={'row my-4'}>
             <ul className={'row-col-2 list-unstyled text-start mb-0'}>
-              <a href="#!" className={'text-decoration-none fw-bold text-dark'}>
+                <a href="#!" className={'text-decoration-none fw-bold text-dark'}>
                 <li className={'mx-3'}><i className="col bi bi-rocket-takeoff rocket-takeoff"></i><span
                     className={'text1'}> 캠핑장</span>
                 </li>
