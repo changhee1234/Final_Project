@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import ReactQuill from "react-quill";
 
 function CampRegisterCombined(props) {
     const [step, setStep] = useState(1); // 현재 단계를 저장하는 상태 변수
@@ -71,7 +72,7 @@ function CampRegisterCombined(props) {
             campAddress,
             partner
         };
-        axios.post('http://localhost:8080/campRegister', campData)
+        axios.post('http://localhost:8080/camp/Register', campData)
             .then((res) => {
                 console.log(res.data.idx);
                 const campRegisterIdx = res.data.idx; // 첫 번째 API 호출의 응답에서 idx 값 받아오기
@@ -83,7 +84,7 @@ function CampRegisterCombined(props) {
                     };
                 });
                 // 이후에 두 번째 단계 처리
-                axios.post('http://localhost:8080/campRegister2', updatedCampSiteInfos)
+                axios.post('http://localhost:8080/camp/Register2', updatedCampSiteInfos)
                     .then((res) => {
                         console.log(res.data);
                         alert('등록되었습니다.');

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+    import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 
@@ -10,7 +10,7 @@ function SelectPartnerCamp(props) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:8080/camp')
+        axios.get('http://localhost:8080/camp/list')
             .then(res => {
                 console.log(res.data);
                 setCampList(res.data);
