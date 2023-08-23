@@ -164,7 +164,7 @@ function CampReservationPage3(props) {
   };
 
   return (
-    <main className={"container"} style={{marginTop: `160px`}}>
+    <main className={"container"}>
       <form onSubmit={handleSubmit}>
         <div className={"row"}>
           <div className="col-sm-6 mx-auto">

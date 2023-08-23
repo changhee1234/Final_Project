@@ -6,7 +6,7 @@ import CampList from "../../componunt/jeongGyuHo/campList";
 function CampListPage(props) {
 
   return (
-    <main className={"container-fluid"} style={{marginTop: 150 + "px"}}>
+    <main className={"container-fluid"}>
       <CampList/>
 
     </main>

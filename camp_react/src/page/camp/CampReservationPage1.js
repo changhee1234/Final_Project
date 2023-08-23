@@ -75,7 +75,7 @@ function CampReservationPage1(props) {
   }, [siteEmptyCnt]);
 
   return (
-    <main className={"container"} style={{marginTop: `160px`}}>
+    <main className={"container"}>
       <div className="row my-4">
         <div className="col-sm-4 mx-auto">
           <CampIntro mainInfo={mainInfo}/>

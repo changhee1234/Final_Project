@@ -18,4 +18,6 @@ public interface ReservationService {
   void updateReservation(int idx, ReservationReqDto params) throws Exception;
 
   List<ReservationRespDto> getReservationFromCampMainIdx(int partnerIdx);
+
+  void cancelReservation(String impUid) throws Exception;
 }

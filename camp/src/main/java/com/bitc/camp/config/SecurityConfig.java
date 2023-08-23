@@ -44,7 +44,7 @@ public class SecurityConfig {
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
                             "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/modify", "/upload-profile-image"
-                            , "/delete-account", "/addPartner", "/updatePartnerAccess", "/camp", "/naver/**", "/reserve/**", "/payments/**", "/user-info/**", "/partnerInfo/**", "/review/**"
+                            , "/delete-account", "/addPartner", "/updatePartnerAccess", "/camp", "/naver/**", "/reserve/**", "/payments/**", "/user-info/**", "/partnerInfo/**", "/review/**", "/camp", "/campRegister", "/campRegister2"
                     ).permitAll()
 //                    .requestMatchers("/reserve/**", "/payments/**", "/user-info/**", "/login").hasAuthority("USER")
 //                    .requestMatchers("/partner-page", "/partnerInfo/**", "/user-info/**").hasRole("PARTNER")

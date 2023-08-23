@@ -155,7 +155,7 @@ function Header(props) {
 
     return (
         <header>
-            <div className={'fixed-top shadow-sm container-fluid mb-3 border-bottom bg-light'}>
+            <div className={'shadow-sm container-fluid mb-3 border-bottom bg-light'}>
                 <div className={'d-flex justify-content-end me-5'}>
                     <Link className={'me-3 text-decoration-none text-dark'} to={'/'}>
                         Home

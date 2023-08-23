@@ -55,9 +55,9 @@ function MyPage() {
 
 
     return (
-        <main className="container my-5 pt-5">
-            <div className="row my-5">
-                <div className="col-md-3 my-5">
+        <main className="container">
+            <div className="row">
+                <div className="col-md-2">
                     {/* 왼쪽 영역 */}
                     <div className="my-5">
                             <h4 className={"text-center"}>마이 페이지</h4>
@@ -104,7 +104,7 @@ function MyPage() {
                         </div>
                 </div>
 
-                <div className="col-md-9">
+                <div className="col-md-10">
                     {/* 오른쪽 영역 */}
                     {contentComponent }
                     {selectedMenu === '파트너 신청 목록' && isPartnerApplicationVisible && <PartnerApplicationComponent user={user} />}
