@@ -21,6 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+<<<<<<< .merge_file_vx8r8Q
 
 # 프로젝트 제외 경로
 /.gradle/
+=======
+>>>>>>> 정세인
