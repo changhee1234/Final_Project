@@ -1,3 +1,4 @@
+// 에러 시 예외처리 파일4
 package com.bitc.camp.exception;
 
 import lombok.extern.slf4j.Slf4j;

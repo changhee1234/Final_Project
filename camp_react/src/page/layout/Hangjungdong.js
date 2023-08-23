@@ -1,3 +1,4 @@
+// 전국 지역 select 박스 출력
 export var hangjungdong =
     {sido:[{sido:'11', codeNm:'서울특별시'},
         {sido:'26', codeNm:'부산광역시'},

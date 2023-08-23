@@ -1,103 +1,131 @@
-import React, {useEffect, useState} from "react";
+// 장터 글 등록 페이지 js파일(TradeWritePage)
+import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 
 function TradeWritePage(props) {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [userName, setUserName] = useState('');
+  const [tradePrice, setTradePrice] = useState('');
+  const [tradeCate, setTradeCate] = useState('');
+  const [createDt, setCreateDt] = useState(new Date());
+  // const [memberIdx, setMemberIdx] = useState([{idx : 0}]);
+  // const [file, setFile] = useState(null);
 
-    const [boards, setBoards] = useState([]);
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+  const navi = useNavigate();
 
-    useEffect(() => {
-      fetchBoards();
-    }, []);
+  // const handleFileChange = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
 
-    const fetchBoards = async () => {
-      const response = await axios.get('/api/boards');
-      setBoards(response.data);
-    };
 
-    // const createBoard = async () => {
-    //   const newBoard = { title, content };
-    //   const response = await axios.post('/api/boards', newBoard);
-    //   setBoards([...boards, response.data]);
-    //   setTitle('');
-    //   setContent('');
-    // };
+  // // 파일 업로드
+  //   const handleFile = () => {
+  //     if (file) {
+  //       const formData = new FormData();
+  //       formData.append("file", file);
+  //
+  //       axios.post("http://localhost:8080/board/write", formData, {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       })
+  //           .then((response) => {
+  //             // 파일 업로드 성공 처리
+  //           })
+  //           .catch((error) => {
+  //             // 파일 업로드 실패 처리
+  //           });
+  //     }
+  //   };
 
-    // const deleteBoard = async (id) => {
-    //   await axios.delete(`/api/boards/${id}`);
-    //   setBoards(boards.filter(board => board.id !== id));
-    // };
-  useEffect(() => {
-    function getBoxOffice() {
-      fetch('/nowMovie')
-          .then(response => response.json())
-          .then(data => {
-            const selectBox = document.getElementById('box-office');
-            let options = "";
-            for (let i = 0; i < data.length; i++) {
-              options += `<option value="${data[i].movieNm}">${data[i].movieNm}</option>`;
-            }
-            selectBox.innerHTML = options;
-          })
-          .catch(error => {
-            console.error(error);
-          });
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault(); // 기본 동작 막기
+    axios.post("http://localhost:8080/board/write", null,
+        {
+          params: {
+            // memberIdx: memberIdx,
+            title: title,
+            content: content,
+            userName: userName,
+            tradePrice: tradePrice,
+            tradeCate: tradeCate,
+            createDt: createDt.toISOString().substr(0, 16),
+          }
 
-    getBoxOffice();
-  }, []);
+        })
+        .then(res => {
+          navi('/trade');
+        })
+        .catch(err => alert(`통신 오류 : ${err}`));
 
+  };
+
+  // 취소 버튼 클릭 시
+  const handleCancel = () => {
+    navi(-1); // 이전 페이지로 이동
+  };
 
   return (
       <div className="container my-5">
         <div className="row">
           <div className="col-sm-2 my-4"></div>
           <div className="col-sm-8 text-center my-5">
-            {/*<h3 className={'mt-5'}>장터 게시판 글 등록</h3>*/}
             <ul className={'col-sm text-center my-4 mt-5'}>
-              <li><i className="bi bi-cart4"></i><span className={'text3'}> 장터 게시판 글 등록</span></li></ul>
-            <div className="row">
-              <form action="/TradeWritePage" method="post" encType="multipart/form-data">
+              <li><i className="bi bi-cart4"></i><span className={'text3'}> 장터 게시판 글 등록</span></li>
+            </ul>
+            <form className={'my-5'} onSubmit={handleSubmit}>
+              <input className={'form-control'} id={'createDt'} name={"createDt"} type="hidden"
+                     value={createDt.toISOString().substr(0, 16)}
+                     onChange={(e) => setCreateDt(new Date(e.target.value))}/>
+              {/*<input className={'form-control'} id={'memberIdx'} type="hidden" name={"memberIdx"} value={memberIdx}*/}
+              {/*        onChange={(e) => setMemberIdx(e.target.value)}/>*/}
+              <div className="row">
                 <div className="my-3 row">
                   <div className="col-sm-2">
-                    <select id="box-office" className="form-control me-3" name="movieNm">
-                      <option value="" selected="selected">분류</option>
+                    <select id="box-office" className="form-control me-3" name="tradeCate"
+                            value={tradeCate} onChange={(e) => setTradeCate(e.target.value)}>
+                      <option value="">분류</option>
                       <option value={"1"}>삽니다</option>
                       <option value={"2"}>팝니다</option>
                     </select>
                   </div>
+                  <input type="hidden" className="form-control" id="user-name" name="userName"
+                         placeholder="사용자 ID를 입력하세요" onChange={(e) => setUserName(e.target.value)}></input>
                   <div className="col-sm">
-                    <input type="text" className="form-control" id="title" name="title" placeholder="제목을 입력하세요"></input>
+                    <input type="text" className="form-control" id="title" name="title" placeholder="제목을 입력하세요"
+                           value={title} onChange={(e) => setTitle(e.target.value)}></input>
                   </div>
                   <div className={"mt-3"}>
-                    <input type="number" className="form-control" id="tradePrice" name="tradePrice" placeholder="희망하는 가격을 입력하세요(원)"></input>
+                    <input type="number" className="form-control" id="tradePrice" name="tradePrice"
+                           placeholder="희망하는 가격을 입력하세요(원)" value={tradePrice}
+                           onChange={e => setTradePrice(e.target.value)}></input>
                   </div>
                 </div>
                 <div className="mb-3">
-                        <textarea className="form-control" id="content" name="content" rows="20"
-                                  placeholder="글 내용을 입력하세요"></textarea>
+                          <textarea className="form-control" id="content" name="content" rows="20"
+                                    placeholder="글 내용을 입력하세요" onChange={(e) => setContent(e.target.value)}></textarea>
                 </div>
                 <div className="row input-group">
                   <div className="my-3 col-sm d-flex justify-content-start gap-3">
                     <div className="input-group">
-                      <input type="file" className="form-control" id="files" name="files" multiple></input>
+                      <input type="file" className="form-control" id="file" name="file" multiple></input>
                     </div>
                   </div>
                   <div className="my-3 col-sm d-flex justify-content-end gap-3 mx-0 px-0">
                     <button type="submit" className="w-btn w-btn-indigo">등록</button>
-                    <button type="reset" className="w-btn w-btn-gray" id="btn-cancel">취소</button>
+                    <button type="reset" className="w-btn w-btn-gray" onClick={handleCancel}>취소
+                    </button>
                   </div>
                 </div>
-                {/*<input type="hidden" className="form-control" id="user-name" name="userName" th:value="${session.userName}"></input>*/}
-                {/*  <input type="hidden" className="form-control" id="user-id" name="id" th:value="${session.id}"></input>*/}
-              </form>
-            </div>
+                <div className="col-sm-2"></div>
+              </div>
+            </form>
           </div>
-          <div className="col-sm-2"></div>
         </div>
       </div>
-)
+  )
 }
 
 export default TradeWritePage;

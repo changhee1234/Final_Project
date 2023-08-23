@@ -1,3 +1,4 @@
+// 에러 시 예외처리 파일3
 package com.bitc.camp.exception;
 
 import lombok.Getter;

@@ -1,7 +1,11 @@
 import React, {useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import ReactQuill from "react-quill";
+
 
 function CampRegisterCombined(props) {
+    const navigate = useNavigate();
     const [step, setStep] = useState(1); // 현재 단계를 저장하는 상태 변수
 
     // campMainInfo 등록 인풋 state
@@ -12,7 +16,8 @@ function CampRegisterCombined(props) {
     const [campHpLink, setCampHpKink] = useState('');
     const [campPh, setCampPh] = useState('');
     const [campAddress, setCampAddress] = useState('');
-    const [partner, setPartner] = useState({idx: 0,});
+    const [partner, setPartner] = useState({idx: 0});
+    const campDeletedYn = 'N';
 
     // campSiteInfo리스트 state
     const [campSiteInfos, setCampSiteInfos] = useState([
@@ -29,6 +34,7 @@ function CampRegisterCombined(props) {
             parkPrice: 0,
             elePrice: 0,
             areaSiteCnt: 0,
+            siteDeletedYn : 'N'
         }
     ]);
 
@@ -53,6 +59,7 @@ function CampRegisterCombined(props) {
             parkPrice: 0,
             elePrice: 0,
             areaSiteCnt: 0,
+            siteDeletedYn : 'N'
         };
 
         setCampSiteInfos([...campSiteInfos, newCampSiteInfo])
@@ -60,6 +67,7 @@ function CampRegisterCombined(props) {
     // 최종등록
     const handleCampRegister2Submit = (e) => {
         e.preventDefault();
+
 
         const campData = {
             campName,
@@ -69,9 +77,10 @@ function CampRegisterCombined(props) {
             campHpLink,
             campPh,
             campAddress,
-            partner
+            partner,
+            campDeletedYn
         };
-        axios.post('http://localhost:8080/campRegister', campData)
+        axios.post('http://localhost:8080/camp/Register', campData)
             .then((res) => {
                 console.log(res.data.idx);
                 const campRegisterIdx = res.data.idx; // 첫 번째 API 호출의 응답에서 idx 값 받아오기
@@ -83,10 +92,11 @@ function CampRegisterCombined(props) {
                     };
                 });
                 // 이후에 두 번째 단계 처리
-                axios.post('http://localhost:8080/campRegister2', updatedCampSiteInfos)
+                axios.post('http://localhost:8080/camp/Register2', updatedCampSiteInfos)
                     .then((res) => {
                         console.log(res.data);
                         alert('등록되었습니다.');
+                        navigate(`/`);
                     })
                     .catch((err) => {
                         console.log(err);
@@ -105,6 +115,7 @@ function CampRegisterCombined(props) {
         <div className={'col-sm-8 mx-auto text-start'}>
             {step === 1 && (
                 <form onSubmit={handleCampRegisterNext}>
+                    <h3>캠핑장 정보 입력</h3>
                     {/*매니저 번호(나중에 세션값으로 받아와 로그인과 연동(사라질 것)*/}
                     <div className={'my-3'}>
                         <label className={'form-label'} htmlFor={'partner'}>회원번호(없애고 로그인과 연동) : </label>
@@ -193,6 +204,7 @@ function CampRegisterCombined(props) {
                 <form onSubmit={handleCampRegister2Submit}>
                     {campSiteInfos.map((campSiteInfo, index) => (
                         <div key={index} className={'border-bottom'}>
+                            <h3>캠핑장 구역 정보 입력</h3>
                             <div className={'my-3 row'}>
 
                                 {/*구역 이름*/}

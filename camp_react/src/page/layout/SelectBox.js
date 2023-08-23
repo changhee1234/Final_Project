@@ -1,3 +1,5 @@
+// 전국 지역 select 박스(구/군까지만 출력)
+
 // import React from "react";
 // import $ from 'jquery';
 //

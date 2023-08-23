@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+    import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function SelectPartnerCamp(props) {
     const [campList, setCampList] = useState([]);
@@ -8,9 +8,8 @@ function SelectPartnerCamp(props) {
     const [selectedPartnerIdx, setSelectedPartnerIdx] = useState(null);
 
 
-
     useEffect(() => {
-        axios.get('http://localhost:8080/camp')
+        axios.get('http://localhost:8080/camp/list')
             .then(res => {
                 console.log(res.data);
                 setCampList(res.data);
@@ -45,13 +44,6 @@ function SelectPartnerCamp(props) {
         return text.slice(0, maxLength) + "...";
     };
 
-    const dtTruncateText = (text, maxLength) => {
-        if (text.length <= maxLength) {
-            return text;
-        }
-        return text.slice(0, maxLength);
-    };
-
     return (
         <div className={'container'}>
             <h2>운영중인 캠핑장</h2>
@@ -78,7 +70,7 @@ function SelectPartnerCamp(props) {
                         <td><Link to={`/detailPartnerCamp/${camp.idx}`}>{camp.campName}</Link></td>
                         <td>{truncateText(camp.campIntro, 50)}</td>
                         <td>{camp.partnerName}</td>
-                        <td>{dtTruncateText(camp.campDt, 10)}</td>
+                        <td>{camp.campDt[0]}-{camp.campDt[1]}-{camp.campDt[2]}</td>
                     </tr>
                 ))}
                 </tbody>

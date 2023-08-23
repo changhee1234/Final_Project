@@ -35,7 +35,8 @@ public class SecurityConfig {
   // 해당 부분에서 권한별로 접속할 수 있는 페이지 지정 필요함
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf().disable()
+    http.csrf(csrf -> csrf.disable())
+            .cors(cors -> cors.disable())
             .cors(c -> c
                     .configurationSource(corsConfigurationSource()) // corsConfigurationSource 빈을 사용
             )
@@ -43,8 +44,9 @@ public class SecurityConfig {
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
+
                             "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image"
-                            , "/delete-account", "/addPartner", "/updatePartnerAccess"
+                            , "/delete-account", "/addPartner", "/updatePartnerAccess", "/board/**", "/camp/**", "/"
                     ).permitAll()
                     .requestMatchers("/partner-page", "/partnerInfo/**").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")
