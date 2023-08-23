@@ -4,12 +4,8 @@ import com.bitc.camp.data.dto.PartnerRespDto;
 import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.repository.MemberRepository;
 import com.bitc.camp.service.MemberService;
-
-import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.dto.ModifyMemberReq;
 import com.bitc.camp.entity.Member;
-import com.bitc.camp.repository.MemberRepository;
-import com.bitc.camp.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -17,9 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor

@@ -43,7 +43,7 @@ function CampReservationPage2(props) {
   }, []);
 
   return (
-    <main className={"container"}>
+    <main className={"container"} style={{marginTop: `160px`}}>
       <div className="row">
         <div className="col-sm-6">
           <SiteInfo siteInfo={siteInfo}/>

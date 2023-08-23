@@ -7,8 +7,10 @@ import {DateRange} from 'react-date-range';
 import * as locales from 'react-date-range/dist/locale';
 import {addDays, format} from 'date-fns';
 import axios from "axios";
+import {useParams} from "react-router-dom";
 
 function CampReservationPage1(props) {
+  const campIdx = useParams();
   const [mainInfo, setMainInfo] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
   const [siteInfos, setSiteInfos] = useState([]);
@@ -23,7 +25,7 @@ function CampReservationPage1(props) {
 
   useEffect(() => {
     // 캠핑장 메인 정보 저장
-    axios.get("http://localhost:8080/reserve/" + 1)
+    axios.get("http://localhost:8080/reserve/" + campIdx.campIdx)
       .then(res => {
         setMainInfo(res.data.mainInfo);
         setSiteInfos(res.data.mainInfo.siteInfoLists);
@@ -73,7 +75,7 @@ function CampReservationPage1(props) {
   }, [siteEmptyCnt]);
 
   return (
-    <main className={"container"}>
+    <main className={"container"} style={{marginTop: `160px`}}>
       <div className="row my-4">
         <div className="col-sm-4 mx-auto">
           <CampIntro mainInfo={mainInfo}/>

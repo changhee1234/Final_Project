@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 const {kakao} = window;
 const places = new kakao.maps.services.Places();
@@ -377,6 +378,7 @@ function CampList(props) {
                             <div className={'border-bottom'}>
                                 <div className={'d-flex justify-content-around my-3 mx-5'}>
                                     {/*예약아이콘*/}
+                                    <Link to={`/reservation1/${selectedCampInfo.idx}`}>
                                     <i>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="58"
                                              fill="currentColor"
@@ -389,6 +391,7 @@ function CampList(props) {
                                                 d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
                                         </svg>
                                     </i>
+                                    </Link>
 
                                     {/*홈페이지아이콘*/}
                                     <i>
@@ -463,7 +466,8 @@ function CampList(props) {
                                             <div>
                                                 {/*블로그 리스트*/}
                                                 {blogSearchResults.slice(blogStartIndex, blogEndIndex).map((item, index) => (
-                                                    <a href={item.bloggerlink}
+                                                    <a href={item.link}
+                                                       target={'_blank'}
                                                        className={'text-decoration-none text-dark'}
                                                        key={index}>
                                                         <div className={'border-top card my-4'}>
