@@ -1,5 +1,5 @@
-package com.bitc.camp.common;
 
+package com.bitc.camp.common;
 import com.bitc.camp.dto.FileDto;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -17,6 +17,7 @@ import java.util.List;
 public class FileUtils {
 
   public List<FileDto> parseDisFileInfo(int idx, String id, MultipartHttpServletRequest uploadFiles) throws Exception {
+
     if (ObjectUtils.isEmpty(uploadFiles)) {
       return null;
     }

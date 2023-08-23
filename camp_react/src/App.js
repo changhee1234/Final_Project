@@ -18,6 +18,8 @@ import TradeDetailPage from "./page/trade/TradeDetailPage";
 import CampListPage from "./page/camp/CampListPage";
 import Header from "./page/layout/Header";
 import Footer from "./page/layout/Footer";
+import UpdatePage from "./page/trade/UpdatePage";
+import TradeWritePage from "./page/trade/TradeWritePage";
 
 function App() {
   const [userInfo, setUserInfo] = useState(null);
@@ -44,7 +46,10 @@ function App() {
             {/*중고장터 리스트*/}
             <Route path={'/trade'} element={<TradeListPage/>}/>
             {/*중고장터 상세보기*/}
-            <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>
+            <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
+            {/*중고장터 글 등록*/}
+            <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
+            <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
             {/*예약페이지*/}
             <Route path={'/reservation1/*'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
             <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
