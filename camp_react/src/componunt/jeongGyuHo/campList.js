@@ -254,7 +254,7 @@ function CampList(props) {
                     {!selectedCampInfo && (
                         <div className={'row'}>
                             <div className={'col-sm-7'}>
-                                <div className={'d-flex justify-content-start'}>
+                                <div className={'d-flex justify-content-start mb-4'}>
                                     <input
                                         className={'form-control me-2'}
                                         type={'text'}
