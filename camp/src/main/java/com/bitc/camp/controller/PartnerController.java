@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class PartnerController {
@@ -28,13 +31,19 @@ public class PartnerController {
         }
     }
 
-    @PostMapping("/{memberIdx}/approve")
-    public ResponseEntity<String> approvePartner(@PathVariable int memberIdx) {
+    @GetMapping("/partnerList")
+    public ResponseEntity<List<AddPartnerReq>> getPartnerList() {
+        List<AddPartnerReq> partnerList = partnerService.getPartnerList();
+        return ResponseEntity.ok(partnerList);
+    }
+
+    @PostMapping("/updatePartnerAccess")
+    public ResponseEntity<String> updatePartnerAccess(@RequestParam int memberIdx, @RequestParam String newValue) {
         try {
-            partnerService.approvePartner(memberIdx);
-            return ResponseEntity.ok("파트너 승인이 완료되었습니다.");
+            partnerService.updatePartnerAccess(memberIdx, newValue);
+            return ResponseEntity.ok("파트너 접근 권한이 업데이트되었습니다.");
         } catch (Exception e) {
-            String errorMessage = "파트너 승인 오류가 발생했습니다. 오류 내용: " + e.getMessage();
+            String errorMessage = "파트너 접근 권한 업데이트 중 오류가 발생했습니다. 오류 내용: " + e.getMessage();
             return ResponseEntity.badRequest().body(errorMessage);
         }
     }

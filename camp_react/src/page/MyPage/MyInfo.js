@@ -186,7 +186,7 @@ function MyInfo(props) {
 
     return (
         <div className="my-info my-5">
-            <h3 className="text-start mt-5">내 정보</h3>
+            <h3 className="text-start">내 정보</h3>
             <div className="profile-image">
                 <label htmlFor="image-upload">
                     <img

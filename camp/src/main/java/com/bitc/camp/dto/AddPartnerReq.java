@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddPartnerReq {
+    private int idx;
     private String partnerName;
     private String partnerPhone;
     private String partnerNum;

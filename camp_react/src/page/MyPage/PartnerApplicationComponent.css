@@ -1,0 +1,29 @@
+.partner-application {
+    margin: 20px; /* 테이블 컴포넌트와의 간격 설정 */
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px; /* 글자 크기 조정 */
+}
+
+.table th,
+.table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.save-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.save-button:hover {
+    background-color: #0056b3;
+}

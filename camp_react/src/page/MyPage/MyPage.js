@@ -6,12 +6,13 @@ import ReservationConfirmation from './ReservationConfirmation'; // 예약 확�
 import MyTradePosts from './MyTradePosts'; // 내가 쓴 장터글 컴포넌트 경로에 맞게 수정
 import PartnerApplication from './PartnerApplication'; // 파트너 회원 신청 컴포넌트 경로에 맞게 수정
 import axios from "../layout/axios";
+import PartnerApplicationComponent from "./PartnerApplicationComponent ";
 
 
 function MyPage() {
     const [user, setUser] = useState(null);
     const [selectedMenu, setSelectedMenu] = useState('내 정보');
-
+    const [isPartnerApplicationVisible, setIsPartnerApplicationVisible] = useState(false);
     // 컴포넌트가 마운트될 때 사용자 정보를 가져오도록 설정
     useEffect(() => {
         fetchUserInfo();
@@ -22,6 +23,7 @@ function MyPage() {
         try {
             const response = await axios.get("/user-info"); // Spring Security의 API endpoint
             setUser(response.data); // 사용자 정보 설정
+            setIsPartnerApplicationVisible(response.data.grade === "admin"); // 파트너 신청 가능 여부 설정
         } catch (error) {
             console.error("사용자 정보를 가져오는 데 실패했습니다.", error);
         }
@@ -46,7 +48,7 @@ function MyPage() {
     } else {
         contentComponent = (
             <div className="container">
-                {/* ... */}
+
             </div>
         );
     }
@@ -90,15 +92,22 @@ function MyPage() {
                                 >
                                     파트너 회원 신청
                                 </li>
+                                {isPartnerApplicationVisible && (
+                                    <li
+                                        className={`list-group-item ${selectedMenu === '파트너 신청 목록' ? 'active' : ''}`}
+                                        onClick={() => handleMenuClick('파트너 신청 목록')}
+                                    >
+                                        파트너 신청 목록
+                                    </li>
+                                )}
                             </ul>
                         </div>
                 </div>
-                <div className="col-md-1">
 
-                </div>
-                <div className="col-md-8">
+                <div className="col-md-9">
                     {/* 오른쪽 영역 */}
                     {contentComponent }
+                    {selectedMenu === '파트너 신청 목록' && isPartnerApplicationVisible && <PartnerApplicationComponent user={user} />}
                 </div>
             </div>
         </main>

@@ -85,7 +85,7 @@ function PartnerApplication({ user }) {
     return (
         <div className="my-5">
             <div className="my-5">
-                <h3 className="mt-5 pt-5">업체 등록</h3>
+                <h3 className="mt-5 pt-5">파트너 등록</h3>
                 <form onSubmit={handleSubmit} className="formContainer">
                     <div className="formGroup">
                         <label className="label">업체 이름</label>

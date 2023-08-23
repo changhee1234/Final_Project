@@ -23,7 +23,7 @@ public class ReservationReqDto {
   private int userEleCnt;
   private String userPhoneNumber;
   private String userMemo;
-  private String userReservationTotalPrice;
+  private int userReservationTotalPrice;
   private String payStatus;
   private String impUid;
   private String merchantUid;
@@ -49,8 +49,6 @@ public class ReservationReqDto {
         .impUid(impUid)
         .merchantUid(merchantUid)
         .name(name)
-        .campSiteInfo(new CampSiteInfo(userSiteInfoIdx))
-        .campSiteList(new CampSiteList(userSiteListIdx))
         .member(new Member(userMemberIdx))
         .build();
   }
