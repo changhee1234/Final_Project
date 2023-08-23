@@ -1,13 +1,17 @@
 package com.bitc.camp.data.dto;
 
 import com.bitc.camp.data.entity.Partner;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CampMainInfoDto {
     private int idx;
     private String campName;
