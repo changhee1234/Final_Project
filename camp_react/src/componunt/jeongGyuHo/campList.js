@@ -249,6 +249,12 @@ function CampList(props) {
 
     };
 
+    const stripHtmlTags = (html) => {
+        const tmp = document.createElement("div");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    };
+
     return (
 
         <div className={'row'}>
@@ -435,7 +441,7 @@ function CampList(props) {
                              tabIndex={'0'}>
                             <div id={'detail'} className={'border-bottom my-4'}>
                                 <h4 className={'text-start mb-3'}>상세보기</h4>
-                                <p className={'text-start'}>{selectedCampInfo.campIntro}</p>
+                                <p className={'text-start'}>{stripHtmlTags(selectedCampInfo.campIntro)}</p>
                             </div>
                             <div id={'naverBlog'} className={'border-bottom'}>
                                 <div>
