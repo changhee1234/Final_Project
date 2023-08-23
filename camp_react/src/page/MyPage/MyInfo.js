@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import axios from "../layout/axios";
 import Modal from 'react-bootstrap/Modal'; // Modal 컴포넌트 import 추가
 import Button from 'react-bootstrap/Button'; // Button 컴포넌트 import 추가
-import { CameraFill } from 'react-bootstrap-icons';
+import {CameraFill} from 'react-bootstrap-icons';
 import {useEffect, useState} from "react";
 
 function formatPhoneNumber(phoneNumber) {
@@ -14,7 +14,7 @@ function formatPhoneNumber(phoneNumber) {
 
 function MyInfo(props) {
 
-    const { nickname } = useParams();
+    const {nickname} = useParams();
     const [user, setUser] = useState(null);
     const [isOpened, setIsOpend] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -43,7 +43,6 @@ function MyInfo(props) {
             try {
                 const response = await axios.get("/user-info");
                 setUser(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error("사용자 정보를 가져오는 데 실패했습니다.", error);
             }
@@ -90,8 +89,6 @@ function MyInfo(props) {
     };
     const handleSend2 = async () => {
         // 서버로 보낼 휴대폰 번호
-
-
         try {
             // axios 통신 시 파라미터값 전달할때 주의해야할 부분
             const params = new URLSearchParams();
@@ -138,7 +135,7 @@ function MyInfo(props) {
                 },
             });
 
-            setUser({ ...user, profileImage: response.data.imageUrl  });
+            setUser({...user, profileImg: response.data});
 
             // 이미지 업로드 후 저장 버튼 감추기
             setShowUploadForm(false);
@@ -162,33 +159,57 @@ function MyInfo(props) {
     };
 
     const handleImageChange = (e) => {
-        console.log("handleImageChange called");
         setSelectedImage(e.target.files[0]);
-        setShowUploadForm(true);
+        setShowUploadForm(true); // 이미지 선택 시 저장 버튼 표시
     };
+
+    const handleDeleteAccount = () => {
+        const confirmDelete = window.confirm("정말 회원 탈퇴하시겠습니까?");
+
+        if (confirmDelete) {
+            axios
+                .post('/delete-account', null, {
+                    params: { email: user.email }
+                })
+                .then(response => {
+                    // 회원 탈퇴 성공 시 로그아웃 또는 다른 처리 수행
+                    alert(response.data);
+                    window.location.href = 'http://localhost:3000';
+                })
+                .catch(error => {
+                    console.error('회원 탈퇴 오류', error);
+                });
+        }
+    };
+
+
 
     return (
         <div className="my-info my-5">
-            <h3 className="text-start mt-5">내 정보</h3>
+            <h3 className="text-start">내 정보</h3>
             <div className="profile-image">
                 <label htmlFor="image-upload">
                     <img
-                        src={user?.profileImage || ProfileImage}
+                        src={user?.profileImg || ProfileImage}
                         alt="프로필 사진"
                     />
                 </label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    id="image-upload"
-                    onChange={handleImageChange}
-                />
-                {selectedImage && !user?.profileImage && showUploadForm && (
-                    <button className="btn btn-primary my-3" onClick={handleImageUpload}>
-                        사진 저장
-                    </button>
-                 )}
+
             </div>
+            <input
+                type="file"
+                accept="image/*"
+                id="image-upload"
+                onChange={handleImageChange}
+                style={{ display: 'none' }}
+            />
+                <div>
+                    {showUploadForm && (
+                        <button className="btn btn-primary my-3" onClick={handleImageUpload}>
+                            사진 저장
+                        </button>
+                    )}
+                </div>
             <div>
                 <div className="info-details">
                     <div className="info-card">
@@ -196,7 +217,7 @@ function MyInfo(props) {
                             {user && <h4 className="ms-2 mt-2">{user.nickName}</h4>}
                         </div>
                         <p className="email ms-2">{user?.email}</p>
-                        <hr />
+                        <hr/>
                         <div className="info-body my-3">
                             <p className="info-label">이름</p>
                             <p className="ms-2 info-value">{user?.realName}</p>
@@ -214,7 +235,7 @@ function MyInfo(props) {
                             >
                                 정보 수정
                             </button>
-                            <button className="btn btn-danger">회원 탈퇴</button>
+                            <button className="btn btn-danger" onClick={handleDeleteAccount}>회원 탈퇴</button>
                         </div>
                     </div>
                     {/* 회원 정보 수정 모달 */}
@@ -354,7 +375,8 @@ function MyInfo(props) {
                                         >
                                             저장
                                         </button>
-                                        <button type="button" className="btn btn-secondary" id="btn-cancel" data-bs-dismiss={'modal'}>
+                                        <button type="button" className="btn btn-secondary" id="btn-cancel"
+                                                data-bs-dismiss={'modal'}>
                                             취소
                                         </button>
                                     </div>

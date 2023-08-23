@@ -19,7 +19,9 @@ public class CampController {
 
     private final CampService campService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+
     public Object selectBoardList() throws Exception {
         List<CampMainInfoDto> campMainInfoDtoList = campService.selectCampList();
 
@@ -56,9 +58,9 @@ public class CampController {
     }
 
     @RequestMapping(value = "/partnerCampDetail/{campIdx}", method = RequestMethod.PUT)
-    public Object updatePartnerCamp(@PathVariable int campIdx, @RequestBody CampMainInfoDto campMainInfoDto) throws Exception {
-        campService.updatePartnerCamp(campIdx, campMainInfoDto);
 
+    public Object updatePartnerCamp(@PathVariable int campIdx, @RequestBody(required = false) CampMainInfoDto campMainInfoDto) throws Exception {
+        campService.updatePartnerCamp(campIdx, campMainInfoDto);
         return "성공";
     }
 

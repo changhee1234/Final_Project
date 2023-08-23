@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CampMainInfoDto {
-    private int idx;
+    private  Integer idx;
+    private Integer partnerIdx;
     private String campName;
     private String campIntro;
     private LocalDateTime campDt;
@@ -22,8 +23,8 @@ public class CampMainInfoDto {
     private String campPh;
     private String campAddress;
     private Partner partner;
-    private int partnerIdx;
-    private int memberIdx;
+
+    private Integer memberIdx;
     private String partnerName;
     private String campDeletedYn;
 }

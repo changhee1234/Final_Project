@@ -109,4 +109,6 @@ public class Member implements UserDetails {
   public void setPhone(String phone) {
     this.phone = phone;
   }
+
+  public void setProfileImg(String profileImg) { this.profileImg = profileImg; }
 }

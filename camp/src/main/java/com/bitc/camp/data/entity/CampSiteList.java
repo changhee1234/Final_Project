@@ -27,10 +27,6 @@ public class CampSiteList {
   @ToString.Exclude
   private CampSiteInfo campSiteInfo;
 
-  @OneToMany(mappedBy = "campSiteList")
-  @ToString.Exclude
-  List<Reservation> reservationList = new ArrayList<>();
-
   public CampSiteList(int idx) {
     this.idx = idx;
   }

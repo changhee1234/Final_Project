@@ -26,7 +26,6 @@ public class CampServiceImpl implements CampService {
     private final CampSiteListRepository campSiteListRepository;
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
-    private final PartnerRepository partnerRepository;
 
     private String getNickName(int memberIdx) {
         Member member = memberRepository.findNickNameByMemberIdx(memberIdx).orElse(null);

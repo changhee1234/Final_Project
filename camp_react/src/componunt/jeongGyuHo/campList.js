@@ -23,7 +23,7 @@ function CampList(props) {
     // 캠프리스트 가져오기
     useEffect(() => {
         // GET방식으로 스프링 서버와 통신
-        axios.get('http://localhost:8080/camp')
+        axios.get('http://localhost:8080/camp/list')
             .then(res => {
 
                 // 통신을 통해 가져온 data campList에 넣기

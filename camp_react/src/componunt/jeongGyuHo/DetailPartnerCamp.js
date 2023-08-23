@@ -2,6 +2,9 @@ import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {logDOM} from "@testing-library/react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import campIntro from "../../components/reserve/CampIntro";
 
 function PartnerCampDetail() {
     const navigate = useNavigate();
@@ -14,7 +17,7 @@ function PartnerCampDetail() {
         campIdx: campIdx,
         campName: '',
         campIntro: '',
-        campDt: '',
+        // campDt: '',
         kidszoneYn: 'N',
         campHpLink: '',
         campPh: '',
@@ -23,6 +26,31 @@ function PartnerCampDetail() {
             idx: 0
         }
     });
+
+    const [desc, setDesc] = useState('');
+    const modules = {
+        toolbar: [
+            [{ 'header': [1, 2, false] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+            ['link', 'image'],
+            [{ 'align': [] }, { 'color': [] }, { 'background': [] }],
+            ['clean']
+        ],
+    };
+
+    const formats = [
+        'header',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image',
+        'align', 'color', 'background',
+    ];
+
+    function onEditorChange(value) {
+        setDesc(value)
+    }
+
     const intCampIdx = parseInt(campIdx);
 
     const [selectedArea, setSelectedArea] = useState([
@@ -65,6 +93,7 @@ function PartnerCampDetail() {
                         idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
                     }
                 });
+                setDesc(res.data.campIntro);
 
                 axios.get(`http://localhost:8080/camp/partnerCampSiteDetail/${intCampIdx}`)
                     .then((res) => {
@@ -135,10 +164,10 @@ function PartnerCampDetail() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-
         // partnerIdx를 updatedCampInfo에 포함시킵니다.
         const updatedDataWithPartnerIdx = {
             ...updatedCampInfo,
+            campIntro: desc,
             partner: {
                 idx: partnerIdx
             } // partnerIdx를 여기에 포함시킵니다.
@@ -194,10 +223,12 @@ function PartnerCampDetail() {
             },
         };
         const campSiteInfoIdx = parseInt(selectedArea[0].idx);
+
         axios.put(`http://localhost:8080/camp/partnerCampSiteDetail/${campSiteInfoIdx}`, newArea)
             .then((res) => {
                 console.log(res.data);
                 alert('수정되었습니다.');
+
                 navigate(`/detailPartnerCamp/?${campIdx}`);
 
             })
@@ -229,6 +260,7 @@ function PartnerCampDetail() {
                                 <input className={'form-control'}
                                     value={`${campDetails.campDt[0]}-${campDetails.campDt[1]}-${campDetails.campDt[2]}`}
                                        readOnly={true}/>
+
                             </div>
                         </div>
                     </div>
@@ -287,16 +319,25 @@ function PartnerCampDetail() {
                                    onChange={handleInputChange}/>
                         </div>
 
-                        <div className={'my-3'}>
-                    <textarea className={'form-control'} rows={8}
-                              value={updatedCampInfo.campIntro || ''}
-                              name="campIntro"
-                              onChange={handleInputChange}></textarea>
+                        <div className={'my-3 d-grid'}>
+                            <ReactQuill
+                                value={desc}
+                                onChange={onEditorChange}
+                                modules={modules}
+                                formats={formats}
+                                // style={{ width: "800px", height: "300px" }}
+                                style={{ height: "300px" }}
+
+                            />
+                    {/*<textarea className={'form-control'} rows={8}*/}
+                    {/*          value={updatedCampInfo.campIntro || ''}*/}
+                    {/*          name="campIntro"*/}
+                    {/*          onChange={handleInputChange}></textarea>*/}
                         </div>
                     </div>
 
 
-                    <div className={'row my-3'}>
+                    <div className={'row my-5'}>
                         <div className={'d-flex justify-content-end'}>
                             <button type={'submit'} className={'btn btn-primary me-3'}>수정하기</button>
                             <button type={'reset'} className={'btn btn-danger'}

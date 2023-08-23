@@ -87,13 +87,14 @@ public class Reservation {
       String impUid,
       String merchantUid,
       String name,
+
       CampMainInfo campMainInfo,
       CampSiteList campSiteList,
       Member member
   ) {
     this.userReservationName = userReservationName;
-    this.userReservationStart = userReservationStart;
-    this.userReservationEnd = userReservationEnd;
+    this.userReservationStart = LocalDate.from(userReservationStart);
+    this.userReservationEnd = LocalDate.from(userReservationEnd);
     this.userReservationCnt = userReservationCnt;
     this.userParkCnt = userParkCnt;
     this.userCarNum = userCarNum;
@@ -105,6 +106,7 @@ public class Reservation {
     this.impUid = impUid;
     this.merchantUid = merchantUid;
     this.name = name;
+
     this.campMainInfo = campMainInfo;
     this.campSiteList = campSiteList;
     this.member = member;

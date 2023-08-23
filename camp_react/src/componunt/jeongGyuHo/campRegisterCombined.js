@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import ReactQuill from "react-quill";
+
 
 function CampRegisterCombined(props) {
     const navigate = useNavigate();
