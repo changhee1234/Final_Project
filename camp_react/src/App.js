@@ -42,7 +42,7 @@ function App() {
             <Route path={'/'} element={<MainPage/>}/>
             {/*마이페이지*/}
 
-            <Route path={'/myPage'} element={<MyPage/>}/>
+            <Route path={'/myPage/:userInfo'} element={<MyPage/>}/>
             {/*예외처리(에러페이지)*/}
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
