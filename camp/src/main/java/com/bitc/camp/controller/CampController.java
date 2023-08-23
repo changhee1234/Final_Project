@@ -14,11 +14,12 @@ import java.util.List;
 @CrossOrigin("http://localhost:3000")
 @RequiredArgsConstructor
 @RestController
+@RequestMapping(value = "/camp")
 public class CampController {
 
     private final CampService campService;
 
-    @RequestMapping(value = "/camp", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public Object selectBoardList() throws Exception {
         List<CampMainInfoDto> campMainInfoDtoList = campService.selectCampList();
 
@@ -33,14 +34,14 @@ public class CampController {
         return reviewBoardDtoList;
     }
 
-    @RequestMapping(value = "/campRegister", method = RequestMethod.POST)
+    @RequestMapping(value = "/Register", method = RequestMethod.POST)
     public Object campRegister(@RequestBody CampMainInfoDto campMainInfoDto) throws Exception {
         CampMainInfo createdCamp = campService.createCamp(campMainInfoDto);
 
         return createdCamp;
     }
 
-    @RequestMapping(value = "/campRegister2", method = RequestMethod.POST)
+    @RequestMapping(value = "/Register2", method = RequestMethod.POST)
     public Object campRegister2(@RequestBody List<CampSiteInfoDto> campSiteInfoDtoList) throws Exception{
         List<CampSiteInfo> campSiteInfo = campService.createCamp2(campSiteInfoDtoList);
 

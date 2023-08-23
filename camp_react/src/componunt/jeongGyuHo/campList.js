@@ -117,7 +117,7 @@ function CampList(props) {
     // 사용자 리뷰 가져오기
     const [reviewList, setReviewList] = useState([]);
     const searchReview = (item) => {
-        axios.get(`http://localhost:8080/review/${item.idx}`)
+        axios.get(`http://localhost:8080/camp/review/${item.idx}`)
             .then(res => {
                 setReviewList(res.data);
             })

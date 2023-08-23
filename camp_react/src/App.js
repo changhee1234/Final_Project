@@ -18,6 +18,7 @@ import AnnouncementDetailPage from "./page/announcementDetailPage.js";
 import CampRegisterCombined from "./componunt/jeongGyuHo/campRegisterCombined.js";
 import Footer from "./layout/footer.js";
 import DetailPartnerCamp from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
+import SelectPartnerCamp from "./componunt/jeongGyuHo/SelectPartnerCamp";
 
 function App() {
   return (
@@ -49,8 +50,9 @@ function App() {
           <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
           {/*공지사항 상세보기 페이지*/}
           <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
+          <Route path={'/selectPartnerCamp'} element={<SelectPartnerCamp/>}/>
           <Route path={'/detailPartnerCamp/:campIdx'} element={<DetailPartnerCamp/>}/>
-          <Route path={'campRegister'} element={<CampRegisterCombined/>}/>
+          <Route path={'/campRegister'} element={<CampRegisterCombined/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

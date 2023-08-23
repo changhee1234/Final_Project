@@ -46,7 +46,7 @@ function PartnerCampDetail() {
     const [editingArea, setEditingArea] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/partnerCampDetail/${campIdx}`)
+        axios.get(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`)
             .then(res => {
                 console.log(res.data); // 응답 데이터를 콘솔에 기록
                 setCampDetails(res.data);
@@ -66,7 +66,7 @@ function PartnerCampDetail() {
                     }
                 });
 
-                axios.get(`http://localhost:8080/partnerCampSiteDetail/${intCampIdx}`)
+                axios.get(`http://localhost:8080/camp/partnerCampSiteDetail/${intCampIdx}`)
                     .then((res) => {
                         console.log(res.data);
                         // setCampSiteInfo(res.data);
@@ -91,7 +91,7 @@ function PartnerCampDetail() {
     const handleMainInfoDeleteButton = (e) => {
         e.preventDefault();
 
-        axios.delete(`http://localhost:8080/partnerCampDetail/${campIdx}`)
+        axios.delete(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`)
             .then((res) => {
                 console.log(res.data);
                 alert("삭제되었습니다");
@@ -111,11 +111,11 @@ function PartnerCampDetail() {
         };
 
         const campInfoIdx = parseInt(deletedArea.idx);
-        axios.delete(`http://localhost:8080/partnerCampSiteDetail/${campInfoIdx}`)
+        axios.delete(`http://localhost:8080/camp/partnerCampSiteDetail/${campInfoIdx}`)
             .then((res) => {
                 console.log(res.data);
                 alert("삭제되었습니다.");
-                navigate("/");
+                navigate(`/detailPartnerCamp/${campIdx}`);
             })
             .catch((err) => {
                 console.error(err);
@@ -143,7 +143,7 @@ function PartnerCampDetail() {
             } // partnerIdx를 여기에 포함시킵니다.
         };
 
-        axios.put(`http://localhost:8080/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx)
+        axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx)
             .then(res => {
                 console.log("캠프 상세 정보가 성공적으로 업데이트되었습니다:", res.data);
                 setPartnerIdx(res.data.partnerIdx);
@@ -193,10 +193,11 @@ function PartnerCampDetail() {
             },
         };
         const campSiteInfoIdx = parseInt(newArea.idx);
-        axios.put(`http://localhost:8080/partnerCampSiteDetail/${campSiteInfoIdx}`, newArea)
+        axios.put(`http://localhost:8080/camp/partnerCampSiteDetail/${campSiteInfoIdx}`, newArea)
             .then((res) => {
                 console.log(res.data);
                 alert('수정되었습니다.');
+
             })
             .catch((err) => {
                 console.error(err);
@@ -211,7 +212,7 @@ function PartnerCampDetail() {
 
 
     const handleCancel = () => {
-        navigate("/");
+        navigate("/selectPartnerInfo");
     };
 
     const dtTruncateText = (text, maxLength) => {
@@ -575,7 +576,7 @@ function PartnerCampDetail() {
                                 <div className={'d-grid'}>
                                     <button
                                         type={'submit'}
-                                        className={'btn btn-primary'}
+                                        className={'btn btn-danger'}
                                         onClick={handleSiteInfoDeleteButton}
                                     >
                                         구역 삭제
@@ -588,7 +589,7 @@ function PartnerCampDetail() {
                             <div className={'d-grid'}>
                                 <button
                                     type={'button'}
-                                    className={'btn btn-danger'}
+                                    className={'btn btn-primary'}
                                     onClick={handleAreaEditClick}
                                 >
                                     구역 수정하기
@@ -599,7 +600,7 @@ function PartnerCampDetail() {
                     )}
                 </div>
             </div>
-            <button type={'reset'} className={'btn btn-secondary my-3'} onClick={handleCancel}>취소하기</button>
+            <div className={'d-grid'}><button type={'reset'} className={'btn btn-secondary my-3'} onClick={handleCancel}>취소하기</button></div>
         </div>
     );
 }
