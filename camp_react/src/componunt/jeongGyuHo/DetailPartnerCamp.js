@@ -84,7 +84,7 @@ function PartnerCampDetail() {
                     campIdx: res.data.campIdx,
                     campName: res.data.campName,
                     campIntro: res.data.campIntro,
-                    campDt: res.data.campDt,
+                    // campDt: res.data.campDt,
                     kidszoneYn: res.data.kidszoneYn,
                     campHpLink: res.data.campHpLink,
                     campPh: res.data.campPh,
@@ -163,7 +163,7 @@ function PartnerCampDetail() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(desc)
+
         // partnerIdx를 updatedCampInfo에 포함시킵니다.
         const updatedDataWithPartnerIdx = {
             ...updatedCampInfo,
@@ -173,9 +173,7 @@ function PartnerCampDetail() {
             } // partnerIdx를 여기에 포함시킵니다.
         };
 
-        console.log(updatedCampInfo.campIntro)
-        axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx
-        )
+        axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx)
             .then(res => {
                 console.log("캠프 상세 정보가 성공적으로 업데이트되었습니다:", res.data);
                 setPartnerIdx(res.data.partnerIdx);
@@ -183,7 +181,7 @@ function PartnerCampDetail() {
                     campIdx: res.data.campIdx,
                     campName: res.data.campName,
                     campIntro: res.data.campIntro,
-                    campDt: res.data.campDt,
+                    // campDt: res.data.campDt,
                     kidszoneYn: res.data.kidszoneYn,
                     campHpLink: res.data.campHpLink,
                     campPh: res.data.campPh,
@@ -224,11 +222,14 @@ function PartnerCampDetail() {
                 idx: partnerIdx,
             },
         };
-        const campSiteInfoIdx = parseInt(newArea.idx);
+        const campSiteInfoIdx = parseInt(selectedArea[0].idx);
+
         axios.put(`http://localhost:8080/camp/partnerCampSiteDetail/${campSiteInfoIdx}`, newArea)
             .then((res) => {
                 console.log(res.data);
                 alert('수정되었습니다.');
+
+                navigate(`/detailPartnerCamp/?${campIdx}`);
 
             })
             .catch((err) => {
@@ -257,8 +258,9 @@ function PartnerCampDetail() {
                             <div className={'input-group'}>
                                 <span className={'input-group-text'}>등록일자</span>
                                 <input className={'form-control'}
-                                       value={`${campDetails.campDt[0]}-${campDetails.campDt[1]}-${campDetails.campDt[2]}`}
-                                       readonly={true}/>
+                                    value={`${campDetails.campDt[0]}-${campDetails.campDt[1]}-${campDetails.campDt[2]}`}
+                                       readOnly={true}/>
+
                             </div>
                         </div>
                     </div>
@@ -338,7 +340,7 @@ function PartnerCampDetail() {
                     <div className={'row my-5'}>
                         <div className={'d-flex justify-content-end'}>
                             <button type={'submit'} className={'btn btn-primary me-3'}>수정하기</button>
-                            <button type={'resset'} className={'btn btn-danger'}
+                            <button type={'reset'} className={'btn btn-danger'}
                                     onClick={handleMainInfoDeleteButton}>삭제하기
                             </button>
                         </div>
@@ -402,7 +404,7 @@ function PartnerCampDetail() {
                                                 type={'number'}
                                                 className={'form-control'}
                                                 value={selectedArea[0].sitePrice}
-                                                ononChange={(e) => {
+                                                onChange={(e) => {
                                                     const newValue = e.target.value;
                                                     setSelectedArea(prevAreas => [{
                                                         ...prevAreas[0],
@@ -569,7 +571,8 @@ function PartnerCampDetail() {
                                 <span className={'input-group-text'}>캠프 구역</span>
                                 <select
                                     className={'form-select'}
-                                    value={selectedArea[0] ? selectedArea[0].idx : ""}
+                                    // value={selectedArea[0] ? selectedArea[0].idx : ""}
+                                    value={selectedArea.length > 0 ? selectedArea[0].idx : ""}
                                     onChange={(e) => {
                                         const selectedIdx = parseInt(e.target.value);
                                         const selectedAreaInfo = campSiteInfo.find(area => area.idx === selectedIdx);

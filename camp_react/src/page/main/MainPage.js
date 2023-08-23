@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './mainPage.css';
+// import './mainPage.css';
 // import {selectBox} from "../layout/SelectBox";
 import {hangjungdong} from "../layout/Hangjungdong";
 

@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
+
 function CampRegisterCombined(props) {
+    const navigate = useNavigate();
     const [step, setStep] = useState(1); // 현재 단계를 저장하는 상태 변수
 
     // campMainInfo 등록 인풋 state
@@ -14,8 +17,8 @@ function CampRegisterCombined(props) {
     const [campHpLink, setCampHpKink] = useState('');
     const [campPh, setCampPh] = useState('');
     const [campAddress, setCampAddress] = useState('');
-    const [partner, setPartner] = useState({idx: 0,});
-    const campDeletedYn = "N";
+    const [partner, setPartner] = useState({idx: 0});
+    const campDeletedYn = 'N';
 
     // campSiteInfo리스트 state
     const [campSiteInfos, setCampSiteInfos] = useState([
@@ -59,6 +62,7 @@ function CampRegisterCombined(props) {
             parkPrice: 0,
             elePrice: 0,
             areaSiteCnt: 0,
+            siteDeletedYn : 'N'
         };
 
         setCampSiteInfos([...campSiteInfos, newCampSiteInfo])
@@ -67,8 +71,8 @@ function CampRegisterCombined(props) {
     const handleCampRegister2Submit = (e) => {
         e.preventDefault();
 
+
         const campData = {
-            campDeletedYn: campDeletedYn,
             campName,
             campIntro,
             campDt: campDt.toISOString().substr(0, 16),
@@ -76,7 +80,8 @@ function CampRegisterCombined(props) {
             campHpLink,
             campPh,
             campAddress,
-            partner
+            partner,
+            campDeletedYn
         };
         axios.post('http://localhost:8080/camp/Register', campData)
             .then((res) => {
@@ -94,6 +99,7 @@ function CampRegisterCombined(props) {
                     .then((res) => {
                         console.log(res.data);
                         alert('등록되었습니다.');
+                        navigate(`/`);
                     })
                     .catch((err) => {
                         console.log(err);
@@ -112,6 +118,7 @@ function CampRegisterCombined(props) {
         <div className={'col-sm-8 mx-auto text-start'}>
             {step === 1 && (
                 <form onSubmit={handleCampRegisterNext}>
+                    <h3>캠핑장 정보 입력</h3>
                     {/*매니저 번호(나중에 세션값으로 받아와 로그인과 연동(사라질 것)*/}
                     <div className={'my-3'}>
                         <label className={'form-label'} htmlFor={'partner'}>회원번호(없애고 로그인과 연동) : </label>
@@ -207,6 +214,7 @@ function CampRegisterCombined(props) {
                 <form onSubmit={handleCampRegister2Submit}>
                     {campSiteInfos.map((campSiteInfo, index) => (
                         <div key={index} className={'border-bottom'}>
+                            <h3>캠핑장 구역 정보 입력</h3>
                             <div className={'my-3 row'}>
 
                                 {/*구역 이름*/}

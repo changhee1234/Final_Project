@@ -39,11 +39,13 @@ function App() {
             {/*메인페이지*/}
             <Route path={'/'} element={<MainPage/>}/>
             {/*마이페이지*/}
-            <Route path={'/myPage/:userNickName'} element={<MyPage/>}/>
+
+            <Route path={'/myPage'} element={<MyPage/>}/>
             {/*예외처리(에러페이지)*/}
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
-            <Route path={'/camp'} element={<CampList/>}/>
+            <Route path={'/camp'} element={<CampListPage/>}/>
+
             {/*캠핑장 상세보기*/}
             <Route path={'/campList/*'} element={<CampDetailPage/>}/>
             {/*중고장터 리스트*/}
@@ -61,6 +63,7 @@ function App() {
             <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
             {/*공지사항 상세보기 페이지*/}
             <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
+
             <Route path={'/selectPartnerCamp'} element={<SelectPartnerCamp/>}/>
             <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail/>}/>
             <Route path={'campRegister'} element={<CampRegisterCombined/>}/>

@@ -101,6 +101,7 @@ public class CampServiceImpl implements CampService {
         campMainInfo.setCampAddress(campMainInfoDto.getCampAddress());
         campMainInfo.setPartner(campMainInfoDto.getPartner());
         campMainInfo.setCampDeletedYn(campMainInfo.getCampDeletedYn());
+
         return campMainInfoRepository.save(campMainInfo);
     }
 
@@ -125,6 +126,7 @@ public class CampServiceImpl implements CampService {
             campSiteInfo.setParkPrice(dto.getParkPrice());
             campSiteInfo.setElePrice(dto.getElePrice());
             campSiteInfo.setAreaSiteCnt(dto.getAreaSiteCnt());
+            campSiteInfo.setSiteDeletedYn(dto.getSiteDeletedYn());
 
             campSiteInfos.add(campSiteInfo);
         }
@@ -179,7 +181,7 @@ public class CampServiceImpl implements CampService {
         // 업데이트할 필드들을 campMainInfoDto로부터 가져와서 엔티티에 설정합니다.
         existingCamp.setCampName(campMainInfoDto.getCampName());
         existingCamp.setCampIntro(campMainInfoDto.getCampIntro());
-        existingCamp.setCampDt(campMainInfoDto.getCampDt());
+//        existingCamp.setCampDt(campMainInfoDto.getCampDt());
         existingCamp.setKidszoneYn(campMainInfoDto.getKidszoneYn());
         existingCamp.setCampHpLink(campMainInfoDto.getCampHpLink());
         existingCamp.setCampPh(campMainInfoDto.getCampPh());

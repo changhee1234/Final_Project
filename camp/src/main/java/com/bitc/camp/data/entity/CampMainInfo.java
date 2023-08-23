@@ -68,7 +68,9 @@ public class CampMainInfo {
   @PrePersist
   protected void onCreate() {
     if (campDeletedYn == null) {
-      campDeletedYn = "N";
+
+      campDeletedYn = "N"; // 기본값으로 설정하거나 필요에 따라 다른 값을 설정할 수 있음
+
     }
   }
 }

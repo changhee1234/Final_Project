@@ -19,7 +19,9 @@ public class CampController {
 
     private final CampService campService;
 
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
+
     public Object selectBoardList() throws Exception {
         List<CampMainInfoDto> campMainInfoDtoList = campService.selectCampList();
 
