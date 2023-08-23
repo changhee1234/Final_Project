@@ -64,4 +64,11 @@ public class CampMainInfo {
   public CampMainInfo(int idx) {
     this.idx = idx;
   }
+
+  @PrePersist
+  protected void onCreate() {
+    if (campDeletedYn == null) {
+      campDeletedYn = "N";
+    }
+  }
 }

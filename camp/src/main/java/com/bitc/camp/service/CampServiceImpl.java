@@ -100,7 +100,7 @@ public class CampServiceImpl implements CampService {
         campMainInfo.setCampPh(campMainInfoDto.getCampPh());
         campMainInfo.setCampAddress(campMainInfoDto.getCampAddress());
         campMainInfo.setPartner(campMainInfoDto.getPartner());
-
+        campMainInfo.setCampDeletedYn(campMainInfo.getCampDeletedYn());
         return campMainInfoRepository.save(campMainInfo);
     }
 

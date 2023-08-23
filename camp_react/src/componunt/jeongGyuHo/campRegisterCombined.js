@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function CampRegisterCombined(props) {
     const [step, setStep] = useState(1); // 현재 단계를 저장하는 상태 변수
@@ -14,6 +15,7 @@ function CampRegisterCombined(props) {
     const [campPh, setCampPh] = useState('');
     const [campAddress, setCampAddress] = useState('');
     const [partner, setPartner] = useState({idx: 0,});
+    const campDeletedYn = "N";
 
     // campSiteInfo리스트 state
     const [campSiteInfos, setCampSiteInfos] = useState([
@@ -29,9 +31,12 @@ function CampRegisterCombined(props) {
             campReservePeriod: 0,
             parkPrice: 0,
             elePrice: 0,
+            siteDeletedYn : "N",
             areaSiteCnt: 0,
         }
     ]);
+
+
 
     // 다음페이지로 이동
     const handleCampRegisterNext = (e) => {
@@ -63,6 +68,7 @@ function CampRegisterCombined(props) {
         e.preventDefault();
 
         const campData = {
+            campDeletedYn: campDeletedYn,
             campName,
             campIntro,
             campDt: campDt.toISOString().substr(0, 16),
@@ -173,11 +179,18 @@ function CampRegisterCombined(props) {
                     </div>
 
                     {/*캠프설명*/}
+                    {/* 캠프설명 */}
                     <div className={'my-3'}>
-                    <textarea className={'form-control'} id={'campIntro'} rows={'8'} value={campIntro}
-                              onChange={(e) => setCampIntro(e.target.value)}/>
+                        <label htmlFor={'campIntro'} className={'form-label'}>캠프설명</label>
+                        <ReactQuill
+                            id={'campIntro'}
+                            value={campIntro}
+                            onChange={setCampIntro}
+                            style={{ height: "300px" }}
+                            theme="snow" // 테마 선택 (snow, bubble 등)
+                        />
                     </div>
-                    <div className={'d-flex justify-content-end'}>
+                    <div className={'d-flex justify-content-end my-5'}>
                         <div className={'col-sm-3'}>
                             <div className={'d-grid'}>
                                 {/*다음페이지(campSiteInfo 입력) 넘어가기*/}
@@ -411,24 +424,25 @@ function CampRegisterCombined(props) {
                             {/*주의 사항*/}
                             <div className={'my-3'}>
                                 <label htmlFor={'notice'} className={'form-label'}>주의사항</label>
-                                <textarea
-                                    rows={8}
-                                    className={'form-control'}
-                                    id={'notice'}
+                                <ReactQuill
+                                    id={`notice-${index}`}
                                     value={campSiteInfo.notice}
-                                    onChange={(e) =>
+                                    onChange={(value) => {
                                         setCampSiteInfos((prevInfos) => {
                                             const newInfos = [...prevInfos];
-                                            newInfos[index].notice = e.target.value; // 값 설정
+                                            newInfos[index].notice = value;
                                             return newInfos;
-                                        })}
+                                        });
+                                    }}
+                                    theme="snow"
+                                    style={{ height: "300px" }}
                                 />
                             </div>
 
 
                         </div>
                     ))}
-                    <div className={'row my-3'}>
+                    <div className={'row my-5'}>
                         <div className={'col-sm-12'}>
                             <div className={'d-grid'}>
                                 <button className={'btn btn-secondary'} onClick={handleAddCampSiteInfo} type={'button'}>+</button>
