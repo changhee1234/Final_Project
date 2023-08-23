@@ -44,7 +44,7 @@ public class SecurityConfig {
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
                             "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image"
-                            , "/delete-account", "/addPartner", "/updatePartnerAccess"
+                            , "/delete-account", "/addPartner", "/updatePartnerAccess", "/board/**"
                     ).permitAll()
                     .requestMatchers("/partner-page", "/partnerInfo/**").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")

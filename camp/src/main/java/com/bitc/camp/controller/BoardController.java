@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/board")
 @RestController
-public class BoardController {
+public class  BoardController {
 
   private final BoardService boardService;
 
