@@ -2,10 +2,10 @@ package com.bitc.camp.service;
 
 import com.bitc.camp.data.dto.PartnerRespDto;
 import com.bitc.camp.data.entity.Partner;
-import com.bitc.camp.data.repository.PartnerRepository;
 import com.bitc.camp.dto.AddMemberReq;
 import com.bitc.camp.entity.Member;
 import com.bitc.camp.repository.MemberRepository;
+import com.bitc.camp.repository.PartnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -58,7 +58,7 @@ public class PartnerServiceImpl implements PartnerService {
         for (Partner partnerEntity : partnerEntities) {
             AddPartnerReq partnerReq = new AddPartnerReq();
             partnerReq.setIdx(partnerEntity.getIdx());
-            partnerReq.setMemberIdx(partnerEntity.getMemberIdx());
+            partnerReq.setMemberIdx(partnerEntity.getMember());
             partnerReq.setPartnerName(partnerEntity.getPartnerName());
             partnerReq.setPartnerPhone(partnerEntity.getPartnerPhone());
             partnerReq.setPartnerNum(partnerEntity.getPartnerNum());

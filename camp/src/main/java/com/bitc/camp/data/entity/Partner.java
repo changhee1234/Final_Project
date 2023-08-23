@@ -50,7 +50,7 @@ public class Partner {
   @ManyToOne
   @JoinColumn(name = "member_idx")
   @ToString.Exclude
-  private Member memberIdx;
+  private Member member;
 
   public void setPartnerName(String partnerName) {this.partnerName = partnerName;}
   public void setPartnerPhone(String partnerPhone) {this.partnerPhone = partnerPhone;}
@@ -59,7 +59,7 @@ public class Partner {
   public void setAddress(String address) {this.address = address;}
   public void setAddressDetail(String addressDetail) {this.addressDetail = addressDetail;}
   public void setPartnerAccess(String partnerAccess) {this.partnerAccess = partnerAccess;}
-  public void setMember(Member memberIdx) { this.memberIdx = memberIdx; }
+  public void setMember(Member member) { this.member = member; }
   }
 
 
