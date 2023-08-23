@@ -1,3 +1,4 @@
+// 장터 WebMvcConfiguration 파일(WebMvcConfig)
 package com.bitc.camp.config;
 
 import org.springframework.context.annotation.Configuration;

@@ -1,3 +1,4 @@
+// 장터 목록 페이지 js파일(TradeListPage)
 import React, { useEffect, useState } from "react";
 import './tradeListpage.css';
 import axios from 'axios';
@@ -131,7 +132,7 @@ function TradeListMain(props) {
                       {/*삽니다/팝니다 선택에 따라 다른 css 디자인 적용하여 구분*/}
                       <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                         <div className="product_img_div">
-                          <Link to={`/trade/${item.tradeBoardIdx}`}>
+                          <Link to={`/board/trade/${item.tradeBoardIdx}`}>
                             <img  src={item.img} alt={"img"} className="product_img"/>
                             {/*"/assets/default_image.png"*/}
                           </Link>
@@ -140,7 +141,7 @@ function TradeListMain(props) {
                           {item.title}
                         </div>
                         <div className="product_mon text-center">
-                          <i className="bi bi-coin"></i>가격: {item.tradePrice.toLocaleString()}원
+                          <i className="bi bi-coin"></i>희망가: {item.tradePrice.toLocaleString()}원
                         </div>
                         <h5 className="product_content">{item.content}</h5>
                         <a className="product_des text-decoration-none">{item.description}</a>

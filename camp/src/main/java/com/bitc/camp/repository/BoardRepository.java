@@ -1,3 +1,5 @@
+// 장터 레파지토리 파일(BoardRepository)
+// 최근순/조회순 정렬 미구현
 package com.bitc.camp.repository;
 
 import com.bitc.camp.entity.Board;
@@ -10,7 +12,6 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Integer> {
   //  리스트 조회
   List<Board> findAllByOrderByTradeBoardIdxDesc();
-
 
   //  최근순/조회순 정렬
   @Modifying

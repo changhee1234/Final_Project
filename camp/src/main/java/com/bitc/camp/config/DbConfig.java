@@ -1,3 +1,4 @@
+// 장터 DB Configuration 파일(DbConfig)
 package com.bitc.camp.config;
 
 import com.zaxxer.hikari.HikariConfig;

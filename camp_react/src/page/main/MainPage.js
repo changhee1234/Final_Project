@@ -1,8 +1,10 @@
+// 메인페이지 js파일(MainPage)
+// 1)캐러셀 이미지 및 링크 2)공지사항 3)광고배너 4)캠핑장 리스트 5)장터 리스트
 import React, {useState} from 'react';
 import './mainPage.css';
-// import {selectBox} from "../layout/SelectBox"; // 전국 지역 select 박스(구/군까지 출력)
 import {hangjungdong} from "../layout/Hangjungdong";
 import TradeListMain from "../trade/TradeListMain";
+// import {selectBox} from "../layout/SelectBox"; // 전국 지역 select 박스(구/군까지 출력)
 
 function MainPage(props) {
 
@@ -126,12 +128,11 @@ function MainPage(props) {
                   </a>
                 </ul>
               </div>
-
             </ul>
 
-            {/*검색된 캠핑장 Card 리스트*/}
+            {/*검색된 캠핑장 Card 리스트(map 구현 필요)*/}
             <div className={'row my-2 mx-4 mt-0'}>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 class="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
@@ -141,7 +142,7 @@ function MainPage(props) {
                   <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
                 </div>
               </div>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
@@ -152,7 +153,7 @@ function MainPage(props) {
 
                 </div>
               </div>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
@@ -163,7 +164,7 @@ function MainPage(props) {
 
                 </div>
               </div>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
@@ -173,7 +174,7 @@ function MainPage(props) {
                   <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
                 </div>
               </div>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
@@ -184,7 +185,7 @@ function MainPage(props) {
 
                 </div>
               </div>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
@@ -195,7 +196,7 @@ function MainPage(props) {
 
                 </div>
               </div>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
@@ -206,7 +207,7 @@ function MainPage(props) {
 
                 </div>
               </div>
-              <div className="col-3 card my-2 mx-2">
+              <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
                 <div className="card-body">
                   <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
@@ -234,8 +235,7 @@ function MainPage(props) {
             </ul>
           </div>
 
-
-          {/*장터 리스트*/}
+          {/*장터 리스트(이미지 업로드 외 구현 완료)*/}
           <div className={'row my-4'}>
             <ul className={'col list-unstyled text-start mb-2'}>
               <a href="#!" className={'text-decoration-none fw-bold text-dark'}>
@@ -247,6 +247,7 @@ function MainPage(props) {
                 <li><i className="bi bi-plus"></i><span className={'text2'}>더보기</span></li>
               </a>
             </ul>
+            {/*장터 목록페이지 컴포넌트(상단 제외)*/}
             <TradeListMain/>
           </div>
         </div>

@@ -16,6 +16,7 @@ import ErrorPage from "./page/layout/ErrorPage";
 import AboutPage from "./page/layout/AboutPage";
 import Footer from "./page/layout/Footer";
 import TradeListPage from "./page/trade/TradeListPage";
+import UpdatePage from "./page/trade/UpdatePage";
 
 function App(props) {
   return (
@@ -39,6 +40,7 @@ function App(props) {
           <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
           {/*중고장터 글 등록*/}
           <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
+          <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
           {/*예약페이지*/}
           <Route path={'/reservation1/*'} element={<CampReservationPage1/>}/>
           <Route path={'/reservation2/*'} element={<CampReservationPage2/>}/>

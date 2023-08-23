@@ -1,3 +1,5 @@
+// 장터 ResponseDTO 파일
+// updateDt 및 deleteYn 에러로 주석처리
 package com.bitc.camp.dto;
 
 import com.bitc.camp.entity.Board;

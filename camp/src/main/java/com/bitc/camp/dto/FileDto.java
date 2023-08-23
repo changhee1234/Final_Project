@@ -1,3 +1,4 @@
+// 장터 fileDTO 파일
 package com.bitc.camp.dto;
 
 import lombok.Data;

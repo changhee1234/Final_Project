@@ -1,9 +1,9 @@
+// 장터 RequestDTO 파일
+// deleteYn 에러로 주석처리
 package com.bitc.camp.dto;
 
 import com.bitc.camp.entity.Board;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +16,7 @@ public class BoardRequestDto {
   private String content; // 내용
   private String userName; // 작성자
 //  private char deleteYn; // 삭제 여부
-  private Long tradeBoardIdx; // PK
+  private int tradeBoardIdx; // PK
   private int tradePrice; // 가격
   private String tradeLocation; // 지역
   private LocalDateTime createDt; // 생성일
@@ -26,6 +26,7 @@ public class BoardRequestDto {
 
   public Board toEntity() {
     return Board.builder()
+        .tradeBoardIdx(tradeBoardIdx)
         .title(title)
         .content(content)
         .userName(userName)

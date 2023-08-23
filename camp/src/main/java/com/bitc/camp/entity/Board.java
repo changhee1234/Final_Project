@@ -1,3 +1,5 @@
+// 장터 엔티티 파일(Board)
+// updateDt 및 deleteYn 에러로 주석처리
 package com.bitc.camp.entity;
 
 import jakarta.persistence.*;
@@ -10,7 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "trade_board")
 @NoArgsConstructor
-// (access = AccessLevel.PROTECTED)
 @Entity
 @ToString
 @AllArgsConstructor
@@ -60,14 +61,15 @@ public class Board {
   private String tradeLocation; // 지역
 
   @Column(length = 1000)
-  private String imgUrl;
+  private String imgUrl; // 이미지 링크
 
   private int views; // 조회수 필드
 
   @Builder
 //  생성자 정의
   public Board(String title, String content, String userName, int cnt,
-               int tradePrice, String tradeLocation, String tradeCate, int memberIdx) {
+                int tradePrice, String tradeLocation, String tradeCate, int memberIdx, int tradeBoardIdx) {
+    this.tradeBoardIdx = tradeBoardIdx;
     this.title = title;
     this.content = content;
     this.userName = userName;
@@ -81,7 +83,8 @@ public class Board {
   }
 
   //  객체의 속성을 업데이트
-  public void update(String title, String content, String tradeLocation, String tradeCate, int tradePrice, int cnt) {
+  public void update(String title, String content, String tradeLocation, String tradeCate, int tradePrice, int cnt, int tradeBoardIdx) {
+    this.tradeBoardIdx = tradeBoardIdx;
     this.title = title;
     this.content = content;
 //    this.updateDt = updateDt.now();
@@ -90,13 +93,7 @@ public class Board {
     this.tradePrice = tradePrice;
     this.imgUrl = imageUrl;
     this.cnt = cnt;
-
   }
-
-  //  게시글 삭제
-//  public void delete() {
-//    this.deleteYn = 'Y';
-//  }
 
   //  조회수 증가
   public void increaseHits() {

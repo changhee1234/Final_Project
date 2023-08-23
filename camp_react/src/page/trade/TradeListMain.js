@@ -1,3 +1,4 @@
+// 메인페이지 하단 부분, 장터 목록리스트 컴포넌트 js파일(TradeListMain)
 import React, {useEffect, useState} from "react";
 import './tradeListpage.css';
 import axios from 'axios';
@@ -80,7 +81,7 @@ function TradeListMain(props) {
                       {item.title}
                     </div>
                     <div className="product_mon text-center">
-                      <i className="bi bi-coin"></i>가격: {item.tradePrice.toLocaleString()}원
+                      <i className="bi bi-coin"></i>희망가: {item.tradePrice.toLocaleString()}원
                     </div>
                     <h5 className="product_content">{item.content}</h5>
                     <a className="product_des text-decoration-none">{item.description}</a>
