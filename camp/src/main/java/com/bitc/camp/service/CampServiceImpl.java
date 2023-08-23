@@ -1,13 +1,11 @@
 package com.bitc.camp.service;
 
-import com.bitc.camp.data.dto.CampMainInfoDto;
-import com.bitc.camp.data.dto.CampSiteInfoDto;
-import com.bitc.camp.data.dto.CampSiteListDto;
-import com.bitc.camp.data.dto.ReviewBoardDto;
+import com.bitc.camp.data.dto.*;
 import com.bitc.camp.data.entity.*;
 import com.bitc.camp.data.repository.*;
 import com.bitc.camp.entity.Member;
 import com.bitc.camp.repository.MemberRepository;
+import com.bitc.camp.repository.PartnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,7 @@ public class CampServiceImpl implements CampService {
     private final CampSiteListRepository campSiteListRepository;
     private final ReviewRepository reviewRepository;
     private final MemberRepository memberRepository;
+    private final PartnerRepository partnerRepository;
 
     private String getNickName(int memberIdx) {
         Member member = memberRepository.findNickNameByMemberIdx(memberIdx).orElse(null);
@@ -287,6 +286,18 @@ public class CampServiceImpl implements CampService {
         campSiteInfo.setSiteDeletedYn("Y");
 
         return campSiteInfoRepository.save(campSiteInfo);
+    }
+
+    @Override
+    public PartnerDto searchPartner(int memberIdx) throws Exception {
+        Optional<Member> member = memberRepository.findById(memberIdx);
+
+        Partner partner = partnerRepository.findByMember(member);
+        PartnerDto partnerDto = PartnerDto.builder()
+                .idx(partner.getIdx())
+                .build();
+
+        return partnerDto;
     }
 
 

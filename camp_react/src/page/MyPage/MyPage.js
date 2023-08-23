@@ -56,7 +56,7 @@ function MyPage() {
     } else if (selectedMenu === '캠핑장 등록' && isPartnerApplicationVisible) {
         contentComponent = <ManagerCampRegister user={user} />;
     } else if (selectedMenu === '파트너 신청 목록' && isAdminApplicationVisible) {
-        contentComponent = <PartnerApplicationComponent user={user} />;
+        contentComponent = <PartnerApplicationComponent userInfo={user} />;
     } else {
         contentComponent = (
             <div className="container">

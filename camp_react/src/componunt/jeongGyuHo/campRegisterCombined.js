@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import ReactQuill from "react-quill";
@@ -42,6 +42,18 @@ function CampRegisterCombined(props) {
     const handleCampRegisterNext = (e) => {
         e.preventDefault();
         setStep(2); // 다음 단계로 변경
+    }
+
+    console.log(props.userInfo);
+    useEffect =() => {
+
+        axios.get("http://localhost:8080/partnerInfo/" + props.userInfo.memberIdx)
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
     }
 
     // 새로운 campSiteInfo 만들기

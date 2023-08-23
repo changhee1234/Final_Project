@@ -2,9 +2,11 @@ package com.bitc.camp.controller;
 
 import com.bitc.camp.data.dto.CampMainInfoDto;
 import com.bitc.camp.data.dto.CampSiteInfoDto;
+import com.bitc.camp.data.dto.PartnerDto;
 import com.bitc.camp.data.dto.ReviewBoardDto;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
+import com.bitc.camp.data.entity.Partner;
 import com.bitc.camp.service.CampService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,6 @@ public class CampController {
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-
     public Object selectBoardList() throws Exception {
         List<CampMainInfoDto> campMainInfoDtoList = campService.selectCampList();
 
@@ -90,5 +91,12 @@ public class CampController {
         campService.deletePartnerSite(campInfoIdx);
 
         return "성공";
+    }
+
+    @RequestMapping(value = "/searchPartner/{memberIdx}", method = RequestMethod.GET)
+    public Object searchPartner(@PathVariable int memberIdx) throws Exception {
+        PartnerDto partnerDto = campService.searchPartner(memberIdx);
+
+        return partnerDto;
     }
 }

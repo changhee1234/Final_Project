@@ -1,9 +1,6 @@
 package com.bitc.camp.service;
 
-import com.bitc.camp.data.dto.CampMainInfoDto;
-import com.bitc.camp.data.dto.CampSiteInfoDto;
-import com.bitc.camp.data.dto.CampSiteListDto;
-import com.bitc.camp.data.dto.ReviewBoardDto;
+import com.bitc.camp.data.dto.*;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
 
@@ -29,4 +26,6 @@ public interface CampService {
     CampMainInfo deletePartnerCamp(int campIdx) throws Exception;
 
     CampSiteInfo deletePartnerSite(int campInfoIdx) throws Exception;
+
+    PartnerDto searchPartner(int memberIdx) throws Exception;
 }
