@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -67,6 +67,7 @@ function PartnerCampDetail(props) {
             areaSiteCnt: 0,
         },
     ]);
+    const location = useLocation();
     const [editingArea, setEditingArea] = useState(false);
 
     useEffect(() => {
@@ -185,6 +186,7 @@ function PartnerCampDetail(props) {
                     }
                 });
                 setCampDetails(updatedDataWithPartnerIdx); // 업데이트된 데이터로 campDetails 업데이트
+                location.reload();
             })
             .catch(err => {
                 console.log("캠프 상세 정보 업데이트 중 오류 발생:", err);
@@ -223,7 +225,7 @@ function PartnerCampDetail(props) {
                 console.log(res.data);
                 alert('수정되었습니다.');
 
-                navigate(`/detailPartnerCamp/${campIdx}`);
+                location.reload();
 
             })
             .catch((err) => {
