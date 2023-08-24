@@ -50,16 +50,16 @@ public class BoardServiceImpl implements BoardService {
     Board camp = boardRepository.findById(tradeBoardIdx).orElse(null);
 
     BoardResponseDto boardResponseDto = BoardResponseDto.builder()
-        .tradeBoardIdx(camp.getTradeBoardIdx())
-        .title(camp.getTitle())
-        .content(camp.getContent())
-        .createDt(camp.getCreateDt())
-        .userName(camp.getUserName())
-        .tradePrice(camp.getTradePrice())
-        .tradeLocation(camp.getTradeLocation())
-        .tradeCate(camp.getTradeCate())
-        .memberIdx(camp.getMemberIdx())
-        .build();
+            .tradeBoardIdx(camp.getTradeBoardIdx())
+            .title(camp.getTitle())
+            .content(camp.getContent())
+            .createDt(camp.getCreateDt())
+            .userName(camp.getUserName())
+            .tradePrice(camp.getTradePrice())
+            .tradeLocation(camp.getTradeLocation())
+            .tradeCate(camp.getTradeCate())
+            .memberIdx(camp.getMemberIdx())
+            .build();
     return boardResponseDto;
   }
 
@@ -74,7 +74,7 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public Board update(int tradeBoardIdx, BoardRequestDto boardRequestDto) throws Exception {
     Board board = boardRepository.findById(tradeBoardIdx)
-        .orElse(null);
+            .orElse(null);
 
     if (board == null) {
       throw new Exception("Board not found with ID: " + tradeBoardIdx);
@@ -93,7 +93,7 @@ public class BoardServiceImpl implements BoardService {
   @Override
   public void delete(int tradeBoardIdx) throws Exception {
     Board board = boardRepository.findById(tradeBoardIdx)
-        .orElse(null);
+            .orElse(null);
 
     if (board == null) {
       throw new Exception("Board not found with ID: " + tradeBoardIdx);

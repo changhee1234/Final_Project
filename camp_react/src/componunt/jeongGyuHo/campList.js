@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const {kakao} = window;
 const places = new kakao.maps.services.Places();
@@ -252,6 +252,7 @@ function CampList(props) {
         return tmp.textContent || tmp.innerText || "";
     };
 
+
     return (
 
         <div className={'row'}>
@@ -312,10 +313,9 @@ function CampList(props) {
                         // 검색 결과가 있는 경우 리스트 표시
                         searchedCampList
                             .filter((camp) => camp.campDeletedYn === 'N').slice(startIndex, endIndex).map((camp) => (
-                            <a href={`#${camp.idx}`} className={'text-decoration-none'}>
+                            <Link to={`#${camp.idx}`} className={'text-decoration-none'} key={camp.idx}>
                                 <div
                                     className={'card my-3'}
-                                    key={camp.idx}
                                     onClick={() => {
                                         handleCardClick(camp);
                                         searchBlog(camp);
@@ -335,6 +335,7 @@ function CampList(props) {
                                             <div className={'col-sm-8 my-auto'}>
                                                 <a
                                                     className={'d-flex justify-content-start card-title text-decoration-none fs-3'}
+
                                                 >
                                                     {camp.campName}
                                                 </a>
@@ -350,7 +351,7 @@ function CampList(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         ))
                     )
                 ) : (
