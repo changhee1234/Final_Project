@@ -50,7 +50,7 @@ function App() {
             {/*중고장터 상세보기*/}
             <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
             {/*중고장터 글 등록*/}
-            <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
+            <Route path={'/tradeWrite/*'} element={<TradeWritePage userInfo={userInfo}/>}/>
             <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
             {/*예약페이지*/}
             <Route path={'/reservation1/:campIdx'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
