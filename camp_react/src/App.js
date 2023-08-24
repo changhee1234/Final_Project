@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CampDetailPage from "./page/campDetailPage.js";
 import AboutPage from "./page/aboutPage.js";
@@ -9,6 +8,7 @@ import CampReservationPage1 from "./page/camp/CampReservationPage1";
 import CampReservationPage2 from "./page/camp/CampReservationPage2";
 import CampReservationPage3 from "./page/camp/CampReservationPage3";
 import CampReservationPage4 from "./page/camp/CampReservationPage4";
+import {useState} from "react";
 import MainPage from "./page/main/MainPage";
 import MyPage from "./page/MyPage/MyPage";
 import ErrorPage from "./page/layout/ErrorPage";
@@ -64,7 +64,7 @@ function App() {
             {/*공지사항 상세보기 페이지*/}
             <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
 
-            <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail/>}/>
+            <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail user={userInfo}/>}/>
           </Routes>
           <Footer/>
         </BrowserRouter>

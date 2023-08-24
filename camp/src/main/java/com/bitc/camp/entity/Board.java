@@ -65,7 +65,7 @@ public class Board {
   @Builder
 //  생성자 정의
   public Board(String title, String content, String userName, int cnt,
-                int tradePrice, String tradeLocation, String tradeCate, int memberIdx, int tradeBoardIdx, String imageOriginal, String imageUrl) {
+               int tradePrice, String tradeLocation, String tradeCate, int memberIdx, int tradeBoardIdx, String imageOriginal, String imageUrl) {
     this.tradeBoardIdx = tradeBoardIdx;
     this.title = title;
     this.content = content;
