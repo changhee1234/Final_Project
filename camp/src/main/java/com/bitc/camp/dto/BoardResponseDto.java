@@ -28,7 +28,6 @@ public class BoardResponseDto {
     private LocalDateTime updateDt; // 수정일
     private String tradeCate; // 판매/구매 구분
     private int memberIdx; // 회원번호
-    private String imgUrl; // 이미지 주소
 
     public BoardResponseDto(Board entity) {
         this.tradeBoardIdx = entity.getTradeBoardIdx();

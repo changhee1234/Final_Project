@@ -335,7 +335,6 @@ function CampList(props) {
                                             <div className={'col-sm-8 my-auto'}>
                                                 <a
                                                     className={'d-flex justify-content-start card-title text-decoration-none fs-3'}
-
                                                 >
                                                     {camp.campName}
                                                 </a>

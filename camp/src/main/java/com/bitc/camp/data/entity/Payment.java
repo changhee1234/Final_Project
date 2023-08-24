@@ -80,4 +80,10 @@ public class Payment {
     this.cancelDate = cancelDate;
     this.reservationIdx = reservationIdx;
   }
+
+  public void cancelUpdate(String payStatus, int cancelAmount, Long cancelDate) {
+    this.payStatus = payStatus;
+    this.cancelAmount = cancelAmount;
+    this.cancelDate = cancelDate;
+  }
 }
