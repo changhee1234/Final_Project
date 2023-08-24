@@ -38,6 +38,8 @@ public class BoardServiceImpl implements BoardService {
     board.setTradeCate(boardRequestDto.getTradeCate());
     board.setMemberIdx(boardRequestDto.getMemberIdx());
     board.setCreateDt(boardRequestDto.getCreateDt());
+    board.setImageUrl(boardRequestDto.getImageUrl());
+    board.setImageOriginal(boardRequestDto.getImageOriginal());
 
     return boardRepository.save(board);
   }
@@ -56,7 +58,7 @@ public class BoardServiceImpl implements BoardService {
         .tradePrice(camp.getTradePrice())
         .tradeLocation(camp.getTradeLocation())
         .tradeCate(camp.getTradeCate())
-        .imgUrl(camp.getImgUrl())
+        .imgUrl(camp.getImageUrl())
         .memberIdx(camp.getMemberIdx())
         .build();
     return boardResponseDto;

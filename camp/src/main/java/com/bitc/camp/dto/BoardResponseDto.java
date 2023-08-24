@@ -43,7 +43,7 @@ public class BoardResponseDto {
 //        this.updateDt = entity.getUpdateDt();
         this.tradeCate = entity.getTradeCate();
         this.memberIdx = entity.getMemberIdx();
-        this.imgUrl = entity.getImgUrl();
+        this.imgUrl = entity.getImageUrl();
     }
 
 }

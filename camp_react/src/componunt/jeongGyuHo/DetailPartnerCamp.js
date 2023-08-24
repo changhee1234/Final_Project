@@ -325,9 +325,7 @@ function PartnerCampDetail() {
                                 onChange={onEditorChange}
                                 modules={modules}
                                 formats={formats}
-                                // style={{ width: "800px", height: "300px" }}
                                 style={{ height: "300px" }}
-
                             />
                     {/*<textarea className={'form-control'} rows={8}*/}
                     {/*          value={updatedCampInfo.campIntro || ''}*/}
