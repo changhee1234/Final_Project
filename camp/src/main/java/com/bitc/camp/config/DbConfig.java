@@ -16,19 +16,20 @@ public class DbConfig {
 
   @Bean
   @ConfigurationProperties(prefix = "spring.datasource.hikari")
-  public HikariConfig hikariConfig(){
+  public HikariConfig hikariConfig() {
     return new HikariConfig();
   }
 
   @Bean
-  public DataSource dataSource(){
+  public DataSource dataSource() {
+
     DataSource dataSource = new HikariDataSource(hikariConfig());
     return dataSource;
   }
 
   @Bean
   @ConfigurationProperties(prefix = "spring.jpa")
-  public Properties properties(){
+  public Properties properties() {
     return new Properties();
   }
 }

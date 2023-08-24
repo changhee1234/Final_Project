@@ -82,4 +82,9 @@ public class ReservationController {
 
     return result;
   }
+
+  @PutMapping("/cancel/{impUid}")
+  public void cancelReservation(@PathVariable("impUid") String impUid) throws Exception{
+    reservationService.cancelReservation(impUid);
+  }
 }

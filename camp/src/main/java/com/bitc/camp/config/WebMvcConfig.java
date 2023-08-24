@@ -7,7 +7,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -27,5 +26,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     // 이미지 파일에 대한 매핑 추가
     registry.addResourceHandler("/uploaded-images/**")
         .addResourceLocations("file:" + uploadDir + "/");
+
   }
 }

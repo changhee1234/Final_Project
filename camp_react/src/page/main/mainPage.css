@@ -1,60 +1,38 @@
-/*.carousel-inner {*/
-/*width: auto;*/
-/*height: 965px;*/
-/*}*/
+/*메인 페이지 CSS 파일*/
+/*이 파일 내용 변경 시, 해당되는 모든 파일의 css 디자인이 변경되니 주의!*/
 
-/*.carousel-item.active{*/
-/*    position: relative;*/
-/*    opacity: 1;*/
-/*    z-index: 700;*/
-/*}*/
-
-/*.carousel-item.prev{*/
-/*    transform: translateX(-100%);*/
-/*    z-index: 500;*/
-/*}*/
-
-/*.carousel-item.next{*/
-/*    transform: translateX(100%);*/
-/*    z-index: 500;*/
-/*}*/
-
-/*.carousel-btn-next,*/
-/*.carousel-btn-prev{*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    width: 40px;*/
-/*    height: 40px;*/
-/*    border-radius: 50%;*/
-/*    border : 1px solid #000;*/
-/*    background-color: #fff;*/
-/*    cursor: pointer;*/
-/*    transform: translateY(-50%);*/
-/*    z-index: 1000;*/
-/*}*/
-/*광고배너 크기*/
+/*광고배너 UI(크기)*/
 .ad {
     width: 700px;
     height: 200px;
 }
 
+/*아이콘1 UI*/
 .bi-megaphone {
     font-size: 25px;
     line-height: 22px;
     color: crimson;
 }
 
+/*아이콘2 UI*/
 .rocket-takeoff {
     font-size: 25px;
     line-height: 22px;
     color: rgba(175, 146, 0, 0.93);
 }
 
+/*아이콘3 UI*/
 .bi-cart4 {
     font-size: 25px;
     line-height: 22px;
 }
 
+/*텍스트 패딩 값 UI*/
+.more {
+    margin: 20px 40px;
+}
+
+/*텍스트 UI 4개*/
 .text1 {
     text-transform: uppercase;
     font-family: "Arial Black", sans-serif;
@@ -71,16 +49,11 @@
 
 .text3 {
     text-transform: uppercase;
-    font-family: "Arial Black", sans-serif;
+    font-family: "cursive Black", sans-serif;
     font-size: 40px;
-    font-weight: bold;
 }
 
-.more {
-    margin: 20px 40px;
-}
-
-/*등록 및 수정버튼 UI*/
+/*등록 및 수정버튼 UI 3개*/
 .w-btn {
     position: relative;
     border: none;
@@ -106,7 +79,7 @@
     cursor: pointer;
 }
 
-/*캐러셀 텍스트 형광펜 효과*/
+/*캐러셀 텍스트 UI(형광펜 효과) 2개*/
 .highlight1 {
     background-color: rgba(0, 0, 0, 0.4);
     width: auto;
@@ -125,12 +98,17 @@
     margin: auto;
 }
 
+/*ul 태그 선 제거 UI*/
 ul{
-list-style-type: none;
+    list-style-type: none;
 }
 
+/*카드 UI*/
+.cardUi {
+    width: 18rem
+}
 
-/*샐렉트 박스 UI*/
+/*샐렉트 박스 UI 2개*/
 .sel{
     width: 200px;
     border: 1px solid #C4C4C4;

@@ -4,7 +4,7 @@ import AboutPage from "./page/aboutPage.js";
 import AnnouncementListPage from "./page/announcementListPage.js";
 import AnnouncementDetailPage from "./page/announcementDetailPage.js";
 import CampRegisterCombined from "./componunt/jeongGyuHo/campRegisterCombined.js";
-import DetailPartnerCamp from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
+
 import CampReservationPage1 from "./page/camp/CampReservationPage1";
 import CampReservationPage2 from "./page/camp/CampReservationPage2";
 import CampReservationPage3 from "./page/camp/CampReservationPage3";
@@ -17,7 +17,8 @@ import TradeListPage from "./page/trade/TradeListPage";
 import TradeDetailPage from "./page/trade/TradeDetailPage";
 import Header from "./page/layout/Header";
 import Footer from "./page/layout/Footer";
-import CampListPage from "./page/campListPage";
+import UpdatePage from "./page/trade/UpdatePage";
+import TradeWritePage from "./page/trade/TradeWritePage";
 import CampList from "./componunt/jeongGyuHo/campList";
 import Editor from "./Editor";
 import SelectPartnerCamp from "./componunt/jeongGyuHo/SelectPartnerCamp";
@@ -43,16 +44,19 @@ function App() {
             {/*예외처리(에러페이지)*/}
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
-            <Route path={'/camp'} element={<CampListPage/>}/>
+            <Route path={'/camp'} element={<CampList/>}/>
 
             {/*캠핑장 상세보기*/}
             <Route path={'/campList/*'} element={<CampDetailPage/>}/>
             {/*중고장터 리스트*/}
             <Route path={'/trade'} element={<TradeListPage/>}/>
             {/*중고장터 상세보기*/}
-            <Route path={'/tradeDetail/*'} element={<TradeDetailPage/>}/>
+            <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
+            {/*중고장터 글 등록*/}
+            <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
+            <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
             {/*예약페이지*/}
-            <Route path={'/reservation1/*'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
+            <Route path={'/reservation1/:campIdx'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
             <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
             <Route path={'/reservation3/*'} element={<CampReservationPage3 userInfo={userInfo}/>}/>
             <Route path={'/reservation4/*'} element={<CampReservationPage4 userInfo={userInfo}/>}/>

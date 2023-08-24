@@ -33,28 +33,31 @@ function CampReservationPage2(props) {
 
   useEffect(() => {
     axios.get("http://localhost:8080/reserve/reserveStep/" + siteIdx.siteIdx)
-      .then(res => {
-        setSiteInfo(res.data.campSiteInfo);
-        setSiteLists(res.data.campSiteInfo.campSiteLists)
-      })
-      .catch(err => {
-        alert(`통신 오류 : ${err}`);
-      });
+        .then(res => {
+          setSiteInfo(res.data.campSiteInfo);
+          setSiteLists(res.data.campSiteInfo.campSiteLists)
+        })
+        .catch(err => {
+          alert(`통신 오류 : ${err}`);
+        });
   }, []);
 
   return (
-    <main className={"container"}>
-      <div className="row">
-        <div className="col-sm-6">
-          <SiteInfo siteInfo={siteInfo}/>
-          <Notice siteInfo={siteInfo}/>
-          <SiteLists siteLists={siteLists} availSiteList={availSiteList} selectedSite={selectedSiteFromSiteLists} selectedSiteIdx={selectedSiteIdxFromSiteLists}/>
+      <main className={"container"}>
+        <div className="row">
+          <div className="col-sm-6">
+            <SiteInfo siteInfo={siteInfo}/>
+            <Notice siteInfo={siteInfo}/>
+            <SiteLists siteLists={siteLists} availSiteList={availSiteList} selectedSite={selectedSiteFromSiteLists}
+                       selectedSiteIdx={selectedSiteIdxFromSiteLists}/>
+          </div>
+          <div className="col-sm">
+            <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campMainIdx={campMainIdx} campName={campName}
+                           siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite}
+                           selectedSiteIdx={selectedSiteIdx}/>
+          </div>
         </div>
-        <div className="col-sm">
-          <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campMainIdx={campMainIdx} campName={campName} siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite} selectedSiteIdx={selectedSiteIdx}/>
-        </div>
-      </div>
-    </main>
+      </main>
   );
 }
 

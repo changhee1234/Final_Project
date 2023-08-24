@@ -1,28 +1,13 @@
-/*텍스트 UI*/
-.product_container{
-    /*display:flex;*/
-    /*flex-direction: row;*/
-    /*flex-wrap : wrap;*/
-    /*width: 100%;*/
-}
-.product{
-    /*width:25%;*/
-    /*height: 100%;*/
-    /*margin-bottom : 4%;*/
-    /* border: 1px solid black; */
-}
+/* 장터 글 목록페이지 CSS 파일*/
+
+/*텍스트 UI 4개*/
 .product_img_div{
     text-align: center;
 }
-.product_img{
-    padding: 5px;
-    width:80%;
-    height:65%;
-}
-.product_title1{
-    color: #334c8d;
-    font-size : 1.1rem;
-    font-weight: 700;
+
+.product_content{
+    color: #000000;
+    font-size : 0.9rem;
     /*text-align: center;*/
     margin : 4%;
 }
@@ -43,15 +28,32 @@
     /*padding-right: 10px;*/
 }
 .product_mon{
-    margin : 4%;
+    margin : 2%;
     font-size : 1.3rem;
     /*margin : 2% 3% 1% 4%;*/
     /*text-align: center;*/
     /*table-border-color-dark: #2c0b0e;*/
 }
+
+/*이미지 UI(크기)*/
+.product_img{
+    padding: 5px;
+    width:80%;
+    height:65%;
+}
+
+.product_text{
+    margin : 4%;
+    font-size : 0.7rem;
+    /*margin : 2% 3% 1% 4%;*/
+    /*text-align: center;*/
+    /*table-border-color-dark: #2c0b0e;*/
+}
+
 .product_link_div{
     /*text-align: center;*/
 }
+
 .product_link{
     position:inherit;
     font-size : 1.2rem;
@@ -76,12 +78,12 @@
 /*리스트 박스 UI*/
 .box1 {
     color: #334c8d;
-    box-shadow: 0px 0px 12px 0px #11184f;
+    box-shadow: 3px 7px 12px 2px #cdd2f3;
 }
 
 .box2 {
-    color: #854141;
-    box-shadow: 0px 10px 20px 0px #d0cfcf;
+    color: #964a4a;
+    box-shadow: 3px 7px 12px 2px #e8cfcd;
     /*box-shadow: 0px 0px 5px 0px #7e7e7e;*/
 }
 

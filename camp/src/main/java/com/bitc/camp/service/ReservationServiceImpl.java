@@ -87,11 +87,8 @@ public class ReservationServiceImpl implements ReservationService {
     return reservationRespDtos;
   }
 
-//  @Override
-//  public ReservationRespDto getReservation(int id) throws Exception {
-//
-//    Reservation reservation = reservationRepository.findById(id).orElseThrow();
-//    return new ReservationRespDto(reservation);
-//  }
-
+  @Override
+  public void cancelReservation(String impUid) throws Exception {
+    reservationRepository.findByImpUid(impUid);
+  }
 }

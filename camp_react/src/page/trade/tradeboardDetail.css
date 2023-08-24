@@ -1,6 +1,7 @@
+/* 장터 글 상세페이지 CSS 파일*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
 
-/*글제목 UI*/
+/*텍스트 UI 3개*/
 h2 {
     margin: 20px;
     padding: 20px 0px;
@@ -27,7 +28,7 @@ text1 {
     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -3px 20px rgba(255,255,255,0.4);
 }
 
-/*등록 및 수정버튼 UI*/
+/*등록 및 수정버튼 UI 2개*/
 .w-btn {
     position: relative;
     border: none;
@@ -47,6 +48,14 @@ text1 {
     color: #1e6b7b;
 }
 
+/*목록 버튼 2개*/
+.w-btn-list {
+    background-color: #ffffff;
+    opacity: 0.5;
+    color: #000000;
+    border: #1a1d20;
+}
+
 .w-btn:hover {
     letter-spacing: 2px;
     transform: scale(1.2);
@@ -59,7 +68,7 @@ text1 {
     color: #ffffff;
 }
 
-/*삭제 버튼 UI*/
+/*삭제 버튼 UI 5개*/
 .w-btn-outline {
     position: relative;
     border: none;

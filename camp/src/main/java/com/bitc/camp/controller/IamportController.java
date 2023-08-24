@@ -2,6 +2,7 @@ package com.bitc.camp.controller;
 
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,12 @@ public class IamportController {
   @PostMapping("/payments/{imp_uid}")
   public IamportResponse<Payment> paymentByImpUid(@PathVariable("imp_uid") String imp_uid) throws IamportResponseException, IOException {
     return iamportClient.paymentByImpUid(imp_uid);
+  }
+
+  @PostMapping("/payments/cancel/{imp_uid}")
+  public IamportResponse<Payment> cancel(@PathVariable("imp_uid") String imp_uid) throws Exception {
+    CancelData cancelData = new CancelData(imp_uid, true);
+    return iamportClient.cancelPaymentByImpUid(cancelData);
   }
 
 }

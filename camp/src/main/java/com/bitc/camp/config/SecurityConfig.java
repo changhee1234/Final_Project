@@ -28,7 +28,7 @@ public class SecurityConfig {
   @Bean
   public WebSecurityCustomizer configure() {
     return web -> web.ignoring()
-        .requestMatchers("/static/**");
+            .requestMatchers("/static/**");
   }
 
 
@@ -44,12 +44,9 @@ public class SecurityConfig {
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
-
-                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image"
-                            , "/delete-account", "/addPartner", "/updatePartnerAccess", "/camp/**", "/", "/naver/**"
-
-                    ).permitAll()
-                    .requestMatchers("/partner-page", "/partnerInfo/**").hasRole("PARTNER")
+                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image", "/delete-account", "/addPartner", "/updatePartnerAccess", "/board/**", "/camp/**", "/", "/naver/**", "/reserve/**", "/payments/**", "/user-info/**", "/partnerInfo/**", "/review/**").permitAll()
+//                    .requestMatchers("/reserve/**", "/payments/**", "/user-info/**", "/login").hasAuthority("USER")
+//                    .requestMatchers("/partner-page", "/partnerInfo/**", "/user-info/**").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")
                     .anyRequest().authenticated())
             .formLogin(login -> login
@@ -69,9 +66,9 @@ public class SecurityConfig {
   @Bean
   public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, MemberDetailService memberDetailService) throws Exception {
     return http.getSharedObject(AuthenticationManagerBuilder.class)
-        .userDetailsService(memberDetailService)
-        .passwordEncoder(bCryptPasswordEncoder)
-        .and().build();
+            .userDetailsService(memberDetailService)
+            .passwordEncoder(bCryptPasswordEncoder)
+            .and().build();
   }
 
   @Bean

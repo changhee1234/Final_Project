@@ -26,6 +26,10 @@ if "%OS%"=="Windows_NT" setlocal
 
 set DIRNAME=%~dp0
 if "%DIRNAME%"=="" set DIRNAME=.
+<<<<<<< HEAD
+=======
+@rem This is normally unused
+>>>>>>> 정세인
 set APP_BASE_NAME=%~n0
 set APP_HOME=%DIRNAME%
 
@@ -88,4 +92,8 @@ exit /b %EXIT_CODE%
 :mainEnd
 if "%OS%"=="Windows_NT" endlocal
 
+<<<<<<< HEAD
 :omega
+=======
+:omega
+>>>>>>> 정세인
