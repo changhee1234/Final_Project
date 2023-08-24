@@ -27,7 +27,7 @@ function CampListMain(props) {
             .catch((err) => {
                 console.error(err);
             })
-    }, [campList]);
+    }, []);
 
     return (
         <div className={'container'}>
