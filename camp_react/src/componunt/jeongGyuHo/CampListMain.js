@@ -24,6 +24,9 @@ function CampListMain(props) {
                 console.log(res.data);
                 setCampList(res.data);
             })
+            .catch((err) => {
+                console.error(err);
+            })
     }, [campList]);
 
     return (
