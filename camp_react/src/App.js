@@ -19,8 +19,6 @@ import Footer from "./page/layout/Footer";
 import UpdatePage from "./page/trade/UpdatePage";
 import TradeWritePage from "./page/trade/TradeWritePage";
 import CampList from "./componunt/jeongGyuHo/campList";
-import Editor from "./Editor";
-import SelectPartnerCamp from "./componunt/jeongGyuHo/SelectPartnerCamp";
 import PartnerCampDetail from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
 
 function App() {
@@ -52,7 +50,7 @@ function App() {
             {/*중고장터 상세보기*/}
             <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
             {/*중고장터 글 등록*/}
-            <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
+            <Route path={'/tradeWrite/*'} element={<TradeWritePage userInfo={userInfo}/>}/>
             <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
             {/*예약페이지*/}
             <Route path={'/reservation1/:campIdx'} element={<CampReservationPage1 userInfo={userInfo}/>}/>

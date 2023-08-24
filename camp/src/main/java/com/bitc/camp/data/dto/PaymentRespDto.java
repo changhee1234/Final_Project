@@ -33,7 +33,7 @@ public class PaymentRespDto {
     this.payDate = entity.getPayDate();
     this.receiptUrl = entity.getReceiptUrl();
     this.payStatus = entity.getPayStatus();
-    this.cancelAmount = getCancelAmount();
+    this.cancelAmount = entity.getCancelAmount();
     this.cancelDate = entity.getCancelDate();
     this.reservationIdx = entity.getReservationIdx();
   }
