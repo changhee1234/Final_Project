@@ -3,10 +3,11 @@ import CampRegisterCombined from "../../componunt/jeongGyuHo/campRegisterCombine
 
 function ManagerCampRegister(props) {
 
+    // console.log(props.userInfo);
     return (
-        <div>
-            <CampRegisterCombined userInfo={props.userInfo}/>
-        </div>
+        <>
+            <CampRegisterCombined user={props.user}/>
+        </>
     )
 }
 

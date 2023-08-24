@@ -18,7 +18,6 @@ function CampRegisterCombined(props) {
     const [campAddress, setCampAddress] = useState('');
     const [partner, setPartner] = useState({idx: 0});
     const campDeletedYn = 'N';
-
     // campSiteInfo리스트 state
     const [campSiteInfos, setCampSiteInfos] = useState([
         {
@@ -34,7 +33,7 @@ function CampRegisterCombined(props) {
             parkPrice: 0,
             elePrice: 0,
             areaSiteCnt: 0,
-            siteDeletedYn : 'N'
+            siteDeletedYn: 'N'
         }
     ]);
 
@@ -44,17 +43,21 @@ function CampRegisterCombined(props) {
         setStep(2); // 다음 단계로 변경
     }
 
-    console.log(props.userInfo);
-    useEffect =() => {
-
-        axios.get("http://localhost:8080/partnerInfo/" + props.userInfo.memberIdx)
+    useEffect(() => {
+        console.log(props.user.memberIdx);
+        axios.get(`http://localhost:8080/camp/searchPartner/${props.user.memberIdx}`)
             .then((res) => {
                 console.log(res.data);
+                setPartner(prevPartner => ({ ...prevPartner, idx: res.data.idx }));
             })
             .catch((err) => {
                 console.error(err);
-            })
-    }
+            });
+    }, [props.user.memberIdx]);
+
+
+
+
 
     // 새로운 campSiteInfo 만들기
     const handleAddCampSiteInfo = () => {
@@ -71,7 +74,7 @@ function CampRegisterCombined(props) {
             parkPrice: 0,
             elePrice: 0,
             areaSiteCnt: 0,
-            siteDeletedYn : 'N'
+            siteDeletedYn: 'N'
         };
 
         setCampSiteInfos([...campSiteInfos, newCampSiteInfo])
@@ -103,6 +106,7 @@ function CampRegisterCombined(props) {
                         campMainInfo: {idx: campRegisterIdx}
                     };
                 });
+
                 // 이후에 두 번째 단계 처리
                 axios.post('http://localhost:8080/camp/Register2', updatedCampSiteInfos)
                     .then((res) => {
@@ -122,18 +126,17 @@ function CampRegisterCombined(props) {
     }
 
 
-
     return (
         <div className={'col-sm-8 mx-auto text-start'}>
             {step === 1 && (
                 <form onSubmit={handleCampRegisterNext}>
                     <h3>캠핑장 정보 입력</h3>
-                    {/*매니저 번호(나중에 세션값으로 받아와 로그인과 연동(사라질 것)*/}
-                    <div className={'my-3'}>
-                        <label className={'form-label'} htmlFor={'partner'}>회원번호(없애고 로그인과 연동) : </label>
-                        <input className={'form-control'} id={'partner'} value={partner.idx}
-                               onChange={(e) => setPartner({...partner, idx: e.target.value})}/>
-                    </div>
+                    {/*/!*매니저 번호(나중에 세션값으로 받아와 로그인과 연동(사라질 것)*!/*/}
+                    {/*<div className={'my-3'}>*/}
+                    {/*    <label className={'form-label'} htmlFor={'partner'}>회원번호(없애고 로그인과 연동) : </label>*/}
+                    {/*    <input className={'form-control'} id={'partner'} value={partner.idx}*/}
+                    {/*           onChange={(e) => setPartner({...partner, idx: e.target.value})}/>*/}
+                    {/*</div>*/}
 
                     {/*날짜 입력*/}
                     <input
@@ -454,7 +457,9 @@ function CampRegisterCombined(props) {
                     <div className={'row my-3'}>
                         <div className={'col-sm-12'}>
                             <div className={'d-grid'}>
-                                <button className={'btn btn-secondary'} onClick={handleAddCampSiteInfo} type={'button'}>+</button>
+                                <button className={'btn btn-secondary'} onClick={handleAddCampSiteInfo}
+                                        type={'button'}>+
+                                </button>
                             </div>
                         </div>
                     </div>
