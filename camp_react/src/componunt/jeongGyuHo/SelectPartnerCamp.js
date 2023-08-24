@@ -44,6 +44,19 @@ function SelectPartnerCamp(props) {
         return text.slice(0, maxLength) + "...";
     };
 
+    const dtTruncateText = (text, maxLength) => {
+        if (text.length <= maxLength) {
+            return text;
+        }
+        return text.slice(0, maxLength);
+    };
+
+    const stripHtmlTags = (html) => {
+        const tmp = document.createElement("div");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    };
+
     return (
         <div className={'container'}>
             <h2>운영중인 캠핑장</h2>
@@ -68,7 +81,7 @@ function SelectPartnerCamp(props) {
                     <tr key={camp.idx}>
                         <td>{camp.idx}</td>
                         <td><Link to={`/detailPartnerCamp/${camp.idx}`}>{camp.campName}</Link></td>
-                        <td>{truncateText(camp.campIntro, 50)}</td>
+                        <td>{stripHtmlTags(truncateText(camp.campIntro, 50))}</td>
                         <td>{camp.partnerName}</td>
                         <td>{camp.campDt[0]}-{camp.campDt[1]}-{camp.campDt[2]}</td>
                     </tr>

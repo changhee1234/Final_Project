@@ -23,7 +23,6 @@ public class CampMainInfoDto {
     private String campPh;
     private String campAddress;
     private Partner partner;
-
     private Integer memberIdx;
     private String partnerName;
     private String campDeletedYn;

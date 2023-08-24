@@ -396,10 +396,10 @@ function Header(props) {
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="loginModalLabel">회원가입</h1>
+                            <h1 className="modal-title fs-5" id="loginModalLabel">로그인</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body">    
                             {/* 로그인정보 입력 */}
                             <form action="/login" method="post">
                                 <div className="border-bottom">
