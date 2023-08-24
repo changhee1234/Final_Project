@@ -17,4 +17,9 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
   @Modifying
   @Query("update Board p set p.cnt = p.cnt + 1 where p.cnt = :id")
   int updateView(Long id);
+
+  List<Board> findByMemberIdxOrderByTradeBoardIdxDesc(int memberIdx);
+
+// 로그인한 사용자가 작성한 게시물 조회
+//  List<Board> findByMember_UsernameOrderByTradeBoardIdxDesc(String username);
 }

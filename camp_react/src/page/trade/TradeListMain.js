@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import './tradeListpage.css';
 import axios from 'axios';
 import {Link, useNavigate} from "react-router-dom";
-import TradeListPage from "./TradeListPage";
 
 function TradeListMain(props) {
   const [tradeListPage, setTradeListPage] = useState([]);

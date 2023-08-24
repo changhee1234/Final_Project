@@ -41,22 +41,20 @@ function App() {
             {/*메인페이지*/}
             <Route path={'/'} element={<MainPage/>}/>
             {/*마이페이지*/}
-
-            <Route path={'/myPage/:userInfo'} element={<MyPage/>}/>
+            <Route path={'/myPage/:userInfo'} element={<MyPage userInfo={userInfo}/>}/>
             {/*예외처리(에러페이지)*/}
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
             <Route path={'/camp'} element={<CampListPage/>}/>
-
             {/*캠핑장 상세보기*/}
             <Route path={'/campList/*'} element={<CampDetailPage/>}/>
             {/*중고장터 리스트*/}
-            <Route path={'/trade'} element={<TradeListPage/>}/>
+            <Route path={'/trade'} element={<TradeListPage userInfo={userInfo}/>}/>
             {/*중고장터 상세보기*/}
-            <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
+            <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage userInfo={userInfo}/> }/>
             {/*중고장터 글 등록*/}
-            <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
-            <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
+            <Route path={'/tradeWrite/*'} element={<TradeWritePage userInfo={userInfo}/>}/>
+            <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage userInfo={userInfo}/>}/>
             {/*예약페이지*/}
             <Route path={'/reservation1/*'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
             <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
@@ -68,7 +66,6 @@ function App() {
             <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
             {/*공지사항 상세보기 페이지*/}
             <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
-
             <Route path={'/selectPartnerCamp'} element={<SelectPartnerCamp/>}/>
             <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail/>}/>
             <Route path={'campRegister'} element={<CampRegisterCombined/>}/>

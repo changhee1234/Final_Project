@@ -65,7 +65,6 @@ function TradeListMain(props) {
         });
   }, [sortOption]); // sortOption이 변경될 때마다 실행
 
-  // 정렬 옵션 변경 핸들러
 
 // 등록일을 ~시간 전으로 표기, 24시간 후에는 날짜로 표기하는 함수
   const getTimeOrDate = (dateTime) => {
@@ -128,7 +127,7 @@ function TradeListMain(props) {
             <div className={'row'}>
               {tradeListPage.map(item => (
                   <div key={item.index} className="my-2 mb-0 col-3">
-ㅇ                    <Link to={`/trade/${item.tradeBoardIdx}`} className="text-decoration-none">
+                    <Link to={`/trade/${item.tradeBoardIdx}`} className="text-decoration-none">
                       {/*삽니다/팝니다 선택에 따라 다른 css 디자인 적용하여 구분*/}
                       <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                         <div className="product_img_div">

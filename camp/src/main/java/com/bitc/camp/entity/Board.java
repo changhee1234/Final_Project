@@ -59,10 +59,6 @@ public class Board {
 
   @Column(length = 100, nullable = true)
   private String tradeLocation; // 지역
-
-  @Column(length = 1000)
-  private String imgUrl; // 이미지 링크
-
   private int views; // 조회수 필드
 
   @Builder
@@ -79,7 +75,7 @@ public class Board {
     this.tradeCate = tradeCate;
     this.memberIdx = memberIdx;
     this.createDt = LocalDateTime.now();
-    this.imgUrl = imageUrl;
+    this.imageUrl = imageUrl;
   }
 
   //  객체의 속성을 업데이트
@@ -91,7 +87,7 @@ public class Board {
     this.tradeLocation = tradeLocation;
     this.tradeCate = tradeCate;
     this.tradePrice = tradePrice;
-    this.imgUrl = imageUrl;
+    this.imageUrl = imageUrl;
     this.cnt = cnt;
   }
 

@@ -54,9 +54,6 @@ public class Member implements UserDetails {
     this.profileImg = profileImg;
   }
 
-
-
-
   // UserDetails 메소드 구현
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
