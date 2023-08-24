@@ -245,7 +245,7 @@ function PartnerCampDetail() {
 
 
     const handleCancel = () => {
-        navigate("/selectPartnerCamp");
+        navigate("/");
     };
 
     return (
