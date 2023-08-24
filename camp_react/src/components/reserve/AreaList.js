@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {formatDistance} from "date-fns";
 
 function AreaList(props) {
+  console.log(props.siteInfos.campSiteNewImg);
   return (
     <div>
       {
@@ -25,7 +26,7 @@ function AreaList(props) {
               <div className="card my-2">
                 <div className="row g-0">
                   <div className="col-sm-3">
-                    <img src="/area01.png" className="img-fluid" alt=""/>
+                    <img src={m.campSiteNewImg} className="img-fluid" alt=""/>
                   </div>
                   <div className="col-sm-8">
                     <div className="card-body">

@@ -3,6 +3,7 @@ package com.bitc.camp.service;
 import com.bitc.camp.data.dto.*;
 import com.bitc.camp.data.entity.CampMainInfo;
 import com.bitc.camp.data.entity.CampSiteInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

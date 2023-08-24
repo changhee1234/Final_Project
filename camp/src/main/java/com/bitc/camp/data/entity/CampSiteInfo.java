@@ -63,6 +63,10 @@ public class CampSiteInfo {
   @OneToMany(mappedBy = "campSiteInfo")
   @ToString.Exclude
   private List<CampSiteList> campSiteLists = new ArrayList<>();
+  @Column(length = 100, nullable = true)
+  private String campSiteNewImg;
+  @Column(length = 100, nullable = true)
+  private String campSiteOriginImg;
 
   public CampSiteInfo(int idx) {
     this.idx = idx;

@@ -20,6 +20,11 @@ public class CampMainRespDto {
   private String campAddress;
   private int partnerIdx;
   private List<CampSiteInfoRespDto> siteInfoLists;
+
+  private String campMainTitleNewImg;
+  private String campMainTitleOriginImg;
+  private String campMainLayoutNewImg;
+  private String campMainLayoutOriginImg;
 //  private List<ReservationRespDto> reservationList;
 
   public CampMainRespDto(CampMainInfo entity) {
@@ -32,6 +37,8 @@ public class CampMainRespDto {
     this.campPh = entity.getCampPh();
     this.campAddress = entity.getCampAddress();
     this.partnerIdx = entity.getPartner().getIdx();
+    this.campMainTitleNewImg = entity.getCampMainTitleNewImg();
+    this.campMainLayoutNewImg = entity.getCampMainLayoutNewImg();
     this.siteInfoLists = entity.getCampSiteInfoList().stream()
         .map(CampSiteInfoRespDto::new)
         .collect(Collectors.toList());

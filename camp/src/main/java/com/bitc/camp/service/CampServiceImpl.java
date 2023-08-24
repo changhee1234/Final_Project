@@ -7,12 +7,19 @@ import com.bitc.camp.entity.Member;
 import com.bitc.camp.repository.MemberRepository;
 import com.bitc.camp.repository.PartnerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +33,9 @@ public class CampServiceImpl implements CampService {
     private final MemberRepository memberRepository;
     private final PartnerRepository partnerRepository;
 
+    @Value("${upload.dir}")
+    private String uploadDir;
+
     private String getNickName(int memberIdx) {
         Member member = memberRepository.findNickNameByMemberIdx(memberIdx).orElse(null);
         if (member != null) {
@@ -34,6 +44,7 @@ public class CampServiceImpl implements CampService {
 
         return null;
     }
+
 
     @Override
     public List<CampMainInfoDto> selectCampList() throws Exception {
@@ -53,6 +64,8 @@ public class CampServiceImpl implements CampService {
                     .campPh(camp.getCampPh())
                     .campAddress(camp.getCampAddress())
                     .campDeletedYn(camp.getCampDeletedYn())
+                    .campMainTitleNewImg(camp.getCampMainTitleNewImg())
+                    .campMainLayoutNewImg(camp.getCampMainLayoutNewImg())
                     .partnerIdx(partner != null ? partner.getIdx() : null)
                     .partnerName(partner != null ? partner.getPartnerName() : null)
                     .memberIdx(partner != null && partner.getMember() != null ? partner.getMember().getMemberIdx() : null)
@@ -87,6 +100,8 @@ public class CampServiceImpl implements CampService {
         return reviewBoardDtoList;
     }
 
+
+
     @Override
     public CampMainInfo createCamp(CampMainInfoDto campMainInfoDto) throws Exception {
         CampMainInfo campMainInfo = new CampMainInfo();
@@ -100,6 +115,11 @@ public class CampServiceImpl implements CampService {
         campMainInfo.setCampAddress(campMainInfoDto.getCampAddress());
         campMainInfo.setPartner(campMainInfoDto.getPartner());
         campMainInfo.setCampDeletedYn(campMainInfo.getCampDeletedYn());
+        // 이미지 업로드 및 URL 저장
+        String campMainTitleNewImgUrl = campMainInfoDto.getCampMainTitleNewImg();
+        String campMainLayoutNewImgUrl = campMainInfoDto.getCampMainLayoutNewImg();
+        campMainInfo.setCampMainTitleNewImg(campMainTitleNewImgUrl);
+        campMainInfo.setCampMainLayoutNewImg(campMainLayoutNewImgUrl);
 
         return campMainInfoRepository.save(campMainInfo);
     }
@@ -127,12 +147,15 @@ public class CampServiceImpl implements CampService {
             campSiteInfo.setAreaSiteCnt(dto.getAreaSiteCnt());
             campSiteInfo.setSiteDeletedYn(dto.getSiteDeletedYn());
 
+            // 이미지 URL 설정
+            campSiteInfo.setCampSiteNewImg(dto.getCampSiteNewImg()); // 이미지 URL 설정
+
             campSiteInfos.add(campSiteInfo);
         }
 
         List<CampSiteInfo> savedCampSiteInfos = campSiteInfoRepository.saveAll(campSiteInfos);
 
-//        camp_site_list 자동저장
+        // camp_site_list 자동저장
         for (CampSiteInfo savedCampSiteInfo : savedCampSiteInfos) {
             for (int i = 1; i <= savedCampSiteInfo.getAreaSiteCnt(); i++) {
                 CampSiteList campSiteList = new CampSiteList();
@@ -144,6 +167,7 @@ public class CampServiceImpl implements CampService {
 
         return savedCampSiteInfos;
     }
+
 
     @Override
     public CampMainInfoDto partnerSelectCampList(int campIdx) throws Exception {

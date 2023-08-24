@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -26,4 +27,8 @@ public class CampMainInfoDto {
     private Integer memberIdx;
     private String partnerName;
     private String campDeletedYn;
+    private String campMainTitleNewImg;
+    private String campMainTitleOriginImg;
+    private String campMainLayoutNewImg;
+    private String campMainLayoutOriginImg;
 }
