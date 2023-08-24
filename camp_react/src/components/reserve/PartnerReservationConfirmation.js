@@ -57,17 +57,20 @@ function PartnerReservationConfirmation(props) {
 
         const cancelReqData = {
           cancelAmount: cancelData.cancelAmount,
-          cancelledAt: cancelData.cancelledAt,
-          status: cancelData.status
+          cancelDate: cancelData.cancelledAt,
+          payStatus: cancelData.status
         }
 
         // 예약 테이블 상태 결제 취소로 수정
         axios.put(`http://localhost:8080/reserve/cancel/${impUid}`)
           .catch(err=>console.log(err));
+<<<<<<< HEAD
 
         //결제 테이블 결제 상태,취소금액,취소일 수정
         // axios.put(`http://localhost:8080/payments/cancelDb/${res.data.impUid}`)
         //   .catch(err=>console.log(err));
+=======
+>>>>>>> 사용금지
       })
       .catch(err => {
         console.log(err);
