@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CampDetailPage from "./page/campDetailPage.js";
 import AboutPage from "./page/aboutPage.js";
@@ -9,6 +8,7 @@ import CampReservationPage1 from "./page/camp/CampReservationPage1";
 import CampReservationPage2 from "./page/camp/CampReservationPage2";
 import CampReservationPage3 from "./page/camp/CampReservationPage3";
 import CampReservationPage4 from "./page/camp/CampReservationPage4";
+import {useState} from "react";
 import MainPage from "./page/main/MainPage";
 import MyPage from "./page/MyPage/MyPage";
 import ErrorPage from "./page/layout/ErrorPage";
@@ -19,6 +19,8 @@ import Footer from "./page/layout/Footer";
 import UpdatePage from "./page/trade/UpdatePage";
 import TradeWritePage from "./page/trade/TradeWritePage";
 import CampList from "./componunt/jeongGyuHo/campList";
+import Editor from "./Editor";
+import SelectPartnerCamp from "./componunt/jeongGyuHo/SelectPartnerCamp";
 import PartnerCampDetail from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
 
 function App() {
@@ -50,7 +52,7 @@ function App() {
             {/*중고장터 상세보기*/}
             <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
             {/*중고장터 글 등록*/}
-            <Route path={'/tradeWrite/*'} element={<TradeWritePage userInfo={userInfo}/>}/>
+            <Route path={'/tradeWrite/*'} element={<TradeWritePage/>}/>
             <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
             {/*예약페이지*/}
             <Route path={'/reservation1/:campIdx'} element={<CampReservationPage1 userInfo={userInfo}/>}/>

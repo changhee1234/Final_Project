@@ -38,8 +38,6 @@ public class BoardServiceImpl implements BoardService {
     board.setTradeCate(boardRequestDto.getTradeCate());
     board.setMemberIdx(boardRequestDto.getMemberIdx());
     board.setCreateDt(boardRequestDto.getCreateDt());
-    board.setImageUrl(boardRequestDto.getImageUrl());
-    board.setImageOriginal(boardRequestDto.getImageOriginal());
 
     return boardRepository.save(board);
   }
