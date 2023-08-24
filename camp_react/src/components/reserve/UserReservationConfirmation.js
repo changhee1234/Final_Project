@@ -4,6 +4,7 @@ import "./partnerReConfirm.css"
 import {Link} from "react-router-dom";
 import {format, fromUnixTime} from "date-fns";
 
+// 이 주석 있으면 최신파일
 function UserReservationConfirmation(props) {
   const [reservationList, setReservationList] = useState([]);
   const [paymentInfo, setPaymentInfo] = useState(null);

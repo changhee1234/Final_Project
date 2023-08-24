@@ -3,6 +3,7 @@ import "./partnerReConfirm.css"
 import axios from "../../page/layout/axios";
 import {format, fromUnixTime} from "date-fns";
 
+// 이 주석 있으면 최신파일임
 function PartnerReservationConfirmation(props) {
   const [reservationList, setReservationList] = useState([]);
   const [partnerInfo, setPartnerInfo] = useState([]);
