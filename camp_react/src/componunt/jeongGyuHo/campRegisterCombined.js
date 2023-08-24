@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import ReactQuill from "react-quill";
@@ -18,7 +18,10 @@ function CampRegisterCombined(props) {
     const [campPh, setCampPh] = useState('');
     const [campAddress, setCampAddress] = useState('');
     const [partner, setPartner] = useState({idx: 0});
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFileName, setSelectedFileName] = useState(""); // 파일 이름을 저장하는 상태 변수
     const campDeletedYn = 'N';
+    const fileInputRef = useRef(null);
     // campSiteInfo리스트 state
     const [campSiteInfos, setCampSiteInfos] = useState([
         {
@@ -129,6 +132,12 @@ function CampRegisterCombined(props) {
     }
 
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]; // 선택된 파일 정보 가져오기
+        setSelectedFileName(file.name); // 파일 이름을 저장
+        // 파일 업로드 처리 등 추가적인 작업 수행...
+    };
+
     return (
         <div className={'col-sm-8 mx-auto text-start'}>
             {step === 1 && (
@@ -199,7 +208,13 @@ function CampRegisterCombined(props) {
                         <input className={'form-control'} id={'campHpLink'} value={campHpLink}
                                onChange={(e) => setCampHpKink(e.target.value)}/>
                     </div>
-
+                    <div className="my-3 input-group">
+                        <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #ced4da', borderRadius: '0.25rem', padding: '0.375rem 0.75rem' }}>
+                            <label className="form-label input-group-text" style={{ marginRight: '10px' }}>사진</label>
+                            <span></span>
+                        </div>
+                        <input type="file" className="form-control" name="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} />
+                    </div>
                     {/*캠프설명*/}
                     {/* 캠프설명 */}
                     <div className={'my-3'}>

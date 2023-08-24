@@ -31,12 +31,28 @@ public class  BoardController {
     return result;
   }
 
+
   // 글 등록(파일 업로드 제외)
   @RequestMapping(value = "/write", method = RequestMethod.POST)
   public Object boardWrite(@RequestBody BoardRequestDto boardRequestDto) throws Exception {
     Board createBoard = boardService.createBoard(boardRequestDto);
     return createBoard;
   }
+
+
+//  @PostMapping("/write")
+//  public ResponseEntity<Object> boardWrite(@RequestBody BoardRequestDto boardRequestDto) {
+//    try {
+//      // 나머지 필드를 이용하여 글을 생성
+//      Board createBoard = boardService.createBoard(boardRequestDto);
+//
+//      // 생성된 글 정보를 응답
+//      return new ResponseEntity<>(createBoard, HttpStatus.CREATED);
+//    } catch (Exception e) {
+//      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
+//
+//  }
 
   //  글 상세
   @RequestMapping(value = "/trade/{tradeBoardIdx}", method = RequestMethod.GET)

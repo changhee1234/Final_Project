@@ -16,7 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 import com.bitc.camp.entity.Member;
-@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000")
 @Controller
 public class ImageUploadController {
 

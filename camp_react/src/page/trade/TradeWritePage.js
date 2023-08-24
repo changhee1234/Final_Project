@@ -1,5 +1,5 @@
 // 장터 글 등록 페이지 js파일(TradeWritePage)
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
 
@@ -15,30 +15,58 @@ function TradeWritePage(props) {
 
   const navi = useNavigate();
 
-  // const handleFileChange = (event) => {
-  //   setFile(event.target.files[0]);
-  // };
+
+  const [desc, setDesc] = useState('');
+  const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      [{ 'align': [] }, { 'color': [] }, { 'background': [] }],
+      ['clean']
+    ],
+  };
+
+  const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image',
+    'align', 'color', 'background',
+  ];
 
 
-  // // 파일 업로드
-  //   const handleFile = () => {
-  //     if (file) {
-  //       const formData = new FormData();
-  //       formData.append("file", file);
+  // const quillRef = useRef(null);
   //
-  //       axios.post("http://localhost:8080/board/write", formData, {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       })
-  //           .then((response) => {
-  //             // 파일 업로드 성공 처리
-  //           })
-  //           .catch((error) => {
-  //             // 파일 업로드 실패 처리
-  //           });
+  // // 이미지 핸들러 함수
+  // const imageHandler = async () => {
+  //   const input = document.createElement('input');
+  //   input.setAttribute('type', 'file');
+  //   input.setAttribute('accept', 'image/*');
+  //   input.click();
+  //   input.addEventListener('change', async () => {
+  //     const editor = quillRef.current.getEditor();
+  //     const file = input.files[0];
+  //     const range = editor.getSelection(true);
+  //
+  //     try {
+  //       // 파일명을 "image/Date.now()"로 저장
+  //       const storageRef = ref(storage, `image/${Date.now()}`);
+  //
+  //       await uploadBytes(storageRef, file).then((snapshot) => {
+  //         getDownloadURL(snapshot.ref).then((url) => {
+  //           // 이미지 삽입
+  //           quillRef.current.getEditor().insertEmbed(range.index, 'image', url);
+  //           // 커서 이동
+  //           quillRef.current.getEditor().setSelection(range.index + 1);
+  //         });
+  //       });
+  //     } catch (error) {
+  //       console.log(error);
   //     }
-  //   };
+  //   });
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault(); // 기본 동작 막기
@@ -66,6 +94,12 @@ function TradeWritePage(props) {
   const handleCancel = () => {
     navi(-1); // 이전 페이지로 이동
   };
+
+  const onEditorChange = (value) => {
+    setContent(value);
+  };
+
+
 
   return (
       <div className="container my-5">
