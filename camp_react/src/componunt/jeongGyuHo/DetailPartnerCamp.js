@@ -13,6 +13,7 @@ function PartnerCampDetail() {
     const [partnerIdx, setPartnerIdx] = useState(0);
     const {campIdx} = useParams(); // Get campIdx from URL parameter
     const [campDetails, setCampDetails] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
     const [updatedCampInfo, setUpdatedCampInfo] = useState({
         campIdx: campIdx,
         campName: '',
@@ -160,37 +161,34 @@ function PartnerCampDetail() {
         setUpdatedCampInfo(prevData => ({...prevData, [name]: checked ? "Y" : "N"}));
     };
 
-
+    // 파일 입력 필드 변경 핸들러
+    const handleFileChange = (event) => {
+        const file = event.target.files[0]; // 선택된 파일은 배열의 첫 번째 요소로 접근 가능
+        setSelectedFile(file);
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // partnerIdx를 updatedCampInfo에 포함시킵니다.
         const updatedDataWithPartnerIdx = {
             ...updatedCampInfo,
             campIntro: desc,
             partner: {
                 idx: partnerIdx
-            } // partnerIdx를 여기에 포함시킵니다.
+            }
         };
 
-        axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx)
+        const formData = new FormData();
+        formData.append('file', selectedFile); // 선택된 파일 추가
+        formData.append('campData', JSON.stringify(updatedDataWithPartnerIdx)); // JSON 데이터 추가
+
+        axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data' // 필수: 폼 데이터 형식으로 전송
+            }
+        })
             .then(res => {
                 console.log("캠프 상세 정보가 성공적으로 업데이트되었습니다:", res.data);
-                setPartnerIdx(res.data.partnerIdx);
-                setUpdatedCampInfo({
-                    campIdx: res.data.campIdx,
-                    campName: res.data.campName,
-                    campIntro: res.data.campIntro,
-                    // campDt: res.data.campDt,
-                    kidszoneYn: res.data.kidszoneYn,
-                    campHpLink: res.data.campHpLink,
-                    campPh: res.data.campPh,
-                    campAddress: res.data.campAddress,
-                    partner: {
-                        idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
-                    }
-                });
-                setCampDetails(updatedDataWithPartnerIdx); // 업데이트된 데이터로 campDetails 업데이트
+                // 업데이트 후 처리 로직
             })
             .catch(err => {
                 console.log("캠프 상세 정보 업데이트 중 오류 발생:", err);
@@ -248,11 +246,12 @@ function PartnerCampDetail() {
         navigate("/");
     };
 
+
     return (
         <div className={'col-sm-8 mx-auto text-start'}>
             <h2 className={'my-3'}>캠핑장 정보 수정하기</h2>
             {campDetails ? (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <div className={'row my-3'}>
                         <div className={'col-sm-3'}>
                             <div className={'input-group'}>
@@ -314,9 +313,19 @@ function PartnerCampDetail() {
 
                         <div className={'my-3 input-group'}>
                             <span className={'input-group-text'}>홈페이지</span>
-                            <input className={'form-control'} value={updatedCampInfo.campHpLink || ''}
-                                   name="campHpLink"
-                                   onChange={handleInputChange}/>
+                            <input
+                                className={'form-control'}
+                                value={updatedCampInfo.campHpLink || ''}
+                                name="campHpLink"
+                                onChange={handleInputChange}
+                            />
+                        </div>
+
+                        <div className="my-3 input-group">
+                            <label htmlFor="imageUpload" className="form-label">
+                                캠핑장 사진 등록
+                            </label>
+                            <input type="file" name="file" onChange={handleFileChange} />
                         </div>
 
                         <div className={'my-3 d-grid'}>

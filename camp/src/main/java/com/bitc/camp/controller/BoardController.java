@@ -42,68 +42,6 @@ public class  BoardController {
     return result;
   }
 
-  // 글 등록(파일 업로드 제외)
-//  @RequestMapping(value = "/write", method = RequestMethod.POST)
-//  public Object boardWrite(@RequestBody BoardRequestDto boardRequestDto) throws Exception {
-//    Board createBoard = boardService.createBoard(boardRequestDto);
-//    return createBoard;
-//  }
-//  private String imageUrl = ""; // 이미지 URL을 저장할 변수
-//
-//  // 이미지 URL 업로드 API
-//  @PostMapping("/upload-image")
-//  public ResponseEntity<Map<String, String>> uploadImage(@RequestBody Map<String, String> request) {
-//    try {
-//      String imageUrl = request.get("imageUrl");
-//
-//      // 이미지 URL을 파일로 저장하여 줄여서 DB에 저장하는 로직 추가
-//      String shortenedImageUrl = saveImageDataToFile(imageUrl);
-//
-//      Map<String, String> response = new HashMap<>();
-//      response.put("imageUrl", shortenedImageUrl);
-//
-//      return ResponseEntity.ok(response);
-//    } catch (Exception e) {
-//      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//    }
-//  }
-//
-//  // 이미지 URL을 파일로 저장하여 줄여서 DB에 저장하는 메서드
-//  private String saveImageDataToFile(String imageUrl) throws IOException {
-//    // 저장할 디렉토리 경로 설정
-//    String uploadDirectory = "src/main/resources/static/uploaded-images"; // resources/static/uploaded-images 경로
-//
-//    // 저장할 파일명 생성 (예: 현재 시간 + 확장자)
-//    String newFileName = System.currentTimeMillis() + ".jpg"; // 확장자는 실제 이미지 확장자에 맞게 설정
-//
-//    // 파일을 저장할 경로 설정
-//    String filePath = Paths.get(uploadDirectory, newFileName).toString();
-//
-//    // 이미지 파일 다운로드 후 저장
-//    URL imageUrlObject = new URL(imageUrl);
-//    FileUtils.copyURLToFile(imageUrlObject, new File(filePath));
-//
-//    // 줄여진 이미지 URL 생성 (백엔드 서버에서 이미지에 접근할 수 있는 URL)
-//    String shortenedImageUrl = "/uploaded-images/" + newFileName; // 프론트에서 접근 가능한 URL
-//
-//    return shortenedImageUrl;
-//  }
-//
-//  // 글 등록 API
-//  @RequestMapping(value = "/write", method = RequestMethod.POST)
-//  public Object boardWrite(@RequestBody BoardRequestDto boardRequestDto) throws Exception {
-//    try {
-//      // 이미지 URL을 boardRequestDto에 추가
-//      boardRequestDto.setImageUrl(imageUrl);
-//
-//      Board createBoard = boardService.createBoard(boardRequestDto);
-//      return createBoard;
-//    } catch (Exception e) {
-//      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//    }
-//  }
-
-
 
   @PostMapping("/write")
   public ResponseEntity<Object> boardWrite(@RequestBody BoardRequestDto boardRequestDto) {
