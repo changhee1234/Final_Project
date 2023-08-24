@@ -24,7 +24,7 @@ public class Board {
   @Column(length = 45, nullable = false)
   private String title; // 제목
 
-  @Column(length = 1000, nullable = false)
+  @Column(length = 5000, nullable = false)
   private String content; // 내용
 
   @Column(length = 15, nullable = false)
@@ -39,10 +39,10 @@ public class Board {
   @Column(nullable = false)
   private int cnt; // 조회수
 
-  @Column(length = 1000, nullable = true)
+  @Column(length = 5000, nullable = true)
   private String imageUrl; // 이미지 주소
 
-  @Column(length = 1000, nullable = true)
+  @Column(length = 5000, nullable = true)
   private String imageOriginal; // 이미지 원본
 
 //  @Column(nullable = true)
@@ -60,13 +60,12 @@ public class Board {
   @Column(length = 100, nullable = true)
   private String tradeLocation; // 지역
 
-
   private int views; // 조회수 필드
 
   @Builder
 //  생성자 정의
   public Board(String title, String content, String userName, int cnt,
-                int tradePrice, String tradeLocation, String tradeCate, int memberIdx, int tradeBoardIdx) {
+                int tradePrice, String tradeLocation, String tradeCate, int memberIdx, int tradeBoardIdx, String imageOriginal, String imageUrl) {
     this.tradeBoardIdx = tradeBoardIdx;
     this.title = title;
     this.content = content;
@@ -77,6 +76,8 @@ public class Board {
     this.tradeCate = tradeCate;
     this.memberIdx = memberIdx;
     this.createDt = LocalDateTime.now();
+    this.imageUrl = imageUrl;
+    this.imageOriginal = imageOriginal;
   }
 
   //  객체의 속성을 업데이트
@@ -88,6 +89,7 @@ public class Board {
     this.tradeLocation = tradeLocation;
     this.tradeCate = tradeCate;
     this.tradePrice = tradePrice;
+    this.imageUrl = imageUrl;
     this.cnt = cnt;
   }
 
