@@ -195,7 +195,7 @@ function CampRegisterCombined(props) {
 
                     {/*홈페이지*/}
                     <div className={'my-3 input-group'}>
-                        <label className={'input-group-text'}>홈페이지</label>
+                        <label className={'input-group-text'}>확인</label>
                         <input className={'form-control'} id={'campHpLink'} value={campHpLink}
                                onChange={(e) => setCampHpKink(e.target.value)}/>
                     </div>
