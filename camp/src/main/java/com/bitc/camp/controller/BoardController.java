@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.apache.commons.io.FileUtils; // FileUtils 추가
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
