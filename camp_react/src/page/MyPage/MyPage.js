@@ -8,6 +8,7 @@ import PartnerApplication from './PartnerApplication'; // 파트너 회원 신�
 import axios from "../layout/axios";
 import PartnerApplicationComponent from "./PartnerApplicationComponent ";
 import ManagerCampRegister from "./ManagerCampRegister";
+import PartnerCampList from "./PartnerCampList";
 
 
 function MyPage() {
@@ -50,7 +51,9 @@ function MyPage() {
     } else if (selectedMenu === '예약 확인') {
         contentComponent = <ReservationConfirmation userInfo={user} />;
     } else if (selectedMenu === '내가 쓴 장터글') {
-        contentComponent = <MyTradePosts user={user} />;
+        contentComponent = <MyTradePosts user={user}/>;
+    } else if (selectedMenu === '등록된 캠핑장' && isPartnerApplicationVisible) {
+            contentComponent = <PartnerCampList user={user} />;
     } else if (selectedMenu === '파트너 회원 신청' && isUserApplicationVisible) {
         contentComponent = <PartnerApplication user={user} />;
     } else if (selectedMenu === '캠핑장 등록' && isPartnerApplicationVisible) {
@@ -97,6 +100,14 @@ function MyPage() {
                             >
                                 내가 쓴 장터글
                             </li>
+                            {isPartnerApplicationVisible && (
+                                <li
+                                    className={`list-group-item ${selectedMenu === '등록된 캠핑장' ? 'active' : ''}`}
+                                    onClick={() => handleMenuClick('등록된 캠핑장')}
+                                >
+                                    등록된 캠핑장
+                                </li>
+                            )}
                             {isUserApplicationVisible && (
                                 <li
                                     className={`list-group-item ${selectedMenu === '파트너 회원 신청' ? 'active' : ''}`}
@@ -131,6 +142,7 @@ function MyPage() {
                     {selectedMenu === '찜한 캠핑장' && <FavoriteCampingList user={user} />}
                     {selectedMenu === '예약 확인' && <ReservationConfirmation userInfo={user} />}
                     {selectedMenu === '내가 쓴 장터글' && <MyTradePosts user={user} />}
+                    {selectedMenu === '등록된 캠핑장' && isPartnerApplicationVisible && <PartnerCampList user={user} />}
                     {selectedMenu === '파트너 회원 신청' && isUserApplicationVisible && <PartnerApplication user={user} />}
                     {selectedMenu === '캠핑장 등록' && isPartnerApplicationVisible && <ManagerCampRegister user={user} />}
                     {selectedMenu === '파트너 신청 목록' && isAdminApplicationVisible && <PartnerApplicationComponent user={user} />}

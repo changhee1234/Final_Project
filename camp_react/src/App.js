@@ -3,7 +3,6 @@ import CampDetailPage from "./page/campDetailPage.js";
 import AboutPage from "./page/aboutPage.js";
 import AnnouncementListPage from "./page/announcementListPage.js";
 import AnnouncementDetailPage from "./page/announcementDetailPage.js";
-import CampRegisterCombined from "./componunt/jeongGyuHo/campRegisterCombined.js";
 
 import CampReservationPage1 from "./page/camp/CampReservationPage1";
 import CampReservationPage2 from "./page/camp/CampReservationPage2";
@@ -66,7 +65,7 @@ function App() {
             <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
             {/*공지사항 상세보기 페이지*/}
             <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
-            <Route path={'/selectPartnerCamp'} element={<SelectPartnerCamp/>}/>
+
             <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail/>}/>
           </Routes>
           <Footer/>

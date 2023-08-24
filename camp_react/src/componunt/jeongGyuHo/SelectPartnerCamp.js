@@ -1,4 +1,4 @@
-    import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 
@@ -6,35 +6,39 @@ function SelectPartnerCamp(props) {
     const [campList, setCampList] = useState([]);
     const [filteredCampList, setFilteredCampList] = useState([]);
     const [selectedPartnerIdx, setSelectedPartnerIdx] = useState(null);
+    const [partner, setPartner] = useState([]);
+
 
 
     useEffect(() => {
+        axios.get(`http://localhost:8080/camp/searchPartner/${props.user.memberIdx}`)
+            .then((res) => {
+                console.log(res.data);
+                setPartner({ idx: res.data.idx });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
         axios.get('http://localhost:8080/camp/list')
             .then(res => {
                 console.log(res.data);
                 setCampList(res.data);
-                setFilteredCampList(res.data);
             })
             .catch(err => {
                 console.log(`error ${err}`);
             });
-    }, []);
+    }, [props.user.memberIdx]);
 
     useEffect(() => {
-        if (selectedPartnerIdx === null) {
+        if (partner.idx === null) {
             setFilteredCampList(campList);
-            const filteredList = campList.filter(camp => camp.campDeletedYn === 'N');
-            setFilteredCampList(filteredList);
         } else {
-            const filteredList = campList.filter(camp => camp.partnerIdx === selectedPartnerIdx && camp.campDeletedYn === 'N');
+            const filteredList = campList.filter(camp => camp.partnerIdx === partner.idx && camp.campDeletedYn === 'N');
             setFilteredCampList(filteredList);
         }
-    }, [selectedPartnerIdx, campList]);
+    }, [partner.idx, campList]);
 
-
-    const handlePartnerSelectChange = (e) => {
-        setSelectedPartnerIdx(e.target.value === "all" ? null : parseInt(e.target.value));
-    };
 
     // Function to truncate text
     const truncateText = (text, maxLength) => {
@@ -44,12 +48,6 @@ function SelectPartnerCamp(props) {
         return text.slice(0, maxLength) + "...";
     };
 
-    const dtTruncateText = (text, maxLength) => {
-        if (text.length <= maxLength) {
-            return text;
-        }
-        return text.slice(0, maxLength);
-    };
 
     const stripHtmlTags = (html) => {
         const tmp = document.createElement("div");
@@ -60,11 +58,7 @@ function SelectPartnerCamp(props) {
     return (
         <div className={'container'}>
             <h2>운영중인 캠핑장</h2>
-            <select onChange={handlePartnerSelectChange} className={'form-select'}>
-                <option value="all">전체</option>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-            </select>
+
 
             <table className={'table table-hover table-striped my-3'}>
                 <thead>
