@@ -66,7 +66,7 @@ function App() {
             {/*공지사항 상세보기 페이지*/}
             <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
 
-            <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail/>}/>
+            <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail user={userInfo}/>}/>
           </Routes>
           <Footer/>
         </BrowserRouter>

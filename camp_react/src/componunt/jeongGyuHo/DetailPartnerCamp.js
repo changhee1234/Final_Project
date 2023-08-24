@@ -4,7 +4,7 @@ import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function PartnerCampDetail() {
+function PartnerCampDetail(props) {
     const navigate = useNavigate();
     // camp_main_info 입력관련 state 관리
     const [campSiteInfo, setCampSiteInfo] = useState([]);
@@ -80,7 +80,6 @@ function PartnerCampDetail() {
                     campIdx: res.data.campIdx,
                     campName: res.data.campName,
                     campIntro: res.data.campIntro,
-                    // campDt: res.data.campDt,
                     kidszoneYn: res.data.kidszoneYn,
                     campHpLink: res.data.campHpLink,
                     campPh: res.data.campPh,
@@ -120,7 +119,7 @@ function PartnerCampDetail() {
             .then((res) => {
                 console.log(res.data);
                 alert("삭제되었습니다");
-                navigate('/');
+                navigate(`/myPage/${props.user.nickName}`);
             })
             .catch((err) => {
                 console.error(err);
@@ -140,7 +139,8 @@ function PartnerCampDetail() {
             .then((res) => {
                 console.log(res.data);
                 alert("삭제되었습니다.");
-                navigate(`/detailPartnerCamp/${campIdx}`);
+                navigate(`/myPage/${props.user.nickName}`);
+
             })
             .catch((err) => {
                 console.error(err);
@@ -193,7 +193,6 @@ function PartnerCampDetail() {
 
     const handleAreaEditClick = () => {
         setEditingArea(true);
-        navigate(`/detailPartnerCamp/${campIdx}`);
     };
 
     const handleAreaEditSubmit = (e) => {
@@ -224,7 +223,7 @@ function PartnerCampDetail() {
                 console.log(res.data);
                 alert('수정되었습니다.');
 
-                navigate(`/detailPartnerCamp/?${campIdx}`);
+                navigate(`/detailPartnerCamp/${campIdx}`);
 
             })
             .catch((err) => {
@@ -235,7 +234,7 @@ function PartnerCampDetail() {
     }
 
     const handleCancel = () => {
-        navigate("/");
+        navigate(`/myPage/${props.user.nickName}`);
     };
 
     return (
