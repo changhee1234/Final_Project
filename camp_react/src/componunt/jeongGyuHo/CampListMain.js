@@ -24,7 +24,7 @@ function CampListMain(props) {
                 console.log(res.data);
                 setCampList(res.data);
             })
-    });
+    }, []);
 
     return (
         <div className={'container'}>
