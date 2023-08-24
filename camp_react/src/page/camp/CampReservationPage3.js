@@ -79,7 +79,6 @@ function CampReservationPage3(props) {
 
     try {
       const res = await axios.post("http://localhost:8080/reserve/insertReservation", requestData)
-      alert(`결제 전 예약db 저장.`);
       const reservationIdx = res.data;
       await doPayment(reservationIdx);
     } catch (err) {
@@ -129,7 +128,7 @@ function CampReservationPage3(props) {
         // 결제 내역 결제 테이블에 저장
         await axios.post("http://localhost:8080/payments/success", reqPayData)
           .then(res => {
-            alert(`결제 db 저장 완료`)
+            alert(`결제가 완료되었습니다.`)
           })
           .catch(err => alert(err));
 
