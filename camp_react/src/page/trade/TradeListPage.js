@@ -68,24 +68,19 @@ function TradeListMain(props) {
   // 정렬 옵션 변경 핸들러
 
 // 등록일을 ~시간 전으로 표기, 24시간 후에는 날짜로 표기하는 함수
-  const getTimeOrDate = (dateTimeArray) => {
-    const [year, month, day, hour, minute] = dateTimeArray;
-    const postedTime = new Date(year, month - 1, day, hour, minute);
+  const getTimeOrDate = (dateTime) => {
     const now = new Date();
+    const postedTime = new Date(dateTime);
     const timeDiff = Math.floor((now - postedTime) / (60 * 60 * 1000)); // 시간 간격 계산
 
     if (timeDiff < 24) {
       return `${timeDiff}시간 전`;
     } else {
-      const options = { year: "numeric", month: "long", day: "numeric" };
+      const options = {year: "numeric", month: "long", day: "numeric"};
       return postedTime.toLocaleDateString(undefined, options);
     }
   };
-  const stripHtmlTags = (html) => {
-    const tmp = document.createElement("div");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
-  };
+
   // 등록된 게시판 리스트
   return (
       <main className={'container'}>
@@ -133,12 +128,12 @@ function TradeListMain(props) {
             <div className={'row'}>
               {tradeListPage.map(item => (
                   <div key={item.index} className="my-2 mb-0 col-3">
-                    <Link to={`/trade/${item.tradeBoardIdx}`} className="text-decoration-none">
+ㅇ                    <Link to={`/trade/${item.tradeBoardIdx}`} className="text-decoration-none">
                       {/*삽니다/팝니다 선택에 따라 다른 css 디자인 적용하여 구분*/}
                       <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                         <div className="product_img_div">
-                          <Link to={`/trade/${item.tradeBoardIdx}`}>
-                            <img src={extractImageUrl(item.content)} alt={"img"} className="product_img" />
+                          <Link to={`/board/trade/${item.tradeBoardIdx}`}>
+                            <img  src={item.img} alt={"img"} className="product_img"/>
                             {/*"/assets/default_image.png"*/}
                           </Link>
                         </div>
@@ -148,7 +143,7 @@ function TradeListMain(props) {
                         <div className="product_mon text-center">
                           <i className="bi bi-coin"></i>희망가: {item.tradePrice.toLocaleString()}원
                         </div>
-                        <h5 className="product_content">{stripHtmlTags(item.content)}</h5>
+                        <h5 className="product_content">{item.content}</h5>
                         <a className="product_des text-decoration-none">{item.description}</a>
                         <div className="row my-2">
                           <div className="row col-5 text-start">
@@ -197,16 +192,6 @@ function TradeListMain(props) {
         </div>
       </main>
   )
-}
-// 이미지 URL 추출 함수
-function extractImageUrl(content) {
-  const imageRegex = /<img[^>]*src="([^"]+)"[^>]*>/g;
-  const matches = content.match(imageRegex);
-  if (matches && matches.length > 0) {
-    const imageUrl = matches[0].match(/src="([^"]+)"/)[1];
-    return imageUrl;
-  }
-  return ''; // 이미지가 없을 경우 빈 문자열 반환
 }
 
 export default TradeListMain;

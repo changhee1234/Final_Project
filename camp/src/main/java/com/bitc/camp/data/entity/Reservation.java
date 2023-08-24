@@ -118,10 +118,4 @@ public class Reservation {
     this.merchantUid = merchantUid;
     this.name = name;
   }
-
-  public void cancelUpdate(String payStatus, LocalDate userReservationStart, LocalDate userReservationEnd) {
-    this.payStatus = payStatus;
-    this.userReservationStart = userReservationStart;
-    this.userReservationEnd = userReservationEnd;
-  }
 }

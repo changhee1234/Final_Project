@@ -6,7 +6,7 @@ function ReservationConfirmation(props) {
     return (
         <>
           {
-            props.userInfo.grade === "user" || props.userInfo.grade === "admin" ? <UserReservationConfirmation userInfo={props.userInfo}/> : <PartnerReservationConfirmation userInfo={props.userInfo}/>
+            props.userInfo.grade === "user" ? <UserReservationConfirmation/> : <PartnerReservationConfirmation userInfo={props.userInfo}/>
           }
         </>
     )

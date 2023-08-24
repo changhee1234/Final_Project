@@ -96,12 +96,6 @@ function TradeDetailPage(props) {
     }
   }
 
-  function adjustImageStyle(content) {
-    const adjustedContent = content.replace(/<img[^>]*>/g, (match) => {
-      return match.replace(/<img/, '<img style="max-width: 100%; height: auto;"');
-    });
-    return adjustedContent;
-  }
   return (
       <main className="container MY">
         <div className="row">
@@ -147,7 +141,7 @@ function TradeDetailPage(props) {
 
                   <div className="row my-2 bg-light">
                     <input type="text" className="form-control-plaintext fw-light text-body-outline-light w-auto mx-2"
-                           value={`${campDetails.createDt[0]}-${campDetails.createDt[1]}-${campDetails.createDt[2]}`} readOnly={true}/>
+                           value={dtTruncateText(campDetails.createDt, 10)} readOnly={true}/>
                     <div className="col-sm d-flex justify-content-end py-2">
                       <div className="mx-2">
                         <p className="text-end mb-0 pb-0"></p>
@@ -161,8 +155,11 @@ function TradeDetailPage(props) {
                 <div className="row my-3">
                   <div className="col-sm">
                     <div className="my-3">
-                      <div dangerouslySetInnerHTML={{ __html: adjustImageStyle(campDetails.content) }} />
+                      <img width="100%" alt={"img"} src={campDetails.imgUrl}
+                           onChange={handleInputChange}></img>
                     </div>
+                    <textarea className="form-control-plaintext" rows="15" id="content" name="content"
+                              value={campDetails.content || ''} onChange={handleInputChange} readOnly></textarea>
                   </div>
                 </div>
                 {/*REST 방식 사용 시 form태그의 데이터 전송 방식을 변경하기 위한 태그*/}
