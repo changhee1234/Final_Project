@@ -19,9 +19,7 @@ import Header from "./page/layout/Header";
 import Footer from "./page/layout/Footer";
 import UpdatePage from "./page/trade/UpdatePage";
 import TradeWritePage from "./page/trade/TradeWritePage";
-import CampListPage from "./page/campListPage";
-import CampList from "./componunt/jeongGyuHo/campList";
-import Editor from "./Editor";
+import CampListPage from "./page/camp/CampListPage";
 import SelectPartnerCamp from "./componunt/jeongGyuHo/SelectPartnerCamp";
 import PartnerCampDetail from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
 
