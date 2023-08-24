@@ -4,7 +4,7 @@ import AboutPage from "./page/aboutPage.js";
 import AnnouncementListPage from "./page/announcementListPage.js";
 import AnnouncementDetailPage from "./page/announcementDetailPage.js";
 import CampRegisterCombined from "./componunt/jeongGyuHo/campRegisterCombined.js";
-import DetailPartnerCamp from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
+
 import CampReservationPage1 from "./page/camp/CampReservationPage1";
 import CampReservationPage2 from "./page/camp/CampReservationPage2";
 import CampReservationPage3 from "./page/camp/CampReservationPage3";
@@ -19,7 +19,6 @@ import Header from "./page/layout/Header";
 import Footer from "./page/layout/Footer";
 import UpdatePage from "./page/trade/UpdatePage";
 import TradeWritePage from "./page/trade/TradeWritePage";
-import CampListPage from "./page/campListPage";
 import CampList from "./componunt/jeongGyuHo/campList";
 import Editor from "./Editor";
 import SelectPartnerCamp from "./componunt/jeongGyuHo/SelectPartnerCamp";
@@ -46,7 +45,7 @@ function App() {
             {/*예외처리(에러페이지)*/}
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
-            <Route path={'/camp'} element={<CampListPage/>}/>
+            <Route path={'/camp'} element={<CampList/>}/>
 
             {/*캠핑장 상세보기*/}
             <Route path={'/campList/*'} element={<CampDetailPage/>}/>
