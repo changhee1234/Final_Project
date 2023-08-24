@@ -245,7 +245,7 @@ function PartnerCampDetail() {
 
 
     const handleCancel = () => {
-        navigate("/selectPartnerCamp");
+        navigate("/");
     };
 
     return (
@@ -603,7 +603,7 @@ function PartnerCampDetail() {
                                 <div className={'d-grid'}>
                                     <button
                                         type={'submit'}
-                                        className={'btn btn-primary'}
+                                        className={'btn btn-success'}
                                         onClick={handleAreaEditSubmit}
                                     >
                                         구역 수정 완료
