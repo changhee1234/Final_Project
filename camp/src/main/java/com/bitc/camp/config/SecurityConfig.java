@@ -44,7 +44,7 @@ public class SecurityConfig {
                     .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                     .requestMatchers(
                             // ... 다른 permitAll 경로들 추가 ...
-                            "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image", "/delete-account", "/addPartner", "/updatePartnerAccess", "/board/**", "/camp/**", "/", "/naver/**", "/reserve/**", "/payments/**", "/user-info/**", "/partnerInfo/**", "/review/**").permitAll()
+                            "/upload", "/write", "/board/write", "/signup", "/member", "/board/", "/sms", "/login", "/logout", "/check-email", "/reserve/**", "/payments/**", "/user-info/**", "/modify", "/upload-profile-image", "/delete-account", "/addPartner", "/updatePartnerAccess", "/board/**", "/camp/**", "/", "/naver/**", "/reserve/**", "/payments/**", "/user-info/**", "/partnerInfo/**", "/review/**").permitAll()
 //                    .requestMatchers("/reserve/**", "/payments/**", "/user-info/**", "/login").hasAuthority("USER")
 //                    .requestMatchers("/partner-page", "/partnerInfo/**", "/user-info/**").hasRole("PARTNER")
                     .requestMatchers("/admin-page").hasRole("ADMIN")

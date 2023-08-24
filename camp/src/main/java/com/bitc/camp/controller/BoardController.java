@@ -8,17 +8,27 @@ import com.bitc.camp.dto.BoardResponseDto;
 import com.bitc.camp.entity.Board;
 import com.bitc.camp.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/board")
 @RestController
 public class  BoardController {
+  private final String imageUploadDirectory = "src/main/resources/static/uploaded-images/";
 
   private final BoardService boardService;
 
@@ -32,11 +42,82 @@ public class  BoardController {
   }
 
   // 글 등록(파일 업로드 제외)
-  @RequestMapping(value = "/write", method = RequestMethod.POST)
-  public Object boardWrite(@RequestBody BoardRequestDto boardRequestDto) throws Exception {
-    Board createBoard = boardService.createBoard(boardRequestDto);
-    return createBoard;
+//  @RequestMapping(value = "/write", method = RequestMethod.POST)
+//  public Object boardWrite(@RequestBody BoardRequestDto boardRequestDto) throws Exception {
+//    Board createBoard = boardService.createBoard(boardRequestDto);
+//    return createBoard;
+//  }
+//  private String imageUrl = ""; // 이미지 URL을 저장할 변수
+//
+//  // 이미지 URL 업로드 API
+//  @PostMapping("/upload-image")
+//  public ResponseEntity<Map<String, String>> uploadImage(@RequestBody Map<String, String> request) {
+//    try {
+//      String imageUrl = request.get("imageUrl");
+//
+//      // 이미지 URL을 파일로 저장하여 줄여서 DB에 저장하는 로직 추가
+//      String shortenedImageUrl = saveImageDataToFile(imageUrl);
+//
+//      Map<String, String> response = new HashMap<>();
+//      response.put("imageUrl", shortenedImageUrl);
+//
+//      return ResponseEntity.ok(response);
+//    } catch (Exception e) {
+//      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//    }
+//  }
+//
+//  // 이미지 URL을 파일로 저장하여 줄여서 DB에 저장하는 메서드
+//  private String saveImageDataToFile(String imageUrl) throws IOException {
+//    // 저장할 디렉토리 경로 설정
+//    String uploadDirectory = "src/main/resources/static/uploaded-images"; // resources/static/uploaded-images 경로
+//
+//    // 저장할 파일명 생성 (예: 현재 시간 + 확장자)
+//    String newFileName = System.currentTimeMillis() + ".jpg"; // 확장자는 실제 이미지 확장자에 맞게 설정
+//
+//    // 파일을 저장할 경로 설정
+//    String filePath = Paths.get(uploadDirectory, newFileName).toString();
+//
+//    // 이미지 파일 다운로드 후 저장
+//    URL imageUrlObject = new URL(imageUrl);
+//    FileUtils.copyURLToFile(imageUrlObject, new File(filePath));
+//
+//    // 줄여진 이미지 URL 생성 (백엔드 서버에서 이미지에 접근할 수 있는 URL)
+//    String shortenedImageUrl = "/uploaded-images/" + newFileName; // 프론트에서 접근 가능한 URL
+//
+//    return shortenedImageUrl;
+//  }
+//
+//  // 글 등록 API
+//  @RequestMapping(value = "/write", method = RequestMethod.POST)
+//  public Object boardWrite(@RequestBody BoardRequestDto boardRequestDto) throws Exception {
+//    try {
+//      // 이미지 URL을 boardRequestDto에 추가
+//      boardRequestDto.setImageUrl(imageUrl);
+//
+//      Board createBoard = boardService.createBoard(boardRequestDto);
+//      return createBoard;
+//    } catch (Exception e) {
+//      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//    }
+//  }
+
+
+
+  @PostMapping("/write")
+  public ResponseEntity<Object> boardWrite(@RequestBody BoardRequestDto boardRequestDto) {
+    try {
+      // 나머지 필드를 이용하여 글을 생성
+      Board createBoard = boardService.createBoard(boardRequestDto);
+
+      // 생성된 글 정보를 응답
+      return new ResponseEntity<>(createBoard, HttpStatus.CREATED);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
+
+
 
   //  글 상세
   @RequestMapping(value = "/trade/{tradeBoardIdx}", method = RequestMethod.GET)

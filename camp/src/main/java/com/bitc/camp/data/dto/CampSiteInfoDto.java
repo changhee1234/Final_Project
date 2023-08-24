@@ -26,4 +26,6 @@ public class CampSiteInfoDto {
     private CampMainInfo campMainInfo;
     private int campMainInfoIdx;
     private String siteDeletedYn;
+    private String campSiteNewImg;
+    private String campSiteOriginImg;
 }

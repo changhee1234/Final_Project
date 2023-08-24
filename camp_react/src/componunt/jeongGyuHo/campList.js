@@ -327,7 +327,7 @@ function CampList(props) {
                                             <div className={'col-sm-4 my-auto'}>
                                         <span style={campImg}>
                                             <img
-                                                src={'/campImg/img.png'}
+                                                src={camp.campMainTitleNewImg}
                                                 className={'img-fluid'}
                                             />
                                         </span>
@@ -439,11 +439,17 @@ function CampList(props) {
 
                         <div data-bs-spy={'scroll'} data-bs-target={'#detail-scrollspy'}
                              tabIndex={'0'}>
-                            <div id={'detail'} className={'border-bottom my-4'}>
+                            <div id={'detail'} className={'border-bottom my-4 img-fluid'}>
                                 <h4 className={'text-start mx-3'}>상세보기</h4>
-                                <p className={'text-start ms-2'}>
-                                    {stripHtmlTags(selectedCampInfo.campIntro)}
-                                </p>
+                                <div className={'d-flex justify-content-center'}>
+                                    <img
+                                        src={selectedCampInfo.campMainTitleNewImg}
+                                        className={'img-fluid'}
+                                        style={{ width: '400px' }}
+                                    />
+                                </div>
+
+                                <p className={'text-start mx-4'}>{stripHtmlTags(selectedCampInfo.campIntro)}</p>
                             </div>
                             <div id={'naverBlog'} className={'border-bottom'}>
                                 <div>

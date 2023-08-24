@@ -7,5 +7,7 @@ public interface PaymentService {
 
   void save(PaymentReqDto payReqData) throws Exception;
 
-  PaymentRespDto getPaymentInfo(String idx) throws Exception;
+  PaymentRespDto getPaymentInfo(int idx) throws Exception;
+
+  void cancelPayment(String impUid, PaymentReqDto params) throws Exception;
 }

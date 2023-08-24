@@ -9,17 +9,23 @@ import com.bitc.camp.data.entity.CampSiteInfo;
 import com.bitc.camp.data.entity.Partner;
 import com.bitc.camp.service.CampService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/camp")
 public class CampController {
 
     private final CampService campService;
+    public CampController(CampService campService) {
+        this.campService = campService;
+    }
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -37,18 +43,37 @@ public class CampController {
         return reviewBoardDtoList;
     }
 
-    @RequestMapping(value = "/Register", method = RequestMethod.POST)
-    public Object campRegister(@RequestBody CampMainInfoDto campMainInfoDto) throws Exception {
+//    @RequestMapping(value = "/Register", method = RequestMethod.POST)
+//    public Object campRegister(@RequestBody CampMainInfoDto campMainInfoDto) throws Exception {
+//        CampMainInfo createdCamp = campService.createCamp(campMainInfoDto);
+//
+//        return createdCamp;
+//    }
+//
+//    @RequestMapping(value = "/Register2", method = RequestMethod.POST)
+//    public Object campRegister2(@RequestBody List<CampSiteInfoDto> campSiteInfoDtoList) throws Exception{
+//        List<CampSiteInfo> campSiteInfo = campService.createCamp2(campSiteInfoDtoList);
+//
+//        return campSiteInfo;
+//    }
+@PostMapping("/register")
+public ResponseEntity<CampMainInfo> registerCamp(@RequestBody CampMainInfoDto campMainInfoDto) {
+    try {
         CampMainInfo createdCamp = campService.createCamp(campMainInfoDto);
-
-        return createdCamp;
+        return ResponseEntity.ok(createdCamp);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+}
 
-    @RequestMapping(value = "/Register2", method = RequestMethod.POST)
-    public Object campRegister2(@RequestBody List<CampSiteInfoDto> campSiteInfoDtoList) throws Exception{
-        List<CampSiteInfo> campSiteInfo = campService.createCamp2(campSiteInfoDtoList);
-
-        return campSiteInfo;
+    @PostMapping("/register2")
+    public ResponseEntity<List<CampSiteInfo>> registerCampSiteInfo(@RequestBody List<CampSiteInfoDto> campSiteInfoDtoList) {
+        try {
+            List<CampSiteInfo> createdCampSiteInfo = campService.createCamp2(campSiteInfoDtoList);
+            return ResponseEntity.ok(createdCampSiteInfo);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @RequestMapping(value = "/partnerCampDetail/{campIdx}", method = RequestMethod.GET)

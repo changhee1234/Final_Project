@@ -29,11 +29,14 @@ function CampReservationPage1(props) {
       .then(res => {
         setMainInfo(res.data.mainInfo);
         setSiteInfos(res.data.mainInfo.siteInfoLists);
+        console.log(res.data.mainInfo); // 데이터 로그 확인
+        console.log(res.data.mainInfo.campMainTitleNewImg); // 데이터 로그 확인
       })
       .catch(err => {
         alert(`통신 오류 : ${err}`);
       });
   }, []);
+
 
   // 날짜 선택 시 예약 가능한 자리수 저장
   const handleOnChange = item => {
@@ -94,7 +97,7 @@ function CampReservationPage1(props) {
         </div>
 
         <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange} campMainIdx={mainInfo.idx}
-                  campName={mainInfo.campName}/>
+                  campName={mainInfo.campName} mainInfo={mainInfo}/>
 
         <div><img className={'img-fluid'} alt={"배치도이미지"} src="/Site_batch.gif"/></div>
       </main>

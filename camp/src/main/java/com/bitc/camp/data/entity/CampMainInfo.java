@@ -61,6 +61,15 @@ public class CampMainInfo {
   @ToString.Exclude
   private List<Reservation> reservationList = new ArrayList<>();
 
+  @Column(length = 0, nullable = true)
+  private String campMainTitleNewImg;
+  @Column(length = 1000, nullable = true)
+  private String campMainTitleOriginImg;
+  @Column(length = 1000, nullable = true)
+  private String campMainLayoutNewImg;
+  @Column(length = 1000, nullable = true)
+  private String campMainLayoutOriginImg;
+
   public CampMainInfo(int idx) {
     this.idx = idx;
   }

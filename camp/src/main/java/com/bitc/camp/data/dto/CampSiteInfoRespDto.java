@@ -24,6 +24,9 @@ public class CampSiteInfoRespDto {
   private int campMainIdx;
   private List<CampSiteListRespDto> campSiteLists;
 
+  private String campSiteNewImg;
+  private String campSiteOriginImg;
+
   public CampSiteInfoRespDto(CampSiteInfo entity) {
     this.idx = entity.getIdx();
     this.areaName = entity.getAreaName();
@@ -38,6 +41,7 @@ public class CampSiteInfoRespDto {
     this.elePrice = entity.getElePrice();
     this.areaSiteCnt = entity.getAreaSiteCnt();
     this.campMainIdx = entity.getCampMainInfo().getIdx();
+    this.campSiteNewImg = entity.getCampSiteNewImg();
     this.campSiteLists = entity.getCampSiteLists().stream()
         .map(CampSiteListRespDto::new)
         .collect(Collectors.toList());

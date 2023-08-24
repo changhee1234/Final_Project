@@ -17,7 +17,9 @@ public interface ReservationService {
 
   void updateReservation(int idx, ReservationReqDto params) throws Exception;
 
-  List<ReservationRespDto> getReservationFromCampMainIdx(int partnerIdx);
+  List<ReservationRespDto> getReservationFromCampMainIdx(int partnerIdx) throws Exception;
+  List<ReservationRespDto> getReservationFromMemberIdx(int memberIdx) throws Exception;
 
   void cancelReservation(String impUid) throws Exception;
+
 }
