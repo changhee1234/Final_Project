@@ -9,6 +9,15 @@ import com.bitc.camp.entity.Board;
 import com.bitc.camp.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+>>>>>>> 사용금지
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
