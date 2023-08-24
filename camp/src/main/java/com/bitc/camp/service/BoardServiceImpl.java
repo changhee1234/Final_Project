@@ -56,7 +56,6 @@ public class BoardServiceImpl implements BoardService {
         .tradePrice(camp.getTradePrice())
         .tradeLocation(camp.getTradeLocation())
         .tradeCate(camp.getTradeCate())
-        .imgUrl(camp.getImgUrl())
         .memberIdx(camp.getMemberIdx())
         .build();
     return boardResponseDto;
