@@ -73,7 +73,7 @@ public class ReservationController {
 
   // 파트너 예약 리스트 조회
   @GetMapping("/reservationList/{partnerIdx}")
-  public Map<String, Object> getReservation(@PathVariable("partnerIdx") int partnerIdx) throws Exception {
+  public Map<String, Object> getPartnerReservation(@PathVariable("partnerIdx") int partnerIdx) throws Exception {
 
     Map<String, Object> result = new HashMap<>();
 
@@ -82,6 +82,18 @@ public class ReservationController {
 
     return result;
   }
+
+  // 사용자 예약 리스트 조회
+  @GetMapping("/userReservationList/{memberIdx}")
+  public Map<String, Object> getUserReservation(@PathVariable("memberIdx") int memberIdx) throws Exception {
+    Map<String, Object> result = new HashMap<>();
+
+    List<ReservationRespDto> reservationList = reservationService.getReservationFromMemberIdx(memberIdx);
+    result.put("result", reservationList);
+
+    return result;
+  }
+
 
   @PutMapping("/cancel/{impUid}")
   public void cancelReservation(@PathVariable("impUid") String impUid) throws Exception{

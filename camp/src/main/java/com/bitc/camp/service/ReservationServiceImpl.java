@@ -76,7 +76,7 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public List<ReservationRespDto> getReservationFromCampMainIdx(int partnerIdx) {
+  public List<ReservationRespDto> getReservationFromCampMainIdx(int partnerIdx) throws Exception{
     int campMainIdx = reservationRepository.findByPartnerIdx(partnerIdx);
     List<Reservation> reservations = reservationRepository.findByCampMainIdx(campMainIdx);
     List<ReservationRespDto> reservationRespDtos = new ArrayList<>();
@@ -88,7 +88,23 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
+  public List<ReservationRespDto> getReservationFromMemberIdx(int memberIdx) throws Exception {
+    List<Reservation> reservations = reservationRepository.findByUserMemberIdx(memberIdx);
+    List<ReservationRespDto> reservationRespDtos = new ArrayList<>();
+    for (Reservation reservation: reservations){
+      ReservationRespDto respDto = new ReservationRespDto(reservation);
+      reservationRespDtos.add(respDto);
+    }
+    return reservationRespDtos;
+  }
+
+  @Transactional
+  @Override
   public void cancelReservation(String impUid) throws Exception {
-    reservationRepository.findByImpUid(impUid);
+    LocalDate userReservationStart = LocalDate.parse("1111-11-11");
+    LocalDate userReservationEnd = LocalDate.parse("1111-11-11");
+
+    Reservation entity = reservationRepository.findByImpUid(impUid);
+    entity.cancelUpdate("결제취소", userReservationStart, userReservationEnd);
   }
 }
