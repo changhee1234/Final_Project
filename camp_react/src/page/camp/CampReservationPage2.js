@@ -45,17 +45,19 @@ function CampReservationPage2(props) {
   return (
       <main className={"container"}>
         <div className="row">
-          <div className="col-sm-6">
+          <div className="col-sm-2"></div>
+          <div className="col-sm-3">
             <SiteInfo siteInfo={siteInfo}/>
             <Notice siteInfo={siteInfo}/>
             <SiteLists siteLists={siteLists} availSiteList={availSiteList} selectedSite={selectedSiteFromSiteLists}
                        selectedSiteIdx={selectedSiteIdxFromSiteLists}/>
           </div>
-          <div className="col-sm">
+          <div className="col-sm-5">
             <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campMainIdx={campMainIdx} campName={campName}
                            siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite}
                            selectedSiteIdx={selectedSiteIdx}/>
           </div>
+          <div className="col-sm-2"></div>
         </div>
       </main>
   );
