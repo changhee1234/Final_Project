@@ -99,7 +99,7 @@ function CampReservationPage1(props) {
         <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange} campMainIdx={mainInfo.idx}
                   campName={mainInfo.campName} mainInfo={mainInfo}/>
 
-        <div><img className={'img-fluid'} alt={"배치도이미지"} src="/Site_batch.gif"/></div>
+        <div><img className={'img-fluid'} alt={"배치도이미지"} src={mainInfo.campMainLayoutNewImg}/></div>
       </main>
   );
 }

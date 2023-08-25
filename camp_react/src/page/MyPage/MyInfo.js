@@ -14,7 +14,6 @@ function formatPhoneNumber(phoneNumber) {
 
 function MyInfo(props) {
 
-    const {nickname} = useParams();
     const [user, setUser] = useState(null);
     const [isOpened, setIsOpend] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -372,6 +371,7 @@ function MyInfo(props) {
                                             className="btn btn-success"
                                             id="signupBtn"
                                             onClick={handleModifySubmit}
+                                            disabled={password !== password2 || !isCkeckNum}
                                         >
                                             저장
                                         </button>

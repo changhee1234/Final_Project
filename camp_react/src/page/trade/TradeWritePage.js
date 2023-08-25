@@ -69,7 +69,7 @@ function TradeWritePage({userInfo}) {
       [{ 'header': [1, 2, false] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
+      ['link'],
       [{ 'align': [] }, { 'color': [] }, { 'background': [] }],
       ['clean']
     ],
@@ -82,26 +82,8 @@ function TradeWritePage({userInfo}) {
     'link', 'image',
     'align', 'color', 'background',
   ];
-
-  // const handleImageUpload = async (e) => {
-  //   const imageFile = e.target.files[0];
-  //   const storageRef = storage.ref();
-  //   const imageRef = storageRef.child(`images/${imageFile.name}`);
-  //
-  //   try {
-  //     const snapshot = await imageRef.put(imageFile);
-  //     const imageUrl = await snapshot.ref.getDownloadURL();
-  //
-  //     // Quill 에디터 내에 이미지 삽입
-  //     if (quillIns) {
-  //       const range = quillIns.getSelection();
-  //       quillIns.insertEmbed(range.index, 'image', imageUrl);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error uploading image:', error);
-  //   }
-  // };
   const quillRef = useRef(null);
+
 
   // 이미지 핸들러 함수
   const imageHandler = async () => {
@@ -117,15 +99,7 @@ function TradeWritePage({userInfo}) {
       try {
         // 파일명을 "image/Date.now()"로 저장
         const storageRef = ref(storage, `image/${Date.now()}`);
-        // Firebase Method : uploadBytes, getDownloadURL
-        // await uploadBytes(storageRef, file).then((snapshot) => {
-        //   getDownloadURL(snapshot.ref).then((url) => {
-        //     // 이미지 URL 에디터에 삽입
-        //     editor.insertEmbed(range.index, 'image', url);
-        //     // URL 삽입 후 커서를 이미지 뒷 칸으로 이동
-        //     editor.setSelection(range.index + 1);
-        //   });
-        // });
+
         await uploadBytes(storageRef, file).then((snapshot) => {
           getDownloadURL(snapshot.ref).then((url) => {
             // 이미지 삽입
@@ -139,31 +113,6 @@ function TradeWritePage({userInfo}) {
       }
     });
   };
-  // const handleFileChange = (event) => {
-  //   setFile(event.target.files[0]);
-  // };
-
-
-  // // 파일 업로드
-  //   const handleFile = () => {
-  //     if (file) {
-  //       const formData = new FormData();
-  //       formData.append("file", file);
-  //
-  //       axios.post("http://localhost:8080/board/write", formData, {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //       })
-  //           .then((response) => {
-  //             // 파일 업로드 성공 처리
-  //           })
-  //           .catch((error) => {
-  //             // 파일 업로드 실패 처리
-  //           });
-  //     }
-  //   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -193,84 +142,6 @@ function TradeWritePage({userInfo}) {
   const onEditorChange = (value) => {
     setContent(value);
   };
-
-  // // 이미지 압축 함수
-  // const compressImage = async (imageFile) => {
-  //   const options = {
-  //     quality: 0.7, // 압축 품질 설정 (0.1 ~ 1.0 사이의 값)
-  //     maxWidth: 800, // 이미지의 최대 너비 설정
-  //   };
-  //
-  //   try {
-  //     const compressedFile = await new ImageCompressor(imageFile, options);
-  //     return compressedFile;
-  //   } catch (error) {
-  //     console.error('Error compressing image:', error);
-  //     throw error;
-  //   }
-  // };
-  // function onEditorChange(value) {
-  //   setContent(value);
-  //
-  //   const imgTags = value.match(/<img\s+src="data:image[^"]+"\s*>/g);
-  //   if (imgTags) {
-  //     const extractedImageUrls = imgTags.map(tag => {
-  //       const srcMatch = tag.match(/src="([^"]+)"/);
-  //       if (srcMatch && srcMatch[1]) {
-  //         return srcMatch[1];
-  //       }
-  //       return null;
-  //     });
-  //
-  //     setImageUrl(extractedImageUrls[0] || '');
-  //   }
-  // }
-  //
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //
-  //   try {
-  //     const requestData = {
-  //       title: title,
-  //       content: content,
-  //       userName: userName,
-  //       tradePrice: tradePrice,
-  //       tradeCate: tradeCate,
-  //       createDt: createDt.toISOString().substr(0, 16),
-  //       imageUrl: imageUrl,
-  //     };
-  //
-  //     // 글 등록
-  //     const createResponse = await axios.post("http://localhost:8080/board/write", requestData, {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //
-  //     // 글 등록 성공 후 이미지 업로드
-  //     if (createResponse.status === 200) {
-  //       await handleUploadImage();
-  //     }
-  //
-  //     navi('/trade');
-  //   } catch (err) {
-  //     alert(`통신 오류 : ${err}`);
-  //   }
-  // };
-
-  // const handleUploadImage = async () => {
-  //   try {
-  //     const response = await axios.post("http://localhost:8080/board/upload-image", {
-  //       imageUrl: imageUrl,
-  //     });
-  //
-  //     // 이미지 URL 저장 성공
-  //     console.log("Image URL uploaded:", response.data.imageUrl);
-  //   } catch (error) {
-  //     // 오류 처리
-  //     console.error("Image URL upload error:", error);
-  //   }
-  // };
 
 
   return (
