@@ -75,7 +75,7 @@ public class PartnerServiceImpl implements PartnerService {
 
     @Override
     public void updatePartnerAccess(int memberIdx, String newValue) {
-        Optional<Partner> optionalPartner = partnerRepository.findById(memberIdx);
+        Optional<Partner> optionalPartner = partnerRepository.findByMemberIdx(memberIdx);
         if (optionalPartner.isPresent()) {
             Partner partner = optionalPartner.get();
             partner.setPartnerAccess(newValue);
