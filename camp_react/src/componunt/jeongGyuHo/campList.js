@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {Link, useParams} from "react-router-dom";
 
 const {kakao} = window;
 const places = new kakao.maps.services.Places();
@@ -34,10 +35,6 @@ function CampList(props) {
             })
 
     }, []);
-
-
-
-
 
 
     const itemsPerPage = 5; // 한 페이지에 표시할 아이템 수
@@ -249,6 +246,13 @@ function CampList(props) {
 
     };
 
+    const stripHtmlTags = (html) => {
+        const tmp = document.createElement("div");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    };
+
+
     return (
 
         <div className={'row'}>
@@ -309,10 +313,9 @@ function CampList(props) {
                         // 검색 결과가 있는 경우 리스트 표시
                         searchedCampList
                             .filter((camp) => camp.campDeletedYn === 'N').slice(startIndex, endIndex).map((camp) => (
-                            <a href={`#${camp.idx}`} className={'text-decoration-none'}>
+                            <Link to={`#${camp.idx}`} className={'text-decoration-none'} key={camp.idx}>
                                 <div
                                     className={'card my-3'}
-                                    key={camp.idx}
                                     onClick={() => {
                                         handleCardClick(camp);
                                         searchBlog(camp);
@@ -324,7 +327,7 @@ function CampList(props) {
                                             <div className={'col-sm-4 my-auto'}>
                                         <span style={campImg}>
                                             <img
-                                                src={'/campImg/img.png'}
+                                                src={camp.campMainTitleNewImg}
                                                 className={'img-fluid'}
                                             />
                                         </span>
@@ -332,6 +335,7 @@ function CampList(props) {
                                             <div className={'col-sm-8 my-auto'}>
                                                 <a
                                                     className={'d-flex justify-content-start card-title text-decoration-none fs-3'}
+
                                                 >
                                                     {camp.campName}
                                                 </a>
@@ -347,7 +351,7 @@ function CampList(props) {
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         ))
                     )
                 ) : (
@@ -357,15 +361,15 @@ function CampList(props) {
                         {/*상세정보 이름*/}
                         <div className={'border-bottom'}>
                             <div className={'my-3 justify-content-start d-flex'}>
-                                <h2 className={'fw-bold ms-3'}>{selectedCampInfo.campName}</h2>
+                                <h3 className={'fw-bold ms-3'}>{selectedCampInfo.campName}</h3>
                                 {/*일단 넣어놓은 좋아요용 빈 하트*/}
-                                <i className="ms-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                         fill="currentColor"
-                                         className="bi bi-heart" viewBox="0 0 16 16">
-                                        <path
-                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-                                    </svg>
+                                <i className="bi bi-heart">
+                                    {/*<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"*/}
+                                    {/*     fill="currentColor"*/}
+                                    {/*     className="bi bi-heart" viewBox="0 0 16 16">*/}
+                                    {/*    <path*/}
+                                    {/*        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>*/}
+                                    {/*</svg>*/}
                                 </i>
                             </div>
                         </div>
@@ -381,18 +385,20 @@ function CampList(props) {
                         <div className={'border-bottom'}>
                             <div className={'d-flex justify-content-around my-3 mx-5'}>
                                 {/*예약아이콘*/}
-                                <i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="58"
-                                         fill="currentColor"
-                                         className="bi bi-journal-check" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                              d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                                        <path
-                                            d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                                        <path
-                                            d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                                    </svg>
-                                </i>
+                                <Link to={`/reservation1/${selectedCampInfo.idx}`}>
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="58"
+                                             fill="currentColor"
+                                             className="bi bi-journal-check" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                            <path
+                                                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                            <path
+                                                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                                        </svg>
+                                    </i>
+                                </Link>
 
                                 {/*홈페이지아이콘*/}
                                 <i>
@@ -433,15 +439,23 @@ function CampList(props) {
 
                         <div data-bs-spy={'scroll'} data-bs-target={'#detail-scrollspy'}
                              tabIndex={'0'}>
-                            <div id={'detail'} className={'border-bottom my-4'}>
-                                <h4 className={'text-start mb-3'}>상세보기</h4>
-                                <p className={'text-start'}>{selectedCampInfo.campIntro}</p>
+                            <div id={'detail'} className={'border-bottom my-4 img-fluid'}>
+                                <h4 className={'text-start mx-3'}>상세보기</h4>
+                                <div className={'d-flex justify-content-center'}>
+                                    <img
+                                        src={selectedCampInfo.campMainTitleNewImg}
+                                        className={'img-fluid'}
+                                        style={{ width: '400px' }}
+                                    />
+                                </div>
+
+                                <p className={'text-start mx-4'}>{stripHtmlTags(selectedCampInfo.campIntro)}</p>
                             </div>
                             <div id={'naverBlog'} className={'border-bottom'}>
                                 <div>
                                     <div className={'text-start'}>
                                         <div className={'d-flex justify-content-between'}>
-                                            <h4 className={'mb-3'}>블로그 리뷰</h4>
+                                            <h4 className={'mx-3'}>블로그 리뷰</h4>
 
                                             {/*블로그 페이지 네이션*/}
                                             <div className="pagination d-flex justify-content-center mt-4">
@@ -453,8 +467,8 @@ function CampList(props) {
                                                     이전
                                                 </button>
                                                 <span className="align-self-center">
-            {blogCurrentPage} / {Math.ceil(blogSearchResults.length / blogItemsPerPage)}
-        </span>
+                {blogCurrentPage} / {Math.ceil(blogSearchResults.length / blogItemsPerPage)}
+                    </span>
                                                 <button
                                                     onClick={() => setBlogCurrentPage(blogCurrentPage + 1)}
                                                     disabled={blogEndIndex === blogSearchResults.length}
@@ -469,9 +483,9 @@ function CampList(props) {
                                             {blogSearchResults.slice(blogStartIndex, blogEndIndex).map((item, index) => (
                                                 <a href={item.link}
                                                    target={'_blank'}
-                                                   className={'text-decoration-none text-dark'}
+                                                   className={'text-decoration-none mx-3 text-dark'}
                                                    key={index}>
-                                                    <div className={'border-top card my-4'}>
+                                                    <div className={'border-top card my-4 mx-2'}>
                                                         <div className={'border-bottom my-2'}>
                                                             <h5 dangerouslySetInnerHTML={{__html: item.title}}
                                                                 className={'ms-2 mt-2'}></h5>
@@ -501,8 +515,8 @@ function CampList(props) {
                                             이전
                                         </button>
                                         <span className="align-self-center">
-            {reviewCurrentPage} / {Math.ceil(reviewList.length / reviewItemsPerPage)}
-        </span>
+                {reviewCurrentPage} / {Math.ceil(reviewList.length / reviewItemsPerPage)}
+                    </span>
                                         <button
                                             onClick={() => setReviewCurrentPage(reviewCurrentPage + 1)}
                                             disabled={reviewEndIndex === reviewList.length}
@@ -513,7 +527,7 @@ function CampList(props) {
                                     </div>
                                 </div>
                                 {reviewList.slice(reviewStartIndex, reviewEndIndex).map((item, index) => (
-                                    <div className={'card my-3'} key={index}>
+                                    <div className={'card my-4 mx-2'} key={index}>
                                         <div className={'my-1 border-bottom'}>
                                             <h4 className={'ms-2 my-2'}>{item.nickName}</h4>
                                         </div>

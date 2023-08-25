@@ -22,7 +22,9 @@ public class ImageUploadController {
 
 //    @Value("${upload.dir}")
 //    private String uploadDir;
-String uploadDir = "C:\\project\\camp\\src\\main\\resources\\static\\uploaded-images";
+// 프로젝트 이미지 업로드폴더 절대 경로 각각 지정
+//String uploadDir = "C:\\project\\camp\\src\\main\\resources\\static\\uploaded-images";
+String uploadDir = "C:\\smart505\\final\\camp\\src\\main\\resources\\static\\uploaded-images";
 
     private final MemberService memberService;
 
@@ -56,4 +58,48 @@ String uploadDir = "C:\\project\\camp\\src\\main\\resources\\static\\uploaded-im
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Image upload failed");
         }
     }
+
+    @PostMapping("/upload")
+    public ResponseEntity<ImageUploadResponse> uploadImage(@RequestParam("file") MultipartFile imageFile) {
+        try {
+            if (imageFile.isEmpty()) {
+                return ResponseEntity.badRequest().body(new ImageUploadResponse("Image file is required", null));
+            }
+
+            // 파일 이름 생성
+            String fileName = UUID.randomUUID().toString() + "-" + imageFile.getOriginalFilename();
+            Path filePath = Paths.get(uploadDir, fileName);
+
+            // 파일 업로드
+            File dest = filePath.toFile();
+            imageFile.transferTo(dest);
+
+            // 업로드된 이미지 URL 반환
+            String imageUrl = "/uploaded-images/" + fileName;
+
+            return ResponseEntity.ok(new ImageUploadResponse(null, imageUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ImageUploadResponse("Image upload failed", null));
+        }
+    }
+
+    public static class ImageUploadResponse {
+        private String error;
+        private String imageUrl;
+
+        public ImageUploadResponse(String error, String imageUrl) {
+            this.error = error;
+            this.imageUrl = imageUrl;
+        }
+
+        public String getError() {
+            return error;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "./axios";
 import './LoginCSS.css';
+// import LoginForm from './LoginForm';
 function Header(props) {
     const [isVerified, setIsVerified] = useState(false);
     const [isOpened, setIsOpend] = useState(false);
@@ -19,6 +20,8 @@ function Header(props) {
     const [isEmailAvailable, setIsEmailAvailable] = useState(true);
     const [isCheckingEmail, setIsCheckingEmail] = useState(false);
     const [isCkeckNum, setIsCheckNum] = useState(false);
+    const [error, setError] = useState(false);
+    const [exception, setException] = useState('');
     const emailToSend = email;
     const passwordToSend = password;
     const nickNameToSend = nickName;
@@ -152,39 +155,47 @@ function Header(props) {
         }
     };
 
+    const linkStyle = {
+        display: 'inline-block',
+        padding: '8px 16px',
+        borderRadius: '4px', // 네모 모양을 위한 속성
+        margin: '0 5px',
+    };
+
     return (
         <header>
             <div className={'shadow-sm container-fluid mb-3 border-bottom bg-light'}>
                 <div className={'d-flex justify-content-end me-5'}>
-                    <Link className={'me-3 text-decoration-none text-dark'} to={'/'}>
-                        Home
-                    </Link>
-                    <Link className={'me-3 text-decoration-none text-dark'} to={'/announcementList'}>
-                        공지사항
-                    </Link>
-                    {user ? (
-                        <>
-                            {/*<span className={'me-3'}>{user.nickName}님</span>*/}
-                            <Link className="me-3 text-decoration-none text-dark fw-bold" to={`/myPage/${user.nickName}`}>
-                                {user.nickName}님
-                            </Link>
-                            <a className={'me-3 text-decoration-none text-dark'} onClick={handleLogout}>
-                                로그아웃
-                            </a>
-                        </>
-                    ) : (
-                        <>
-                            <a className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#joinModal'}>
-                                회원가입
-                            </a>
-                            <a className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#loginModal'}>
-                                로그인
-                            </a>
-                        </>
-                    )}
-                    <Link className={'text-decoration-none text-dark'} to={'/about'}>
-                        고객센터
-                    </Link>
+                    <nav>
+                        <Link style={linkStyle} className={'me-3 text-decoration-none text-dark'} to={'/'}>
+                            Home
+                        </Link>
+                        <Link style={linkStyle} className={'me-3 text-decoration-none text-dark'} to={'/announcementList'}>
+                            공지사항
+                        </Link>
+                        {user ? (
+                            <>
+                                <Link style={{ ...linkStyle, fontWeight: 'bold' }} className="me-3 text-decoration-none text-dark" to={`/myPage/${user.nickName}`}>
+                                    {user.nickName}님
+                                </Link>
+                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} onClick={handleLogout}>
+                                    로그아웃
+                                </a>
+                            </>
+                        ) : (
+                            <>
+                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#joinModal'}>
+                                    회원가입
+                                </a>
+                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#loginModal'}>
+                                    로그인
+                                </a>
+                            </>
+                        )}
+                        <Link style={linkStyle} className={'text-decoration-none text-dark'} to={'/about'}>
+                            고객센터
+                        </Link>
+                    </nav>
                 </div>
                 <nav className={"navbar navbar-expand-lg p-0"}>
                     <div className={"navbar-brand ms-3"} style={logo}>
@@ -393,10 +404,10 @@ function Header(props) {
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h1 className="modal-title fs-5" id="loginModalLabel">회원가입</h1>
+                            <h1 className="modal-title fs-5" id="loginModalLabel">로그인</h1>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div className="modal-body">
+                        <div className="modal-body">    
                             {/* 로그인정보 입력 */}
                             <form action="/login" method="post">
                                 <div className="border-bottom">
@@ -420,6 +431,7 @@ function Header(props) {
                                             placeholder="비밀번호를 입력하세요"
                                         />
                                     </div>
+                                    {/*<LoginForm error={error} exception={exception} />*/}
                                 </div>
 
                                 {/* 로그인 버튼 */}

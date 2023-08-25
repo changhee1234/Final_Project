@@ -27,9 +27,9 @@ public class ReservationController {
   // 예약 날짜 선택 후 예약 가능한 자리 조회
   @PostMapping("/selectDate")
   public List<Integer> countSiteList(
-      @RequestParam("startDate") String startDate,
-      @RequestParam("endDate") String endDate,
-      @RequestParam("siteInfoIdxs") List<Integer> siteInfoIdxs) throws Exception {
+          @RequestParam("startDate") String startDate,
+          @RequestParam("endDate") String endDate,
+          @RequestParam("siteInfoIdxs") List<Integer> siteInfoIdxs) throws Exception {
     List<Integer> siteCntList = new ArrayList<>();
 
     for (int siteInfoIdx : siteInfoIdxs) {
@@ -41,9 +41,9 @@ public class ReservationController {
 
   @PostMapping("/availableSiteList")
   public List<CampSiteListRespDto> siteList(
-      @RequestParam("startDate") String startDate,
-      @RequestParam("endDate") String endDate,
-      @RequestParam("siteInfoIdx") int siteInfoIdx) throws Exception {
+          @RequestParam("startDate") String startDate,
+          @RequestParam("endDate") String endDate,
+          @RequestParam("siteInfoIdx") int siteInfoIdx) throws Exception {
     List<CampSiteListRespDto> siteList = new ArrayList<>();
 
     siteList = reservationService.getSiteList(siteInfoIdx, startDate, endDate);
@@ -73,7 +73,7 @@ public class ReservationController {
 
   // 파트너 예약 리스트 조회
   @GetMapping("/reservationList/{partnerIdx}")
-  public Map<String, Object> getReservation(@PathVariable("partnerIdx") int partnerIdx) throws Exception {
+  public Map<String, Object> getPartnerReservation(@PathVariable("partnerIdx") int partnerIdx) throws Exception {
 
     Map<String, Object> result = new HashMap<>();
 
@@ -81,5 +81,22 @@ public class ReservationController {
     result.put("result", reservationList);
 
     return result;
+  }
+
+  // 사용자 예약 리스트 조회
+  @GetMapping("/userReservationList/{memberIdx}")
+  public Map<String, Object> getUserReservation(@PathVariable("memberIdx") int memberIdx) throws Exception {
+    Map<String, Object> result = new HashMap<>();
+
+    List<ReservationRespDto> reservationList = reservationService.getReservationFromMemberIdx(memberIdx);
+    result.put("result", reservationList);
+
+    return result;
+  }
+
+
+  @PutMapping("/cancel/{impUid}")
+  public void cancelReservation(@PathVariable("impUid") String impUid) throws Exception{
+    reservationService.cancelReservation(impUid);
   }
 }

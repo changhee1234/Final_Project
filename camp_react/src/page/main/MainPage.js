@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import './mainPage.css';
 import {hangjungdong} from "../layout/Hangjungdong";
 import TradeListMain from "../trade/TradeListMain";
+import CampListMain from "../../componunt/jeongGyuHo/CampListMain";
 // import {selectBox} from "../layout/SelectBox"; // 전국 지역 select 박스(구/군까지 출력)
 
 function MainPage(props) {
@@ -134,107 +135,8 @@ function MainPage(props) {
 
             {/*검색된 캠핑장 Card 리스트(map 구현 필요)*/}
             <div className={'row my-2 mx-4 mt-0'}>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
-                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-                </div>
-              </div>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
-                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-
-                </div>
-              </div>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
-                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-
-                </div>
-              </div>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
-                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-                </div>
-              </div>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
-                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-
-                </div>
-              </div>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
-                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-
-                </div>
-              </div>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
-                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-
-                </div>
-              </div>
-              <div className="col-3 cardUi card my-2 mx-2">
-                <img className="card-img" src="/assets/camp2.jpg" alt="img"></img>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">수하리 캠핑 파크</h5>
-                  <p className="card-text">강원 홍천군 서석면 행치령로 708</p>
-                </div>
-                <div className="card-body text-end">
-                  <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
-                </div>
-              </div>
+              <CampListMain/>
             </div>
-          </div>
-
-          {/* ajax 페이징*/}
-          <div className={'my-3'}>
-            <ul className={'pagination justify-content-center'} id={'paginationAjax'}>
-              <li className={'page-item disabled'}>
-                <a href="#!" className={'page-link'}>&laquo;</a>
-              </li>
-              <li className={'page-item disabled'}>
-                <a href="#!" className={'page-link'}>1</a>
-              </li>
-              <li className={'page-item disabled'}>
-                <a href="#!" className={'page-link'}>&raquo;</a>
-              </li>
-            </ul>
           </div>
 
           {/*장터 리스트(이미지 업로드 외 구현 완료)*/}

@@ -1,11 +1,13 @@
 import React from 'react';
+import CampRegisterCombined from "../../componunt/jeongGyuHo/campRegisterCombined";
 
 function ManagerCampRegister(props) {
 
+    // console.log(props.userInfo);
     return (
-        <div>
-
-        </div>
+        <>
+            <CampRegisterCombined user={props.user}/>
+        </>
     )
 }
 

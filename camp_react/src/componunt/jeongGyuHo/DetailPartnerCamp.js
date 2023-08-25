@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import {logDOM} from "@testing-library/react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import campIntro from "../../components/reserve/CampIntro";
 
-function PartnerCampDetail() {
+function PartnerCampDetail(props) {
     const navigate = useNavigate();
     // camp_main_info 입력관련 state 관리
     const [campSiteInfo, setCampSiteInfo] = useState([]);
@@ -17,7 +15,6 @@ function PartnerCampDetail() {
         campIdx: campIdx,
         campName: '',
         campIntro: '',
-        // campDt: '',
         kidszoneYn: 'N',
         campHpLink: '',
         campPh: '',
@@ -54,7 +51,6 @@ function PartnerCampDetail() {
     const intCampIdx = parseInt(campIdx);
 
     const [selectedArea, setSelectedArea] = useState([
-        // 초기 선택된 구역이 없을 때의 기본 값
         {
             idx: 0,
             campMainInfo: {idx: campIdx,},
@@ -71,6 +67,7 @@ function PartnerCampDetail() {
             areaSiteCnt: 0,
         },
     ]);
+    const location = useLocation();
     const [editingArea, setEditingArea] = useState(false);
 
     useEffect(() => {
@@ -84,7 +81,6 @@ function PartnerCampDetail() {
                     campIdx: res.data.campIdx,
                     campName: res.data.campName,
                     campIntro: res.data.campIntro,
-                    // campDt: res.data.campDt,
                     kidszoneYn: res.data.kidszoneYn,
                     campHpLink: res.data.campHpLink,
                     campPh: res.data.campPh,
@@ -124,7 +120,7 @@ function PartnerCampDetail() {
             .then((res) => {
                 console.log(res.data);
                 alert("삭제되었습니다");
-                navigate('/');
+                navigate(`/myPage/${props.user.nickName}`);
             })
             .catch((err) => {
                 console.error(err);
@@ -144,7 +140,8 @@ function PartnerCampDetail() {
             .then((res) => {
                 console.log(res.data);
                 alert("삭제되었습니다.");
-                navigate(`/detailPartnerCamp/${campIdx}`);
+                navigate(`/myPage/${props.user.nickName}`);
+
             })
             .catch((err) => {
                 console.error(err);
@@ -163,34 +160,36 @@ function PartnerCampDetail() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // partnerIdx를 updatedCampInfo에 포함시킵니다.
         const updatedDataWithPartnerIdx = {
             ...updatedCampInfo,
             campIntro: desc,
             partner: {
                 idx: partnerIdx
-            } // partnerIdx를 여기에 포함시킵니다.
+            }
         };
+
+
 
         axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx)
             .then(res => {
                 console.log("캠프 상세 정보가 성공적으로 업데이트되었습니다:", res.data);
-                setPartnerIdx(res.data.partnerIdx);
-                setUpdatedCampInfo({
-                    campIdx: res.data.campIdx,
-                    campName: res.data.campName,
-                    campIntro: res.data.campIntro,
-                    // campDt: res.data.campDt,
-                    kidszoneYn: res.data.kidszoneYn,
-                    campHpLink: res.data.campHpLink,
-                    campPh: res.data.campPh,
-                    campAddress: res.data.campAddress,
-                    partner: {
-                        idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
-                    }
-                });
-                setCampDetails(updatedDataWithPartnerIdx); // 업데이트된 데이터로 campDetails 업데이트
+                // setPartnerIdx(res.data.partnerIdx);
+                // setUpdatedCampInfo({
+                //     campIdx: res.data.campIdx,
+                //     campName: res.data.campName,
+                //     campIntro: res.data.campIntro,
+                //     // campDt: res.data.campDt,
+                //     kidszoneYn: res.data.kidszoneYn,
+                //     campHpLink: res.data.campHpLink,
+                //     campPh: res.data.campPh,
+                //     campAddress: res.data.campAddress,
+                //     partner: {
+                //         idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
+                //     }
+                // });
+                // setCampDetails(updatedDataWithPartnerIdx); // 업데이트된 데이터로 campDetails 업데이트
+                // location.reload();
+                alert("수정되었습니다.")
             })
             .catch(err => {
                 console.log("캠프 상세 정보 업데이트 중 오류 발생:", err);
@@ -229,28 +228,23 @@ function PartnerCampDetail() {
                 console.log(res.data);
                 alert('수정되었습니다.');
 
-                navigate(`/detailPartnerCamp/?${campIdx}`);
+                location.reload();
 
             })
             .catch((err) => {
                 console.error(err);
             })
-
-
         setSelectedArea([newArea]); // 수정된 구역 정보로 setSelectedArea 업데이트
         setEditingArea(false);
-
-
     }
 
-
     const handleCancel = () => {
-        navigate("/selectPartnerCamp");
+        navigate(`/myPage/${props.user.nickName}`);
     };
 
     return (
         <div className={'col-sm-8 mx-auto text-start'}>
-            <h2 className={'my-3'}>캠핑장 정보 수정하기</h2>
+            <h3 className={'my-3'}>캠핑장 정보 수정하기</h3>
             {campDetails ? (
                 <form onSubmit={handleSubmit}>
                     <div className={'row my-3'}>
@@ -329,10 +323,6 @@ function PartnerCampDetail() {
                                 style={{ height: "300px" }}
 
                             />
-                    {/*<textarea className={'form-control'} rows={8}*/}
-                    {/*          value={updatedCampInfo.campIntro || ''}*/}
-                    {/*          name="campIntro"*/}
-                    {/*          onChange={handleInputChange}></textarea>*/}
                         </div>
                     </div>
 
@@ -353,7 +343,7 @@ function PartnerCampDetail() {
             )}
 
             <div className={'row my-4'}>
-                <h2 className={'my-3'}>구역 수정하기</h2>
+                <h3 className={'my-3'}>구역 수정하기</h3>
                 <div className={'d-flex justify-content-between'}>
                     <div className={'col-sm-9'}>
                         {editingArea ? (
@@ -603,7 +593,7 @@ function PartnerCampDetail() {
                                 <div className={'d-grid'}>
                                     <button
                                         type={'submit'}
-                                        className={'btn btn-primary'}
+                                        className={'btn btn-success'}
                                         onClick={handleAreaEditSubmit}
                                     >
                                         구역 수정 완료

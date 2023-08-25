@@ -3,8 +3,7 @@ import CampDetailPage from "./page/campDetailPage.js";
 import AboutPage from "./page/aboutPage.js";
 import AnnouncementListPage from "./page/announcementListPage.js";
 import AnnouncementDetailPage from "./page/announcementDetailPage.js";
-import CampRegisterCombined from "./componunt/jeongGyuHo/campRegisterCombined.js";
-import DetailPartnerCamp from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
+
 import CampReservationPage1 from "./page/camp/CampReservationPage1";
 import CampReservationPage2 from "./page/camp/CampReservationPage2";
 import CampReservationPage3 from "./page/camp/CampReservationPage3";
@@ -19,10 +18,7 @@ import Header from "./page/layout/Header";
 import Footer from "./page/layout/Footer";
 import UpdatePage from "./page/trade/UpdatePage";
 import TradeWritePage from "./page/trade/TradeWritePage";
-import CampListPage from "./page/campListPage";
 import CampList from "./componunt/jeongGyuHo/campList";
-import Editor from "./Editor";
-import SelectPartnerCamp from "./componunt/jeongGyuHo/SelectPartnerCamp";
 import PartnerCampDetail from "./componunt/jeongGyuHo/DetailPartnerCamp.js";
 
 function App() {
@@ -41,11 +37,11 @@ function App() {
             {/*메인페이지*/}
             <Route path={'/'} element={<MainPage/>}/>
             {/*마이페이지*/}
-            <Route path={'/myPage/:userInfo'} element={<MyPage userInfo={userInfo}/>}/>
+            <Route path={'/myPage/:userInfo'} element={<MyPage/>}/>
             {/*예외처리(에러페이지)*/}
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
-            <Route path={'/camp'} element={<CampListPage/>}/>
+            <Route path={'/camp'} element={<CampList/>}/>
             {/*캠핑장 상세보기*/}
             <Route path={'/campList/*'} element={<CampDetailPage/>}/>
             {/*중고장터 리스트*/}
@@ -56,7 +52,7 @@ function App() {
             <Route path={'/tradeWrite/*'} element={<TradeWritePage userInfo={userInfo}/>}/>
             <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage userInfo={userInfo}/>}/>
             {/*예약페이지*/}
-            <Route path={'/reservation1/*'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
+            <Route path={'/reservation1/:campIdx'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
             <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
             <Route path={'/reservation3/*'} element={<CampReservationPage3 userInfo={userInfo}/>}/>
             <Route path={'/reservation4/*'} element={<CampReservationPage4 userInfo={userInfo}/>}/>
@@ -66,9 +62,7 @@ function App() {
             <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
             {/*공지사항 상세보기 페이지*/}
             <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
-            <Route path={'/selectPartnerCamp'} element={<SelectPartnerCamp/>}/>
-            <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail/>}/>
-            <Route path={'campRegister'} element={<CampRegisterCombined/>}/>
+            <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail user={userInfo}/>}/>
           </Routes>
           <Footer/>
         </BrowserRouter>
