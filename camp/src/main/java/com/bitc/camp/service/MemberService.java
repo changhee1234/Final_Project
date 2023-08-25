@@ -9,7 +9,6 @@ public interface MemberService {
 
   void join(AddMemberReq dto);
 
-
   void updateProfileImage(String imageUrl);
 
   void deleteMemberByEmail(String email);

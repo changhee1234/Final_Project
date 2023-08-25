@@ -54,9 +54,6 @@ public class Member implements UserDetails {
     this.profileImg = profileImg;
   }
 
-
-
-
   // UserDetails 메소드 구현
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -111,4 +108,5 @@ public class Member implements UserDetails {
   }
 
   public void setProfileImg(String profileImg) { this.profileImg = profileImg; }
+
 }

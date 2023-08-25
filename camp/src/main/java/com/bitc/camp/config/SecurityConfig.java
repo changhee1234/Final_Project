@@ -3,6 +3,7 @@ package com.bitc.camp.config;
 import com.bitc.camp.service.MemberDetailService;
 import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -18,7 +20,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
+
   private final MemberDetailService memberDetailService;
+
+//  private final CustomAuthFailureHandler customAuthFailureHandler;
 
   @Bean
   public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -51,6 +56,7 @@ public class SecurityConfig {
                     .anyRequest().authenticated())
             .formLogin(login -> login
                     .loginPage("/login") // 로그인 페이지 경로
+//                    .failureHandler(customAuthFailureHandler) // 로그인 실패 핸들러
                     .defaultSuccessUrl("http://localhost:3000/", true) // 로그인 성공 시 리다이렉트 경로
                     .permitAll())
             .logout(logout -> logout

@@ -19,6 +19,11 @@ function TradeListMain(props) {
   };
   params.append("title", titleToSend);
 
+  const tradeImg = {
+    weight: "130px",
+    height: "200px"
+  }
+
   useEffect(() => {
     fetchData();
   }, [sortOption]);
@@ -65,7 +70,6 @@ function TradeListMain(props) {
         });
   }, [sortOption]); // sortOption이 변경될 때마다 실행
 
-  // 정렬 옵션 변경 핸들러
 
 // 등록일을 ~시간 전으로 표기, 24시간 후에는 날짜로 표기하는 함수
   const getTimeOrDate = (dateTimeArray) => {
@@ -86,6 +90,15 @@ function TradeListMain(props) {
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
   };
+
+  // 글자 수를 제한하고 나머지는 ".."으로 출력하는 함수
+  function limitText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "..";
+    }
+    return text;
+  }
+
   // 등록된 게시판 리스트
   return (
       <main className={'container'}>
@@ -138,17 +151,17 @@ function TradeListMain(props) {
                       <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                         <div className="product_img_div">
                           <Link to={`/trade/${item.tradeBoardIdx}`}>
-                            <img src={extractImageUrl(item.content)} alt={"img"} className="product_img" />
+                            <img src={extractImageUrl(item.content)} alt={"img"} style={tradeImg} className="product_img" />
                             {/*"/assets/default_image.png"*/}
                           </Link>
                         </div>
                         <div className={'product_mon mx-3 text-center'}>
-                          {item.title}
+                          {limitText(stripHtmlTags(item.title), 14)}
                         </div>
                         <div className="product_mon text-center">
                           <i className="bi bi-coin"></i>희망가: {item.tradePrice.toLocaleString()}원
                         </div>
-                        <h5 className="product_content">{stripHtmlTags(item.content)}</h5>
+                        <h5 className="product_content">{limitText(stripHtmlTags(item.content), 18)}</h5>
                         <a className="product_des text-decoration-none">{item.description}</a>
                         <div className="row my-2">
                           <div className="row col-5 text-start">

@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface PartnerRepository extends JpaRepository<Partner, Integer> {
     Partner findByMember(Optional<Member> member);
-    // 이미 save 메서드가 JpaRepository에 정의되어 있음
+
 }

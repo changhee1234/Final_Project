@@ -7,18 +7,22 @@ package com.bitc.camp.service;
 import com.bitc.camp.dto.BoardRequestDto;
 import com.bitc.camp.dto.BoardResponseDto;
 import com.bitc.camp.entity.Board;
+import com.bitc.camp.entity.Member;
 import com.bitc.camp.repository.BoardRepository;
+import com.bitc.camp.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
-  private final BoardRepository boardRepository;
+  private final MemberRepository memberRepository;
 
+  private final BoardRepository boardRepository;
 
   //  게시글 목록 조회
   @Override
@@ -50,6 +54,7 @@ public class BoardServiceImpl implements BoardService {
     Board camp = boardRepository.findById(tradeBoardIdx).orElse(null);
 
     BoardResponseDto boardResponseDto = BoardResponseDto.builder()
+
             .tradeBoardIdx(camp.getTradeBoardIdx())
             .title(camp.getTitle())
             .content(camp.getContent())
@@ -120,5 +125,16 @@ public class BoardServiceImpl implements BoardService {
     } else {
       throw new Exception("Board not found with ID: " + tradeBoardIdx);
     }
+  }
+
+  @Override
+  public List<BoardResponseDto> getMyPost(int memberIdx) throws Exception {
+    List<Board> boards = boardRepository.findByMemberIdxOrderByTradeBoardIdxDesc(memberIdx);
+    List<BoardResponseDto> responseDtos = new ArrayList<>();
+    for(Board board: boards){
+      BoardResponseDto dto = new BoardResponseDto(board);
+      responseDtos.add(dto);
+    }
+    return responseDtos;
   }
 }
