@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "./axios";
 import './LoginCSS.css';
-import LoginForm from './LoginForm';
+// import LoginForm from './LoginForm';
 function Header(props) {
     const [isVerified, setIsVerified] = useState(false);
     const [isOpened, setIsOpend] = useState(false);
@@ -434,7 +434,7 @@ function Header(props) {
                                             placeholder="비밀번호를 입력하세요"
                                         />
                                     </div>
-                                    <LoginForm error={error} exception={exception} />
+                                    {/*<LoginForm error={error} exception={exception} />*/}
                                 </div>
 
                                 {/* 로그인 버튼 */}

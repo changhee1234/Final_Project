@@ -23,7 +23,7 @@ public class SecurityConfig {
 
   private final MemberDetailService memberDetailService;
 
-  private final CustomAuthFailureHandler customAuthFailureHandler;
+//  private final CustomAuthFailureHandler customAuthFailureHandler;
 
   @Bean
   public BCryptPasswordEncoder bCryptPasswordEncoder() {
