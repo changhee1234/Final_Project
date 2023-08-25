@@ -171,7 +171,7 @@ function CampReservationPage3(props) {
             <div>
               <div className={"form-check m-0"}>
                 <input type={"checkbox"} className={"form-check-input"} id={"check"} onChange={handleCheck}/>
-                <label htmlFor={"check"} className={"form-check-label"}>정보 동일</label>
+                <label htmlFor={"check"} className={"form-check-label text-muted"}>예약자 정보 동일</label>
               </div>
               <div className={"mb-3"}>
                 <label htmlFor="reservationName" className={"form-label"}>예약자 이름</label>

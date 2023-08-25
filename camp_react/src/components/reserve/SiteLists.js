@@ -25,7 +25,7 @@ function SiteLists(props) {
                             props.selectedSite(site.campSiteName);
                             props.selectedSiteIdx(site.idx);
                           }}>
-              <h5 className="card-title py-4">{site.campSiteName}</h5>
+              <p className="py-3 mb-0" style={{fontSize: `0.9rem`}}>{site.campSiteName}</p>
             </ToggleButton>
         ))}
           </ToggleButtonGroup>
