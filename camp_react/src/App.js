@@ -42,16 +42,15 @@ function App() {
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
             <Route path={'/camp'} element={<CampList/>}/>
-
             {/*캠핑장 상세보기*/}
             <Route path={'/campList/*'} element={<CampDetailPage/>}/>
             {/*중고장터 리스트*/}
-            <Route path={'/trade'} element={<TradeListPage/>}/>
+            <Route path={'/trade'} element={<TradeListPage userInfo={userInfo}/>}/>
             {/*중고장터 상세보기*/}
-            <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage/>}/>
+            <Route path={'/trade/:tradeBoardIdx'} element={<TradeDetailPage userInfo={userInfo}/> }/>
             {/*중고장터 글 등록*/}
             <Route path={'/tradeWrite/*'} element={<TradeWritePage userInfo={userInfo}/>}/>
-            <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage/>}/>
+            <Route path={'/board/edit/:tradeBoardIdx'} element={<UpdatePage userInfo={userInfo}/>}/>
             {/*예약페이지*/}
             <Route path={'/reservation1/:campIdx'} element={<CampReservationPage1 userInfo={userInfo}/>}/>
             <Route path={'/reservation2/reserveStep/:siteIdx'} element={<CampReservationPage2 userInfo={userInfo}/>}/>
@@ -63,7 +62,6 @@ function App() {
             <Route path={'/announcementList'} element={<AnnouncementListPage/>}/>
             {/*공지사항 상세보기 페이지*/}
             <Route path={'/announcementDetail/*'} element={<AnnouncementDetailPage/>}/>
-
             <Route path={'/detailPartnerCamp/:campIdx'} element={<PartnerCampDetail user={userInfo}/>}/>
           </Routes>
           <Footer/>

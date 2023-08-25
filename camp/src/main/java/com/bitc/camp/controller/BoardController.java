@@ -6,6 +6,7 @@ package com.bitc.camp.controller;
 import com.bitc.camp.dto.BoardRequestDto;
 import com.bitc.camp.dto.BoardResponseDto;
 import com.bitc.camp.entity.Board;
+import com.bitc.camp.entity.Member;
 import com.bitc.camp.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -153,5 +154,14 @@ public class  BoardController {
   public String deleteBoard(@PathVariable int tradeBoardIdx) throws Exception {
     boardService.delete(tradeBoardIdx);
     return "redirect:/board/list"; // 삭제 후 글 목록 페이지로 리다이렉트
+  }
+
+  // 장터 마이페이지 - 로그인한 사용자의 게시물 가져오기
+  @GetMapping("/myPosts/{memberIdx}")
+  public Object getMyPosts(@PathVariable("memberIdx") int memberIdx) throws Exception {
+    Map<String, Object> result = new HashMap<>();
+    List<BoardResponseDto> myPostList = boardService.getMyPost(memberIdx);
+    result.put("result", myPostList);
+    return result;
   }
 }
