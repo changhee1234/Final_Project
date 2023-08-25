@@ -32,7 +32,7 @@ function Header(props) {
     });
 
     const logo = {
-        height: "90px",
+        height: "70px",
         width: "150px"
     }
 
@@ -186,20 +186,17 @@ function Header(props) {
                         고객센터
                     </Link>
                 </div>
-                <nav className={"navbar navbar-expand-lg"}>
+                <nav className={"navbar navbar-expand-lg p-0"}>
                     <div className={"navbar-brand ms-3"} style={logo}>
                         <Link to={'/'}>
-                            <img src={'assets/camp_logo.png'} className={'img-fluid'}/>
+                            <img src={'assets/campLogo.png'} className={'img-fluid'}/>
                         </Link>
                     </div>
                     <div className={"collapse navbar-collapse"} id={"navbarNav"}>
 
                         <ul className={"navbar-nav"}>
-                            <li className={"nav-item"}>
-                                <Link className={"nav-link fs-4 me-4 ms-3"} to={'/'}>홈</Link>
-                            </li>
                             <li className="nav-item">
-                                <Link className="nav-link fs-4 me-4" to={'/camp'}>캠핑장</Link>
+                                <Link className="nav-link mx-3 fs-4 me-6" to={'/camp'}>캠핑장</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link fs-4 me-4" to={'/trade'}>장터</Link>
@@ -210,11 +207,11 @@ function Header(props) {
                         </ul>
 
                     </div>
-                    <form className="d-flex justify-content-end me-3" role="search">
-                        <input className="form-control me-2" type="search" placeholder="검색어를 입력해주세요."
-                               aria-label="Search"/>
-                        <button className="btn btn-light btn-outline-dark" type="submit">Search</button>
-                    </form>
+                    {/*<form className="d-flex justify-content-end me-3" role="search">*/}
+                    {/*    <input className="form-control me-2" type="search" placeholder="검색어를 입력해주세요."*/}
+                    {/*           aria-label="Search"/>*/}
+                    {/*    <button className="btn btn-light btn-outline-dark" type="submit">Search</button>*/}
+                    {/*</form>*/}
                 </nav>
             </div>
             {/*    회원가입 모달창*/}

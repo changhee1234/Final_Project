@@ -1,6 +1,12 @@
 /*메인 페이지 CSS 파일*/
 /*이 파일 내용 변경 시, 해당되는 모든 파일의 css 디자인이 변경되니 주의!*/
 
+.carousel-inner {
+    width: auto;
+    height: auto;
+}
+
+
 /*광고배너 UI(크기)*/
 .ad {
     width: 700px;

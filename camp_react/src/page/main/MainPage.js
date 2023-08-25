@@ -18,31 +18,33 @@ function MainPage(props) {
   const [setVal3] = useState("");
   const {sido, sigugun, dong} = hangjungdong;
 
+  const Carousel = {
+    height: "615px",
+  }
+
   return (
       <main>
-        <div id="mycarousel" className="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div id="myCarousel" className="carousel slide carousel-fade" data-bs-ride="carousel">
           <div className="carousel-indicators">
-            <button type="button" data-bs-target="#mycarousel" data-bs-slide-to="0" className="active"></button>
-            <button type="button" data-bs-target="#mycarousel" data-bs-slide-to="1"></button>
-            {/*<button type="button" data-bs-target="#mycarousel" data-bs-slide-to="2"></button>*/}
-            {/*<button type="button" data-bs-target="#mycarousel" data-bs-slide-to="3"></button>*/}
-            {/*<button type="button" data-bs-target="#mycarousel" data-bs-slide-to="4"></button>*/}
-            {/*<button type="button" data-bs-target="#mycarousel" data-bs-slide-to="5"></button>*/}
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" className="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                    aria-current="true" aria-label="Slide 2"></button>
           </div>
 
           <div className="carousel-inner">
             <div className="carousel-item active" data-bs-interval="4000">
-              <img src="/assets/camp1.jpg" alt="img" className="d-block w-100"></img>
-              <div className="carousel-caption d-none d-md-block">
+              <img src="/assets/camp1.jpg" alt="img" className="d-block w-100" style={Carousel}></img>
+              <div className="carousel-caption d-none d-md-block my-5">
                 <h2 className={'highlight1'}>수하리 캠핑 파크</h2>
                 <h4 className={'highlight2'}>강원 홍천군 서석면 행치령로 708</h4>
                 <button type={'button'} className={'btn w-btn w-btn-indigo my-4'}>바로가기</button>
               </div>
             </div>
             <div className="carousel-item" data-bs-interval="4000">
-              <img src="/assets/camp2.jpg" alt="img" className="d-block w-100"></img>
-              <div className="carousel-caption d-none d-md-block">
-                <h2 className={'highlight1 '}>태양 힐링숲 글램핑&오토캠핑장</h2>
+              <img src="/assets/camp2.jpg" alt="img" className="d-block w-100" style={Carousel}></img>
+              <div className="carousel-caption d-none d-md-block my-5">
+                <h2 className={'highlight1'}>태양 힐링숲 글램핑&오토캠핑장</h2>
                 <h4 className={'highlight2'}>경기 파주시 적성면 설마천로 376</h4>
                 <button type={'button'} className={'btn w-btn w-btn-indigo my-4'}>바로가기</button>
               </div>
@@ -51,9 +53,9 @@ function MainPage(props) {
         </div>
 
         {/*캐러셀 이미지 이동*/}
-        <button className="carousel-control-prev" type="button" data-bs-target="#!mycarousel" data-bs-slide="prev">
-          <img src="/assets/camp1.jpg" alt="img" className="d-block w-100"></img></button>
-        <button className="carousel-control-next" type="button" data-bs-target="#!mycarousel" data-bs-slide="next">
+        <button className="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <img src="/assets/camp1.jpg" alt="img" className="d-block w-100" ></img></button>
+        <button className="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
           <img src="/assets/camp2.jpg" alt="img" className="d-block w-100"></img></button>
 
         {/*공지 및 광고배너*/}
@@ -135,10 +137,10 @@ function MainPage(props) {
               <div className="col-3 cardUi card my-2 mx-2">
                 <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
                 <div className="card-body">
-                  <h5 class="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
-                  <p class="card-text">경기 파주시 적성면 설마천로 376</p>
+                  <h5 className="card-title fw-bold">태양 힐링숲 글램핑&오토캠핑장</h5>
+                  <p className="card-text">경기 파주시 적성면 설마천로 376</p>
                 </div>
-                <div class="card-body text-end">
+                <div className="card-body text-end">
                   <a href="#!" className="card-link text-decoration-none fw-bold text-dark">예약 바로가기</a>
                 </div>
               </div>
