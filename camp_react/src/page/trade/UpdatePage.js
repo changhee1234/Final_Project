@@ -240,9 +240,6 @@ function UpdatePage({userInfo}) {
                   <div className="mb-3">
                     {/* 이미지 업로드 인풋 추가 */}
                     {/* 이미지 핸들러 추가 */}
-                    <button type="button" className="w-btn w-btn-gray" onClick={imageHandler}>
-                      이미지 업로드
-                    </button>
                     <ReactQuill
                         ref={quillRef} // Quill 에디터에 ref 추가
                         value={content} // content 상태 사용
@@ -253,6 +250,9 @@ function UpdatePage({userInfo}) {
                     />
                   </div>
                 </div>
+                <button type="button" className="w-btn w-btn-gray my-5" onClick={imageHandler}>
+                  이미지 업로드
+                </button>
                 <div className="row input-group">
                   {/*<div className="my-3 col-sm d-flex justify-content-start gap-3">*/}
                   {/*  <div className="input-group">*/}

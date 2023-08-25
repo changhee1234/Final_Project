@@ -89,7 +89,7 @@ function MyTradePosts({user}) {
                   <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                     <div className="product_img_div">
                       <Link to={`/board/trade/${item.tradeBoardIdx}`}>
-                        <img src={extractImageUrl(item.content)} alt={"img"} className="product_img"/>
+                        <img src={extractImageUrl(item.content)} alt={"img"} style={tradeImg} className="product_img"/>
                         {/*"/assets/default_image.png"*/}
                       </Link>
                     </div>

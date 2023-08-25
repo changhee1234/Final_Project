@@ -176,11 +176,6 @@ function TradeWritePage({userInfo}) {
                   </div>
                 </div>
                 <div className="mb-3">
-                  {/* 이미지 업로드 인풋 추가 */}
-                  {/* 이미지 핸들러 추가 */}
-                  <button type="button" className="w-btn w-btn-gray" onClick={imageHandler}>
-                    이미지 업로드
-                  </button>
                   <ReactQuill
                       ref={quillRef} // Quill 에디터에 ref 추가
                       value={content}
@@ -190,12 +185,17 @@ function TradeWritePage({userInfo}) {
                       style={{ height: '500px' }}
                   />
                 </div>
+                <button type="button" className="w-btn w-btn-gray my-5" onClick={imageHandler}>
+                  이미지 업로드
+                </button>
                 <div className="row input-group my-5">
                   <div className="row input-group my-5">
                     <div className="my-3 col-sm d-flex justify-content-end gap-3 mx-0 px-0">
                       <button type="submit" className="w-btn w-btn-indigo">등록</button>
                       <button type="reset" className="w-btn w-btn-gray" onClick={handleCancel}>취소</button>
                     </div>
+                    {/* 이미지 업로드 인풋 추가 */}
+                    {/* 이미지 핸들러 추가 */}
                   </div>
                 </div>
               </div>
