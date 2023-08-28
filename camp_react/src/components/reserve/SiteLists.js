@@ -28,8 +28,10 @@ function SiteLists(props) {
     const availSiteMap = mapObjectsByKey(props.availSiteList, 'idx');
 
     return (
-      <ToggleButtonGroup type="radio" name="options" className="row row-cols-4 text-center">
-        {Object.values(siteListMap).map((site) => (
+      <div className="card">
+        <div className="card-body">
+        <ToggleButtonGroup type="radio" name="options" className="row row-cols-4 text-center px-2">
+          {Object.values(siteListMap).map((site) => (
             <ToggleButton key={site.idx} id={site.idx} value={site.campSiteName}
                           disabled={!availSiteMap[site.idx]}
                           style={{borderRadius: 3 + "px", margin: 0.2 + "rem"}}
@@ -40,8 +42,10 @@ function SiteLists(props) {
                           }}>
               <p className="py-3 mb-0" style={{fontSize: `0.9rem`}}>{site.campSiteName}</p>
             </ToggleButton>
-        ))}
-          </ToggleButtonGroup>
+          ))}
+        </ToggleButtonGroup>
+        </div>
+      </div>
     );
   };
 
