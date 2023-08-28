@@ -59,7 +59,7 @@ function TradeListMain(props) {
   useEffect(() => {
     axios.get(`http://localhost:8080/board/list?sortOption=${sortOption}`)
         .then(res => {
-          console.log(res.data); // 확인용 로그
+          // console.log(res.data); // 확인용 로그
           const tradeListPageData = res.data.result
           setTradeListPage(tradeListPageData);
           // setLoading(false); // 데이터 로딩 완료
@@ -145,15 +145,13 @@ function TradeListMain(props) {
             {/*게시판 리스트*/}
             <div className={'row'}>
               {tradeListPage.map(item => (
-                  <div key={item.index} className="my-2 mb-0 col-3">
+                  <div key={item.tradeBoardIdx} className="my-2 mb-0 col-3">
                     <Link to={`/trade/${item.tradeBoardIdx}`} className="text-decoration-none">
                       {/*삽니다/팝니다 선택에 따라 다른 css 디자인 적용하여 구분*/}
                       <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                         <div className="product_img_div">
-                          <Link to={`/trade/${item.tradeBoardIdx}`}>
                             <img src={extractImageUrl(item.content)} alt={"img"} style={tradeImg} className="product_img" />
                             {/*"/assets/default_image.png"*/}
-                          </Link>
                         </div>
                         <div className={'product_mon mx-3 text-center'}>
                           {limitText(stripHtmlTags(item.title), 14)}
@@ -162,7 +160,7 @@ function TradeListMain(props) {
                           <i className="bi bi-coin"></i>희망가: {item.tradePrice.toLocaleString()}원
                         </div>
                         <h5 className="product_content">{limitText(stripHtmlTags(item.content), 18)}</h5>
-                        <a className="product_des text-decoration-none">{item.description}</a>
+                        <span className="product_des text-decoration-none">{item.description}</span>
                         <div className="row my-2">
                           <div className="row col-5 text-start">
                             <ul className="list-unstyled mx-2">

@@ -41,7 +41,7 @@ function App() {
             {/*예외처리(에러페이지)*/}
             <Route path={'*'} element={<ErrorPage/>}/>
             {/*캠핑장 리스트*/}
-            <Route path={'/camp'} element={<CampList/>}/>
+            <Route path={'/camp'} element={<CampList userInfo={userInfo}/>}/>
             {/*캠핑장 상세보기*/}
             <Route path={'/campList/*'} element={<CampDetailPage/>}/>
             {/*중고장터 리스트*/}

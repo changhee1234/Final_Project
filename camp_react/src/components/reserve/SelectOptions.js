@@ -174,7 +174,7 @@ function SelectOptions(props) {
 
       <div className={"mx-auto"}>
         <DateRange
-          editableDateInputs={false}
+          editableDateInputs={true}
           onChange={handleOnChange}
           moveRangeOnFirstSelection={false}
           minDate={addDays(new Date(), 0)}
@@ -284,6 +284,9 @@ function SelectOptions(props) {
                 e.preventDefault();
               } else if (distance === "less than a minute") {
                 alert(`1박 이상 선택하세요.`);
+                e.preventDefault();
+              } else if (selectedSite === "-") {
+                alert(`사이트(객실)을 다시 선택해주십시오`);
                 e.preventDefault();
               }
             }}

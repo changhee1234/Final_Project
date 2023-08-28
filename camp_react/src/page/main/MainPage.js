@@ -67,12 +67,10 @@ function MainPage(props) {
                 <li><i className="bi bi-megaphone megaphone"></i><span className={'text1'}> 공지사항</span></li>
               </ul>
               <ul>
-                <a href="#!" className={'text-decoration-none text-black'}>
-                  <li><i className="bi bi-caret-right"></i><span className={'text2'}> 첫번째 공지사항입니다.</span></li>
-                </a>
-                <a href="#!" className={'text-decoration-none text-black'}>
-                  <li><i className="bi bi-caret-right"></i><span className={'text2'}> 두번째 공지사항입니다.</span></li>
-                </a>
+                <li><a href="/#" className={'text-decoration-none text-black'}>
+                  <i className="bi bi-caret-right"></i><span className={'text2'}> 첫번째 공지사항입니다.</span></a></li>
+                <li><a href="/#" className={'text-decoration-none text-black'}>
+                  <i className="bi bi-caret-right"></i><span className={'text2'}> 두번째 공지사항입니다.</span></a></li>
               </ul>
             </div>
             <div className={'col-8 text-center'}>
@@ -83,11 +81,9 @@ function MainPage(props) {
           {/*캠핑장 리스트*/}
           <div className={'row my-4'}>
             <ul className={'row-col-2 list-unstyled text-start mb-0'}>
-                <a href="#!" className={'text-decoration-none fw-bold text-dark'}>
                 <li className={'mx-3'}><i className="col bi bi-rocket-takeoff rocket-takeoff"></i><span
-                    className={'text1'}> 캠핑장</span>
+                    className={'text1'} style={{cursor:"default"}}> 캠핑장</span>
                 </li>
-              </a>
 
               {/* 지역 설렉트 선택 버튼*/}
               <div className={'row my-3 mx-4 mt-1 mb-0'}>
@@ -126,7 +122,7 @@ function MainPage(props) {
                   </select>
                 </div>
                 <ul className={'col list-unstyled text-end mb-0 more'}>
-                  <a href="#!!" className={'text-decoration-none fw-bold text-dark'}>
+                  <a href="/" className={'text-decoration-none fw-bold text-dark'}>
                     <li><i className="bi bi-pencil-square"></i><span className={'text2'}> 캠핑장 등록 및 광고문의</span></li>
                   </a>
                 </ul>
@@ -142,12 +138,10 @@ function MainPage(props) {
           {/*장터 리스트(이미지 업로드 외 구현 완료)*/}
           <div className={'row my-4'}>
             <ul className={'col list-unstyled text-start mb-2'}>
-              <a href="#!" className={'text-decoration-none fw-bold text-dark'}>
-                <li><i className="bi bi-cart4"></i><span className={'text1'}> 장터</span></li>
-              </a>
+                <li><i className="bi bi-cart4"></i><span className={'text1'} style={{cursor:"default"}}> 장터</span></li>
             </ul>
             <ul className={'col list-unstyled text-end mb-0 more'}>
-              <a href="trade" className={'text-decoration-none fw-bold text-dark'}>
+              <a href="/trade" className={'text-decoration-none fw-bold text-dark'}>
                 <li><i className="bi bi-plus"></i><span className={'text2'}>더보기</span></li>
               </a>
             </ul>

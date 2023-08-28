@@ -178,18 +178,18 @@ function Header(props) {
                                 <Link style={{ ...linkStyle, fontWeight: 'bold' }} className="me-3 text-decoration-none text-dark" to={`/myPage/${user.nickName}`}>
                                     {user.nickName}님
                                 </Link>
-                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} onClick={handleLogout}>
+                                <button style={linkStyle} className={'btn btn-link me-3 text-decoration-none text-dark'} onClick={handleLogout}>
                                     로그아웃
-                                </a>
+                                </button>
                             </>
                         ) : (
                             <>
-                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#joinModal'}>
+                                <button style={linkStyle} className={'btn btn-link me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#joinModal'}>
                                     회원가입
-                                </a>
-                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#loginModal'}>
+                                </button>
+                                <button style={linkStyle} className={'btn btn-link me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#loginModal'}>
                                     로그인
-                                </a>
+                                </button>
                             </>
                         )}
                         <Link style={linkStyle} className={'text-decoration-none text-dark'} to={'/about'}>

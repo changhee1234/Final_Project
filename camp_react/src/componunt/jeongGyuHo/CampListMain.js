@@ -21,7 +21,7 @@ function CampListMain(props) {
     useEffect(() => {
         axios.get('http://localhost:8080/camp/list')
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setCampList(res.data);
             })
             .catch((err) => {
