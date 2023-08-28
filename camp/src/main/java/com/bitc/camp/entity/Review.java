@@ -1,39 +1,45 @@
 package com.bitc.camp.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.UpdateTimestamp;
 
-@Setter
-@Getter
-@Table(name = "review_board")
-@NoArgsConstructor
+import java.time.LocalDateTime;
+
 @Entity
+@Table(name = "trade_review_board")
+@Getter
+@Setter
 @ToString
-@AllArgsConstructor
 @DynamicInsert
+@NoArgsConstructor
 public class Review {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int reCampMainIdx; // 댓글 ID(PK)
+  private int idx;
 
   @Column(length = 1000, nullable = false)
-  private String reContent; // 댓글 내용
+  private String reContent;
 
-//  @Column(nullable = false)
-//  private LocalDateTime createDt = LocalDateTime.now(); // 생성일
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "re_member_idx")
+  @ToString.Exclude
+  private Member member;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "tradeBoardIdx", nullable = false)
-  private Board board; // 해당 댓글이 속한 게시글
+  @ManyToOne(optional = false) // ManyToOne 관계 설정
+  @JoinColumn(name = "re_board_idx") // JoinColumn 설정
+  private Board board; // Board 엔티티와의 관계 설정
 
-  @Column(nullable = false)
-  private int reMemberIdx; // 회원번호
+  @CreationTimestamp
+  @Column(name = "create_dt", updatable = false)
+  private LocalDateTime createDt;
 
-  @Builder
-  public Review(String reContent, int reMemberIdx, Board board) {
-    this.reContent = reContent;
-    this.reMemberIdx = reMemberIdx;
-    this.board = board;
-  }
+  @UpdateTimestamp
+  @Column(name = "update_dt")
+  private LocalDateTime updateDt;
 }

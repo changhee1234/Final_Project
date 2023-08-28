@@ -22,6 +22,9 @@ function TradeDetailPage(props) {
     memberIdx: '',
   });
 
+  const [reviews, setReviews] = useState([]); // 리뷰 상태 추가
+  const [newReview, setNewReview] = useState(''); // 새 리뷰 상태 추가
+
   const navi = useNavigate();
   const goList = () => navi('/trade');
 
@@ -103,23 +106,30 @@ function TradeDetailPage(props) {
     return adjustedContent;
   }
 
-  // 댓글 작성 처리
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    const content = e.target.content.value; // 댓글 내용 가져오기
-
-    // 댓글 작성 API 호출
-    axios.post(`http://localhost:8080/board/${tradeBoardIdx}/comments`, { content })
+  // 상세 정보 가져오기
+  useEffect(() => {
+    axios.get(`http://localhost:8080/board/trade/${tradeBoardIdx}`)
         .then(res => {
-          // 댓글 작성 성공 시, 댓글 목록을 업데이트하기 위해 fetchData() 호출
-          fetchData();
-          // 댓글 작성 후 입력 필드 초기화
-          e.target.content.value = '';
+          setCampDetails(res.data);
+          setUpdateBoard({
+            // 이전 코드 생략
+          });
         })
         .catch(err => {
-          console.error(`Error submitting comment: ${err}`);
+          console.log(`에러: ${err}`);
         });
-  };
+
+    // 리뷰 데이터 가져오기
+    axios.get(`http://localhost:8080/board/${tradeBoardIdx}/reviews`)
+        .then(res => {
+          setReviews(res.data);
+        })
+        .catch(err => {
+          console.log(`에러: ${err}`);
+        });
+
+  }, [tradeBoardIdx]);
+
 
   return (
       <main className="container MY">
