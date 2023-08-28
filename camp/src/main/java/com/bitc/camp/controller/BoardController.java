@@ -168,7 +168,7 @@ public class  BoardController {
 
 
   // 댓글 목록 조회
-  @GetMapping("/board/review/{tradeBoardIdx}")
+  @GetMapping("review/{tradeBoardIdx}")
   public Object getReviewListByBoardId(@PathVariable int tradeBoardIdx) throws Exception {
     Map<String, Object> result = new HashMap<>();
     List<Review> reviewList = reviewService.getReviewsByBoardId(tradeBoardIdx);
@@ -176,8 +176,7 @@ public class  BoardController {
     return result;
   }
 
-  // 댓글 등록
-  @PostMapping("/board/review/create")
+  @PostMapping("review/create")
   public ResponseEntity<Object> createReview(@RequestBody ReviewDto reviewDto) {
     try {
       ReviewDto createReview = reviewService.createReview(reviewDto);
@@ -187,8 +186,8 @@ public class  BoardController {
     }
   }
 
-  // 댓글 수정
-  @PostMapping("/board/review/update/{reviewId}")
+
+  @PostMapping("review/update/{reviewId}")
   public ResponseEntity<Object> updateReview(@PathVariable int reviewId, @RequestBody ReviewDto reviewDto) {
     try {
       ReviewDto updateReview = reviewService.updateReview(reviewId, reviewDto);
@@ -198,8 +197,7 @@ public class  BoardController {
     }
   }
 
-  // 댓글 삭제
-  @DeleteMapping("/board/review/delete/{reviewId}")
+  @DeleteMapping("review/delete/{reviewId}")
   public ResponseEntity<Object> deleteReview(@PathVariable int reviewId) {
     try {
       reviewService.deleteReview(reviewId);
@@ -208,4 +206,5 @@ public class  BoardController {
       return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
 }

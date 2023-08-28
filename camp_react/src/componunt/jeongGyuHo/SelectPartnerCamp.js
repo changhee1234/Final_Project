@@ -80,8 +80,9 @@ function SelectPartnerCamp(props) {
 
     return (
         <div className={'container'}>
-            <h3>운영중인 캠핑장</h3>
-
+            <ul className={'col-sm text-center my-4'}>
+                <span className={'text3 me-5'}>☑ 운영중인 캠핑장</span>
+            </ul>
 
             {filteredCampList.length === 0 ? (
                 <p className={'text-center'}>해당 조건에 맞는 캠핑장이 없습니다.</p>
