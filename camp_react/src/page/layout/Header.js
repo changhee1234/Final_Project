@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "./axios";
 import './LoginCSS.css';
+// import LoginForm from './LoginForm';
 function Header(props) {
     const [isVerified, setIsVerified] = useState(false);
     const [isOpened, setIsOpend] = useState(false);
@@ -19,6 +20,8 @@ function Header(props) {
     const [isEmailAvailable, setIsEmailAvailable] = useState(true);
     const [isCheckingEmail, setIsCheckingEmail] = useState(false);
     const [isCkeckNum, setIsCheckNum] = useState(false);
+    const [error, setError] = useState(false);
+    const [exception, setException] = useState('');
     const emailToSend = email;
     const passwordToSend = password;
     const nickNameToSend = nickName;
@@ -32,7 +35,7 @@ function Header(props) {
     });
 
     const logo = {
-        height: "90px",
+        height: "70px",
         width: "150px"
     }
 
@@ -152,54 +155,59 @@ function Header(props) {
         }
     };
 
+    const linkStyle = {
+        display: 'inline-block',
+        padding: '8px 16px',
+        borderRadius: '4px', // 네모 모양을 위한 속성
+        margin: '0 5px',
+    };
+
     return (
         <header>
             <div className={'shadow-sm container-fluid mb-3 border-bottom bg-light'}>
                 <div className={'d-flex justify-content-end me-5'}>
-                    <Link className={'me-3 text-decoration-none text-dark'} to={'/'}>
-                        Home
-                    </Link>
-                    <Link className={'me-3 text-decoration-none text-dark'} to={'/announcementList'}>
-                        공지사항
-                    </Link>
-                    {user ? (
-                        <>
-                            {/*<span className={'me-3'}>{user.nickName}님</span>*/}
-                            <Link className="me-3 text-decoration-none text-dark fw-bold" to={`/myPage/${user.nickName}`}>
-                                {user.nickName}님
-                            </Link>
-                            <a className={'me-3 text-decoration-none text-dark'} onClick={handleLogout}>
-                                로그아웃
-                            </a>
-                        </>
-                    ) : (
-                        <>
-                            <a className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#joinModal'}>
-                                회원가입
-                            </a>
-                            <a className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#loginModal'}>
-                                로그인
-                            </a>
-                        </>
-                    )}
-                    <Link className={'text-decoration-none text-dark'} to={'/about'}>
-                        고객센터
-                    </Link>
+                    <nav>
+                        <Link style={linkStyle} className={'me-3 text-decoration-none text-dark'} to={'/'}>
+                            Home
+                        </Link>
+                        <Link style={linkStyle} className={'me-3 text-decoration-none text-dark'} to={'/announcementList'}>
+                            공지사항
+                        </Link>
+                        {user ? (
+                            <>
+                                <Link style={{ ...linkStyle, fontWeight: 'bold' }} className="me-3 text-decoration-none text-dark" to={`/myPage/${user.nickName}`}>
+                                    {user.nickName}님
+                                </Link>
+                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} onClick={handleLogout}>
+                                    로그아웃
+                                </a>
+                            </>
+                        ) : (
+                            <>
+                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#joinModal'}>
+                                    회원가입
+                                </a>
+                                <a style={linkStyle} className={'me-3 text-decoration-none text-dark'} data-bs-toggle={'modal'} data-bs-target={'#loginModal'}>
+                                    로그인
+                                </a>
+                            </>
+                        )}
+                        <Link style={linkStyle} className={'text-decoration-none text-dark'} to={'/about'}>
+                            고객센터
+                        </Link>
+                    </nav>
                 </div>
-                <nav className={"navbar navbar-expand-lg"}>
+                <nav className={"navbar navbar-expand-lg p-0"}>
                     <div className={"navbar-brand ms-3"} style={logo}>
                         <Link to={'/'}>
-                            <img src={'assets/camp_logo.png'} className={'img-fluid'}/>
+                            <img src={'assets/campLogo.png'} className={'img-fluid'}/>
                         </Link>
                     </div>
                     <div className={"collapse navbar-collapse"} id={"navbarNav"}>
 
                         <ul className={"navbar-nav"}>
-                            <li className={"nav-item"}>
-                                <Link className={"nav-link fs-4 me-4 ms-3"} to={'/'}>홈</Link>
-                            </li>
                             <li className="nav-item">
-                                <Link className="nav-link fs-4 me-4" to={'/camp'}>캠핑장</Link>
+                                <Link className="nav-link mx-3 fs-4 me-6" to={'/camp'}>캠핑장</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link fs-4 me-4" to={'/trade'}>장터</Link>
@@ -210,11 +218,11 @@ function Header(props) {
                         </ul>
 
                     </div>
-                    <form className="d-flex justify-content-end me-3" role="search">
-                        <input className="form-control me-2" type="search" placeholder="검색어를 입력해주세요."
-                               aria-label="Search"/>
-                        <button className="btn btn-light btn-outline-dark" type="submit">Search</button>
-                    </form>
+                    {/*<form className="d-flex justify-content-end me-3" role="search">*/}
+                    {/*    <input className="form-control me-2" type="search" placeholder="검색어를 입력해주세요."*/}
+                    {/*           aria-label="Search"/>*/}
+                    {/*    <button className="btn btn-light btn-outline-dark" type="submit">Search</button>*/}
+                    {/*</form>*/}
                 </nav>
             </div>
             {/*    회원가입 모달창*/}
@@ -423,6 +431,7 @@ function Header(props) {
                                             placeholder="비밀번호를 입력하세요"
                                         />
                                     </div>
+                                    {/*<LoginForm error={error} exception={exception} />*/}
                                 </div>
 
                                 {/* 로그인 버튼 */}

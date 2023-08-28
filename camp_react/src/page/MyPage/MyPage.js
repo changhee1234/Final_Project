@@ -12,23 +12,23 @@ import PartnerCampList from "./PartnerCampList";
 
 
 function MyPage() {
-    const [user, setUser] = useState(null);
-    const [selectedMenu, setSelectedMenu] = useState('내 정보');
-    const [isUserApplicationVisible, setIsUserApplicationVisible] = useState('')
-    const [isPartnerApplicationVisible, setIsPartnerApplicationVisible] = useState('');
-    const [isAdminApplicationVisible, setIsAdminApplicationVisible] = useState('');
-    // 컴포넌트가 마운트될 때 사용자 정보를 가져오도록 설정
-    useEffect(() => {
-        fetchUserInfo();
-    }, []);
+  const [user, setUser] = useState(null);
+  const [selectedMenu, setSelectedMenu] = useState('내 정보');
+  const [isUserApplicationVisible, setIsUserApplicationVisible] = useState('')
+  const [isPartnerApplicationVisible, setIsPartnerApplicationVisible] = useState('');
+  const [isAdminApplicationVisible, setIsAdminApplicationVisible] = useState('');
+  // 컴포넌트가 마운트될 때 사용자 정보를 가져오도록 설정
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
 
-    // 사용자 정보 가져오는 함수
-    const fetchUserInfo = async () => {
-        try {
-            const response = await axios.get("/user-info");
-            const userGrade = response.data.grade; // 사용자의 권한 등급
-            console.log("사용자 등급:", userGrade); // 등급 콘솔 출력
-            setUser(response.data);
+  // 사용자 정보 가져오는 함수
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get("/user-info");
+      const userGrade = response.data.grade; // 사용자의 권한 등급
+      console.log("사용자 등급:", userGrade); // 등급 콘솔 출력
+      setUser(response.data);
 
             setIsUserApplicationVisible(userGrade === "user");
             setIsPartnerApplicationVisible(userGrade === "partner");
@@ -149,8 +149,8 @@ function MyPage() {
                 </div>
             </div>
         </main>
-    );
-}
+  );
+};
 
 export default MyPage;
 

@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import './tradeListpage.css';
 import axios from 'axios';
 import {Link, useNavigate} from "react-router-dom";
-import TradeListPage from "./TradeListPage";
 
 function TradeListMain(props) {
   const [tradeListPage, setTradeListPage] = useState([]);
@@ -70,6 +69,20 @@ function TradeListMain(props) {
     return tmp.textContent || tmp.innerText || "";
   };
 
+  // 글자 수를 제한하고 나머지는 ".."으로 출력하는 함수
+  function limitText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + "..";
+    }
+    return text;
+  }
+
+  const tradeImg = {
+    weight: "130px",
+    height: "200px"
+  }
+
+
   return (
       // 불러올 장터 게시판
       <main className={'container'}>
@@ -81,16 +94,16 @@ function TradeListMain(props) {
                   <div className={`box${item.tradeCate === '1' ? '1' : '2'}`}>
                     <div className="product_img_div">
                       <Link to={`/trade/${item.tradeBoardIdx}`}>
-                        <img src={extractImageUrl(item.content)} alt={"img"} className="product_img" />
+                        <img src={extractImageUrl(item.content)} alt={"img"} style={tradeImg} className="product_img" />
                       </Link>
                     </div>
                     <div className={'product_mon mx-3 text-center'}>
-                      {item.title}
+                      {limitText(stripHtmlTags(item.title), 14)}
                     </div>
                     <div className="product_mon text-center">
                       <i className="bi bi-coin"></i>희망가: {item.tradePrice.toLocaleString()}원
                     </div>
-                    <h5 className="product_content">{stripHtmlTags(item.content)}</h5>
+                    <h5 className="product_content">{limitText(stripHtmlTags(item.content), 18)}</h5>
                     <a className="product_des text-decoration-none">{item.description}</a>
                     <div className="row my-2">
                       <div className="row col-5 text-start">

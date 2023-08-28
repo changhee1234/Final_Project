@@ -6,6 +6,8 @@ package com.bitc.camp.service;
 import com.bitc.camp.dto.BoardRequestDto;
 import com.bitc.camp.dto.BoardResponseDto;
 import com.bitc.camp.entity.Board;
+import com.bitc.camp.entity.Member;
+
 import java.util.List;
 
 public interface BoardService {
@@ -30,6 +32,8 @@ public interface BoardService {
 
   //  게시물 조회수 카운트
   Board getBoardWithIncrementedViews(int tradeBoardIdx) throws Exception;
+
+  List<BoardResponseDto> getMyPost(int memberIdx) throws Exception;
 
   // 최신순/조회순으로 조회
 //  Page<BoardResponseDto> selectListNewest(int pageNum) throws Exception;

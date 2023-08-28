@@ -170,7 +170,7 @@ function SelectOptions(props) {
   // html
   return (
     <div className="card">
-      <p className={"card-title text-center fs-4 fw-bold"}>{props.campName}</p>
+      <p className={"card-title text-center my-2 fs-4 fw-bold"}>{props.campName}</p>
 
       <div className={"mx-auto"}>
         <DateRange
@@ -191,20 +191,21 @@ function SelectOptions(props) {
         <>
           <div className={"mx-5 my-3"}>
             {!isNaN(distanceInt) ?
-              <p className={"mb-0"}>예약날짜 : {startDateFormat} ~ {endDateFormat} / {distanceInt}박</p> :
-              <p className={"mb-0"}>예약날짜 : {startDateFormat} ~ {endDateFormat}</p>}
+              <p className={"mb-0"}>예약날짜 - {startDateFormat} ~ {endDateFormat} / {distanceInt}박</p> :
+              <p className={"mb-0"}>예약날짜 - {startDateFormat} ~ {endDateFormat}</p>}
           </div>
 
-          <div className={"mx-5 my-3"}>
-            <p className={"mb-0"}>예약 사이트 : {selectedSite}</p>
+          <div className={"mx-5 my-3 d-flex justify-content-between"}>
+            <p className={"mb-0"}>예약 사이트</p>
+            <p className={"mb-0"}>{selectedSite}</p>
           </div>
 
           <div className={"d-flex justify-content-between my-3  mx-5"}>
             <span className="mb-0">예약 인원</span>
             <div>
-              <button type="button" className="btn btn-outline-secondary" onClick={handleAddPeople}>+</button>
-              <span className={"mx-3"}>{people}</span>
               <button type="button" className="btn btn-outline-secondary" onClick={handleSubtractPeople}>-</button>
+              <span className={"mx-3"}>{people}</span>
+              <button type="button" className="btn btn-outline-secondary" onClick={handleAddPeople}>+</button>
             </div>
           </div>
 
@@ -212,9 +213,9 @@ function SelectOptions(props) {
             <div className={"d-flex justify-content-between"}>
               <span className="mb-0 me-5">예약 차량</span>
               <div>
-                <button type="button" className="btn btn-outline-secondary" onClick={handleAddCars}>+</button>
-                <span className={"mx-3"}>{cars}</span>
                 <button type="button" className="btn btn-outline-secondary" onClick={handleSubtractCars}>-</button>
+                <span className={"mx-3"}>{cars}</span>
+                <button type="button" className="btn btn-outline-secondary" onClick={handleAddCars}>+</button>
               </div>
             </div>
           </div>
@@ -223,22 +224,36 @@ function SelectOptions(props) {
           <div className={"d-flex justify-content-between mx-5 my-3"}>
             <span className="mb-0">캠핑카 전기 사용(캠핑카 사용 시 필수 선택)</span>
             <div>
-              <button type="button" className="btn btn-outline-secondary" onClick={handleAddEle}>+</button>
-              <span className={"mx-3"}>{ele}</span>
               <button type="button" className="btn btn-outline-secondary" onClick={handleSubtractEle}>-</button>
+              <span className={"mx-3"}>{ele}</span>
+              <button type="button" className="btn btn-outline-secondary" onClick={handleAddEle}>+</button>
             </div>
           </div>
 
 
           {startDateFormat !== endDateFormat &&
             <div className={"mx-5 my-3"}>
-              {!isNaN(sitePriceDays) && <p className={"mb-0"}> 사이트금액 : {sitePriceDays}원 / {distanceInt}박</p>}
-              <p className={"mb-0"}>추가인원 : {addPrice}원</p>
-              <p className={"mb-0"}>추가차량 : {parkPrice}원</p>
-              <p className={"mb-0"}>추가전기 : {elePrice}원</p>
+              <div className={"d-flex justify-content-between"}>
+                <p className={"mb-0"}>사이트 금액</p>
+                {!isNaN(sitePriceDays) && <p className={"mb-0"}>{sitePriceDays}원 / {distanceInt}박</p>}
+              </div>
+              <div className={"d-flex justify-content-between"}>
+                <p className={"mb-0"}>추가 인원</p>
+                <p className={"mb-0"}>{addPrice}원</p>
+              </div>
+              <div className={"d-flex justify-content-between"}>
+                <p className={"mb-0"}>추가 차량</p>
+                <p className={"mb-0"}>{parkPrice}원</p>
+              </div>
+              <div className={"d-flex justify-content-between"}>
+                <p className={"mb-0"}>추가 전기</p>
+                <p className={"mb-0"}>{elePrice}원</p>
+              </div>
               <hr/>
-              <p className={"mb-0"}>총 결제금액</p>
-              <span>{sitePrice + addPrice + parkPrice + elePrice}원</span>
+              <div className={"d-flex justify-content-between fw-bold"}>
+                <p className={"mb-0"}>총 결제 금액</p>
+                <p className={"mb-0"}>{sitePrice + addPrice + parkPrice + elePrice}원</p>
+              </div>
             </div>
           }
         </>

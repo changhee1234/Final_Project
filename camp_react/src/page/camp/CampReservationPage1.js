@@ -79,6 +79,7 @@ function CampReservationPage1(props) {
   return (
       <main className={"container"}>
         <div className="row my-4">
+          <div className={"col-sm-2"}></div>
           <div className="col-sm-4 mx-auto">
             <CampIntro mainInfo={mainInfo}/>
           </div>
@@ -94,12 +95,23 @@ function CampReservationPage1(props) {
                 locale={locales['ko']}
             />
           </div>
+          <div className={"col-sm-2"}></div>
         </div>
-
-        <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange} campMainIdx={mainInfo.idx}
-                  campName={mainInfo.campName} mainInfo={mainInfo}/>
-
-        <div><img className={'img-fluid'} alt={"배치도이미지"} src="/Site_batch.gif"/></div>
+        <div className="row">
+          <div className={"col-sm-2"}></div>
+          <div className={"col-sm"}>
+            <AreaList siteInfos={siteInfos} siteEmptyCnt={siteEmptyCnt} dateRange={dateRange} campMainIdx={mainInfo.idx}
+                      campName={mainInfo.campName} mainInfo={mainInfo}/>
+          </div>
+          <div className={"col-sm-2"}></div>
+        </div>
+        <div className="row">
+          <div className={"col-sm-2"}></div>
+          <div className={"col-sm"}>
+            <div><img className={'img-fluid'} alt={"배치도이미지"} src={mainInfo.campMainLayoutNewImg}/></div>
+          </div>
+          <div className={"col-sm-2"}></div>
+        </div>
       </main>
   );
 }

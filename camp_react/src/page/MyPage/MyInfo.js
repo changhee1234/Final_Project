@@ -14,7 +14,6 @@ function formatPhoneNumber(phoneNumber) {
 
 function MyInfo(props) {
 
-    const {nickname} = useParams();
     const [user, setUser] = useState(null);
     const [isOpened, setIsOpend] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -185,7 +184,7 @@ function MyInfo(props) {
 
 
     return (
-        <div className="my-info my-5">
+        <div className="my-info">
             <h3 className="text-start">내 정보</h3>
             <div className="profile-image">
                 <label htmlFor="image-upload">
@@ -372,6 +371,7 @@ function MyInfo(props) {
                                             className="btn btn-success"
                                             id="signupBtn"
                                             onClick={handleModifySubmit}
+                                            disabled={password !== password2 || !isCkeckNum}
                                         >
                                             저장
                                         </button>

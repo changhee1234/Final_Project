@@ -168,25 +168,28 @@ function PartnerCampDetail(props) {
             }
         };
 
+
+
         axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx)
             .then(res => {
                 console.log("캠프 상세 정보가 성공적으로 업데이트되었습니다:", res.data);
-                setPartnerIdx(res.data.partnerIdx);
-                setUpdatedCampInfo({
-                    campIdx: res.data.campIdx,
-                    campName: res.data.campName,
-                    campIntro: res.data.campIntro,
-                    // campDt: res.data.campDt,
-                    kidszoneYn: res.data.kidszoneYn,
-                    campHpLink: res.data.campHpLink,
-                    campPh: res.data.campPh,
-                    campAddress: res.data.campAddress,
-                    partner: {
-                        idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
-                    }
-                });
-                setCampDetails(updatedDataWithPartnerIdx); // 업데이트된 데이터로 campDetails 업데이트
-                location.reload();
+                // setPartnerIdx(res.data.partnerIdx);
+                // setUpdatedCampInfo({
+                //     campIdx: res.data.campIdx,
+                //     campName: res.data.campName,
+                //     campIntro: res.data.campIntro,
+                //     // campDt: res.data.campDt,
+                //     kidszoneYn: res.data.kidszoneYn,
+                //     campHpLink: res.data.campHpLink,
+                //     campPh: res.data.campPh,
+                //     campAddress: res.data.campAddress,
+                //     partner: {
+                //         idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
+                //     }
+                // });
+                // setCampDetails(updatedDataWithPartnerIdx); // 업데이트된 데이터로 campDetails 업데이트
+                // location.reload();
+                alert("수정되었습니다.")
             })
             .catch(err => {
                 console.log("캠프 상세 정보 업데이트 중 오류 발생:", err);

@@ -34,7 +34,7 @@ function CampListMain(props) {
             <div className={'row'}>
                 {currentCampList.slice(0, 8).map((camp, index) => (
                     <div className="col-3 cardUi card my-2 mx-2" key={index}>
-                        <img className="card-img" src="/assets/camp1.jpg" alt="img"></img>
+                        <img className="card-img" src={camp.campMainTitleNewImg} alt="img"></img>
                         <div className="card-body">
                             <h5 className="card-title fw-bold">{camp.campName}</h5>
                             <p className="card-text">{camp.campAddress}</p>
