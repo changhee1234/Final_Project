@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "react-quill";
@@ -11,6 +11,13 @@ function PartnerCampDetail(props) {
     const [partnerIdx, setPartnerIdx] = useState(0);
     const {campIdx} = useParams(); // Get campIdx from URL parameter
     const [campDetails, setCampDetails] = useState(null);
+    const fileInputRef = useRef(null);
+    // 파일 업로드
+    const [selectedFileName, setSelectedFileName] = useState('');
+
+    const [campMainTitleOriginImg, setCampMainTitleOriginImg] = useState(null); // 대표 이미지
+    const [campMainLayoutOriginImg, setCampMainLayoutOriginImg] = useState(null); // 배치도 이미지
+    const [campSiteOriginImg, setCampSiteOriginImg] = useState([]); //구역 이미지
     const [updatedCampInfo, setUpdatedCampInfo] = useState({
         campIdx: campIdx,
         campName: '',
@@ -19,6 +26,8 @@ function PartnerCampDetail(props) {
         campHpLink: '',
         campPh: '',
         campAddress: '',
+        campMainTitleNewImg: '',
+        campMainLayoutNewImg: '',
         partner: {
             idx: 0
         }
@@ -85,6 +94,8 @@ function PartnerCampDetail(props) {
                     campHpLink: res.data.campHpLink,
                     campPh: res.data.campPh,
                     campAddress: res.data.campAddress,
+                    campMainTitleNewImg: res.data.campMainTitleNewImg,
+                    campMainLayoutNewImg: res.data.campMainLayoutNewImg,
                     partner: {
                         idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
                     }
@@ -157,44 +168,64 @@ function PartnerCampDetail(props) {
         setUpdatedCampInfo(prevData => ({...prevData, [name]: checked ? "Y" : "N"}));
     };
 
+    // 대표 이미지 선택
+    const handleRepresentativeImageChange = (e) => {
+        const file = e.target.files[0];
+        setCampMainTitleOriginImg(file);
+    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const updatedDataWithPartnerIdx = {
-            ...updatedCampInfo,
-            campIntro: desc,
-            partner: {
-                idx: partnerIdx
+    // 배치도 이미지 선택
+    const handleLayoutImageChange = (e) => {
+        const file = e.target.files[0];
+        setCampMainLayoutOriginImg(file);
+    };
+
+    // 이미지 업로드 처리
+    const handleImageUpload = (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return axios.post('http://localhost:8080/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
-        };
-
-
-
-        axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx)
-            .then(res => {
-                console.log("캠프 상세 정보가 성공적으로 업데이트되었습니다:", res.data);
-                // setPartnerIdx(res.data.partnerIdx);
-                // setUpdatedCampInfo({
-                //     campIdx: res.data.campIdx,
-                //     campName: res.data.campName,
-                //     campIntro: res.data.campIntro,
-                //     // campDt: res.data.campDt,
-                //     kidszoneYn: res.data.kidszoneYn,
-                //     campHpLink: res.data.campHpLink,
-                //     campPh: res.data.campPh,
-                //     campAddress: res.data.campAddress,
-                //     partner: {
-                //         idx: partnerIdx // 응답 데이터에서 partnerIdx 설정
-                //     }
-                // });
-                // setCampDetails(updatedDataWithPartnerIdx); // 업데이트된 데이터로 campDetails 업데이트
-                // location.reload();
-                alert("수정되었습니다.")
+        })
+            .then((uploadRes) => {
+                return uploadRes.data.imageUrl; // 업로드된 이미지의 URL 반환
             })
-            .catch(err => {
-                console.log("캠프 상세 정보 업데이트 중 오류 발생:", err);
+            .catch((uploadErr) => {
+                throw new Error('Image upload failed');
             });
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            // 대표 이미지 업로드 및 URL 저장 처리
+            const campMainTitleNewImgUrl = await handleImageUpload(campMainTitleOriginImg);
+            // 배치도 이미지 업로드 및 URL 저장 처리
+            const campMainLayoutNewImgUrl = await handleImageUpload(campMainLayoutOriginImg);
+
+            const updatedDataWithPartnerIdx = {
+                ...updatedCampInfo,
+                campMainTitleNewImg: campMainTitleNewImgUrl,
+                campMainLayoutNewImg: campMainLayoutNewImgUrl,
+                campIntro: desc,
+                partner: {
+                    idx: partnerIdx
+                }
+            };
+
+            const response = await axios.put(`http://localhost:8080/camp/partnerCampDetail/${campIdx}`, updatedDataWithPartnerIdx);
+
+            console.log("캠프 상세 정보가 성공적으로 업데이트되었습니다:", response.data);
+            alert("수정되었습니다.");
+        } catch (error) {
+            console.log("캠프 상세 정보 업데이트 중 오류 발생:", error);
+        }
+    };
+
 
     const handleAreaEditClick = () => {
         setEditingArea(true);
@@ -241,6 +272,11 @@ function PartnerCampDetail(props) {
     const handleCancel = () => {
         navigate(`/myPage/${props.user.nickName}`);
     };
+
+
+
+
+
 
     return (
         <div className={'col-sm-8 mx-auto text-start'}>
@@ -303,6 +339,32 @@ function PartnerCampDetail(props) {
                                            onChange={handleCheckboxChange}/>
                                 </div>
                                 <input className={'form-control text-secondary'} value={'키즈존 여부'} readOnly={true}/>
+                            </div>
+                        </div>
+
+                        <div className="my-3 input-group">
+                            <div className="input-group">
+                                <label htmlFor="customFileInput" className="input-group-text">대표 이미지 : </label>
+                                <input
+                                    type="file"
+                                    className="form-control"
+                                    name="file"
+                                    ref={fileInputRef}
+                                    onChange={handleRepresentativeImageChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="my-3 input-group">
+                            <div className="input-group">
+                                <label htmlFor="customFileInput" className="input-group-text">배치도 이미지 : </label>
+                                <input
+                                    type="file"
+                                    className="form-control"
+                                    name="file"
+                                    ref={fileInputRef}
+                                    onChange={handleLayoutImageChange}
+                                />
                             </div>
                         </div>
 

@@ -120,53 +120,6 @@ function CampRegisterCombined(props) {
 
         setCampSiteInfos([...campSiteInfos, newCampSiteInfo])
     };
-    // 최종등록
-    // const handleCampRegister2Submit = (e) => {
-    //     e.preventDefault();
-    //
-    //     if (selectedFile) {
-    //         const formData = new FormData();
-    //         formData.append('file', selectedFile);
-    //
-    //         axios.post('http://localhost:8080/camp/upload', formData)
-    //             .then((uploadRes) => {
-    //                 const imageUrl = uploadRes.data.imageUrl;
-    //
-    //                 // 이미지 URL을 포함하여 나머지 캠프 정보 서버에 전송
-    //                 const campData = {
-    //                     campName,
-    //                     campIntro,
-    //                     campDt: campDt.toISOString().substr(0, 16),
-    //                     kidszoneYn,
-    //                     campHpLink,
-    //                     campPh,
-    //                     campAddress,
-    //                     partner,
-    //                     campDeletedYn,
-    //                     imageUrl: imageUrl, // 이미지 URL을 서버로 전송
-    //                     campSiteInfos: handleAddCampSiteInfo, // campSiteInfos를 추가해야 함
-    //                 };
-    //
-    //                 axios.post('http://localhost:8080/camp/Register', campData)
-    //                     .then((res) => {
-    //                         console.log(res.data.idx);
-    //                         // ... 나머지 로직
-    //                     })
-    //                     .catch((err) => {
-    //                         console.log(err);
-    //                         alert('등록에 실패하였습니다.');
-    //                     });
-    //             })
-    //             .catch((uploadErr) => {
-    //                 console.log(uploadErr);
-    //                 alert('파일 업로드에 실패했습니다.');
-    //             });
-    //     } else {
-    //         // 선택된 파일이 없을 경우의 처리
-    //         alert('파일을 선택해주세요.');
-    //     }
-    // };
-
     // 이미지 업로드 처리
     const handleImageUpload = (file) => {
         const formData = new FormData();
@@ -245,13 +198,6 @@ return (
         {step === 1 && (
             <form onSubmit={handleCampRegisterNext}>
                 <h3>캠핑장 정보 입력</h3>
-                {/*/!*매니저 번호(나중에 세션값으로 받아와 로그인과 연동(사라질 것)*!/*/}
-                {/*<div className={'my-3'}>*/}
-                {/*    <label className={'form-label'} htmlFor={'partner'}>회원번호(없애고 로그인과 연동) : </label>*/}
-                {/*    <input className={'form-control'} id={'partner'} value={partner.idx}*/}
-                {/*           onChange={(e) => setPartner({...partner, idx: e.target.value})}/>*/}
-                {/*</div>*/}
-
                 {/*날짜 입력*/}
                 <input
                     className={'form-control'}
@@ -319,7 +265,6 @@ return (
                             name="file"
                             ref={fileInputRef}
                             onChange={handleRepresentativeImageChange}
-                            // style={{ display: 'none' }}
                         />
                     </div>
                 </div>
@@ -332,7 +277,6 @@ return (
                             name="file"
                             ref={fileInputRef}
                             onChange={handleLayoutImageChange}
-                            // style={{ display: 'none' }}
                         />
                     </div>
                 </div>
