@@ -102,6 +102,25 @@ function TradeDetailPage(props) {
     });
     return adjustedContent;
   }
+
+  // 댓글 작성 처리
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    const content = e.target.content.value; // 댓글 내용 가져오기
+
+    // 댓글 작성 API 호출
+    axios.post(`http://localhost:8080/board/${tradeBoardIdx}/comments`, { content })
+        .then(res => {
+          // 댓글 작성 성공 시, 댓글 목록을 업데이트하기 위해 fetchData() 호출
+          fetchData();
+          // 댓글 작성 후 입력 필드 초기화
+          e.target.content.value = '';
+        })
+        .catch(err => {
+          console.error(`Error submitting comment: ${err}`);
+        });
+  };
+
   return (
       <main className="container MY">
         <div className="row">
@@ -184,7 +203,7 @@ function TradeDetailPage(props) {
                 {/*comment 레이아웃 불러오기*/}
                 {/*<div th:replace="~{layout/comment :: comment(${comment}, ${idx})}"></div>*/}
 
-                <form action="/disCommentWrite" method="post" id="comment">
+                <form action="/ReviewWrite" method="post" id="review">
                   <div className="input-group mb-3">
                     <input type="hidden" name="disIdx"></input>
                     <input type="hidden" name="id"></input>

@@ -164,4 +164,46 @@ public class  BoardController {
     result.put("result", myPostList);
     return result;
   }
+
+  // 댓글 목록 조회
+  @GetMapping("/list/{tradeBoardIdx}")
+  public Object getCommentsByBoardId(@PathVariable int tradeBoardIdx) {
+    Map<String, Object> result = new HashMap<>();
+    List<Comment> commentList = commentService.getCommentsByBoardId(tradeBoardIdx);
+    result.put("result", commentList);
+    return result;
+  }
+
+  // 댓글 등록
+  @PostMapping("/create")
+  public ResponseEntity<Object> createComment(@RequestBody CommentRequestDto commentRequestDto) {
+    try {
+      Comment createdComment = commentService.createComment(commentRequestDto);
+      return new ResponseEntity<>(createdComment, HttpStatus.CREATED);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  // 댓글 수정
+  @PostMapping("/update")
+  public ResponseEntity<Object> updateComment(@RequestBody CommentRequestDto commentRequestDto) {
+    try {
+      Comment updatedComment = commentService.updateComment(commentRequestDto);
+      return new ResponseEntity<>(updatedComment, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  // 댓글 삭제
+  @DeleteMapping("/delete/{commentId}")
+  public ResponseEntity<Object> deleteComment(@PathVariable long commentId) {
+    try {
+      commentService.deleteComment(commentId);
+      return new ResponseEntity<>("Comment deleted successfully", HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 }
