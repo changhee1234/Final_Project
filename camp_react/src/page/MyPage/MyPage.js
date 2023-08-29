@@ -27,7 +27,7 @@ function MyPage() {
     try {
       const response = await axios.get("/user-info");
       const userGrade = response.data.grade; // 사용자의 권한 등급
-      console.log("사용자 등급:", userGrade); // 등급 콘솔 출력
+      // console.log("사용자 등급:", userGrade); // 등급 콘솔 출력
       setUser(response.data);
 
             setIsUserApplicationVisible(userGrade === "user");

@@ -33,33 +33,44 @@ function CampReservationPage2(props) {
 
   useEffect(() => {
     axios.get("http://localhost:8080/reserve/reserveStep/" + siteIdx.siteIdx)
-        .then(res => {
-          setSiteInfo(res.data.campSiteInfo);
-          setSiteLists(res.data.campSiteInfo.campSiteLists)
+      .then(res => {
+        const sitePrice = (res.data.campSiteInfo.sitePrice).toLocaleString("ko-KR");
+        const addPrice = (res.data.campSiteInfo.addPrice).toLocaleString("ko-KR");
+        const parkPrice = (res.data.campSiteInfo.parkPrice).toLocaleString("ko-KR");
+        const elePrice = (res.data.campSiteInfo.elePrice).toLocaleString("ko-KR");
+        setSiteInfo({
+          ...res.data.campSiteInfo,
+          formatSitePrice:sitePrice,
+          formatAddPrice:addPrice,
+          formatParkPrice:parkPrice,
+          formatElePrice:elePrice
         })
-        .catch(err => {
-          alert(`통신 오류 : ${err}`);
-        });
+
+        setSiteLists(res.data.campSiteInfo.campSiteLists)
+      })
+      .catch(err => {
+        alert(`통신 오류 : ${err}`);
+      });
   }, []);
 
   return (
-      <main className={"container"}>
-        <div className="row">
-          <div className="col-sm-2"></div>
-          <div className="col-sm-3">
-            <SiteInfo siteInfo={siteInfo}/>
-            <Notice siteInfo={siteInfo}/>
-            <SiteLists siteLists={siteLists} availSiteList={availSiteList} selectedSite={selectedSiteFromSiteLists}
-                       selectedSiteIdx={selectedSiteIdxFromSiteLists}/>
-          </div>
-          <div className="col-sm-5">
-            <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campMainIdx={campMainIdx} campName={campName}
-                           siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite}
-                           selectedSiteIdx={selectedSiteIdx}/>
-          </div>
-          <div className="col-sm-2"></div>
+    <main className={"container"}>
+      <div className="row">
+        <div className="col-sm-2"></div>
+        <div className="col-sm-3">
+          <SiteInfo siteInfo={siteInfo}/>
+          <Notice siteInfo={siteInfo}/>
+          <SiteLists siteLists={siteLists} availSiteList={availSiteList} selectedSite={selectedSiteFromSiteLists}
+                     selectedSiteIdx={selectedSiteIdxFromSiteLists}/>
         </div>
-      </main>
+        <div className="col-sm-5">
+          <SelectOptions siteInfo={siteInfo} dateRange={dateRange} campMainIdx={campMainIdx} campName={campName}
+                         siteIdx={siteIdx} availSiteList={siteListFromSelectOptions} selectedSite={selectedSite}
+                         selectedSiteIdx={selectedSiteIdx}/>
+        </div>
+        <div className="col-sm-2"></div>
+      </div>
+    </main>
   );
 }
 

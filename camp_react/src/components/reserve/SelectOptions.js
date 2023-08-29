@@ -25,8 +25,6 @@ function SelectOptions(props) {
 
   const distanceInt = Number(distance.slice(0, -1));
 
-  const sitePriceDays = sitePrice * distanceInt;
-
 
   useEffect(() => {
     setDateRange(props.dateRange);
@@ -166,6 +164,18 @@ function SelectOptions(props) {
     setSitePrice(props.siteInfo.sitePrice);
   }, [props.siteInfo.sitePrice]);
 
+  const sitePriceDays = sitePrice * distanceInt;
+  const addPriceDays = addPrice * distanceInt;
+  const parkPriceDays = parkPrice * distanceInt;
+  const elePriceDays = elePrice * distanceInt;
+  const totalPrice = sitePriceDays + addPriceDays + parkPriceDays + elePriceDays;
+
+
+  const formatSitePriceDays = sitePriceDays.toLocaleString("ko-KR");
+  const formatAddPriceDays = addPriceDays.toLocaleString("ko-KR");
+  const formatParkPriceDays = parkPriceDays.toLocaleString("ko-KR");
+  const formatElePriceDays = elePriceDays.toLocaleString("ko-KR");
+  const formatTotalPriceDays = totalPrice.toLocaleString("ko-KR");
 
   // html
   return (
@@ -174,7 +184,7 @@ function SelectOptions(props) {
 
       <div className={"mx-auto"}>
         <DateRange
-          editableDateInputs={false}
+          editableDateInputs={true}
           onChange={handleOnChange}
           moveRangeOnFirstSelection={false}
           minDate={addDays(new Date(), 0)}
@@ -235,24 +245,24 @@ function SelectOptions(props) {
             <div className={"mx-5 my-3"}>
               <div className={"d-flex justify-content-between"}>
                 <p className={"mb-0"}>사이트 금액</p>
-                {!isNaN(sitePriceDays) && <p className={"mb-0"}>{sitePriceDays}원 / {distanceInt}박</p>}
+                {!isNaN(sitePriceDays) && <p className={"mb-0"}>{formatSitePriceDays}원 / {distanceInt}박</p>}
               </div>
               <div className={"d-flex justify-content-between"}>
                 <p className={"mb-0"}>추가 인원</p>
-                <p className={"mb-0"}>{addPrice}원</p>
+                <p className={"mb-0"}>{formatAddPriceDays}원</p>
               </div>
               <div className={"d-flex justify-content-between"}>
                 <p className={"mb-0"}>추가 차량</p>
-                <p className={"mb-0"}>{parkPrice}원</p>
+                <p className={"mb-0"}>{formatParkPriceDays}원</p>
               </div>
               <div className={"d-flex justify-content-between"}>
                 <p className={"mb-0"}>추가 전기</p>
-                <p className={"mb-0"}>{elePrice}원</p>
+                <p className={"mb-0"}>{formatElePriceDays}원</p>
               </div>
               <hr/>
               <div className={"d-flex justify-content-between fw-bold"}>
                 <p className={"mb-0"}>총 결제 금액</p>
-                <p className={"mb-0"}>{sitePrice + addPrice + parkPrice + elePrice}원</p>
+                <p className={"mb-0"}>{formatTotalPriceDays}원</p>
               </div>
             </div>
           }
@@ -272,6 +282,11 @@ function SelectOptions(props) {
               parkPrice: parkPrice,
               elePrice: elePrice,
               sitePrice: sitePrice,
+              formatAddPriceDays: formatAddPriceDays,
+              formatParkPriceDays: formatParkPriceDays,
+              formatElePriceDays: formatElePriceDays,
+              formatSitePriceDays: formatSitePriceDays,
+              formatTotalPriceDays: formatTotalPriceDays,
               campName: props.campName,
               campMainIdx: props.campMainIdx
             }}
@@ -284,6 +299,9 @@ function SelectOptions(props) {
                 e.preventDefault();
               } else if (distance === "less than a minute") {
                 alert(`1박 이상 선택하세요.`);
+                e.preventDefault();
+              } else if (selectedSite === "-") {
+                alert(`사이트(객실)을 다시 선택해주십시오.`);
                 e.preventDefault();
               }
             }}

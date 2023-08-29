@@ -16,7 +16,6 @@ const campImg = {
 
 function CampList(props) {
 
-
     // 서버와의 통신으로 캠핑장 정보 리스트 가져오기
     const [campList, setCampList] = useState([]);
 
@@ -333,20 +332,20 @@ function CampList(props) {
                                         </span>
                                             </div>
                                             <div className={'col-sm-8 my-auto'}>
-                                                <a
+                                                <span
                                                     className={'d-flex justify-content-start card-title text-decoration-none fs-3'}
 
                                                 >
                                                     {camp.campName}
-                                                </a>
+                                                </span>
                                                 <p className={'d-flex justify-content-start card-text'}>
                                                     <strong>전화번호 : </strong>
                                                     {camp.campPh}
                                                 </p>
-                                                <p className={'d-flex justify-content-start card-text'}>
+                                                <span className={'d-flex justify-content-start card-text'}>
                                                     <strong>주소 : </strong>
                                                     {camp.campAddress}
-                                                </p>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -385,20 +384,41 @@ function CampList(props) {
                         <div className={'border-bottom'}>
                             <div className={'d-flex justify-content-around my-3 mx-5'}>
                                 {/*예약아이콘*/}
-                                <Link to={`/reservation1/${selectedCampInfo.idx}`}>
-                                    <i>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="58"
-                                             fill="currentColor"
-                                             className="bi bi-journal-check" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd"
-                                                  d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                                            <path
+                                {props.userInfo === null ?
+                                  <Link to={`/reservation1/${selectedCampInfo.idx}`}
+                                        onClick={(e) => {
+                                            alert("로그인 후 예약해주세요.");
+                                            e.preventDefault();
+                                        }}>
+                                      <i>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="58"
+                                               fill="currentColor"
+                                               className="bi bi-journal-check" viewBox="0 0 16 16">
+                                              <path fillRule="evenodd"
+                                                    d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                              <path
                                                 d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                                            <path
+                                              <path
                                                 d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                                        </svg>
-                                    </i>
-                                </Link>
+                                          </svg>
+                                      </i>
+                                  </Link>
+                                  :
+                                  <Link to={`/reservation1/${selectedCampInfo.idx}`}>
+                                      <i>
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="58"
+                                               fill="currentColor"
+                                               className="bi bi-journal-check" viewBox="0 0 16 16">
+                                              <path fillRule="evenodd"
+                                                    d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                              <path
+                                                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                              <path
+                                                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                                          </svg>
+                                      </i>
+                                  </Link>
+                                }
 
                                 {/*홈페이지아이콘*/}
                                 <i>

@@ -29,7 +29,7 @@ function TradeDetailPage(props) {
   useEffect(() => {
     axios.get(`http://localhost:8080/board/trade/${tradeBoardIdx}`)
         .then(res => {
-          console.log(res.data); // 응답 데이터를 콘솔에 기록
+          // console.log(res.data); // 응답 데이터를 콘솔에 기록
           setCampDetails(res.data);
           setUpdateBoard({...res.data});
           setUpdateBoard({

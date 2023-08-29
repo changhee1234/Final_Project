@@ -146,7 +146,7 @@ function CampReservationPage3(props) {
         return navigate("/")
 
       } else {
-        alert(`결제 실패하였습니다.`);
+        alert(`결제에 실패하였습니다.`);
         //결제 실패 처리
         const params = {
           payStatus: "결제실패",
@@ -232,55 +232,40 @@ function CampReservationPage3(props) {
 
             {/*결제 정보*/}
             <div>
-              <table className={"table table-hover"}>
-                <thead></thead>
-                <tbody>
-                <tr>
-                  <td className={"text-start"}>사이트</td>
-                  <td className={"text-end"}>{stateObj.selectedSite}</td>
-                </tr>
-                <tr>
-                  <td className={"text-start"}>기간</td>
-                  <td className={"text-end"}>{startDate}~{endDate} / {nightCntInt}박</td>
-                </tr>
-                <tr>
-                  <td className={"text-start"}>예약인원</td>
-                  <td className={"text-end"}>{stateObj.people}명</td>
-                </tr>
-                <tr>
-                  <td className={"text-start"}>예약차량</td>
-                  <td className={"text-end"}>{stateObj.cars}대</td>
-                </tr>
-                </tbody>
-              </table>
-
               <div className="card my-3 p-2">
                 <div className="card my-1">
                   <div className="card-header d-flex justify-content-between">
-                    <p className={"mb-0 fw-bold"}>숙박요금</p>
-                    <p className={"mb-0 fw-bold"}>{sitePriceDays}원</p>
-                  </div>
-                  <div className="card-body d-flex justify-content-between">
-                    <p className="card-text mb-0">{startDate}~{endDate} / {nightCntInt}박</p>
-                    <p className="card-text mb-0">{sitePriceDays}원</p>
+                    <p className={"mb-0 fw-bold"}>사이트</p>
+                    <p className={"mb-0 fw-bold"}>{stateObj.selectedSite}</p>
                   </div>
                 </div>
 
-                {stateObj.addPrice !== 0 &&
+                <div className="card my-1">
+                  <div className="card-header d-flex justify-content-between">
+                    <p className={"mb-0 fw-bold"}>숙박요금</p>
+                    <p className={"mb-0 fw-bold"}>{stateObj.formatSitePriceDays}원</p>
+                  </div>
+                  <div className="card-body d-flex justify-content-between">
+                    <p className="card-text mb-0">{startDate}~{endDate} / {nightCntInt}박</p>
+                    <p className="card-text mb-0">{stateObj.formatSitePriceDays}원</p>
+                  </div>
+                </div>
+
+                {stateObj.people !== 0 &&
                   <div className="card my-1">
                     <div className="card-header d-flex justify-content-between">
                       <p className="card-text fw-bold mb-0">인원추가 ({stateObj.people - stateObj.siteInfo.peopleMin
                       }명)</p>
-                      <p className={"mb-0 fw-bold"}>{stateObj.addPrice}원</p>
+                      <p className={"mb-0 fw-bold"}>{stateObj.formatAddPriceDays}원</p>
                     </div>
                   </div>
                 }
 
-                {stateObj.addPrice !== 0 &&
+                {stateObj.cars !== 0 &&
                   <div className="card my-1">
                     <div className="card-header d-flex justify-content-between">
                       <p className={"mb-0 fw-bold"}>차량 추가({stateObj.cars}대)</p>
-                      <p className={"mb-0 fw-bold"}>{stateObj.addPrice}원</p>
+                      <p className={"mb-0 fw-bold"}>{stateObj.formatParkPriceDays}원</p>
                     </div>
                   </div>
                 }
@@ -289,7 +274,7 @@ function CampReservationPage3(props) {
                   <div className="card my-1">
                     <div className="card-header d-flex justify-content-between">
                       <p className={"mb-0 fw-bold"}>전기 추가({stateObj.ele})</p>
-                      <p className={"mb-0 fw-bold"}>{stateObj.elePrice}원</p>
+                      <p className={"mb-0 fw-bold"}>{stateObj.formatElePriceDays}원</p>
                     </div>
                   </div>
                 }
@@ -297,7 +282,7 @@ function CampReservationPage3(props) {
                 <div className="card-footer d-flex justify-content-between">
                   <p className={"mb-0 fw-bold"}>총 결제 금액</p>
                   <p
-                    className={"mb-0 fw-bold"}>{totalPrice}원</p>
+                    className={"mb-0 fw-bold"}>{stateObj.formatTotalPriceDays}원</p>
                 </div>
               </div>
             </div>

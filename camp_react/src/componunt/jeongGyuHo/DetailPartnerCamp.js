@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import ReactQuill from "react-quill";
@@ -93,6 +93,7 @@ function PartnerCampDetail(props) {
 
           axios.get(`http://localhost:8080/camp/partnerCampSiteDetail/${intCampIdx}`)
               .then((res) => {
+
                 console.log(res.data);
                 // setCampSiteInfo(res.data);
 
@@ -156,7 +157,6 @@ function PartnerCampDetail(props) {
     const {name, checked} = e.target;
     setUpdatedCampInfo(prevData => ({...prevData, [name]: checked ? "Y" : "N"}));
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();

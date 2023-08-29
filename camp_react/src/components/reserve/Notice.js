@@ -30,6 +30,9 @@ function Notice(props) {
           </tr>
           </tbody>
         </table>
+        <p className={"mb-0"} style={{fontSize:`0.9rem`}}>* 인원초과요금 - {props.siteInfo.formatAddPrice}원</p>
+        <p className={"mb-0"} style={{fontSize:`0.9rem`}}>* 차량초과요금 - {props.siteInfo.formatParkPrice}원</p>
+        <p style={{fontSize:`0.9rem`}}>* 전기추가요금 - {props.siteInfo.formatElePrice}원</p>
       </div>
     </div>
   )

@@ -184,6 +184,8 @@ public class CampServiceImpl implements CampService {
                 .campPh(camp.getCampPh())
                 .campDeletedYn(camp.getCampDeletedYn())
                 .campAddress(camp.getCampAddress())
+                .campMainLayoutNewImg(camp.getCampMainLayoutNewImg())
+                .campMainTitleNewImg(camp.getCampMainTitleNewImg())
                 .partnerIdx(partner != null ? partner.getIdx() : null)
                 .partnerName(partner != null ? partner.getPartnerName() : null)
                 .memberIdx(partner != null && partner.getMember() != null ? partner.getMember().getMemberIdx() : null)
@@ -210,6 +212,8 @@ public class CampServiceImpl implements CampService {
         existingCamp.setCampPh(campMainInfoDto.getCampPh());
         existingCamp.setCampAddress(campMainInfoDto.getCampAddress());
         existingCamp.setPartner(campMainInfoDto.getPartner());
+        existingCamp.setCampMainLayoutNewImg(campMainInfoDto.getCampMainLayoutNewImg());
+        existingCamp.setCampMainTitleNewImg(campMainInfoDto.getCampMainTitleNewImg());
 
         // 엔티티 업데이트 후 저장
         return campMainInfoRepository.save(existingCamp);
@@ -237,6 +241,7 @@ public class CampServiceImpl implements CampService {
                     .campReservePeriod(campSiteInfo.getCampReservePeriod())
                     .parkPrice(campSiteInfo.getParkPrice())
                     .elePrice(campSiteInfo.getElePrice())
+                    .campSiteNewImg(campSiteInfo.getCampSiteNewImg())
                     .areaSiteCnt(campSiteInfo.getAreaSiteCnt())
                     .build();
             campSiteInfoDtoList.add(dto);

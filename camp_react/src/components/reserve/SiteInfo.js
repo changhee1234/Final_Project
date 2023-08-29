@@ -9,8 +9,8 @@ function SiteInfo(props) {
         <div className="card-body">
           <h5 className="card-title fw-bold">{props.siteInfo.areaName}</h5>
           <div className={"d-flex justify-content-between"}>
-            <p>가격</p>
-            <p className={"fw-bold"}>{props.siteInfo.sitePrice}원</p>
+            <p className={"mb-0"}>가격</p>
+            <p className={"fw-bold mb-0"}>{props.siteInfo.formatSitePrice}원</p>
           </div>
         </div>
       </div>
