@@ -3,8 +3,8 @@ package com.bitc.camp.service;
 import com.bitc.camp.data.entity.Partner;
 import com.bitc.camp.dto.AddPartnerReq;
 import com.bitc.camp.entity.Member;
+import com.bitc.camp.repository.MemberRepository;
 import com.bitc.camp.repository.PartnerRepository;
-import com.bitc.camp.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +17,12 @@ public class PartnerServiceImpl implements PartnerService {
 
     private final PartnerRepository partnerRepository;
 
+    private final MemberRepository memberRepository;
+
     @Autowired
-    public PartnerServiceImpl(PartnerRepository partnerRepository) {
+    public PartnerServiceImpl(PartnerRepository partnerRepository, MemberRepository memberRepository) {
         this.partnerRepository = partnerRepository;
+        this.memberRepository = memberRepository;
     }
 
     @Override
@@ -80,6 +83,17 @@ public class PartnerServiceImpl implements PartnerService {
             Partner partner = optionalPartner.get();
             partner.setPartnerAccess(newValue);
             partnerRepository.save(partner);
+
+            Optional<Member> optionalMember = memberRepository.findById(memberIdx);
+            if (optionalMember.isPresent()) {
+                Member member = optionalMember.get();
+                if ("Y".equals(newValue)) {
+                    member.setGrade("partner");
+                } else if ("N".equals(newValue)) {
+                    member.setGrade("user");
+                }
+                memberRepository.save(member);
+            }
         }
     }
 }

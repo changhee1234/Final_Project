@@ -109,4 +109,6 @@ public class Member implements UserDetails {
 
   public void setProfileImg(String profileImg) { this.profileImg = profileImg; }
 
+
+  public void setGrade(String grade) {this.grade = grade;}
 }
