@@ -99,6 +99,7 @@ function TradeListMain(props) {
     return text;
   }
 
+
   // 등록된 게시판 리스트
   return (
       <main className={'container'}>

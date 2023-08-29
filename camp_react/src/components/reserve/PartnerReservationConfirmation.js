@@ -103,15 +103,16 @@ function PartnerReservationConfirmation(props) {
   }
 
   return (
-    <div className={"my-5"}>
-      <h4 className={"text-center"}>캠핑장 예약 관리</h4>
-
       <div>
-        <table className={"table table-hover"}>
-          <colgroup>
-            <col/>
-          </colgroup>
-          <thead>
+        <ul className={'col-sm text-center my-4'}>
+          <span className={'text3 me-5'}> ⏰ 캠핑장 예약 관리</span>
+        </ul>
+        <div>
+          <table className={"table table-hover"}>
+            <colgroup>
+              <col/>
+            </colgroup>
+            <thead>
           <tr>
             <th>예약주문명</th>
             <th>예약자</th>

@@ -80,7 +80,7 @@ function MyTradePosts({user}) {
       <div className={'container'}>
         <div className={'row'}>
           <ul className={'text-center my-4'}>
-            <li><i className="bi bi-cart4"></i><span className={'text3 my-4 fw-bold'}> 내가 쓴 장터글</span></li>
+            <li><i className="bi bi-cart4"></i><span className={'me-5 text3 my-4'}> 내가 쓴 장터글</span></li>
           </ul>
           {myPosts.map(item => (
               <div key={item.index} className="my-2 mb-0 col-4">

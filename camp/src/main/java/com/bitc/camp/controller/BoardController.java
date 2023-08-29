@@ -5,9 +5,12 @@ package com.bitc.camp.controller;
 
 import com.bitc.camp.dto.BoardRequestDto;
 import com.bitc.camp.dto.BoardResponseDto;
+import com.bitc.camp.dto.ReviewDto;
 import com.bitc.camp.entity.Board;
 import com.bitc.camp.entity.Member;
+import com.bitc.camp.entity.Review;
 import com.bitc.camp.service.BoardService;
+import com.bitc.camp.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,8 @@ public class  BoardController {
   private final String imageUploadDirectory = "src/main/resources/static/uploaded-images/";
 
   private final BoardService boardService;
+  private final ReviewService reviewService;
+
 
   // 글 목록
   @GetMapping("/list")
@@ -103,8 +108,6 @@ public class  BoardController {
 //    }
 //  }
 
-
-
   @PostMapping("/write")
   public ResponseEntity<Object> boardWrite(@RequestBody BoardRequestDto boardRequestDto) {
     try {
@@ -117,8 +120,6 @@ public class  BoardController {
       return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
-
 
   //  글 상세
   @RequestMapping(value = "/trade/{tradeBoardIdx}", method = RequestMethod.GET)
@@ -164,4 +165,46 @@ public class  BoardController {
     result.put("result", myPostList);
     return result;
   }
+
+
+  // 댓글 목록 조회
+  @GetMapping("review/{tradeBoardIdx}")
+  public Object getReviewListByBoardId(@PathVariable int tradeBoardIdx) throws Exception {
+    Map<String, Object> result = new HashMap<>();
+    List<Review> reviewList = reviewService.getReviewsByBoardId(tradeBoardIdx);
+    result.put("result", reviewList);
+    return result;
+  }
+
+  @PostMapping("review/create")
+  public ResponseEntity<Object> createReview(@RequestBody ReviewDto reviewDto) {
+    try {
+      ReviewDto createReview = reviewService.createReview(reviewDto);
+      return new ResponseEntity<>(createReview, HttpStatus.CREATED);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+
+  @PostMapping("review/update/{reviewId}")
+  public ResponseEntity<Object> updateReview(@PathVariable int reviewId, @RequestBody ReviewDto reviewDto) {
+    try {
+      ReviewDto updateReview = reviewService.updateReview(reviewId, reviewDto);
+      return new ResponseEntity<>(updateReview, HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @DeleteMapping("review/delete/{reviewId}")
+  public ResponseEntity<Object> deleteReview(@PathVariable int reviewId) {
+    try {
+      reviewService.deleteReview(reviewId);
+      return new ResponseEntity<>("Review deleted successfully", HttpStatus.OK);
+    } catch (Exception e) {
+      return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
 }

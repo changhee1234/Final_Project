@@ -34,17 +34,19 @@ function TradeWritePage({userInfo}) {
   const [userName, setUserName] = useState('');
   const [tradePrice, setTradePrice] = useState('');
   const [tradeCate, setTradeCate] = useState('');
+  const [tradeLocation, setTradeLocation] = useState('');
   const [createDt, setCreateDt] = useState(new Date());
   const [imageUrl, setImageUrl] = useState('');
   const [quillIns, setQuillIns] = useState(null); // Quill 에디터 인스턴스 상태 추가
   // const [memberIdx, setMemberIdx] = useState([{idx : 0}]);
   // const [file, setFile] = useState(null);
-  // userInfo에서 nickName 가져오기
-  useEffect(() => {
-    // userInfo를 어떻게 가져오는지에 따라서 아래 코드를 조정해야 합니다.
-    const nickNameFromUserInfo = userInfo.nickName;
-    setUserName(nickNameFromUserInfo);
-  }, []);
+  // // userInfo에서 nickName 가져오기
+  // useEffect(() => {
+  //   // userInfo를 어떻게 가져오는지에 따라서 아래 코드를 조정해야 합니다.
+  //   const nickNameFromUserInfo = userInfo.nickName;
+  //   setUserName(nickNameFromUserInfo);
+  // }, [userInfo]);
+
   // Quill 에디터 초기화
   useEffect(() => {
     if (quillIns) {
@@ -122,6 +124,7 @@ function TradeWritePage({userInfo}) {
       userName: userName,
       tradePrice: tradePrice,
       tradeCate: tradeCate,
+      tradeLocation: tradeLocation,
       createDt: createDt.toISOString().substr(0, 16),
     };
 
@@ -145,14 +148,14 @@ function TradeWritePage({userInfo}) {
 
 
   return (
-      <div className="container my-5">
+      <div className="container">
         <div className="row">
           <div className="col-sm-2 my-4"></div>
-          <div className="col-sm-8 text-center my-5">
-            <ul className={'col-sm text-center my-4 mt-5'}>
+          <div className="col-sm-8 text-center ">
+            <ul className={'col-sm text-center mt-5'}>
               <li><i className="bi bi-cart4"></i><span className={'text3'}> 장터 게시판 글 등록</span></li>
             </ul>
-            <form className={'my-5'} onSubmit={handleSubmit} encType="multipart/form-data">
+            <form   onSubmit={handleSubmit} encType="multipart/form-data">
               <input className={'form-control'} id={'createDt'} name={'createDt'} type="hidden" value={createDt.toISOString().substr(0, 16)} onChange={(e) => setCreateDt(new Date(e.target.value))} />
               <div className="row">
                 <div className="my-3 row">
@@ -174,6 +177,11 @@ function TradeWritePage({userInfo}) {
                            placeholder="희망하는 가격을 입력하세요(원)" value={tradePrice}
                            onChange={e => setTradePrice(e.target.value)}></input>
                   </div>
+                  <div className={"mt-3"}>
+                    <input type="text" className="form-control" id="tradeLocation" name="tradeLocation"
+                           placeholder="거래 지역 및 수단을 입력하세요(직거래 및 택배)" value={tradeLocation}
+                           onChange={e => setTradeLocation(e.target.value)}></input>
+                  </div>
                 </div>
                 <div className="mb-3">
                   <ReactQuill
@@ -185,11 +193,11 @@ function TradeWritePage({userInfo}) {
                       style={{ height: '500px' }}
                   />
                 </div>
-                <button type="button" className="w-btn w-btn-gray my-5" onClick={imageHandler}>
+                <button type="button" className="w-btn w-btn-gray" onClick={imageHandler}>
                   이미지 업로드
                 </button>
-                <div className="row input-group my-5">
-                  <div className="row input-group my-5">
+                <div className="row input-group">
+                  <div className="row input-group">
                     <div className="my-3 col-sm d-flex justify-content-end gap-3 mx-0 px-0">
                       <button type="submit" className="w-btn w-btn-indigo">등록</button>
                       <button type="reset" className="w-btn w-btn-gray" onClick={handleCancel}>취소</button>

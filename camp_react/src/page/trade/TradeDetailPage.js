@@ -5,8 +5,6 @@ import axios from 'axios';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 
 function TradeDetailPage(props) {
-  // const board = useParams();
-  // const [tradeDetailPage, setTradeDetailPage] = useState(0);
   const {tradeBoardIdx} = useParams();
   const [campDetails, setCampDetails] = useState(null);
   const [updateBoard, setUpdateBoard] = useState({
@@ -21,6 +19,9 @@ function TradeDetailPage(props) {
     imgUrl: '',
     memberIdx: '',
   });
+
+  const [reviews, setReviews] = useState([]); // 리뷰 상태 추가
+  const [newReview, setNewReview] = useState(''); // 새 리뷰 상태 추가
 
   const navi = useNavigate();
   const goList = () => navi('/trade');
@@ -102,8 +103,23 @@ function TradeDetailPage(props) {
     });
     return adjustedContent;
   }
+
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+
+    // 리뷰 데이터 가져오기
+    axios
+        .post(`http://localhost:8080/board/review/create`, {content: newReview})
+        .then((res) => {
+          setReviews([...reviews, res.data]);
+          setNewReview('');
+        })
+        .catch((err) => {
+          console.log(`댓글 등록 에러: ${err}`);
+        });
+  }
   return (
-      <main className="container MY">
+      <main className="container">
         <div className="row">
           <div className="col-sm-2"></div>
           <div className="col-sm-8">
@@ -140,14 +156,14 @@ function TradeDetailPage(props) {
                     <input type="text" className="px-2 form-control-plaintext fw-semibold mx-0 text-start"
                            value={campDetails.userName} readOnly></input>
                     <input type="text" className="px-4 text-end form-control-plaintext fs-6 text-start fw-bold"
-                           placeholder={'부산 사상구'}
-                           name="tradeLocation" value={campDetails.tradeLocation} readOnly
-                           onChange={handleInputChange}></input>
+                           name="tradeLocation" value={updateBoard.tradeLocation} readOnly
+                           onChange={handleCancel}></input>
                   </div>
 
                   <div className="row my-2 bg-light">
                     <input type="text" className="form-control-plaintext fw-light text-body-outline-light w-auto mx-2"
-                           value={`${campDetails.createDt[0]}-${campDetails.createDt[1]}-${campDetails.createDt[2]}`} readOnly={true}/>
+                           value={`${campDetails.createDt[0]}-${campDetails.createDt[1]}-${campDetails.createDt[2]}`}
+                           readOnly={true}/>
                     <div className="col-sm d-flex justify-content-end py-2">
                       <div className="mx-2">
                         <p className="text-end mb-0 pb-0"></p>
@@ -161,7 +177,7 @@ function TradeDetailPage(props) {
                 <div className="row my-3">
                   <div className="col-sm">
                     <div className="my-3">
-                      <div dangerouslySetInnerHTML={{ __html: adjustImageStyle(campDetails.content) }} />
+                      <div dangerouslySetInnerHTML={{__html: adjustImageStyle(campDetails.content)}}/>
                     </div>
                   </div>
                 </div>
@@ -173,40 +189,44 @@ function TradeDetailPage(props) {
                 <div className="col-sm-2 d-flex justify-content-start">
                   <p className="text-body-outline-light text-opacity-25 fw-bolder fs-6 mx-0 my-2">댓글</p>
                 </div>
-                <div className="col-sm d-flex justify-content-end py-2">
-                  <a className="btn m-0 p-0" href="#comment" aria-label="pensil">
-                    {/*icon*/}
-                    <i className="bi bi-pencil-fill"></i>
-                  </a>
-                </div>
+                  <form onSubmit={handleReviewSubmit}>
+                    <div className="input-group mb-3">
+                      <input
+                          type="text"
+                          className="form-control border-outline-light py-5"
+                          name="content"
+                          value={newReview}
+                          onChange={(e) => setNewReview(e.target.value)}
+                          aria-label="Recipient's username"
+                          aria-describedby="button-addon2"
+                          width="60%"
+                      />
+                      <button className="btn btn-outline-primary" type="submit" id="btn-content">
+                        등록
+                      </button>
+                    </div>
+                  </form>
               </div>
-              <div className="my-3">
-                {/*comment 레이아웃 불러오기*/}
-                {/*<div th:replace="~{layout/comment :: comment(${comment}, ${idx})}"></div>*/}
 
-                <form action="/disCommentWrite" method="post" id="comment">
-                  <div className="input-group mb-3">
-                    <input type="hidden" name="disIdx"></input>
-                    <input type="hidden" name="id"></input>
-                    <input type="hidden" name="userName"></input>
-                    <input type="text" className="form-control border-outline-light p-1" name="content"
-                           placeholder="댓글을 입력해주세요" aria-label="Recipient's username"
-                           aria-describedby="button-addon2" width="60%"></input>
-                    <button className="btn btn-outline-outline-light" type="submit" id="btn-content">등록</button>
-                  </div>
-                </form>
+              <div className="my-3">
+                {reviews.map((review) => (
+                    <div key={review.id} className="border rounded p-2 mb-2">
+                      <p className="mb-0">{review.content}</p>
+                    </div>
+                ))}
               </div>
+              {/* ... */}
             </div>
             <div className="row my-3">
               <div className="col-sm d-flex justify-content-end">
-                <button type="button" className="btn btn-outline-light" id="btn-list">목록</button>
+                {/* ... */}
               </div>
             </div>
           </div>
           <div className="col-sm-2"></div>
         </div>
       </main>
-  )
+  );
 }
 
 export default TradeDetailPage;
