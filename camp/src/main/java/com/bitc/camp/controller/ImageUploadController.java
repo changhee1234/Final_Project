@@ -24,8 +24,8 @@ public class ImageUploadController {
 //    private String uploadDir;
 // 프로젝트 이미지 업로드폴더 절대 경로 각각 지정
 //String uploadDir = "C:\\project\\camp\\src\\main\\resources\\static\\uploaded-images";
-//String uploadDir = "C:\\smart505\\final\\camp\\src\\main\\resources\\static\\uploaded-images";
-String uploadDir = "C:\\Camping-Sightseeing\\camp\\src\\main\\resources\\static\\uploaded-images";
+String uploadDir = "C:\\smart505\\final\\camp\\src\\main\\resources\\static\\uploaded-images";
+//String uploadDir = "C:\\Camping-Sightseeing\\camp\\src\\main\\resources\\static\\uploaded-images";
 //String uploadDir = "C:\\project\\camp\\src\\main\\resources\\static\\uploaded-images"; // 김창희
 
     private final MemberService memberService;
