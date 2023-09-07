@@ -136,7 +136,7 @@ function SelectOptions(props) {
 
   useEffect(() => {
     if (people > props.siteInfo.peopleMin) {
-      setAddPrice(prev => prev + props.siteInfo.addPrice);
+      setAddPrice((people - props.siteInfo.peopleMin) * props.siteInfo.addPrice);
     } else if (people === props.siteInfo.peopleMin) {
       setAddPrice(0);
     }

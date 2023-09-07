@@ -26,7 +26,6 @@ import java.util.UUID;
 public class CampServiceImpl implements CampService {
 
     private final CampMainInfoRepository campMainInfoRepository;
-    private final CampImgRepository campImgRepository;
     private final CampSiteInfoRepository campSiteInfoRepository;
     private final CampSiteListRepository campSiteListRepository;
     private final ReviewRepository reviewRepository;

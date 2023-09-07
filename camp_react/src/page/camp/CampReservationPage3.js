@@ -246,7 +246,7 @@ function CampReservationPage3(props) {
                     <p className={"mb-0 fw-bold"}>{stateObj.formatSitePriceDays}원</p>
                   </div>
                   <div className="card-body d-flex justify-content-between">
-                    <p className="card-text mb-0">{startDate}~{endDate} / {nightCntInt}박</p>
+                    <p className="card-text mb-0">{startDate} ~ {endDate} / {nightCntInt}박</p>
                     <p className="card-text mb-0">{stateObj.formatSitePriceDays}원</p>
                   </div>
                 </div>
